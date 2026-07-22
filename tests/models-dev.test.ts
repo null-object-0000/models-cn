@@ -58,6 +58,33 @@ const kimiChina: ProviderData = {
   sources: [],
 };
 
+const qwenChina: ProviderData = {
+  schemaVersion: "2.0",
+  id: "qwen-cn",
+  name: "Qwen China",
+  ownedBy: "qwen",
+  baseUrls: {
+    openai: "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  },
+  models: [
+    {
+      id: "qwen3.7-plus",
+      name: "Qwen3.7-Plus",
+      createdAt: "2026-06-01T12:46:50.000+00:00",
+      aliases: [],
+      capabilities: {
+        thinking: true,
+        toolCalls: true,
+        inputModalities: ["text"],
+        outputModalities: ["text"],
+      },
+      limits: { contextTokens: 1_000_000, maxOutputTokens: 65_536 },
+      prices: [],
+    },
+  ],
+  sources: [],
+};
+
 describe("models.dev calibration", () => {
   it("reports differences without overwriting official values", async () => {
     const api: ModelsDevApi = {
@@ -130,5 +157,40 @@ describe("models.dev calibration", () => {
         status: "missing",
       },
     );
+  });
+
+  it("maps Qwen China models to the Alibaba namespace", async () => {
+    const api: ModelsDevApi = {
+      alibaba: {
+        models: {
+          "qwen3.7-plus": {
+            id: "qwen3.7-plus",
+            release_date: "2026-06-01",
+            reasoning: true,
+            tool_call: true,
+            modalities: { input: ["text"], output: ["text"] },
+            limit: { context: 1_000_000, output: 65_536 },
+          },
+        },
+      },
+    };
+    const report = await collectModelsDevCalibration(
+      [qwenChina],
+      undefined,
+      new Date("2026-07-22T00:00:00Z"),
+      async () => api,
+    );
+    const result = report.models.find(
+      (model) => model.provider === "qwen-cn" && model.model === "qwen3.7-plus",
+    );
+    expect(result).toMatchObject({
+      referenceProvider: "alibaba",
+      referenceModel: "qwen3.7-plus",
+      referenceUrl: "https://models.dev/models/alibaba/qwen3.7-plus/",
+      status: "partial",
+    });
+    expect(
+      result?.checks.find((check) => check.field === "limits.contextTokens"),
+    ).toMatchObject({ status: "match", reference: 1_000_000 });
   });
 });
