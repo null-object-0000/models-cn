@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   diffCatalog,
   hasMaterialCatalogChanges,
+  highRiskWarnings,
   renderUpdateReport,
 } from "../src/report.js";
 import type { Catalog, ProviderData } from "../src/types.js";
@@ -58,8 +59,12 @@ describe("automated update report", () => {
     expect(diffCatalog(before, after).prices).toHaveLength(1);
     const report = renderUpdateReport(before, after);
     expect(report).toContain("- 价格变化：1");
-    expect(report).toContain("| moonshot-cn | kimi-k3 | output | ¥100 | ¥80 |");
-    expect(report).toContain("moonshot-cn ✅ 成功");
+    expect(report).toContain(
+      "| moonshot-cn | kimi-k3 | output | ¥100 | ¥80 | -20% |",
+    );
+    expect(report).toContain(
+      "| Kimi China 价格页 | healthy | 2026-07-22T01:17:00.000Z |",
+    );
   });
 
   it("ignores successful timestamp-only refreshes", () => {
@@ -89,5 +94,42 @@ describe("automated update report", () => {
     };
     const after: Catalog = { schemaVersion: "2.0", providers: [failed] };
     expect(hasMaterialCatalogChanges(before, after)).toBe(true);
+  });
+
+  it("flags high-risk price, model count, health, schema and URL changes", () => {
+    const oldProvider = provider(100);
+    oldProvider.models.push(
+      ...[4, 5, 6, 7].map((index) => ({
+        ...structuredClone(oldProvider.models[0]!),
+        id: `kimi-k${index}`,
+        name: `Kimi K${index}`,
+      })),
+    );
+    const newProvider = structuredClone(oldProvider);
+    newProvider.models = newProvider.models.slice(0, 3);
+    newProvider.models[0]!.prices[0]!.output = 40;
+    newProvider.health = {
+      ...newProvider.health,
+      status: "error",
+      consecutiveFailures: 1,
+      message: "HTTP 503",
+    };
+    newProvider.sources[0]!.url = "https://platform.kimi.com/docs/pricing/v2";
+    const before: Catalog = { schemaVersion: "2.0", providers: [oldProvider] };
+    const after: Catalog = { schemaVersion: "2.0", providers: [newProvider] };
+    (after as unknown as { schemaVersion: string }).schemaVersion = "3.0";
+    const risks = highRiskWarnings(before, after);
+    expect(risks).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("单项价格变化超过 50%"),
+        expect.stringContaining("厂商模型数量减少超过 20%"),
+        expect.stringContaining("数据源从 healthy 变为 error"),
+        expect.stringContaining("Schema 版本发生变化"),
+        expect.stringContaining("官方来源 URL 发生变化"),
+      ]),
+    );
+    const report = renderUpdateReport(before, after);
+    expect(report).toContain("### 高风险提示");
+    expect(report).toContain("⚠️ 单项价格变化超过 50%");
   });
 });

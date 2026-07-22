@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   compareModelsByReleaseDate,
+  modelDomId,
+  modelHash,
+  modelKey,
   modelReleaseDate,
 } from "../site/src/lib/catalog.js";
 import type { CalibrationModel, Model } from "../site/src/types.js";
@@ -52,5 +55,18 @@ describe("site catalog release ordering", () => {
         .sort(compareModelsByReleaseDate)
         .map((item) => item.model.id),
     ).toEqual(["official", "referenced", "unknown"]);
+  });
+});
+
+describe("site model identity", () => {
+  it("uses provider and model IDs for state, DOM and hash identity", () => {
+    expect(modelKey("deepseek", "shared-model")).toBe("deepseek/shared-model");
+    expect(modelKey("moonshot-cn", "shared-model")).not.toBe(
+      modelKey("deepseek", "shared-model"),
+    );
+    expect(modelDomId("moonshot-cn", "kimi-k3")).toBe(
+      "model-moonshot-cn-kimi-k3",
+    );
+    expect(modelHash("moonshot-cn", "kimi-k3")).toBe("moonshot-cn/kimi-k3");
   });
 });

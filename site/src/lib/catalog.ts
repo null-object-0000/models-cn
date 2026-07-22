@@ -2,6 +2,18 @@ import type { CalibrationModel, Currency, Model, Provider } from "../types.js";
 
 export const numberFormatter = new Intl.NumberFormat("zh-CN");
 
+export function modelKey(providerId: string, modelId: string): string {
+  return `${providerId}/${modelId}`;
+}
+
+export function modelDomId(providerId: string, modelId: string): string {
+  return `model-${providerId}-${modelId}`;
+}
+
+export function modelHash(providerId: string, modelId: string): string {
+  return `${encodeURIComponent(providerId)}/${encodeURIComponent(modelId)}`;
+}
+
 export function providerName(provider: Provider): string {
   return provider.displayNames?.["zh-CN"] ?? provider.name;
 }

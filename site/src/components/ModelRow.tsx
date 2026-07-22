@@ -3,6 +3,8 @@ import {
   capabilityLabels,
   compactTokens,
   formatPrice,
+  modelDomId,
+  modelKey,
   numberFormatter,
   providerName,
 } from "../lib/catalog";
@@ -23,7 +25,7 @@ type GroupProps = {
   currency: Currency;
   rateType: RateType;
   expanded: string | null;
-  onToggle: (modelId: string) => void;
+  onToggle: (key: string) => void;
 };
 
 function Group({
@@ -52,13 +54,13 @@ function Group({
       </tr>
       {models.map(({ model, calibration }) => (
         <ModelRows
-          key={model.id}
+          key={modelKey(provider.id, model.id)}
           provider={provider}
           model={model}
           calibration={calibration}
           currency={currency}
           rateType={rateType}
-          expanded={expanded === model.id}
+          expanded={expanded === modelKey(provider.id, model.id)}
           onToggle={onToggle}
         />
       ))}
@@ -81,7 +83,7 @@ function ModelRows({
   currency: Currency;
   rateType: RateType;
   expanded: boolean;
-  onToggle: (modelId: string) => void;
+  onToggle: (key: string) => void;
 }) {
   const selected = model.prices.filter((price) => price.currency === currency);
   const preferredRate: RateType = selected.some(
@@ -104,22 +106,23 @@ function ModelRows({
       .sort()
       .at(-1);
   const priceUnit = currency === "CNY" ? "人民币 / 1M" : "美元 / 1M";
+  const key = modelKey(provider.id, model.id);
 
   const activate = (event: MouseEvent<HTMLTableRowElement>) => {
     if ((event.target as HTMLElement).closest("a, button")) return;
-    onToggle(model.id);
+    onToggle(key);
   };
   const onKeyDown = (event: KeyboardEvent<HTMLTableRowElement>) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      onToggle(model.id);
+      onToggle(key);
     }
   };
 
   return (
     <Fragment>
       <tr
-        id={`model-${model.id}`}
+        id={modelDomId(provider.id, model.id)}
         className="model-row"
         tabIndex={0}
         aria-expanded={expanded}
@@ -171,7 +174,7 @@ function ModelRows({
             aria-label={`${expanded ? "收起" : "展开"} ${model.name}`}
             onClick={(event) => {
               event.stopPropagation();
-              onToggle(model.id);
+              onToggle(key);
             }}
           >
             +

@@ -1,5 +1,11 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
-import { compareModelsByReleaseDate, providerName } from "../lib/catalog";
+import {
+  compareModelsByReleaseDate,
+  modelDomId,
+  modelHash,
+  modelKey,
+  providerName,
+} from "../lib/catalog";
 import type { CalibrationModel, Catalog, Currency, RateType } from "../types";
 import { ModelRow } from "./ModelRow";
 
@@ -24,7 +30,7 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
     () =>
       new Map<string, CalibrationModel>(
         catalog.calibration?.modelsDev.models.map((item) => [
-          `${item.provider}/${item.model}`,
+          modelKey(item.provider, item.model),
           item,
         ]) ?? [],
       ),
@@ -51,7 +57,7 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
         .filter((item) => item.provider.id === provider.id)
         .map((item) => ({
           model: item.model,
-          calibration: calibrationMap.get(`${provider.id}/${item.model.id}`),
+          calibration: calibrationMap.get(modelKey(provider.id, item.model.id)),
         }))
         .sort(compareModelsByReleaseDate),
     }))
@@ -70,21 +76,25 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
   }, [expanded]);
 
   useEffect(() => {
+    const [providerId, modelId] = expanded?.split("/", 2) ?? [];
     const nextUrl = expanded
-      ? `${window.location.pathname}${window.location.search}#${encodeURIComponent(expanded)}`
+      ? `${window.location.pathname}${window.location.search}#${modelHash(providerId!, modelId!)}`
       : `${window.location.pathname}${window.location.search}`;
     window.history.replaceState(null, "", nextUrl);
   }, [expanded]);
 
-  const toggleModel = (modelId: string) => {
-    const willExpand = expanded !== modelId;
-    setExpanded(willExpand ? modelId : null);
+  const toggleModel = (key: string) => {
+    const willExpand = expanded !== key;
+    setExpanded(willExpand ? key : null);
     if (willExpand) {
+      const [providerId, modelId] = key.split("/", 2);
       window.requestAnimationFrame(() =>
-        document.getElementById(`model-${modelId}`)?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        }),
+        document
+          .getElementById(modelDomId(providerId!, modelId!))
+          ?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          }),
       );
     }
   };
