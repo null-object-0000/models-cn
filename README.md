@@ -6,9 +6,12 @@
 [![GitHub Pages](https://github.com/null-object-0000/models-cn/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/null-object-0000/models-cn/actions/workflows/deploy-pages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-087f5b.svg)](LICENSE)
 
-models-cn 收集中国大陆模型厂商在官方渠道提供的**自研模型人民币 API 定价**，同时维护模型能力、上下文限制、官方可用清单和 models.dev 交叉校准结果。
+models-cn 只关注**中国大陆模型厂商与国内渠道**，核心目标是提供可信、可追溯的**人民币 API 定价**。项目同时维护模型能力、上下文限制、官方可用清单，并使用 models.dev 补充厂商未披露的信息。
 
-- **官方优先**：价格来自厂商定价页，不采集聚合平台，不用汇率伪造人民币官方价。
+> **项目边界**：国内模型、国内渠道、人民币优先。厂商官方数据拥有最高优先级；官方缺失的字段可以使用 models.dev 作为补充来源，但必须明确标记为参考数据，不能覆盖或冒充官方数据。
+
+- **人民币优先**：重点维护中国大陆官方人民币价格，不用汇率换算结果冒充人民币官方价。
+- **缺失可补全**：模型能力、上下文、输出限制或其他缺失信息可回退到 models.dev，并保留来源与校准状态。
 - **机器友好**：统一 JSON、JSON Schema、稳定字段和可追溯来源。
 - **持续更新**：GitHub Actions 定期采集，数据变化通过 Pull Request 审核。
 - **Agent 友好**：提供可直接交给 Codex、Claude Code、Cursor 等工具的接入提示词。
@@ -49,6 +52,23 @@ console.log(cnyPrice);
 
 推荐使用 `provider.id + model.id` 作为模型价格的联合标识，不要只用模型名称。
 
+官方字段缺失时，可以从校准报告读取 models.dev 参考值：
+
+```ts
+const calibration = catalog.calibration?.modelsDev.models.find(
+  (item: { provider: string; model: string }) =>
+    item.provider === provider.id && item.model === model.id,
+);
+
+const outputLimit =
+  model.limits.maxOutputTokens ??
+  calibration?.checks.find(
+    (item: { field: string }) => item.field === "limits.maxOutputTokens",
+  )?.reference;
+```
+
+使用回退值时，应同时向调用方返回 `referenceUrl` 和 `status`，并标注为 models.dev 参考数据。
+
 ## 当前覆盖
 
 | 厂商        | 收录范围      | 人民币 | 官方美元 | 模型信息 | 官方清单 |
@@ -67,7 +87,7 @@ console.log(cnyPrice);
 请按照 docs/agent-integration-prompt.md 的规则，将 models-cn 接入当前项目。
 数据地址：https://null-object-0000.github.io/models-cn/api.json
 目标：读取中国大陆模型厂商的官方价格和模型信息，并实现可测试的模型查询与费用估算能力。
-要求：官方数据优先；不得硬编码价格；不得用汇率补造缺失价格；正确处理币种、市场、标准价/优惠价、缓存价、缺失字段和 models.dev 校准差异。
+要求：人民币官方价格优先；不得硬编码价格或用汇率伪造人民币官方价；官方字段缺失时允许使用 models.dev 补全，但必须保留参考来源，不能覆盖官方值；正确处理币种、市场、标准价/优惠价和缓存价。
 请先检查当前项目技术栈和已有模型配置，再实施修改、运行测试，并说明改动文件及使用方式。
 ```
 
@@ -98,16 +118,26 @@ console.log(cnyPrice);
 - `USD + international` 表示厂商独立国际渠道的官方美元价格，不是人民币换算价。
 - `standard` 是标准价；`promotional` 是厂商明确标注的优惠价。
 - `cacheHit`、`cacheMiss` 和 `output` 都是每百万 Token 的价格。
-- `maxOutputTokens` 等非必填字段缺失时，应显示“未公开”，不能自行推断。
+- `maxOutputTokens` 等非必填字段缺失时，可使用 models.dev 对应参考值补全；models.dev 也没有时应显示“未公开”，不能自行推断。
 - `sourceUrl`、`retrievedAt` 和 `contentHash` 用于追溯数据来源与变化。
 
-## 数据可信度
+## 官方优先，缺失补全
 
-项目将三类数据分开保存，互不覆盖：
+项目将三类数据分开保存，并按照明确的优先级使用：
 
 1. **官方定价**：厂商中文或英文定价页，是价格的事实来源。
 2. **官方模型清单**：通过厂商 Models API 检查新增、下线和别名变化。
-3. **models.dev 校准**：对比美元价格、上下文、输出限制、模态和能力，只报告差异，不覆盖官方数据。
+3. **models.dev 补全与校准**：对比并补充美元价格、上下文、输出限制、模态和能力。
+
+推荐的字段解析顺序：
+
+```text
+厂商官方字段
+→ 官方字段缺失时使用 models.dev reference
+→ 两者都缺失时保留 unavailable / 未公开
+```
+
+models.dev 补充值必须携带 `referenceUrl` 和校准状态，并在界面或 API 返回中标记为 `reference`。它不能覆盖已有官方字段，也不能通过汇率换算后标成官方人民币价格。
 
 模型级校准状态包括 `match`、`mismatch`、`partial` 和 `missing`。其中 `partial` 通常表示厂商未公开某些可比字段，不代表官方数据错误。
 

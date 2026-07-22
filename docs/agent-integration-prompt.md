@@ -20,10 +20,10 @@ Provider Schema：https://raw.githubusercontent.com/null-object-0000/models-cn/m
 2. 以 provider.id + model.id 作为联合标识，不能只按模型名称匹配。
 3. 优先使用 market=china、currency=CNY、rateType=standard 的官方人民币标准价。
 4. 只有调用方明确允许优惠价时，才能选择 rateType=promotional，并清楚标注它可能是限时价格。
-5. 不得通过汇率补造缺失的人民币或美元价格；没有对应币种时返回 unavailable。
+5. 官方字段缺失时，可以使用 models.dev calibration 中的 reference 补全，并返回 referenceUrl、校准状态和“参考数据”标记；models.dev 也没有时返回 unavailable。
 6. 正确区分 input.cacheHit、input.cacheMiss 和 output，单位均为每 1M Tokens。
-7. maxOutputTokens 等字段缺失时返回 null 或“未公开”，不得自行推断。
-8. models.dev calibration 仅用于提示差异，不能覆盖 providers 中的官方数据。
+7. maxOutputTokens 等字段缺失时优先查找 models.dev reference；仍然缺失时返回 null 或“未公开”，不得自行推断。
+8. models.dev 只能补充官方缺失字段，不能覆盖 providers 中已经存在的官方数据，也不能通过汇率换算后冒充人民币官方价。
 9. inventory 仅用于判断模型是否仍在官方列表中，清单差异不能自动改写价格。
 10. 不得在前端、日志或仓库中写入厂商 API Key；读取 models-cn 的公开 api.json 不需要密钥。
 
@@ -68,8 +68,9 @@ Provider Schema：https://raw.githubusercontent.com/null-object-0000/models-cn/m
 - unit=1M_tokens 表示价格已经按一百万 Token 归一化。
 - input.cacheMiss 用于普通输入，input.cacheHit 用于缓存命中输入，output 用于输出。
 - promotional 可能限时，不得静默替代 standard。
-- 官方未提供目标币种、最大输出或其他字段时，必须保留缺失状态。
-- 禁止汇率换算后冒充官方价格，禁止将 models.dev 或聚合平台数据覆盖到官方字段。
+- 官方未提供目标币种、最大输出或其他字段时，可以读取 calibration 中相同 field 的 models.dev reference。
+- 使用 models.dev 补充值时必须返回 referenceUrl、status 和参考来源标记；没有 reference 时保留缺失状态。
+- 禁止汇率换算后冒充官方人民币价格，禁止将 models.dev 或聚合平台数据覆盖到已有官方字段。
 
 费用估算公式：
 inputCost = uncachedInputTokens / 1_000_000 * input.cacheMiss
@@ -84,7 +85,7 @@ totalCost = inputCost + cacheCost + outputCost
 4. 缓存失效时优先保留最后一次通过校验的数据，并把陈旧状态暴露给调用方。
 5. 如果项目已有 Schema 校验设施，请接入 models-cn Schema；否则至少进行关键字段运行时校验。
 6. 查询 API 应返回价格来源 URL、retrievedAt、币种、市场和价格类型，方便界面向用户解释。
-7. 对 inventory mismatch 或 calibration mismatch 提供 warning，不要把它们当作价格自动修正指令。
+7. 对 inventory mismatch 或 calibration mismatch 提供 warning；只有官方字段缺失时才能使用 reference，不能用 mismatch 自动覆盖官方值。
 8. 添加单元测试和至少一个真实数据结构的 fixture，不要在测试中访问真实厂商密钥。
 9. 更新 README 或接入文档，给出最短可运行示例。
 10. 运行现有检查并修复由本次改动造成的问题。
@@ -93,7 +94,7 @@ totalCost = inputCost + cacheCost + outputCost
 - 能按 provider + model 找到 CNY 标准价。
 - 能区分普通输入、缓存输入和输出费用。
 - 用户明确选择时才能使用优惠价。
-- 目标币种不存在时返回 unavailable，不做换算。
+- 官方目标币种不存在时优先使用同币种的 models.dev reference；仍不存在时返回 unavailable，不做汇率换算。
 - 模型或字段不存在时不会抛出无法理解的空指针错误。
 - 数据源暂时不可用时有明确的缓存或失败策略。
 - 返回结果包含来源与更新时间，便于审计。
@@ -118,6 +119,8 @@ type CostEstimate = {
   totalCost: number;
   sourceUrl: string;
   retrievedAt: string;
+  sourceType: "official" | "reference";
+  calibrationStatus?: "match" | "mismatch" | "partial" | "missing";
   warnings: string[];
 };
 ```
