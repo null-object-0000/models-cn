@@ -3,7 +3,7 @@ name: Update model prices
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 9 * * *"
+    - cron: "17 9,15,21 * * *"
       timezone: "Asia/Shanghai"
 
 permissions:
@@ -36,12 +36,26 @@ jobs:
       - run: npm run build
       - run: npm run check
       - run: npm run format:check
+      - name: Generate update report
+        id: report
+        shell: bash
+        run: |
+          npm run report -- --base HEAD --output update-report.md --status-output update-material.txt
+          material_changes=$(cat update-material.txt)
+          echo "material_changes=$material_changes" >> "$GITHUB_OUTPUT"
+          cat update-report.md >> "$GITHUB_STEP_SUMMARY"
+          if [[ "$material_changes" == "true" ]]; then
+            echo "> 检测到实质变化，将创建或更新自动 PR。" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "> 本次仅刷新成功时间戳，不创建或更新 PR。" >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Create or update price PR
+        if: steps.report.outputs.material_changes == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          if git diff --quiet -- data api.json; then
+          if git diff --quiet -- data api.json v1/api.json; then
             echo "No pricing changes"
             exit 0
           fi
@@ -50,10 +64,15 @@ jobs:
           git config user.email "models-cn-bot@users.noreply.github.com"
           git fetch origin "$branch:refs/remotes/origin/$branch" || true
           git checkout -B "$branch"
-          git add data api.json
+          git add data api.json v1/api.json
           git commit -m "chore: update model prices"
           git push --force-with-lease origin "$branch"
           open_pr_count=$(gh pr list --head "$branch" --state open --json number --jq 'length')
           if [ "$open_pr_count" -eq 0 ]; then
-            gh pr create --head "$branch" --title "chore: update model prices" --body "Automated update from official provider pricing pages."
+            gh pr create --head "$branch" --title "chore: update model prices" --body-file update-report.md
+          else
+            pr_number=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number')
+            gh pr edit "$pr_number" --body-file update-report.md
           fi
+      - name: Assert collection health
+        run: npm run health:check

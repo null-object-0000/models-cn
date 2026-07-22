@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://models-cn.dev/schema/calibration.schema.json",
+  "$id": "https://models-cn.dev/schema/v1/calibration.schema.json",
   "title": "models-cn external calibration report",
   "type": "object",
   "additionalProperties": false,

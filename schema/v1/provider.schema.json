@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://models-cn.dev/schema/provider.schema.json",
+  "$id": "https://models-cn.dev/schema/v1/provider.schema.json",
   "title": "models-cn provider data",
   "type": "object",
   "additionalProperties": false,

@@ -7,6 +7,7 @@ import type {
   ProviderData,
   Source,
 } from "../types.js";
+import { healthyHealth } from "../health.js";
 
 export const LONGCAT_PRICING_SOURCES = [
   {
@@ -309,6 +310,7 @@ export async function collectLongCat(
   const parameters = detail.supported_parameters;
   return {
     schemaVersion: "2.0",
+    health: healthyHealth(now),
     id: "longcat",
     name: "LongCat",
     ownedBy: "longcat",

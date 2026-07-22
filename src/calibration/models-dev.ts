@@ -6,6 +6,7 @@ import type {
   ModelsDevCalibration,
   ProviderData,
 } from "../types.js";
+import { healthyHealth } from "../health.js";
 
 const MODELS_DEV_API_URL = "https://models.dev/api.json" as const;
 
@@ -291,6 +292,7 @@ export async function collectModelsDevCalibration(
   );
   return {
     schemaVersion: "1.0",
+    health: healthyHealth(now),
     source: { url: MODELS_DEV_API_URL, retrievedAt, contentHash },
     models,
   };

@@ -1,6 +1,14 @@
 export type Currency = "CNY" | "USD";
 export type Market = "china" | "international";
 
+export interface ProviderHealth {
+  status: "healthy" | "stale" | "error";
+  lastSuccessfulAt: string;
+  lastAttemptAt: string;
+  consecutiveFailures: number;
+  message?: string;
+}
+
 export interface Source {
   url: string;
   kind: "pricing" | "model-metadata";
@@ -74,6 +82,7 @@ export interface ProviderData {
     openai: string;
     anthropic?: string;
   };
+  health: ProviderHealth;
   models: ModelData[];
   sources: Source[];
 }
@@ -98,6 +107,7 @@ export interface InventoryModel {
 export interface ProviderInventory {
   schemaVersion: "1.0";
   provider: string;
+  health: ProviderHealth;
   source: {
     url: string;
     retrievedAt: string;
@@ -135,6 +145,7 @@ export interface ModelCalibration {
 
 export interface ModelsDevCalibration {
   schemaVersion: "1.0";
+  health: ProviderHealth;
   source: {
     url: "https://models.dev/api.json";
     retrievedAt: string;

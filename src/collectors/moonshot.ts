@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import type { ModelData, ModelPrice, ProviderData, Source } from "../types.js";
+import { healthyHealth } from "../health.js";
 
 export const MOONSHOT_PRICING_SOURCES = [
   "https://platform.kimi.com/docs/pricing/chat-k3",
@@ -268,6 +269,7 @@ export async function collectMoonshot(
   }
   return {
     schemaVersion: "2.0",
+    health: healthyHealth(now),
     id: "moonshot-cn",
     name: "Kimi China",
     displayNames: {

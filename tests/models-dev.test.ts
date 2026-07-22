@@ -4,9 +4,11 @@ import {
   type ModelsDevApi,
 } from "../src/calibration/models-dev.js";
 import type { ProviderData } from "../src/types.js";
+import { healthyHealth } from "../src/health.js";
 
 const longcat: ProviderData = {
   schemaVersion: "2.0",
+  health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
   id: "longcat",
   name: "LongCat",
   ownedBy: "longcat",
@@ -41,6 +43,7 @@ const longcat: ProviderData = {
 
 const kimiChina: ProviderData = {
   schemaVersion: "2.0",
+  health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
   id: "moonshot-cn",
   name: "Kimi China",
   ownedBy: "moonshot",
@@ -60,6 +63,7 @@ const kimiChina: ProviderData = {
 
 const qwenChina: ProviderData = {
   schemaVersion: "2.0",
+  health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
   id: "qwen-cn",
   name: "Qwen China",
   ownedBy: "qwen",

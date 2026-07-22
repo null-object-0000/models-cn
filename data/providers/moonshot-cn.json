@@ -1,6 +1,12 @@
 {
   "schemaVersion": "2.0",
   "id": "moonshot-cn",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-07-22T06:43:02.235Z",
+    "lastAttemptAt": "2026-07-22T06:43:02.235Z",
+    "consecutiveFailures": 0
+  },
   "name": "Kimi China",
   "displayNames": {
     "zh-CN": "Kimi 国内版",

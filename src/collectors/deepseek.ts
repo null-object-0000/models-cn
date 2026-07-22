@@ -10,6 +10,7 @@ import type {
   ProviderData,
   Source,
 } from "../types.js";
+import { healthyHealth } from "../health.js";
 
 export const DEEPSEEK_SOURCES = [
   {
@@ -293,6 +294,7 @@ export async function collectDeepSeek(
 
   return {
     schemaVersion: "2.0",
+    health: healthyHealth(now),
     id: "deepseek",
     name: "DeepSeek",
     ownedBy: "deepseek",

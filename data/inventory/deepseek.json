@@ -1,6 +1,12 @@
 {
   "schemaVersion": "1.0",
   "provider": "deepseek",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-07-22T03:54:30.941Z",
+    "lastAttemptAt": "2026-07-22T03:54:30.941Z",
+    "consecutiveFailures": 0
+  },
   "source": {
     "url": "https://api.deepseek.com/models",
     "retrievedAt": "2026-07-22T03:54:30.941Z",

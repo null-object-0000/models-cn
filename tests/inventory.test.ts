@@ -5,9 +5,11 @@ import {
   INVENTORY_PROVIDERS,
 } from "../src/inventory/provider-inventory.js";
 import type { ProviderData } from "../src/types.js";
+import { healthyHealth } from "../src/health.js";
 
 const deepseek: ProviderData = {
   schemaVersion: "2.0",
+  health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
   id: "deepseek",
   name: "DeepSeek",
   ownedBy: "deepseek",
@@ -95,6 +97,7 @@ describe("provider model inventory", () => {
     );
     const moonshot: ProviderData = {
       schemaVersion: "2.0",
+      health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
       id: "moonshot-cn",
       name: "Kimi China",
       displayNames: { "zh-CN": "Kimi 国内版", en: "Kimi China" },

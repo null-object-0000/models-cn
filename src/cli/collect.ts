@@ -16,6 +16,7 @@ import {
 } from "../io.js";
 import type { ModelsDevCalibration } from "../types.js";
 import { validateCalibration, validateProvider } from "../validation.js";
+import { failedHealth } from "../health.js";
 
 await mkdir(providersDir, { recursive: true });
 const collectors = [
@@ -42,12 +43,23 @@ await Promise.all(
   selectedCollectors.map(async ({ id, collect }) => {
     const output = path.join(providersDir, `${id}.json`);
     const previous = await readProvider(output);
-    const data = preserveUnchangedSourceTimestamps(await collect(), previous);
-    await validateProvider(data);
-    await writeJson(output, data);
-    console.log(
-      `Collected ${data.models.length} ${data.name} models into ${output}`,
-    );
+    try {
+      const data = preserveUnchangedSourceTimestamps(await collect(), previous);
+      await validateProvider(data);
+      await writeJson(output, data);
+      console.log(
+        `Collected ${data.models.length} ${data.name} models into ${output}`,
+      );
+    } catch (error) {
+      if (!previous) throw error;
+      const fallback = {
+        ...previous,
+        health: failedHealth(previous.health, error),
+      };
+      await validateProvider(fallback);
+      await writeJson(output, fallback);
+      console.error(`${id} collection failed: ${(error as Error).message}`);
+    }
   }),
 );
 
@@ -80,5 +92,12 @@ try {
     `Calibrated ${calibration.models.length} models against models.dev (${mismatches} mismatch, ${partial} partial)`,
   );
 } catch (error) {
-  console.warn(`models.dev calibration skipped: ${(error as Error).message}`);
+  if (!previousCalibration) throw error;
+  const fallback = {
+    ...previousCalibration,
+    health: failedHealth(previousCalibration.health, error),
+  };
+  await validateCalibration(fallback);
+  await writeJson(calibrationOutput, fallback);
+  console.error(`models.dev calibration failed: ${(error as Error).message}`);
 }

@@ -1,6 +1,12 @@
 {
   "schemaVersion": "2.0",
   "id": "deepseek",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-07-22T03:03:12.107Z",
+    "lastAttemptAt": "2026-07-22T03:03:12.107Z",
+    "consecutiveFailures": 0
+  },
   "name": "DeepSeek",
   "ownedBy": "deepseek",
   "baseUrls": {

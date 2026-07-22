@@ -16,7 +16,7 @@ models-cn 只关注**中国大陆模型厂商与国内渠道**，核心目标是
 - **持续更新**：GitHub Actions 定期采集，数据变化通过 Pull Request 审核。
 - **Agent 友好**：提供可直接交给 Codex、Claude Code、Cursor 等工具的接入提示词。
 
-[浏览官网](https://null-object-0000.github.io/models-cn/) · [获取 api.json](https://null-object-0000.github.io/models-cn/api.json) · [查看 JSON Schema](schema/provider.schema.json) · [复制 Agent 接入提示词](docs/agent-integration-prompt.md)
+[浏览官网](https://null-object-0000.github.io/models-cn/) · [获取 api.json](https://null-object-0000.github.io/models-cn/api.json) · [v1 稳定接口](https://null-object-0000.github.io/models-cn/v1/api.json) · [查看 JSON Schema](schema/v1/provider.schema.json) · [兼容性承诺](COMPATIBILITY.md) · [复制 Agent 接入提示词](docs/agent-integration-prompt.md)
 
 ## 30 秒开始使用
 
@@ -25,6 +25,8 @@ models-cn 只关注**中国大陆模型厂商与国内渠道**，核心目标是
 ```bash
 curl -L https://null-object-0000.github.io/models-cn/api.json
 ```
+
+生产集成建议固定使用 `https://null-object-0000.github.io/models-cn/v1/api.json`；无版本地址适合主动跟进最新版的使用者。
 
 在 JavaScript / TypeScript 中使用：
 
@@ -187,12 +189,14 @@ Kimi 的最大输出长度与输入共享上下文窗口：K3 为 `1,048,576 - p
 | 路径                               | 内容                                   |
 | ---------------------------------- | -------------------------------------- |
 | `api.json`                         | 所有厂商、模型、价格、清单和校准的入口 |
+| `v1/api.json`                      | v1 稳定 API 入口                       |
 | `data/providers/{provider}.json`   | 单个厂商的规范化官方数据               |
 | `data/inventory/{provider}.json`   | 官方 Models API 可用清单及差异         |
 | `data/calibration/models-dev.json` | models.dev 逐字段校准报告              |
 | `schema/provider.schema.json`      | 厂商数据 JSON Schema                   |
 | `schema/inventory.schema.json`     | 模型清单 JSON Schema                   |
 | `schema/calibration.schema.json`   | 校准报告 JSON Schema                   |
+| `schema/v1/*.json`                 | v1 稳定 API 对应的版本化 Schema        |
 
 ## 本地运行
 
@@ -245,6 +249,10 @@ MOONSHOT_API_KEY=
 ```
 
 采集器在关键表格消失、字段缺失或价格无法解析时会直接失败，不会用空数据覆盖已有结果。只有规范化内容发生变化时，对应来源的 `retrievedAt` 才会更新。
+
+每条采集链路同时记录 `health.status`、`lastSuccessfulAt`、`lastAttemptAt` 和 `consecutiveFailures`。官网仅在所有官方价格采集均为 `healthy` 时显示 `LIVE`；失败时继续提供上一份已验证快照并明确显示异常。自动任务每天在上海时间 09:17、15:17 和 21:17 执行，所有运行都会把完整报告写入 GitHub Actions Summary。机器人 PR 会列出新增/下线模型、逐字段价格与模型信息变化、校准变化，以及官方价格页、Models API 和 models.dev 的采集状态；纯成功时间戳刷新不会更新 PR，模型、价格、清单、校准或健康状态变化才会更新。
+
+公开接口的兼容性、Schema 变更和字段弃用规则见 [COMPATIBILITY.md](COMPATIBILITY.md)，版本历史见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 参与贡献
 

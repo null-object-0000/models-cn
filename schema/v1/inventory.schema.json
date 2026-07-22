@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://models-cn.dev/schema/inventory.schema.json",
+  "$id": "https://models-cn.dev/schema/v1/inventory.schema.json",
   "title": "models-cn live provider model inventory",
   "type": "object",
   "additionalProperties": false,

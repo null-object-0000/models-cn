@@ -1,5 +1,11 @@
 {
   "schemaVersion": "1.0",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-07-22T07:52:02.270Z",
+    "lastAttemptAt": "2026-07-22T07:52:02.270Z",
+    "consecutiveFailures": 0
+  },
   "source": {
     "url": "https://models.dev/api.json",
     "retrievedAt": "2026-07-22T07:52:02.270Z",

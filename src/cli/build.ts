@@ -1,4 +1,4 @@
-import { readdir } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
   calibrationDir,
@@ -59,4 +59,28 @@ const catalog: Catalog = {
   ...(modelsDev ? { calibration: { modelsDev } } : {}),
 };
 await writeJson(path.join(rootDir, "api.json"), catalog);
+await mkdir(path.join(rootDir, "v1"), { recursive: true });
+await writeJson(path.join(rootDir, "v1", "api.json"), catalog);
+await mkdir(path.join(rootDir, "schema", "v1"), { recursive: true });
+for (const schemaFile of [
+  "provider.schema.json",
+  "inventory.schema.json",
+  "calibration.schema.json",
+]) {
+  const source = await readFile(
+    path.join(rootDir, "schema", schemaFile),
+    "utf8",
+  );
+  const versioned = source.replace(
+    `https://models-cn.dev/schema/${schemaFile}`,
+    `https://models-cn.dev/schema/v1/${schemaFile}`,
+  );
+  if (source === versioned)
+    throw new Error(`Cannot version schema/${schemaFile}`);
+  await writeFile(
+    path.join(rootDir, "schema", "v1", schemaFile),
+    versioned,
+    "utf8",
+  );
+}
 console.log(`Built api.json with ${providers.length} provider(s)`);

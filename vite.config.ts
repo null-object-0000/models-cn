@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile } from "node:fs/promises";
+import { copyFile, cp, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin } from "vite";
@@ -26,6 +26,14 @@ function copyCatalog(): Plugin {
       await copyFile(
         path.resolve("api.json"),
         path.join(outputDirectory, "api.json"),
+      );
+      await cp(path.resolve("v1"), path.join(outputDirectory, "v1"), {
+        recursive: true,
+      });
+      await cp(
+        path.resolve("schema", "v1"),
+        path.join(outputDirectory, "schema", "v1"),
+        { recursive: true },
       );
     },
   };

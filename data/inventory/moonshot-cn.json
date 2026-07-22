@@ -1,6 +1,12 @@
 {
   "schemaVersion": "1.0",
   "provider": "moonshot-cn",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-07-22T05:38:16.668Z",
+    "lastAttemptAt": "2026-07-22T05:38:16.668Z",
+    "consecutiveFailures": 0
+  },
   "source": {
     "url": "https://api.moonshot.cn/v1/models",
     "retrievedAt": "2026-07-22T05:38:16.668Z",

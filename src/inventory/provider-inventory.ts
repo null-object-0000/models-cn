@@ -4,6 +4,7 @@ import type {
   ProviderData,
   ProviderInventory,
 } from "../types.js";
+import { healthyHealth } from "../health.js";
 
 interface ModelsResponse {
   data: Array<{
@@ -110,6 +111,7 @@ export function buildProviderInventory(
   return {
     schemaVersion: "1.0",
     provider: config.provider,
+    health: healthyHealth(now),
     source: { url: config.url, retrievedAt, contentHash },
     models,
     comparison: compareInventory(provider, models, now),

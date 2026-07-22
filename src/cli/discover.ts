@@ -14,13 +14,25 @@ import {
 } from "../io.js";
 import type { ProviderInventory } from "../types.js";
 import { validateInventory } from "../validation.js";
+import { failedHealth } from "../health.js";
 
 await mkdir(inventoryDir, { recursive: true });
 let refreshed = 0;
 for (const config of INVENTORY_PROVIDERS) {
   const apiKey = process.env[config.env];
   if (!apiKey) {
-    console.warn(
+    const output = path.join(inventoryDir, `${config.provider}.json`);
+    const previous = await readJson<ProviderInventory>(output);
+    if (previous) {
+      const error = new Error(`${config.env} is not configured`);
+      const fallback = {
+        ...previous,
+        health: failedHealth(previous.health, error),
+      };
+      await validateInventory(fallback);
+      await writeJson(output, fallback);
+    }
+    console.error(
       `${config.provider} inventory skipped: ${config.env} is not configured`,
     );
     continue;
@@ -34,17 +46,30 @@ for (const config of INVENTORY_PROVIDERS) {
     );
   const output = path.join(inventoryDir, `${config.provider}.json`);
   const previous = await readJson<ProviderInventory>(output);
-  const inventory = await fetchProviderInventory(
-    config,
-    apiKey,
-    provider,
-    previous,
-  );
-  await validateInventory(inventory);
-  await writeJson(output, inventory);
-  console.log(
-    `Discovered ${inventory.models.length} live ${provider.name} models (${inventory.comparison.status})`,
-  );
-  refreshed += 1;
+  try {
+    const inventory = await fetchProviderInventory(
+      config,
+      apiKey,
+      provider,
+      previous,
+    );
+    await validateInventory(inventory);
+    await writeJson(output, inventory);
+    console.log(
+      `Discovered ${inventory.models.length} live ${provider.name} models (${inventory.comparison.status})`,
+    );
+    refreshed += 1;
+  } catch (error) {
+    if (!previous) throw error;
+    const fallback = {
+      ...previous,
+      health: failedHealth(previous.health, error),
+    };
+    await validateInventory(fallback);
+    await writeJson(output, fallback);
+    console.error(
+      `${config.provider} inventory failed: ${(error as Error).message}`,
+    );
+  }
 }
 console.log(`Refreshed ${refreshed} provider model inventories`);

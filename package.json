@@ -16,6 +16,8 @@
     "site:preview": "vite preview --config vite.config.ts",
     "build": "tsx src/cli/build.ts",
     "validate": "tsx src/cli/validate.ts",
+    "health:check": "tsx src/cli/check-health.ts",
+    "report": "tsx src/cli/report.ts",
     "check": "npm run typecheck && npm test && npm run validate",
     "typecheck": "tsc --noEmit && tsc --noEmit -p site/tsconfig.json",
     "test": "vitest run",

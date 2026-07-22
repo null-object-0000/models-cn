@@ -1,6 +1,12 @@
 {
   "schemaVersion": "2.0",
   "id": "qwen-cn",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-07-22T08:04:24.662Z",
+    "lastAttemptAt": "2026-07-22T08:04:24.662Z",
+    "consecutiveFailures": 0
+  },
   "name": "Qwen China",
   "displayNames": {
     "zh-CN": "千问国内版",
