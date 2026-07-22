@@ -11,6 +11,7 @@ const MODELS_DEV_API_URL = "https://models.dev/api.json" as const;
 
 export interface ModelsDevModel {
   id: string;
+  release_date?: string;
   reasoning?: boolean;
   tool_call?: boolean;
   modalities?: { input?: string[]; output?: string[] };
@@ -49,38 +50,38 @@ const mappings = [
   {
     provider: "moonshot-cn",
     model: "kimi-k3",
-    referenceProvider: "moonshotai-cn",
+    referenceProvider: "moonshotai",
     referenceModel: "kimi-k3",
-    referenceUrl: "https://models.dev/models/moonshotai-cn/kimi-k3/",
+    referenceUrl: "https://models.dev/models/moonshotai/kimi-k3/",
   },
   {
     provider: "moonshot-cn",
     model: "kimi-k2.7-code",
-    referenceProvider: "moonshotai-cn",
+    referenceProvider: "moonshotai",
     referenceModel: "kimi-k2.7-code",
-    referenceUrl: "https://models.dev/models/moonshotai-cn/kimi-k2.7-code/",
+    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.7-code/",
   },
   {
     provider: "moonshot-cn",
     model: "kimi-k2.7-code-highspeed",
-    referenceProvider: "moonshotai-cn",
+    referenceProvider: "moonshotai",
     referenceModel: "kimi-k2.7-code-highspeed",
     referenceUrl:
-      "https://models.dev/models/moonshotai-cn/kimi-k2.7-code-highspeed/",
+      "https://models.dev/models/moonshotai/kimi-k2.7-code-highspeed/",
   },
   {
     provider: "moonshot-cn",
     model: "kimi-k2.6",
-    referenceProvider: "moonshotai-cn",
+    referenceProvider: "moonshotai",
     referenceModel: "kimi-k2.6",
-    referenceUrl: "https://models.dev/models/moonshotai-cn/kimi-k2.6/",
+    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.6/",
   },
   {
     provider: "moonshot-cn",
     model: "kimi-k2.5",
-    referenceProvider: "moonshotai-cn",
+    referenceProvider: "moonshotai",
     referenceModel: "kimi-k2.5",
-    referenceUrl: "https://models.dev/models/moonshotai-cn/kimi-k2.5/",
+    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.5/",
   },
 ] as const;
 
@@ -126,6 +127,11 @@ function compareModel(
       price.rateType === "standard",
   );
   const checks = [
+    check(
+      "createdAt",
+      model?.createdAt ? model.createdAt.slice(0, 10) : undefined,
+      reference?.release_date,
+    ),
     check(
       "limits.contextTokens",
       model?.limits.contextTokens,

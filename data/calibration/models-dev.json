@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-07-22T06:07:22.579Z",
-    "contentHash": "sha256:532d87a89535367dbaeef0ab0ad2aedd90b4975cfef0c08366b644fe4b9cdeaf"
+    "retrievedAt": "2026-07-22T06:46:14.105Z",
+    "contentHash": "sha256:9948545600157340a812118907f2f5d01a4ef124aec4d218698e2064ab583347"
   },
   "models": [
     {
@@ -14,6 +14,12 @@
       "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-flash/",
       "status": "partial",
       "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-04-24",
+          "status": "missing"
+        },
         {
           "field": "limits.contextTokens",
           "official": 1000000,
@@ -83,6 +89,12 @@
       "status": "partial",
       "checks": [
         {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-04-24",
+          "status": "missing"
+        },
+        {
           "field": "limits.contextTokens",
           "official": 1000000,
           "reference": 1000000,
@@ -151,6 +163,12 @@
       "status": "mismatch",
       "checks": [
         {
+          "field": "createdAt",
+          "official": "2026-03-12",
+          "reference": "2026-06-30",
+          "status": "mismatch"
+        },
+        {
           "field": "limits.contextTokens",
           "official": 1048576,
           "reference": 1000000,
@@ -217,11 +235,17 @@
     {
       "provider": "moonshot-cn",
       "model": "kimi-k3",
-      "referenceProvider": "moonshotai-cn",
+      "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k3",
-      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k3/",
-      "status": "partial",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k3/",
+      "status": "mismatch",
       "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-07-16",
+          "status": "missing"
+        },
         {
           "field": "limits.contextTokens",
           "official": 1048576,
@@ -230,9 +254,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": null,
+          "official": 1048576,
           "reference": 131072,
-          "status": "missing"
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",
@@ -293,11 +317,17 @@
     {
       "provider": "moonshot-cn",
       "model": "kimi-k2.7-code",
-      "referenceProvider": "moonshotai-cn",
+      "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k2.7-code",
-      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k2.7-code/",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.7-code/",
       "status": "partial",
       "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-06-12",
+          "status": "missing"
+        },
         {
           "field": "limits.contextTokens",
           "official": 262144,
@@ -369,11 +399,17 @@
     {
       "provider": "moonshot-cn",
       "model": "kimi-k2.7-code-highspeed",
-      "referenceProvider": "moonshotai-cn",
+      "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k2.7-code-highspeed",
-      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k2.7-code-highspeed/",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.7-code-highspeed/",
       "status": "partial",
       "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-06-12",
+          "status": "missing"
+        },
         {
           "field": "limits.contextTokens",
           "official": 262144,
@@ -445,11 +481,17 @@
     {
       "provider": "moonshot-cn",
       "model": "kimi-k2.6",
-      "referenceProvider": "moonshotai-cn",
+      "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k2.6",
-      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k2.6/",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.6/",
       "status": "partial",
       "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-04-21",
+          "status": "missing"
+        },
         {
           "field": "limits.contextTokens",
           "official": 262144,
@@ -458,9 +500,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": null,
+          "official": 262144,
           "reference": 262144,
-          "status": "missing"
+          "status": "match"
         },
         {
           "field": "capabilities.thinking",
@@ -521,11 +563,17 @@
     {
       "provider": "moonshot-cn",
       "model": "kimi-k2.5",
-      "referenceProvider": "moonshotai-cn",
+      "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k2.5",
-      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k2.5/",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.5/",
       "status": "partial",
       "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-01",
+          "status": "missing"
+        },
         {
           "field": "limits.contextTokens",
           "official": 262144,
@@ -534,9 +582,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": null,
+          "official": 262144,
           "reference": 262144,
-          "status": "missing"
+          "status": "match"
         },
         {
           "field": "capabilities.thinking",

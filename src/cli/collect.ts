@@ -5,6 +5,7 @@ import { collectModelsDevCalibration } from "../calibration/models-dev.js";
 import { collectDeepSeek } from "../collectors/deepseek.js";
 import { collectLongCat } from "../collectors/longcat.js";
 import { collectMoonshot } from "../collectors/moonshot.js";
+import { collectQwen } from "../collectors/qwen.js";
 import {
   calibrationDir,
   preserveUnchangedSourceTimestamps,
@@ -21,6 +22,7 @@ const collectors = [
   { id: "deepseek", collect: collectDeepSeek },
   { id: "longcat", collect: collectLongCat },
   { id: "moonshot-cn", collect: collectMoonshot },
+  { id: "qwen-cn", collect: collectQwen },
 ];
 
 const providerOption = process.argv.indexOf("--provider");

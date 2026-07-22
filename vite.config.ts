@@ -1,11 +1,23 @@
-import { copyFile, mkdir } from "node:fs/promises";
+import { copyFile, mkdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin } from "vite";
 
 function copyCatalog(): Plugin {
   let outputDirectory = "";
   return {
     name: "copy-model-catalog",
+    configureServer(server) {
+      server.middlewares.use("/api.json", async (_request, response) => {
+        try {
+          response.setHeader("Content-Type", "application/json; charset=utf-8");
+          response.end(await readFile(path.resolve("api.json")));
+        } catch {
+          response.statusCode = 500;
+          response.end('{"error":"catalog unavailable"}');
+        }
+      });
+    },
     configResolved(config) {
       outputDirectory = path.resolve(config.root, config.build.outDir);
     },
@@ -22,7 +34,7 @@ function copyCatalog(): Plugin {
 export default defineConfig({
   root: "site",
   base: "./",
-  plugins: [copyCatalog()],
+  plugins: [react(), copyCatalog()],
   build: {
     outDir: "../dist/site",
     emptyOutDir: true,

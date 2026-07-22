@@ -21,8 +21,13 @@ export interface ModelPrice {
   currency: Currency;
   unit: "1M_tokens";
   rateType: "standard" | "promotional";
+  inputTokenRange?: {
+    label: string;
+    minExclusive?: number;
+    maxInclusive?: number;
+  };
   input: {
-    cacheHit: number;
+    cacheHit?: number;
     cacheMiss: number;
   };
   output: number;

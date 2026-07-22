@@ -1,0 +1,225 @@
+.hero {
+  min-height: 620px;
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 90px;
+  align-items: center;
+  padding: 88px 0 100px;
+}
+.eyebrow,
+.section-index {
+  font:
+    600 12px/1.5 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eyebrow span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent);
+}
+.hero h1 {
+  margin: 24px 0 26px;
+  font-size: clamp(52px, 7vw, 92px);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+  font-weight: 620;
+}
+.hero h1 em {
+  color: var(--accent);
+  font-style: normal;
+}
+.lede {
+  max-width: 620px;
+  color: var(--subtle);
+  font-size: 18px;
+  line-height: 1.75;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 38px;
+}
+.hero-actions a {
+  padding: 13px 18px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 600;
+}
+.primary-action {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border-color: var(--accent) !important;
+}
+.secondary-action:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.signal-panel {
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, var(--signal-a), var(--signal-b));
+  box-shadow: 18px 18px 0 var(--shadow);
+}
+.signal-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font:
+    600 12px/1.2 ui-monospace,
+    monospace;
+  letter-spacing: 0.12em;
+}
+.signal-head i {
+  color: var(--accent);
+  font-style: normal;
+}
+.signal-panel dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+}
+.signal-panel dl div {
+  padding: 22px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.signal-panel dl div:nth-child(even) {
+  border-right: 0;
+}
+.signal-panel dt {
+  color: var(--muted);
+  font-size: 14px;
+}
+.signal-panel dd {
+  margin: 8px 0 0;
+  font:
+    500 32px/1 ui-monospace,
+    monospace;
+}
+.signal-panel dd.warn {
+  color: var(--warning);
+}
+.signal-panel dd small {
+  color: var(--muted);
+  font-size: 14px;
+}
+.signal-panel > p {
+  margin: 0;
+  padding: 15px 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.signal-panel time {
+  float: right;
+  color: var(--text-secondary);
+}
+.catalog-section,
+.method-section {
+  scroll-margin-top: 24px;
+  padding: 90px 0;
+  border-top: 1px solid var(--line);
+}
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.section-heading h2 {
+  margin: 8px 0 0;
+  font-size: clamp(30px, 4vw, 48px);
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+.section-heading > p {
+  max-width: 430px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 15px;
+}
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.method-grid article {
+  padding: 30px;
+  background: var(--panel);
+}
+.method-grid span {
+  color: var(--accent);
+  font:
+    12px/1 ui-monospace,
+    monospace;
+}
+.method-grid h3 {
+  margin: 42px 0 12px;
+  font-size: 20px;
+}
+.method-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 34px 0 44px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+.loading-shell,
+.error-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+  font:
+    14px/1.4 ui-monospace,
+    monospace;
+}
+.loading-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.1s infinite;
+}
+.error-shell {
+  flex-direction: column;
+  text-align: center;
+}
+.error-shell p {
+  color: var(--warning);
+  letter-spacing: 0.12em;
+}
+.error-shell h1 {
+  margin: 0;
+  color: var(--text);
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+    transform: scale(0.75);
+  }
+}

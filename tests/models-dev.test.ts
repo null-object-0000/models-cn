@@ -39,6 +39,25 @@ const longcat: ProviderData = {
   sources: [],
 };
 
+const kimiChina: ProviderData = {
+  schemaVersion: "1.0",
+  id: "moonshot-cn",
+  name: "Kimi China",
+  ownedBy: "moonshot",
+  baseUrls: { openai: "https://api.moonshot.cn/v1" },
+  models: [
+    {
+      id: "kimi-k3",
+      name: "Kimi K3",
+      aliases: [],
+      capabilities: { thinking: true },
+      limits: { contextTokens: 1_048_576, maxOutputTokens: 1_048_576 },
+      prices: [],
+    },
+  ],
+  sources: [],
+};
+
 describe("models.dev calibration", () => {
   it("reports differences without overwriting official values", async () => {
     const api: ModelsDevApi = {
@@ -74,5 +93,42 @@ describe("models.dev calibration", () => {
     expect(
       result?.checks.find((item) => item.field === "prices.USD.output")?.status,
     ).toBe("match");
+  });
+
+  it("uses the shared moonshotai namespace for Kimi references", async () => {
+    const api: ModelsDevApi = {
+      moonshotai: {
+        models: {
+          "kimi-k3": {
+            id: "kimi-k3",
+            release_date: "2026-07-16",
+            reasoning: true,
+            limit: { context: 1_048_576, output: 131_072 },
+          },
+        },
+      },
+    };
+    const report = await collectModelsDevCalibration(
+      [kimiChina],
+      undefined,
+      new Date("2026-07-22T00:00:00Z"),
+      async () => api,
+    );
+    const result = report.models.find(
+      (model) => model.provider === "moonshot-cn" && model.model === "kimi-k3",
+    );
+    expect(result).toMatchObject({
+      referenceProvider: "moonshotai",
+      referenceModel: "kimi-k3",
+      referenceUrl: "https://models.dev/models/moonshotai/kimi-k3/",
+    });
+    expect(result?.checks.find((check) => check.field === "createdAt")).toEqual(
+      {
+        field: "createdAt",
+        official: null,
+        reference: "2026-07-16",
+        status: "missing",
+      },
+    );
   });
 });

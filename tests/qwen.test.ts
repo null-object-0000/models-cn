@@ -1,0 +1,284 @@
+import { describe, expect, it } from "vitest";
+import {
+  collectQwen,
+  isQwenDatedSnapshot,
+  parseQwenDetails,
+  type QwenCapturedData,
+} from "../src/collectors/qwen.js";
+
+const qwenDetail = {
+  code: "200",
+  data: {
+    Data: [
+      {
+        GroupModel: "Qwen3.7-Plus",
+        Name: "Qwen3.7-Plus Internal Name",
+        ModelAlias: "qwen3.7-plus",
+        LatestOnlineAt: "2026-06-01T12:46:50.000+00:00",
+        ModelInfo: {
+          ContextWindow: 1_000_000,
+          MaxOutputTokens: 65_536,
+          ReasoningMaxInputTokens: 983_616,
+        },
+        Features: [
+          "function-calling",
+          "prefix-completion",
+          "structured-outputs",
+        ],
+        InferenceMetadata: {
+          RequestModality: ["Image", "Text", "Video"],
+          ResponseModality: ["Text"],
+        },
+        MultiPrices: [
+          {
+            RangeName: "输入<=256k",
+            Prices: [
+              {
+                Type: "input_token",
+                PriceUnit: "每百万tokens",
+                Price: "2",
+                Discount: "0.8",
+              },
+              {
+                Type: "output_token",
+                PriceUnit: "每百万tokens",
+                Price: "8",
+                Discount: "0.8",
+              },
+              {
+                Type: "input_token_cache",
+                PriceUnit: "每百万tokens",
+                Price: "0.4",
+                Discount: "0.8",
+              },
+            ],
+          },
+          {
+            RangeName: "256k<输入<=1m",
+            Prices: [
+              {
+                Type: "input_token",
+                PriceUnit: "每百万tokens",
+                Price: "6",
+                Discount: "0.8",
+              },
+              {
+                Type: "output_token",
+                PriceUnit: "每百万tokens",
+                Price: "24",
+                Discount: "0.8",
+              },
+              {
+                Type: "input_token_cache",
+                PriceUnit: "每百万tokens",
+                Price: "1.2",
+                Discount: "0.8",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        GroupModel: "Qwen3.7-Max",
+        Name: "Qwen3.7-Max",
+        ModelAlias: "",
+        Model: "qwen3.7-max",
+        ModelInfo: {
+          ContextWindow: 1_000_000,
+          MaxOutputTokens: 65_536,
+          ReasoningMaxInputTokens: 983_616,
+        },
+        InferenceMetadata: {
+          RequestModality: ["Text"],
+          ResponseModality: ["Text"],
+        },
+        Prices: [
+          {
+            Type: "input_token",
+            PriceUnit: "每百万tokens",
+            Price: "12",
+            Discount: "0.5",
+          },
+          {
+            Type: "output_token",
+            PriceUnit: "每百万tokens",
+            Price: "36",
+            Discount: "0.5",
+          },
+          {
+            Type: "input_token_cache",
+            PriceUnit: "每百万tokens",
+            Price: "2.4",
+            Discount: "0.5",
+          },
+        ],
+      },
+      {
+        Name: "Third-party model",
+        ModelAlias: "third-party-model",
+        ModelInfo: { ContextWindow: 32_000 },
+        MultiPrices: [],
+      },
+      {
+        Name: "Qwen3.7-Plus Snapshot",
+        ModelAlias: "qwen3.7-plus-0526",
+        ModelInfo: { ContextWindow: 1_000_000 },
+        MultiPrices: [
+          {
+            Prices: [
+              {
+                Type: "input_token",
+                PriceUnit: "每百万tokens",
+                Price: "2",
+              },
+              {
+                Type: "output_token",
+                PriceUnit: "每百万tokens",
+                Price: "8",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        GroupModel: "Qwen Open Source",
+        ModelAlias: "",
+        Model: "qwen-open-source",
+        OpenSource: true,
+        ModelInfo: { ContextWindow: 32_000 },
+        Prices: [
+          {
+            Type: "input_token",
+            PriceUnit: "每百万tokens",
+            Price: "1",
+          },
+          {
+            Type: "output_token",
+            PriceUnit: "每百万tokens",
+            Price: "2",
+          },
+        ],
+      },
+    ],
+  },
+};
+
+describe("Qwen China collector", () => {
+  it("parses official tiered CNY prices and model metadata", () => {
+    const parsed = parseQwenDetails([qwenDetail]);
+    expect(parsed.models).toHaveLength(2);
+    expect(parsed.models[0]).toMatchObject({
+      id: "qwen3.7-plus",
+      name: "Qwen3.7-Plus",
+      createdAt: "2026-06-01T12:46:50.000+00:00",
+      capabilities: {
+        thinking: true,
+        jsonOutput: true,
+        toolCalls: true,
+        chatPrefixCompletion: true,
+        inputModalities: ["image", "text", "video"],
+        outputModalities: ["text"],
+      },
+      limits: { contextTokens: 1_000_000, maxOutputTokens: 65_536 },
+    });
+    expect(parsed.models[0]?.prices).toEqual([
+      expect.objectContaining({
+        market: "china",
+        currency: "CNY",
+        rateType: "standard",
+        inputTokenRange: {
+          label: "输入<=256k",
+          maxInclusive: 256_000,
+        },
+        input: { cacheHit: 0.4, cacheMiss: 2 },
+        output: 8,
+      }),
+      expect.objectContaining({
+        rateType: "promotional",
+        input: { cacheHit: 0.32, cacheMiss: 1.6 },
+        output: 6.4,
+      }),
+      expect.objectContaining({
+        rateType: "standard",
+        inputTokenRange: {
+          label: "256k<输入<=1m",
+          minExclusive: 256_000,
+          maxInclusive: 1_000_000,
+        },
+        input: { cacheHit: 1.2, cacheMiss: 6 },
+        output: 24,
+      }),
+      expect.objectContaining({
+        rateType: "promotional",
+        input: { cacheHit: 0.96, cacheMiss: 4.8 },
+        output: 19.2,
+      }),
+    ]);
+    expect(parsed.models[1]).toMatchObject({
+      id: "qwen3.7-max",
+      name: "Qwen3.7-Max",
+      prices: [
+        {
+          rateType: "standard",
+          input: { cacheHit: 2.4, cacheMiss: 12 },
+          output: 36,
+        },
+        {
+          rateType: "promotional",
+          input: { cacheHit: 1.2, cacheMiss: 6 },
+          output: 18,
+        },
+      ],
+    });
+  });
+
+  it("builds a China-only provider and keeps third-party models out", async () => {
+    const captured: QwenCapturedData = {
+      list: {
+        code: "200",
+        data: {
+          Success: true,
+          Data: [{ DataId: "qwen-series", Provider: "qwen" }],
+        },
+      },
+      details: [qwenDetail],
+    };
+    const provider = await collectQwen(
+      new Date("2026-07-22T00:00:00.000Z"),
+      async () => captured,
+    );
+    expect(provider).toMatchObject({
+      id: "qwen-cn",
+      name: "Qwen China",
+      displayNames: { "zh-CN": "千问国内版", en: "Qwen China" },
+      ownedBy: "alibaba",
+      baseUrls: {
+        openai: "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      },
+    });
+    expect(provider.models.map((model) => model.id)).toEqual([
+      "qwen3.7-plus",
+      "qwen3.7-max",
+    ]);
+    expect(provider.models.flatMap((model) => model.prices)).toSatisfy(
+      (prices: Array<{ market: string; currency: string }>) =>
+        prices.every(
+          (price) => price.market === "china" && price.currency === "CNY",
+        ),
+    );
+  });
+
+  it("fails instead of writing an empty provider", () => {
+    expect(() =>
+      parseQwenDetails([{ code: "200", data: { Data: [] } }]),
+    ).toThrow("no token-priced Qwen models");
+  });
+
+  it("recognizes dated snapshot model IDs", () => {
+    expect(isQwenDatedSnapshot("qwen3.7-plus-0526")).toBe(true);
+    expect(isQwenDatedSnapshot("qwen-plus-20250526")).toBe(true);
+    expect(isQwenDatedSnapshot("qwen-plus-2025-05-26")).toBe(true);
+    expect(isQwenDatedSnapshot("qwen3.7-plus")).toBe(false);
+    expect(isQwenDatedSnapshot("qwen3.6-max-preview")).toBe(false);
+  });
+});

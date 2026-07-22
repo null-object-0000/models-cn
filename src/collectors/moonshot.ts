@@ -9,6 +9,8 @@ export const MOONSHOT_PRICING_SOURCES = [
 ] as const;
 export const MOONSHOT_MODELS_OVERVIEW_URL =
   "https://platform.kimi.com/docs/api/models-overview";
+export const MOONSHOT_OUTPUT_LIMITS_URL =
+  "https://platform.kimi.com/docs/guide/troubleshooting#kimi";
 
 interface ParsedMoonshotPage {
   models: ModelData[];
@@ -39,6 +41,33 @@ function parseRows(markdown: string): string[][] {
     .map((line) => JSON.parse(line) as string[]);
   if (!rows.length) throw new Error("Kimi pricing table contains no models");
   return rows;
+}
+
+export function parseMoonshotOutputLimits(
+  markdown: string,
+): ReadonlyMap<string, number> {
+  const section = markdown
+    .split("Kimi 大模型的输出长度是多少")[1]
+    ?.split("Kimi 大模型支持的汉字数量是多少")[0];
+  if (!section) {
+    throw new Error("Kimi troubleshooting page is missing output limits");
+  }
+
+  const limits = new Map<string, number>();
+  for (const id of ["kimi-k3", "kimi-k2.6", "kimi-k2.5"]) {
+    const escapedId = id.replaceAll(".", "\\.");
+    const expression = section.match(
+      new RegExp(
+        `${escapedId}[^\\n]*?(\\d+)\\s*\\*\\s*(\\d+)\\s*-\\s*prompt_tokens`,
+        "i",
+      ),
+    );
+    if (!expression) {
+      throw new Error(`Kimi output limits are missing ${id}`);
+    }
+    limits.set(id, Number(expression[1]) * Number(expression[2]));
+  }
+  return limits;
 }
 
 function modelMetadata(id: string): Pick<ModelData, "name" | "capabilities"> {
@@ -186,7 +215,7 @@ export async function collectMoonshot(
   now = new Date(),
   fetcher: (url: string) => Promise<string> = fetchMarkdown,
 ): Promise<ProviderData> {
-  const [pages, overview] = await Promise.all([
+  const [pages, overview, troubleshooting] = await Promise.all([
     Promise.all(
       MOONSHOT_PRICING_SOURCES.map(async (url) => ({
         url,
@@ -194,10 +223,20 @@ export async function collectMoonshot(
       })),
     ),
     fetcher(MOONSHOT_MODELS_OVERVIEW_URL),
+    fetcher(MOONSHOT_OUTPUT_LIMITS_URL),
   ]);
   for (const id of ["kimi-k3", "kimi-k2.7-code", "kimi-k2.6", "kimi-k2.5"]) {
     if (!overview.includes(id)) {
       throw new Error(`Kimi model overview is missing ${id}`);
+    }
+  }
+  const outputLimits = parseMoonshotOutputLimits(troubleshooting);
+  for (const { parsed } of pages) {
+    for (const model of parsed.models) {
+      const maxOutputTokens = outputLimits.get(model.id);
+      if (maxOutputTokens !== undefined) {
+        model.limits.maxOutputTokens = maxOutputTokens;
+      }
     }
   }
   const retrievedAt = now.toISOString();
@@ -215,6 +254,13 @@ export async function collectMoonshot(
     locale: "zh-CN",
     retrievedAt,
     contentHash: `sha256:${createHash("sha256").update(overview.replace(/\s+/g, " ").trim()).digest("hex")}`,
+  });
+  sources.push({
+    url: MOONSHOT_OUTPUT_LIMITS_URL,
+    kind: "model-metadata",
+    locale: "zh-CN",
+    retrievedAt,
+    contentHash: `sha256:${createHash("sha256").update(troubleshooting.replace(/\s+/g, " ").trim()).digest("hex")}`,
   });
   const models = pages.flatMap(({ parsed }) => parsed.models);
   if (new Set(models.map((model) => model.id)).size !== models.length) {

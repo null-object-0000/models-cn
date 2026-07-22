@@ -88,10 +88,20 @@
         "currency": { "enum": ["CNY", "USD"] },
         "unit": { "const": "1M_tokens" },
         "rateType": { "enum": ["standard", "promotional"] },
+        "inputTokenRange": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1 },
+            "minExclusive": { "type": "integer", "minimum": 0 },
+            "maxInclusive": { "type": "integer", "minimum": 1 }
+          }
+        },
         "input": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["cacheHit", "cacheMiss"],
+          "required": ["cacheMiss"],
           "properties": {
             "cacheHit": { "type": "number", "minimum": 0 },
             "cacheMiss": { "type": "number", "minimum": 0 }
