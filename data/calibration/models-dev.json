@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-07-22T05:31:28.007Z",
-    "contentHash": "sha256:9948545600157340a812118907f2f5d01a4ef124aec4d218698e2064ab583347"
+    "retrievedAt": "2026-07-22T06:07:22.579Z",
+    "contentHash": "sha256:532d87a89535367dbaeef0ab0ad2aedd90b4975cfef0c08366b644fe4b9cdeaf"
   },
   "models": [
     {
@@ -215,11 +215,11 @@
       ]
     },
     {
-      "provider": "moonshot",
+      "provider": "moonshot-cn",
       "model": "kimi-k3",
-      "referenceProvider": "moonshotai",
+      "referenceProvider": "moonshotai-cn",
       "referenceModel": "kimi-k3",
-      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k3/",
+      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k3/",
       "status": "partial",
       "checks": [
         {
@@ -291,11 +291,11 @@
       ]
     },
     {
-      "provider": "moonshot",
+      "provider": "moonshot-cn",
       "model": "kimi-k2.7-code",
-      "referenceProvider": "moonshotai",
+      "referenceProvider": "moonshotai-cn",
       "referenceModel": "kimi-k2.7-code",
-      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.7-code/",
+      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k2.7-code/",
       "status": "partial",
       "checks": [
         {
@@ -367,11 +367,11 @@
       ]
     },
     {
-      "provider": "moonshot",
+      "provider": "moonshot-cn",
       "model": "kimi-k2.7-code-highspeed",
-      "referenceProvider": "moonshotai",
+      "referenceProvider": "moonshotai-cn",
       "referenceModel": "kimi-k2.7-code-highspeed",
-      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.7-code-highspeed/",
+      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k2.7-code-highspeed/",
       "status": "partial",
       "checks": [
         {
@@ -443,11 +443,11 @@
       ]
     },
     {
-      "provider": "moonshot",
+      "provider": "moonshot-cn",
       "model": "kimi-k2.6",
-      "referenceProvider": "moonshotai",
+      "referenceProvider": "moonshotai-cn",
       "referenceModel": "kimi-k2.6",
-      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.6/",
+      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k2.6/",
       "status": "partial",
       "checks": [
         {
@@ -519,11 +519,11 @@
       ]
     },
     {
-      "provider": "moonshot",
+      "provider": "moonshot-cn",
       "model": "kimi-k2.5",
-      "referenceProvider": "moonshotai",
+      "referenceProvider": "moonshotai-cn",
       "referenceModel": "kimi-k2.5",
-      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.5/",
+      "referenceUrl": "https://models.dev/models/moonshotai-cn/kimi-k2.5/",
       "status": "partial",
       "checks": [
         {

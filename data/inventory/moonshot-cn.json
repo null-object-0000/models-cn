@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "provider": "moonshot",
+  "provider": "moonshot-cn",
   "source": {
     "url": "https://api.moonshot.cn/v1/models",
     "retrievedAt": "2026-07-22T05:38:16.668Z",

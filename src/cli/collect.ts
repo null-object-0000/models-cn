@@ -20,7 +20,7 @@ await mkdir(providersDir, { recursive: true });
 const collectors = [
   { id: "deepseek", collect: collectDeepSeek },
   { id: "longcat", collect: collectLongCat },
-  { id: "moonshot", collect: collectMoonshot },
+  { id: "moonshot-cn", collect: collectMoonshot },
 ];
 
 const providerOption = process.argv.indexOf("--provider");

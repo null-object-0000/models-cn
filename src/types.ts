@@ -60,6 +60,10 @@ export interface ProviderData {
   schemaVersion: "1.0";
   id: string;
   name: string;
+  displayNames?: {
+    "zh-CN": string;
+    en: string;
+  };
   ownedBy: string;
   baseUrls: {
     openai: string;

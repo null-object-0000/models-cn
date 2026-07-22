@@ -32,7 +32,7 @@ const response = await fetch(
 const catalog = await response.json();
 
 const provider = catalog.providers.find(
-  (item: { id: string }) => item.id === "moonshot",
+  (item: { id: string }) => item.id === "moonshot-cn",
 );
 const model = provider?.models.find(
   (item: { id: string }) => item.id === "kimi-k3",
@@ -51,13 +51,13 @@ console.log(cnyPrice);
 
 ## 当前覆盖
 
-| 厂商     | 收录范围      | 人民币 | 官方美元 | 模型信息 | 官方清单 |
-| -------- | ------------- | :----: | :------: | :------: | :------: |
-| DeepSeek | DeepSeek 系列 |   ✅   |    ✅    |    ✅    |    ✅    |
-| LongCat  | LongCat 系列  |   ✅   |    ✅    |    ✅    |    ✅    |
-| Kimi     | `kimi-*` 系列 |   ✅   |    —     |    ✅    |    ✅    |
+| 厂商        | 收录范围      | 人民币 | 官方美元 | 模型信息 | 官方清单 |
+| ----------- | ------------- | :----: | :------: | :------: | :------: |
+| DeepSeek    | DeepSeek 系列 |   ✅   |    ✅    |    ✅    |    ✅    |
+| LongCat     | LongCat 系列  |   ✅   |    ✅    |    ✅    |    ✅    |
+| Kimi 国内版 | `kimi-*` 系列 |   ✅   |    —     |    ✅    |    ✅    |
 
-项目只收录厂商自研模型。例如 Kimi 数据会过滤 `moonshot-v1-*`；平台托管的第三方模型和聚合平台价格不在范围内。
+项目只收录厂商自研模型。`moonshot-cn` 明确表示 **Kimi 国内版（Kimi China）**，国际版暂未接入；同时会过滤不在当前范围内的 `moonshot-v1-*`。平台托管的第三方模型和聚合平台价格也不在范围内。
 
 ## Agent 快速接入
 
@@ -169,7 +169,7 @@ npm run site:dev
 只采集单个厂商时可以使用：
 
 ```powershell
-npm run collect -- --provider moonshot
+npm run collect -- --provider moonshot-cn
 ```
 
 ### 可选密钥

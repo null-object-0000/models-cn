@@ -30,8 +30,13 @@ interface Model {
 interface Provider {
   id: string;
   name: string;
+  displayNames?: { "zh-CN": string; en: string };
   models: Model[];
   sources: Array<{ url: string; retrievedAt: string; kind: string }>;
+}
+
+function providerName(provider: Provider): string {
+  return provider.displayNames?.["zh-CN"] ?? provider.name;
 }
 
 interface CalibrationModel {
@@ -219,7 +224,7 @@ function render(catalog: Catalog): void {
     provider.models.map((model) => ({ provider, model })),
   );
   const filtered = models.filter(({ provider, model }) =>
-    `${provider.name} ${provider.id} ${model.name} ${model.id}`
+    `${providerName(provider)} ${provider.name} ${provider.displayNames?.en ?? ""} ${provider.id} ${model.name} ${model.id}`
       .toLowerCase()
       .includes(search.toLowerCase()),
   );
@@ -313,7 +318,7 @@ function render(catalog: Catalog): void {
                         <div class="provider-heading">
                           <div>
                             <p>${String(index + 1).padStart(2, "0")} / PROVIDER</p>
-                            <h3 id="provider-${escapeHtml(provider.id)}">${escapeHtml(provider.name)}</h3>
+                            <h3 id="provider-${escapeHtml(provider.id)}">${escapeHtml(providerName(provider))}</h3>
                           </div>
                           <span>${providerModels.length} 个模型</span>
                         </div>

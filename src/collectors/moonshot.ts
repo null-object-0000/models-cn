@@ -222,8 +222,12 @@ export async function collectMoonshot(
   }
   return {
     schemaVersion: "1.0",
-    id: "moonshot",
-    name: "Kimi",
+    id: "moonshot-cn",
+    name: "Kimi China",
+    displayNames: {
+      "zh-CN": "Kimi 国内版",
+      en: "Kimi China",
+    },
     ownedBy: "moonshot",
     baseUrls: { openai: "https://api.moonshot.cn/v1" },
     models,

@@ -17,6 +17,15 @@
     "schemaVersion": { "const": "1.0" },
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
     "name": { "type": "string", "minLength": 1 },
+    "displayNames": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["zh-CN", "en"],
+      "properties": {
+        "zh-CN": { "type": "string", "minLength": 1 },
+        "en": { "type": "string", "minLength": 1 }
+      }
+    },
     "ownedBy": { "type": "string", "pattern": "^[a-z0-9-]+$" },
     "baseUrls": {
       "type": "object",

@@ -27,7 +27,7 @@ export const INVENTORY_PROVIDERS = [
     url: "https://api.longcat.chat/openai/v1/models",
   },
   {
-    provider: "moonshot",
+    provider: "moonshot-cn",
     env: "MOONSHOT_API_KEY",
     url: "https://api.moonshot.cn/v1/models",
     modelIdPrefix: "kimi-",
