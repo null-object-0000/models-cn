@@ -170,7 +170,7 @@ export function parseMoonshotPricingPage(
     const [id] = row;
     if (!id) throw new Error("Kimi pricing row is missing a model ID");
     const cacheHit = parseMoney(row[2]!);
-    const cacheMiss = parseMoney(row[3]!);
+    const standard = parseMoney(row[3]!);
     const output = parseMoney(row[4]!);
     const contextTokens = parseTokenCount(row[5]!);
     const metadata = modelMetadata(id);
@@ -181,7 +181,7 @@ export function parseMoonshotPricingPage(
       rateType: "standard",
       input: {
         cacheHit,
-        cacheMiss,
+        standard,
       },
       output,
       sourceUrl,
@@ -267,7 +267,7 @@ export async function collectMoonshot(
     throw new Error("Kimi pricing pages contain duplicate model IDs");
   }
   return {
-    schemaVersion: "1.0",
+    schemaVersion: "2.0",
     id: "moonshot-cn",
     name: "Kimi China",
     displayNames: {

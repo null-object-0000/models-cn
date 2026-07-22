@@ -6,7 +6,7 @@ import {
 import type { ProviderData } from "../src/types.js";
 
 const longcat: ProviderData = {
-  schemaVersion: "1.0",
+  schemaVersion: "2.0",
   id: "longcat",
   name: "LongCat",
   ownedBy: "longcat",
@@ -29,7 +29,7 @@ const longcat: ProviderData = {
           currency: "USD",
           unit: "1M_tokens",
           rateType: "standard",
-          input: { cacheHit: 0.015, cacheMiss: 0.75 },
+          input: { cacheHit: 0.015, standard: 0.75 },
           output: 2.95,
           sourceUrl: "https://longcat.chat/platform/docs/pricing/long-cat-2.0",
         },
@@ -40,7 +40,7 @@ const longcat: ProviderData = {
 };
 
 const kimiChina: ProviderData = {
-  schemaVersion: "1.0",
+  schemaVersion: "2.0",
   id: "moonshot-cn",
   name: "Kimi China",
   ownedBy: "moonshot",

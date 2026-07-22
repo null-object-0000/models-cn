@@ -21,7 +21,7 @@ Provider Schema：https://raw.githubusercontent.com/null-object-0000/models-cn/m
 3. 优先使用 market=china、currency=CNY、rateType=standard 的官方人民币标准价。
 4. 只有调用方明确允许优惠价时，才能选择 rateType=promotional，并清楚标注它可能是限时价格。
 5. 官方字段缺失时，可以使用 models.dev calibration 中的 reference 补全，并返回 referenceUrl、校准状态和“参考数据”标记；models.dev 也没有时返回 unavailable。
-6. 正确区分 input.cacheHit、input.cacheMiss 和 output，单位均为每 1M Tokens。
+6. 使用 input.standard 计算普通输入；仅当 input.cacheHit 存在且请求确实命中厂商缓存时，才使用缓存命中价格。单位均为每 1M Tokens。
 7. maxOutputTokens 等字段缺失时优先查找 models.dev reference；仍然缺失时返回 null 或“未公开”，不得自行推断。
 8. models.dev 只能补充官方缺失字段，不能覆盖 providers 中已经存在的官方数据，也不能通过汇率换算后冒充人民币官方价。
 9. inventory 仅用于判断模型是否仍在官方列表中，清单差异不能自动改写价格。
@@ -31,7 +31,7 @@ Provider Schema：https://raw.githubusercontent.com/null-object-0000/models-cn/m
 - 增加与 JSON Schema 对应的类型定义；
 - 实现带超时、错误处理和合理缓存的数据加载器；
 - 实现按 provider、model、currency、market、rateType 查询价格的方法；
-- 实现输入未命中、输入缓存命中、输出三部分的费用估算；
+- 实现普通输入、可选的缓存命中输入、输出三部分的费用估算；`input.cacheHit` 缺失时全部输入均按 `input.standard` 计费；
 - 对未知模型、缺失价格、非 1M_tokens 单位和校准差异进行显式处理；
 - 添加覆盖标准价、优惠价、缓存命中、缺失币种和未知模型的测试；
 - 更新项目文档，说明数据来源、刷新策略和降级行为。
@@ -61,20 +61,26 @@ Provider Schema：https://raw.githubusercontent.com/null-object-0000/models-cn/m
 - Calibration Schema：https://raw.githubusercontent.com/null-object-0000/models-cn/main/schema/calibration.schema.json
 
 数据解释规则：
+- 当前 Catalog 和 Provider 的 schemaVersion 为 2.0；价格输入字段使用 input.standard，不再使用 1.x 的 input.cacheMiss。
 - providers 是官方数据，拥有最高优先级。
 - inventories 是官方 Models API 清单和对比结果，只用于可用性提示。
 - calibration.modelsDev 是交叉校准结果，只用于展示 match、mismatch、partial、missing。
 - 每条价格必须同时按 market、currency、rateType 选择。
 - unit=1M_tokens 表示价格已经按一百万 Token 归一化。
-- input.cacheMiss 用于普通输入，input.cacheHit 用于缓存命中输入，output 用于输出。
+- input.standard 是普通输入价格；input.cacheHit 是可选字段，仅在厂商明确存在缓存命中计费规则时提供。
+- input.cacheHit 缺失表示不存在独立缓存计费维度，不得解释成“缓存价未公开”，也不得假设一个缓存价格。
 - promotional 可能限时，不得静默替代 standard。
 - 官方未提供目标币种、最大输出或其他字段时，可以读取 calibration 中相同 field 的 models.dev reference。
 - 使用 models.dev 补充值时必须返回 referenceUrl、status 和参考来源标记；没有 reference 时保留缺失状态。
 - 禁止汇率换算后冒充官方人民币价格，禁止将 models.dev 或聚合平台数据覆盖到已有官方字段。
 
 费用估算公式：
-inputCost = uncachedInputTokens / 1_000_000 * input.cacheMiss
-cacheCost = cachedInputTokens / 1_000_000 * input.cacheHit
+if input.cacheHit exists:
+  inputCost = uncachedInputTokens / 1_000_000 * input.standard
+  cacheCost = cachedInputTokens / 1_000_000 * input.cacheHit
+else:
+  inputCost = totalInputTokens / 1_000_000 * input.standard
+  cacheCost = 0
 outputCost = outputTokens / 1_000_000 * output
 totalCost = inputCost + cacheCost + outputCost
 
@@ -92,7 +98,7 @@ totalCost = inputCost + cacheCost + outputCost
 
 验收场景：
 - 能按 provider + model 找到 CNY 标准价。
-- 能区分普通输入、缓存输入和输出费用。
+- 能正确计算普通输入和输出费用；仅在 `input.cacheHit` 存在时区分缓存输入费用。
 - 用户明确选择时才能使用优惠价。
 - 官方目标币种不存在时优先使用同币种的 models.dev reference；仍不存在时返回 unavailable，不做汇率换算。
 - 模型或字段不存在时不会抛出无法理解的空指针错误。
@@ -113,8 +119,8 @@ type CostEstimate = {
   currency: "CNY" | "USD";
   market: "china" | "international";
   rateType: "standard" | "promotional";
-  uncachedInputCost: number;
-  cachedInputCost: number;
+  standardInputCost: number;
+  cachedInputCost?: number;
   outputCost: number;
   totalCost: number;
   sourceUrl: string;

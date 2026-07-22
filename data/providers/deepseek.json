@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "id": "deepseek",
   "name": "DeepSeek",
   "ownedBy": "deepseek",
@@ -43,7 +43,7 @@
           "rateType": "standard",
           "input": {
             "cacheHit": 0.02,
-            "cacheMiss": 1
+            "standard": 1
           },
           "output": 2,
           "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
@@ -55,7 +55,7 @@
           "rateType": "standard",
           "input": {
             "cacheHit": 0.0028,
-            "cacheMiss": 0.14
+            "standard": 0.14
           },
           "output": 0.28,
           "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
@@ -86,7 +86,7 @@
           "rateType": "standard",
           "input": {
             "cacheHit": 0.025,
-            "cacheMiss": 3
+            "standard": 3
           },
           "output": 6,
           "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
@@ -98,7 +98,7 @@
           "rateType": "standard",
           "input": {
             "cacheHit": 0.003625,
-            "cacheMiss": 0.435
+            "standard": 0.435
           },
           "output": 0.87,
           "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"

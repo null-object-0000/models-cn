@@ -14,7 +14,7 @@
     "sources"
   ],
   "properties": {
-    "schemaVersion": { "const": "1.0" },
+    "schemaVersion": { "const": "2.0" },
     "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
     "name": { "type": "string", "minLength": 1 },
     "displayNames": {
@@ -101,10 +101,18 @@
         "input": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["cacheMiss"],
+          "required": ["standard"],
           "properties": {
-            "cacheHit": { "type": "number", "minimum": 0 },
-            "cacheMiss": { "type": "number", "minimum": 0 }
+            "standard": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Standard input price. This applies to all input tokens unless cacheHit is explicitly provided and applicable."
+            },
+            "cacheHit": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Optional cached-input price, present only when the provider explicitly defines a cache-hit billing rule."
+            }
           }
         },
         "output": { "type": "number", "minimum": 0 },

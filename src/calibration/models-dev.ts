@@ -163,8 +163,8 @@ function compareModel(
       reference?.modalities?.output,
     ),
     check(
-      "prices.USD.input.cacheMiss",
-      usd?.input.cacheMiss,
+      "prices.USD.input.standard",
+      usd?.input.standard,
       reference?.cost?.input,
     ),
     check(

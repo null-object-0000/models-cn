@@ -127,7 +127,7 @@ export function parseLongCatPricingPage(
     rateType: index === 0 ? "standard" : "promotional",
     input: {
       cacheHit: parseMoney(cached[index]),
-      cacheMiss: parseMoney(uncached[index]),
+      standard: parseMoney(uncached[index]),
     },
     output: parseMoney(output[index]),
   });
@@ -205,7 +205,7 @@ function assertApiPricingMatchesDocumentation(
   if (!detail.pricing) return;
   const apiPrice = {
     cacheHit: Number(detail.pricing.cached_tokens),
-    cacheMiss: Number(detail.pricing.prompt),
+    standard: Number(detail.pricing.prompt),
     output: Number(detail.pricing.completion),
   };
   const matches = prices
@@ -213,7 +213,7 @@ function assertApiPricingMatchesDocumentation(
     .some(
       (price) =>
         price.input.cacheHit === apiPrice.cacheHit &&
-        price.input.cacheMiss === apiPrice.cacheMiss &&
+        price.input.standard === apiPrice.standard &&
         price.output === apiPrice.output,
     );
   if (!matches)
@@ -308,7 +308,7 @@ export async function collectLongCat(
 
   const parameters = detail.supported_parameters;
   return {
-    schemaVersion: "1.0",
+    schemaVersion: "2.0",
     id: "longcat",
     name: "LongCat",
     ownedBy: "longcat",

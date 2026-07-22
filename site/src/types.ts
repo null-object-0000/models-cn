@@ -12,7 +12,7 @@ export interface Price {
     minExclusive?: number;
     maxInclusive?: number;
   };
-  input: { cacheHit?: number; cacheMiss: number };
+  input: { cacheHit?: number; standard: number };
   output: number;
   sourceUrl: string;
 }

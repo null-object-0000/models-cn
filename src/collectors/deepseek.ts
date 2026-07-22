@@ -125,7 +125,7 @@ export function parseDeepSeekPage(
   const cacheHitRow = findRow($, rows, (texts) =>
     /缓存命中|CACHE HIT/i.test(texts.join(" ")),
   );
-  const cacheMissRow = findRow($, rows, (texts) =>
+  const standardRow = findRow($, rows, (texts) =>
     /缓存未命中|CACHE MISS/i.test(texts.join(" ")),
   );
   const outputPriceRow = findRow($, rows, (texts) =>
@@ -137,7 +137,7 @@ export function parseDeepSeekPage(
 
   const versions = valuesForModels(versionRow, modelIds.length);
   const cacheHits = valuesForModels(cacheHitRow, modelIds.length);
-  const cacheMisses = valuesForModels(cacheMissRow, modelIds.length);
+  const standardPrices = valuesForModels(standardRow, modelIds.length);
   const outputPrices = valuesForModels(outputPriceRow, modelIds.length);
   const concurrencies = valuesForModels(concurrencyRow, modelIds.length);
   const contextTokens = parseTokenCount(contextRow.at(-1) ?? "");
@@ -223,7 +223,7 @@ export function parseDeepSeekPage(
       rateType: "standard" as const,
       input: {
         cacheHit: parseMoney(cacheHits[index] ?? ""),
-        cacheMiss: parseMoney(cacheMisses[index] ?? ""),
+        standard: parseMoney(standardPrices[index] ?? ""),
       },
       output: parseMoney(outputPrices[index] ?? ""),
     },
@@ -292,7 +292,7 @@ export async function collectDeepSeek(
   }));
 
   return {
-    schemaVersion: "1.0",
+    schemaVersion: "2.0",
     id: "deepseek",
     name: "DeepSeek",
     ownedBy: "deepseek",

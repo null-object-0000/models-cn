@@ -105,12 +105,6 @@ const qwenDetail = {
             Price: "36",
             Discount: "0.5",
           },
-          {
-            Type: "input_token_cache",
-            PriceUnit: "每百万tokens",
-            Price: "2.4",
-            Discount: "0.5",
-          },
         ],
       },
       {
@@ -190,12 +184,12 @@ describe("Qwen China collector", () => {
           label: "输入<=256k",
           maxInclusive: 256_000,
         },
-        input: { cacheHit: 0.4, cacheMiss: 2 },
+        input: { cacheHit: 0.4, standard: 2 },
         output: 8,
       }),
       expect.objectContaining({
         rateType: "promotional",
-        input: { cacheHit: 0.32, cacheMiss: 1.6 },
+        input: { cacheHit: 0.32, standard: 1.6 },
         output: 6.4,
       }),
       expect.objectContaining({
@@ -205,12 +199,12 @@ describe("Qwen China collector", () => {
           minExclusive: 256_000,
           maxInclusive: 1_000_000,
         },
-        input: { cacheHit: 1.2, cacheMiss: 6 },
+        input: { cacheHit: 1.2, standard: 6 },
         output: 24,
       }),
       expect.objectContaining({
         rateType: "promotional",
-        input: { cacheHit: 0.96, cacheMiss: 4.8 },
+        input: { cacheHit: 0.96, standard: 4.8 },
         output: 19.2,
       }),
     ]);
@@ -220,12 +214,12 @@ describe("Qwen China collector", () => {
       prices: [
         {
           rateType: "standard",
-          input: { cacheHit: 2.4, cacheMiss: 12 },
+          input: { standard: 12 },
           output: 36,
         },
         {
           rateType: "promotional",
-          input: { cacheHit: 1.2, cacheMiss: 6 },
+          input: { standard: 6 },
           output: 18,
         },
       ],

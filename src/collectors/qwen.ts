@@ -148,7 +148,7 @@ function parsePrices(
       rateType: "standard",
       ...(inputTokenRange ? { inputTokenRange } : {}),
       input: {
-        cacheMiss: money(input.Price, "input"),
+        standard: money(input.Price, "input"),
         ...(cache ? { cacheHit: money(cache.Price, "cache hit") } : {}),
       },
       output: money(output.Price, "output"),
@@ -161,9 +161,13 @@ function parsePrices(
         ...standard,
         rateType: "promotional",
         input: {
-          cacheMiss: discountedPrice(input, "input"),
-          ...(cache?.Discount
-            ? { cacheHit: discountedPrice(cache, "cache hit") }
+          standard: discountedPrice(input, "input"),
+          ...(cache
+            ? {
+                cacheHit: cache.Discount
+                  ? discountedPrice(cache, "cache hit")
+                  : money(cache.Price, "cache hit"),
+              }
             : {}),
         },
         output: discountedPrice(output, "output"),
@@ -436,7 +440,7 @@ export async function collectQwen(
     },
   ];
   return {
-    schemaVersion: "1.0",
+    schemaVersion: "2.0",
     id: "qwen-cn",
     name: "Qwen China",
     displayNames: {

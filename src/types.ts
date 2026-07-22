@@ -28,7 +28,7 @@ export interface ModelPrice {
   };
   input: {
     cacheHit?: number;
-    cacheMiss: number;
+    standard: number;
   };
   output: number;
   sourceUrl: string;
@@ -62,7 +62,7 @@ export interface ModelData {
 }
 
 export interface ProviderData {
-  schemaVersion: "1.0";
+  schemaVersion: "2.0";
   id: string;
   name: string;
   displayNames?: {
@@ -79,7 +79,7 @@ export interface ProviderData {
 }
 
 export interface Catalog {
-  schemaVersion: "1.0";
+  schemaVersion: "2.0";
   providers: ProviderData[];
   inventories?: ProviderInventory[];
   calibration?: {

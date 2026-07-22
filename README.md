@@ -46,7 +46,7 @@ const cnyPrice = model?.prices.find(
 );
 
 console.log(cnyPrice);
-// input.cacheHit / input.cacheMiss / output
+// input.standard / input.cacheHit（可选）/ output
 // 单位：人民币 / 1M Tokens
 ```
 
@@ -88,7 +88,7 @@ const outputLimit =
 请按照 docs/agent-integration-prompt.md 的规则，将 models-cn 接入当前项目。
 数据地址：https://null-object-0000.github.io/models-cn/api.json
 目标：读取中国大陆模型厂商的官方价格和模型信息，并实现可测试的模型查询与费用估算能力。
-要求：人民币官方价格优先；不得硬编码价格或用汇率伪造人民币官方价；官方字段缺失时允许使用 models.dev 补全，但必须保留参考来源，不能覆盖官方值；正确处理币种、市场、标准价/优惠价和缓存价。
+要求：人民币官方价格优先；不得硬编码价格或用汇率伪造人民币官方价；官方字段缺失时允许使用 models.dev 补全，但必须保留参考来源，不能覆盖官方值；正确处理币种、市场和标准价/优惠价；仅在 `input.cacheHit` 存在时处理缓存命中价格。
 请先检查当前项目技术栈和已有模型配置，再实施修改、运行测试，并说明改动文件及使用方式。
 ```
 
@@ -109,8 +109,8 @@ const outputLimit =
     "maxInclusive": 256000
   },
   "input": {
-    "cacheHit": 0.02,
-    "cacheMiss": 1
+    "standard": 1,
+    "cacheHit": 0.02
   },
   "output": 2,
   "sourceUrl": "https://provider.example/pricing"
@@ -123,7 +123,9 @@ const outputLimit =
 - `USD + international` 表示厂商独立国际渠道的官方美元价格，不是人民币换算价。
 - `standard` 是标准价；`promotional` 是厂商明确标注的优惠价。
 - `inputTokenRange` 表示按输入 Token 数分档的价格；缺失时表示该价格不分输入长度档位。
-- `cacheHit`、`cacheMiss` 和 `output` 都是每百万 Token 的价格。
+- `input.standard` 是普通输入价格；没有独立缓存计费规则时，它适用于全部输入 Token。
+- `input.cacheHit` 仅在厂商明确设置缓存命中计费规则时提供。字段缺失表示“不存在该计费维度”，不是价格未公开。
+- 本字段约定自 `schemaVersion: "2.0"` 起生效；旧版 `input.cacheMiss` 已更名为 `input.standard`，避免暗示所有模型都存在缓存计费。
 - 官网模型默认按发布时间倒序排列：优先使用厂商官方 `createdAt`，缺失时读取 models.dev 校准数据中的 `release_date`，仍缺失的排在最后。
 - `maxOutputTokens` 等非必填字段缺失时，可使用 models.dev 对应参考值补全；models.dev 也没有时应显示“未公开”，不能自行推断。
 - `sourceUrl`、`retrievedAt` 和 `contentHash` 用于追溯数据来源与变化。

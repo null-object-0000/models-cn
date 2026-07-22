@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "id": "qwen-cn",
   "name": "Qwen China",
   "displayNames": {
@@ -45,7 +45,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 2,
+            "standard": 2,
             "cacheHit": 0.4
           },
           "output": 8,
@@ -61,7 +61,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 1.6,
+            "standard": 1.6,
             "cacheHit": 0.32
           },
           "output": 6.4,
@@ -78,7 +78,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 6,
+            "standard": 6,
             "cacheHit": 1.2
           },
           "output": 24,
@@ -95,7 +95,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 4.8,
+            "standard": 4.8,
             "cacheHit": 0.96
           },
           "output": 19.2,
@@ -130,7 +130,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 12,
+            "standard": 12,
             "cacheHit": 2.4
           },
           "output": 36,
@@ -142,7 +142,7 @@
           "unit": "1M_tokens",
           "rateType": "promotional",
           "input": {
-            "cacheMiss": 6,
+            "standard": 6,
             "cacheHit": 1.2
           },
           "output": 18,
@@ -177,7 +177,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 12
+            "standard": 12
           },
           "output": 36,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max-preview"
@@ -218,7 +218,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
@@ -234,7 +234,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 8
+            "standard": 8
           },
           "output": 48,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
@@ -275,7 +275,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 0.8
+            "standard": 0.8
           },
           "output": 4.8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
@@ -291,7 +291,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
@@ -307,7 +307,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 4
+            "standard": 4
           },
           "output": 24,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
@@ -338,7 +338,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.5
+            "standard": 0.5
           },
           "output": 2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-ocr"
@@ -377,7 +377,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 9
+            "standard": 9
           },
           "output": 54,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
@@ -393,7 +393,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 15
+            "standard": 15
           },
           "output": 90,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
@@ -434,7 +434,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 0.2
+            "standard": 0.2
           },
           "output": 2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
@@ -450,7 +450,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 0.8
+            "standard": 0.8
           },
           "output": 8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
@@ -466,7 +466,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 1.2
+            "standard": 1.2
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
@@ -505,7 +505,7 @@
             "maxInclusive": 32000
           },
           "input": {
-            "cacheMiss": 2.5,
+            "standard": 2.5,
             "cacheHit": 0.5
           },
           "output": 10,
@@ -522,7 +522,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 4,
+            "standard": 4,
             "cacheHit": 0.8
           },
           "output": 16,
@@ -539,7 +539,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 7,
+            "standard": 7,
             "cacheHit": 1.4
           },
           "output": 28,
@@ -576,7 +576,7 @@
             "maxInclusive": 32000
           },
           "input": {
-            "cacheMiss": 6,
+            "standard": 6,
             "cacheHit": 1.2
           },
           "output": 24,
@@ -593,7 +593,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 10,
+            "standard": 10,
             "cacheHit": 2
           },
           "output": 40,
@@ -610,7 +610,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 15,
+            "standard": 15,
             "cacheHit": 3
           },
           "output": 60,
@@ -648,7 +648,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 3
+            "standard": 3
           },
           "output": 18,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-27b"
@@ -685,7 +685,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 1.8
+            "standard": 1.8
           },
           "output": 10.8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-35b-a3b"
@@ -726,7 +726,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 1.2
+            "standard": 1.2
           },
           "output": 7.2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
@@ -742,7 +742,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 4.8
+            "standard": 4.8
           },
           "output": 28.8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
@@ -778,7 +778,7 @@
             "maxInclusive": 32000
           },
           "input": {
-            "cacheMiss": 4,
+            "standard": 4,
             "cacheHit": 0.8
           },
           "output": 16,
@@ -795,7 +795,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 6,
+            "standard": 6,
             "cacheHit": 1.2
           },
           "output": 24,
@@ -812,7 +812,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 10,
+            "standard": 10,
             "cacheHit": 2
           },
           "output": 40,
@@ -829,7 +829,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 20,
+            "standard": 20,
             "cacheHit": 4
           },
           "output": 200,
@@ -866,7 +866,7 @@
             "maxInclusive": 32000
           },
           "input": {
-            "cacheMiss": 1,
+            "standard": 1,
             "cacheHit": 0.2
           },
           "output": 4,
@@ -883,7 +883,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 1.5,
+            "standard": 1.5,
             "cacheHit": 0.3
           },
           "output": 6,
@@ -900,7 +900,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 2.5,
+            "standard": 2.5,
             "cacheHit": 0.5
           },
           "output": 10,
@@ -917,7 +917,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 5,
+            "standard": 5,
             "cacheHit": 1
           },
           "output": 25,
@@ -949,7 +949,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.25,
+            "standard": 0.25,
             "cacheHit": 0.05
           },
           "output": 1.5,
@@ -991,7 +991,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 0.6
+            "standard": 0.6
           },
           "output": 4.8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-27b"
@@ -1007,7 +1007,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 1.8
+            "standard": 1.8
           },
           "output": 14.4,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-27b"
@@ -1048,7 +1048,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 0.8
+            "standard": 0.8
           },
           "output": 6.4,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-122b-a10b"
@@ -1064,7 +1064,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 16,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-122b-a10b"
@@ -1105,7 +1105,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 0.4
+            "standard": 0.4
           },
           "output": 3.2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-35b-a3b"
@@ -1121,7 +1121,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 1.6
+            "standard": 1.6
           },
           "output": 12.8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-35b-a3b"
@@ -1162,7 +1162,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 1.2
+            "standard": 1.2
           },
           "output": 7.2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-397b-a17b"
@@ -1178,7 +1178,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 3
+            "standard": 3
           },
           "output": 18,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-397b-a17b"
@@ -1213,7 +1213,7 @@
             "maxInclusive": 32000
           },
           "input": {
-            "cacheMiss": 1
+            "standard": 1
           },
           "output": 4,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-next"
@@ -1229,7 +1229,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 1.5
+            "standard": 1.5
           },
           "output": 6,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-next"
@@ -1245,7 +1245,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 2.5
+            "standard": 2.5
           },
           "output": 10,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-next"
@@ -1281,7 +1281,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-vl-32b-instruct"
@@ -1317,7 +1317,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.75
+            "standard": 0.75
           },
           "output": 3,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-vl-30b-a3b-instruct"
@@ -1353,7 +1353,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.5
+            "standard": 0.5
           },
           "output": 2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-vl-8b-instruct"
@@ -1389,7 +1389,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-vl-235b-a22b-instruct"
@@ -1420,7 +1420,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 1
+            "standard": 1
           },
           "output": 4,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-next-80b-a3b-instruct"
@@ -1455,7 +1455,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-235b-a22b"
@@ -1489,7 +1489,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.75
+            "standard": 0.75
           },
           "output": 3,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-30b-a3b"
@@ -1523,7 +1523,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-32b"
@@ -1557,7 +1557,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.5
+            "standard": 0.5
           },
           "output": 2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-8b"
@@ -1591,7 +1591,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 1
+            "standard": 1
           },
           "output": 4,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-14b"
@@ -1632,7 +1632,7 @@
             "maxInclusive": 32000
           },
           "input": {
-            "cacheMiss": 1,
+            "standard": 1,
             "cacheHit": 0.2
           },
           "output": 10,
@@ -1649,7 +1649,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 1.5,
+            "standard": 1.5,
             "cacheHit": 0.3
           },
           "output": 15,
@@ -1666,7 +1666,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 3,
+            "standard": 3,
             "cacheHit": 0.6
           },
           "output": 30,
@@ -1705,7 +1705,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 0.15,
+            "standard": 0.15,
             "cacheHit": 0.03
           },
           "output": 1.5,
@@ -1722,7 +1722,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 0.6,
+            "standard": 0.6,
             "cacheHit": 0.12
           },
           "output": 6,
@@ -1739,7 +1739,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 1.2,
+            "standard": 1.2,
             "cacheHit": 0.24
           },
           "output": 12,
@@ -1771,7 +1771,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2.4
+            "standard": 2.4
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-tts-realtime"
@@ -1802,7 +1802,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2.4
+            "standard": 2.4
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-tts-realtime-latest"
@@ -1837,7 +1837,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 1.6,
+            "standard": 1.6,
             "cacheHit": 0.32
           },
           "output": 4,
@@ -1873,7 +1873,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.8,
+            "standard": 0.8,
             "cacheHit": 0.16
           },
           "output": 2,
@@ -1913,7 +1913,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 0.8,
+            "standard": 0.8,
             "cacheHit": 0.16
           },
           "output": 2,
@@ -1930,7 +1930,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 2.4,
+            "standard": 2.4,
             "cacheHit": 0.48
           },
           "output": 20,
@@ -1947,7 +1947,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 4.8,
+            "standard": 4.8,
             "cacheHit": 0.96
           },
           "output": 48,
@@ -1986,7 +1986,7 @@
             "maxInclusive": 128000
           },
           "input": {
-            "cacheMiss": 0.8
+            "standard": 0.8
           },
           "output": 2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-plus-latest"
@@ -2002,7 +2002,7 @@
             "maxInclusive": 256000
           },
           "input": {
-            "cacheMiss": 2.4
+            "standard": 2.4
           },
           "output": 20,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-plus-latest"
@@ -2018,7 +2018,7 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "cacheMiss": 4.8
+            "standard": 4.8
           },
           "output": 48,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-plus-latest"
@@ -2050,7 +2050,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.3,
+            "standard": 0.3,
             "cacheHit": 0.06
           },
           "output": 0.6,
@@ -2082,7 +2082,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.5
+            "standard": 0.5
           },
           "output": 2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-long"
@@ -2113,7 +2113,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 0.5
+            "standard": 0.5
           },
           "output": 2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-long-latest"
@@ -2144,7 +2144,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 3.5
+            "standard": 3.5
           },
           "output": 7,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-coder-plus"
@@ -2175,7 +2175,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 6,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-math-turbo"
@@ -2206,7 +2206,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 4
+            "standard": 4
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-math-plus"
@@ -2237,7 +2237,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 4
+            "standard": 4
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-math-plus-latest"
@@ -2271,7 +2271,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2.4,
+            "standard": 2.4,
             "cacheHit": 0.48
           },
           "output": 9.6,
@@ -2303,7 +2303,7 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "cacheMiss": 2
+            "standard": 2
           },
           "output": 6,
           "sourceUrl": "https://www.qianwenai.com/models/qwen-coder-turbo"
@@ -2324,7 +2324,7 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-07-22T07:07:03.348Z",
+      "retrievedAt": "2026-07-22T07:11:43.888Z",
       "contentHash": "sha256:21cceb95aca4daa3740fe30cd2d01d3d05bd4a4272a913458dc43f7bd8f422da"
     }
   ]

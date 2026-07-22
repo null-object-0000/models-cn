@@ -7,7 +7,7 @@ import {
 import type { ProviderData } from "../src/types.js";
 
 const deepseek: ProviderData = {
-  schemaVersion: "1.0",
+  schemaVersion: "2.0",
   id: "deepseek",
   name: "DeepSeek",
   ownedBy: "deepseek",
@@ -94,7 +94,7 @@ describe("provider model inventory", () => {
       await readFile("tests/fixtures/moonshot-models.json", "utf8"),
     );
     const moonshot: ProviderData = {
-      schemaVersion: "1.0",
+      schemaVersion: "2.0",
       id: "moonshot-cn",
       name: "Kimi China",
       displayNames: { "zh-CN": "Kimi 国内版", en: "Kimi China" },

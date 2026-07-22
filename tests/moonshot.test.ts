@@ -29,7 +29,7 @@ describe("Kimi collector parser", () => {
         {
           market: "china",
           currency: "CNY",
-          input: { cacheHit: 2, cacheMiss: 20 },
+          input: { cacheHit: 2, standard: 20 },
           output: 100,
         },
       ],

@@ -61,7 +61,7 @@
           "status": "missing"
         },
         {
-          "field": "prices.USD.input.cacheMiss",
+          "field": "prices.USD.input.standard",
           "official": 0.14,
           "reference": 0.14,
           "status": "match"
@@ -135,7 +135,7 @@
           "status": "missing"
         },
         {
-          "field": "prices.USD.input.cacheMiss",
+          "field": "prices.USD.input.standard",
           "official": 0.435,
           "reference": 0.435,
           "status": "match"
@@ -213,7 +213,7 @@
           "status": "match"
         },
         {
-          "field": "prices.USD.input.cacheMiss",
+          "field": "prices.USD.input.standard",
           "official": 0.75,
           "reference": 0.75,
           "status": "match"
@@ -295,7 +295,7 @@
           "status": "match"
         },
         {
-          "field": "prices.USD.input.cacheMiss",
+          "field": "prices.USD.input.standard",
           "official": null,
           "reference": 3,
           "status": "missing"
@@ -377,7 +377,7 @@
           "status": "match"
         },
         {
-          "field": "prices.USD.input.cacheMiss",
+          "field": "prices.USD.input.standard",
           "official": null,
           "reference": 0.95,
           "status": "missing"
@@ -459,7 +459,7 @@
           "status": "match"
         },
         {
-          "field": "prices.USD.input.cacheMiss",
+          "field": "prices.USD.input.standard",
           "official": null,
           "reference": 1.9,
           "status": "missing"
@@ -541,7 +541,7 @@
           "status": "match"
         },
         {
-          "field": "prices.USD.input.cacheMiss",
+          "field": "prices.USD.input.standard",
           "official": null,
           "reference": 0.95,
           "status": "missing"
@@ -623,7 +623,7 @@
           "status": "match"
         },
         {
-          "field": "prices.USD.input.cacheMiss",
+          "field": "prices.USD.input.standard",
           "official": null,
           "reference": 0.6,
           "status": "missing"

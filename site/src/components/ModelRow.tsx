@@ -85,17 +85,17 @@ export function ModelRow({
                   <div>
                     <span>输入</span>
                     <strong>
-                      {formatPrice(price.input.cacheMiss, currency)}
+                      {formatPrice(price.input.standard, currency)}
                     </strong>
                   </div>
-                  <div>
-                    <span>缓存命中</span>
-                    <strong>
-                      {price.input.cacheHit === undefined
-                        ? "未公开"
-                        : formatPrice(price.input.cacheHit, currency)}
-                    </strong>
-                  </div>
+                  {price.input.cacheHit !== undefined ? (
+                    <div>
+                      <span>缓存命中</span>
+                      <strong>
+                        {formatPrice(price.input.cacheHit, currency)}
+                      </strong>
+                    </div>
+                  ) : null}
                   <div>
                     <span>输出</span>
                     <strong>{formatPrice(price.output, currency)}</strong>

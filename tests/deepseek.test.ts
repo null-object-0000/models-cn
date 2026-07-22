@@ -56,7 +56,7 @@ describe("parseDeepSeekPage", () => {
       },
       price: {
         currency: "CNY",
-        input: { cacheHit: 0.02, cacheMiss: 1 },
+        input: { cacheHit: 0.02, standard: 1 },
         output: 2,
       },
     });
@@ -87,7 +87,7 @@ describe("parseDeepSeekPage", () => {
       currency: "USD",
       unit: "1M_tokens",
       rateType: "standard",
-      input: { cacheHit: 0.0028, cacheMiss: 0.14 },
+      input: { cacheHit: 0.0028, standard: 0.14 },
       output: 0.28,
     });
     expect(data.aliases[0]?.deprecatedAt).toBe("2026-07-24T15:59:00Z");

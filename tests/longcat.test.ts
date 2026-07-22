@@ -42,7 +42,7 @@ describe("LongCat collector parsers", () => {
         currency: "CNY",
         unit: "1M_tokens",
         rateType: "standard",
-        input: { cacheHit: 0.1, cacheMiss: 5 },
+        input: { cacheHit: 0.1, standard: 5 },
         output: 20,
       },
       {
@@ -50,7 +50,7 @@ describe("LongCat collector parsers", () => {
         currency: "CNY",
         unit: "1M_tokens",
         rateType: "promotional",
-        input: { cacheHit: 0.04, cacheMiss: 2 },
+        input: { cacheHit: 0.04, standard: 2 },
         output: 8,
       },
     ]);

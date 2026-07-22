@@ -53,7 +53,7 @@ try {
   if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
 }
 const catalog: Catalog = {
-  schemaVersion: "1.0",
+  schemaVersion: "2.0",
   providers,
   ...(inventories?.length ? { inventories } : {}),
   ...(modelsDev ? { calibration: { modelsDev } } : {}),
