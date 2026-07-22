@@ -10,6 +10,7 @@
 | -------- | ------------- | --- | --- | -------- |
 | DeepSeek | DeepSeek 系列 | ✅  | ✅  | ✅       |
 | LongCat  | LongCat 系列  | ✅  | ✅  | ✅       |
+| Kimi     | Kimi 系列     | ✅  | —   | ✅       |
 
 DeepSeek 数据源：
 
@@ -22,10 +23,17 @@ LongCat 数据源：
 - [英文 Models & Pricing](https://longcat.chat/platform/docs/pricing/long-cat-2.0)
 - [模型详情接口文档](https://longcat.chat/platform/docs/zh/api/model)
 
+Kimi 数据源：
+
+- [模型推理价格说明](https://platform.kimi.com/docs/pricing/chat)
+- [模型参数参考](https://platform.kimi.com/docs/api/models-overview)
+- [官方模型列表接口](https://platform.kimi.com/docs/api/list-models)
+
 ## 数据文件
 
 - `data/providers/deepseek.json`：DeepSeek 的规范化数据
 - `data/providers/longcat.json`：LongCat 的规范化数据
+- `data/providers/moonshot.json`：Kimi 的规范化数据
 - `data/calibration/models-dev.json`：与 models.dev 的逐字段校准结果
 - `data/inventory/{provider}.json`：官方模型列表接口返回的实时可用模型基准
 - `api.json`：所有厂商合并后的统一入口
@@ -66,13 +74,14 @@ LongCat 的公开文档足以完成基础采集。若希望同时调用官方模
 ```dotenv
 DEEPSEEK_API_KEY=your-new-key
 LONGCAT_API_KEY=your-new-key
+MOONSHOT_API_KEY=your-new-key
 ```
 
-GitHub Actions 中请将新 Key 配置为名为 `LONGCAT_API_KEY` 的 Repository Secret。不要将 Key 写入代码、数据文件或 Actions YAML。
+GitHub Actions 中请将新 Key 配置为对应名称的 Repository Secret。不要将 Key 写入代码、数据文件或 Actions YAML。
 
 模型清单发现需要各厂商的 API Key，`npm run collect` 和 `npm run discover` 会自动读取项目根目录的 `.env`。系统环境变量或 GitHub Actions 注入的变量优先于 `.env`。
 
-GitHub Actions 对应使用 `DEEPSEEK_API_KEY` 和 `LONGCAT_API_KEY` 两个 Repository Secrets。未配置某个 Key 时会跳过该厂商并保留已有清单。
+GitHub Actions 对应使用 `DEEPSEEK_API_KEY`、`LONGCAT_API_KEY` 和 `MOONSHOT_API_KEY` 三个 Repository Secrets。未配置某个 Key 时会跳过该厂商并保留已有清单。
 
 采集器会校验官方页面结构。关键表格消失、字段缺失或价格无法解析时会直接失败，不会用空数据覆盖已有结果。标准价和限时优惠价分别以 `standard`、`promotional` 保存。只有规范化后的官方数据发生变化时，数据源的 `retrievedAt` 才会更新。
 

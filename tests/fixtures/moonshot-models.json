@@ -1,0 +1,23 @@
+{
+  "object": "list",
+  "data": [
+    { "id": "kimi-k2.5", "owned_by": "moonshot", "context_length": 262144 },
+    {
+      "id": "moonshot-v1-auto",
+      "owned_by": "moonshot",
+      "context_length": 131072
+    },
+    {
+      "id": "kimi-k2.7-code-highspeed",
+      "owned_by": "moonshot",
+      "context_length": 262144
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "owned_by": "moonshot",
+      "context_length": 262144
+    },
+    { "id": "kimi-k3", "owned_by": "moonshot", "context_length": 1048576 },
+    { "id": "kimi-k2.6", "owned_by": "moonshot", "context_length": 262144 }
+  ]
+}

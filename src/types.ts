@@ -37,6 +37,9 @@ export interface ModelData {
   aliases: ModelAlias[];
   capabilities: {
     thinking?: boolean;
+    thinkingModes?: string[];
+    reasoningEfforts?: string[];
+    dynamicTools?: boolean;
     jsonOutput?: boolean;
     toolCalls?: boolean;
     chatPrefixCompletion?: boolean;
@@ -47,7 +50,7 @@ export interface ModelData {
   };
   limits: {
     contextTokens: number;
-    maxOutputTokens: number;
+    maxOutputTokens?: number;
     concurrency?: number;
   };
   prices: ModelPrice[];

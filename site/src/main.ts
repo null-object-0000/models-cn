@@ -20,7 +20,7 @@ interface Model {
   capabilities: Record<string, unknown>;
   limits: {
     contextTokens: number;
-    maxOutputTokens: number;
+    maxOutputTokens?: number;
     concurrency?: number;
   };
   prices: Price[];
@@ -83,7 +83,8 @@ function formatPrice(value: number, selectedCurrency: Currency): string {
   return `${symbol}${value.toLocaleString("zh-CN", { maximumFractionDigits: 6 })}`;
 }
 
-function compactTokens(value: number): string {
+function compactTokens(value?: number): string {
+  if (value === undefined) return "未公开";
   if (value >= 1_000_000)
     return `${(value / 1_000_000).toLocaleString("zh-CN", { maximumFractionDigits: 2 })}M`;
   if (value >= 1_000)
@@ -94,11 +95,14 @@ function compactTokens(value: number): string {
 function capabilityLabels(capabilities: Record<string, unknown>): string[] {
   const labels: string[] = [];
   if (capabilities.thinking) labels.push("思考");
+  if (capabilities.dynamicTools) labels.push("动态工具");
   if (capabilities.toolCalls) labels.push("工具调用");
   if (capabilities.jsonOutput) labels.push("JSON");
   if (capabilities.chatPrefixCompletion) labels.push("前缀续写");
   const inputs = capabilities.inputModalities as string[] | undefined;
   if (inputs?.length) labels.push(inputs.join(" / "));
+  const efforts = capabilities.reasoningEfforts as string[] | undefined;
+  if (efforts?.length) labels.push(`effort: ${efforts.join(" / ")}`);
   return labels;
 }
 

@@ -46,6 +46,42 @@ const mappings = [
     referenceModel: "LongCat-2.0",
     referenceUrl: "https://models.dev/models/meituan/longcat-2.0/",
   },
+  {
+    provider: "moonshot",
+    model: "kimi-k3",
+    referenceProvider: "moonshotai",
+    referenceModel: "kimi-k3",
+    referenceUrl: "https://models.dev/models/moonshotai/kimi-k3/",
+  },
+  {
+    provider: "moonshot",
+    model: "kimi-k2.7-code",
+    referenceProvider: "moonshotai",
+    referenceModel: "kimi-k2.7-code",
+    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.7-code/",
+  },
+  {
+    provider: "moonshot",
+    model: "kimi-k2.7-code-highspeed",
+    referenceProvider: "moonshotai",
+    referenceModel: "kimi-k2.7-code-highspeed",
+    referenceUrl:
+      "https://models.dev/models/moonshotai/kimi-k2.7-code-highspeed/",
+  },
+  {
+    provider: "moonshot",
+    model: "kimi-k2.6",
+    referenceProvider: "moonshotai",
+    referenceModel: "kimi-k2.6",
+    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.6/",
+  },
+  {
+    provider: "moonshot",
+    model: "kimi-k2.5",
+    referenceProvider: "moonshotai",
+    referenceModel: "kimi-k2.5",
+    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.5/",
+  },
 ] as const;
 
 function sameValue(left: CalibrationValue, right: CalibrationValue): boolean {

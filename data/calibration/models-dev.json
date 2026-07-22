@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-07-22T03:42:23.741Z",
-    "contentHash": "sha256:364940ebf8fe6c21796ca0a9b9beeb2b94511ceca3423b61115e5fb700126af2"
+    "retrievedAt": "2026-07-22T05:31:28.007Z",
+    "contentHash": "sha256:9948545600157340a812118907f2f5d01a4ef124aec4d218698e2064ab583347"
   },
   "models": [
     {
@@ -211,6 +211,386 @@
           "official": 2.95,
           "reference": 2.95,
           "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "moonshot",
+      "model": "kimi-k3",
+      "referenceProvider": "moonshotai",
+      "referenceModel": "kimi-k3",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k3/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "limits.contextTokens",
+          "official": 1048576,
+          "reference": 1048576,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": null,
+          "reference": 131072,
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheMiss",
+          "official": null,
+          "reference": 3,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.3,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 15,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "moonshot",
+      "model": "kimi-k2.7-code",
+      "referenceProvider": "moonshotai",
+      "referenceModel": "kimi-k2.7-code",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.7-code/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "limits.contextTokens",
+          "official": 262144,
+          "reference": 262144,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": null,
+          "reference": 262144,
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheMiss",
+          "official": null,
+          "reference": 0.95,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.19,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 4,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "moonshot",
+      "model": "kimi-k2.7-code-highspeed",
+      "referenceProvider": "moonshotai",
+      "referenceModel": "kimi-k2.7-code-highspeed",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.7-code-highspeed/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "limits.contextTokens",
+          "official": 262144,
+          "reference": 262144,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": null,
+          "reference": 262144,
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheMiss",
+          "official": null,
+          "reference": 1.9,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.38,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 8,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "moonshot",
+      "model": "kimi-k2.6",
+      "referenceProvider": "moonshotai",
+      "referenceModel": "kimi-k2.6",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.6/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "limits.contextTokens",
+          "official": 262144,
+          "reference": 262144,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": null,
+          "reference": 262144,
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheMiss",
+          "official": null,
+          "reference": 0.95,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.16,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 4,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "moonshot",
+      "model": "kimi-k2.5",
+      "referenceProvider": "moonshotai",
+      "referenceModel": "kimi-k2.5",
+      "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.5/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "limits.contextTokens",
+          "official": 262144,
+          "reference": 262144,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": null,
+          "reference": 262144,
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheMiss",
+          "official": null,
+          "reference": 0.6,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.1,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 3,
+          "status": "missing"
         }
       ]
     }

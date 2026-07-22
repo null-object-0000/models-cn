@@ -107,6 +107,17 @@
           "additionalProperties": false,
           "properties": {
             "thinking": { "type": "boolean" },
+            "thinkingModes": {
+              "type": "array",
+              "items": { "enum": ["thinking", "non-thinking"] },
+              "uniqueItems": true
+            },
+            "reasoningEfforts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true
+            },
+            "dynamicTools": { "type": "boolean" },
             "jsonOutput": { "type": "boolean" },
             "toolCalls": { "type": "boolean" },
             "chatPrefixCompletion": { "type": "boolean" },
@@ -134,7 +145,7 @@
         "limits": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["contextTokens", "maxOutputTokens"],
+          "required": ["contextTokens"],
           "properties": {
             "contextTokens": { "type": "integer", "minimum": 1 },
             "maxOutputTokens": { "type": "integer", "minimum": 1 },

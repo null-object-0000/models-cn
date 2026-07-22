@@ -26,6 +26,12 @@ export const INVENTORY_PROVIDERS = [
     env: "LONGCAT_API_KEY",
     url: "https://api.longcat.chat/openai/v1/models",
   },
+  {
+    provider: "moonshot",
+    env: "MOONSHOT_API_KEY",
+    url: "https://api.moonshot.cn/v1/models",
+    modelIdPrefix: "kimi-",
+  },
 ] as const;
 
 export type InventoryProviderConfig = (typeof INVENTORY_PROVIDERS)[number];
@@ -82,7 +88,10 @@ export function buildProviderInventory(
   previous?: ProviderInventory,
   now = new Date(),
 ): ProviderInventory {
+  const modelIdPrefix =
+    "modelIdPrefix" in config ? config.modelIdPrefix : undefined;
   const models = response.data
+    .filter((model) => !modelIdPrefix || model.id.startsWith(modelIdPrefix))
     .map((model) => ({
       id: model.id,
       ownedBy: model.owned_by,

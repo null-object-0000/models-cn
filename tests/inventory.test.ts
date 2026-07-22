@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 import {
   buildProviderInventory,
@@ -86,5 +87,43 @@ describe("provider model inventory", () => {
     expect(inventory.comparison.status).toBe("mismatch");
     expect(inventory.comparison.listedWithoutPricing).toEqual(["deepseek-new"]);
     expect(inventory.comparison.activeAliasesNotListed).toEqual([]);
+  });
+
+  it("filters the Moonshot API inventory to the selected Kimi family", async () => {
+    const response = JSON.parse(
+      await readFile("tests/fixtures/moonshot-models.json", "utf8"),
+    );
+    const moonshot: ProviderData = {
+      schemaVersion: "1.0",
+      id: "moonshot",
+      name: "Kimi",
+      ownedBy: "moonshot",
+      baseUrls: { openai: "https://api.moonshot.cn/v1" },
+      models: response.data
+        .filter((model: { id: string }) => model.id.startsWith("kimi-"))
+        .map((model: { id: string; context_length: number }) => ({
+          id: model.id,
+          name: model.id,
+          aliases: [],
+          capabilities: { inputModalities: ["text"] },
+          limits: { contextTokens: model.context_length },
+          prices: [],
+        })),
+      sources: [],
+    };
+    const inventory = buildProviderInventory(
+      INVENTORY_PROVIDERS[2],
+      moonshot,
+      response,
+    );
+    expect(inventory.comparison).toMatchObject({
+      status: "match",
+      listedWithoutPricing: [],
+      pricedButNotListed: [],
+    });
+    expect(inventory.models).toHaveLength(5);
+    expect(
+      inventory.models.every((model) => model.id.startsWith("kimi-")),
+    ).toBe(true);
   });
 });
