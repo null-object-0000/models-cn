@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://models-cn.dev/schema/inventory.schema.json",
+  "title": "models-cn live provider model inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "provider", "source", "models", "comparison"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "provider": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "retrievedAt", "contentHash"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "retrievedAt": { "type": "string", "format": "date-time" },
+        "contentHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "ownedBy"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "ownedBy": { "type": "string", "minLength": 1 },
+          "displayName": { "type": "string", "minLength": 1 },
+          "contextTokens": { "type": "integer", "minimum": 1 },
+          "maxOutputTokens": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "pricedAndListed",
+        "aliasesAndListed",
+        "listedWithoutPricing",
+        "pricedButNotListed",
+        "activeAliasesNotListed"
+      ],
+      "properties": {
+        "status": { "enum": ["match", "mismatch"] },
+        "pricedAndListed": { "$ref": "#/$defs/modelIds" },
+        "aliasesAndListed": { "$ref": "#/$defs/modelIds" },
+        "listedWithoutPricing": { "$ref": "#/$defs/modelIds" },
+        "pricedButNotListed": { "$ref": "#/$defs/modelIds" },
+        "activeAliasesNotListed": { "$ref": "#/$defs/modelIds" }
+      }
+    }
+  },
+  "$defs": {
+    "modelIds": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  }
+}

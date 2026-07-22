@@ -1,0 +1,57 @@
+name: Update model prices
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 9 * * *"
+      timezone: "Asia/Shanghai"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-model-prices
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run collect
+        env:
+          LONGCAT_API_KEY: ${{ secrets.LONGCAT_API_KEY }}
+      - run: npm run discover
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          LONGCAT_API_KEY: ${{ secrets.LONGCAT_API_KEY }}
+      - run: npm run build
+      - run: npm run check
+      - run: npm run format:check
+      - name: Create or update price PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if git diff --quiet -- data api.json; then
+            echo "No pricing changes"
+            exit 0
+          fi
+          branch="bot/update-model-prices"
+          git config user.name "models-cn-bot"
+          git config user.email "models-cn-bot@users.noreply.github.com"
+          git fetch origin "$branch:refs/remotes/origin/$branch" || true
+          git checkout -B "$branch"
+          git add data api.json
+          git commit -m "chore: update model prices"
+          git push --force-with-lease origin "$branch"
+          open_pr_count=$(gh pr list --head "$branch" --state open --json number --jq 'length')
+          if [ "$open_pr_count" -eq 0 ]; then
+            gh pr create --head "$branch" --title "chore: update model prices" --body "Automated update from official provider pricing pages."
+          fi

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://models-cn.dev/schema/provider.schema.json",
+  "title": "models-cn provider data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "ownedBy",
+    "baseUrls",
+    "models",
+    "sources"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string", "minLength": 1 },
+    "ownedBy": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "baseUrls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["openai"],
+      "properties": {
+        "openai": { "type": "string", "format": "uri" },
+        "anthropic": { "type": "string", "format": "uri" }
+      }
+    },
+    "models": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/model" }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/source" }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "kind", "locale", "retrievedAt", "contentHash"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "kind": { "enum": ["pricing", "model-metadata"] },
+        "locale": { "enum": ["zh-CN", "en"] },
+        "currency": { "enum": ["CNY", "USD"] },
+        "retrievedAt": { "type": "string", "format": "date-time" },
+        "contentHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "alias": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "mode"],
+      "properties": {
+        "id": { "type": "string" },
+        "mode": { "enum": ["thinking", "non-thinking"] },
+        "deprecatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "price": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "market",
+        "currency",
+        "unit",
+        "rateType",
+        "input",
+        "output",
+        "sourceUrl"
+      ],
+      "properties": {
+        "market": { "enum": ["china", "international"] },
+        "currency": { "enum": ["CNY", "USD"] },
+        "unit": { "const": "1M_tokens" },
+        "rateType": { "enum": ["standard", "promotional"] },
+        "input": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cacheHit", "cacheMiss"],
+          "properties": {
+            "cacheHit": { "type": "number", "minimum": 0 },
+            "cacheMiss": { "type": "number", "minimum": 0 }
+          }
+        },
+        "output": { "type": "number", "minimum": 0 },
+        "sourceUrl": { "type": "string", "format": "uri" }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "aliases", "capabilities", "limits", "prices"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "name": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "tokenizer": { "type": "string", "minLength": 1 },
+        "aliases": { "type": "array", "items": { "$ref": "#/$defs/alias" } },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "thinking": { "type": "boolean" },
+            "jsonOutput": { "type": "boolean" },
+            "toolCalls": { "type": "boolean" },
+            "chatPrefixCompletion": { "type": "boolean" },
+            "fimCompletion": {
+              "enum": ["non-thinking-only", "supported", "unsupported"]
+            },
+            "inputModalities": {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true
+            },
+            "outputModalities": {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true
+            },
+            "supportedParameters": {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true
+            }
+          },
+          "minProperties": 1
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["contextTokens", "maxOutputTokens"],
+          "properties": {
+            "contextTokens": { "type": "integer", "minimum": 1 },
+            "maxOutputTokens": { "type": "integer", "minimum": 1 },
+            "concurrency": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "prices": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/price" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0",
+  "source": {
+    "url": "https://models.dev/api.json",
+    "retrievedAt": "2026-07-22T03:42:23.741Z",
+    "contentHash": "sha256:364940ebf8fe6c21796ca0a9b9beeb2b94511ceca3423b61115e5fb700126af2"
+  },
+  "models": [
+    {
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
+      "referenceProvider": "deepseek",
+      "referenceModel": "deepseek-v4-flash",
+      "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-flash/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 384000,
+          "reference": 384000,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheMiss",
+          "official": 0.14,
+          "reference": 0.14,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.0028,
+          "reference": 0.0028,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 0.28,
+          "reference": 0.28,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "deepseek",
+      "model": "deepseek-v4-pro",
+      "referenceProvider": "deepseek",
+      "referenceModel": "deepseek-v4-pro",
+      "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-pro/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 384000,
+          "reference": 384000,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheMiss",
+          "official": 0.435,
+          "reference": 0.435,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.003625,
+          "reference": 0.003625,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 0.87,
+          "reference": 0.87,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "longcat",
+      "model": "LongCat-2.0",
+      "referenceProvider": "longcat",
+      "referenceModel": "LongCat-2.0",
+      "referenceUrl": "https://models.dev/models/meituan/longcat-2.0/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "limits.contextTokens",
+          "official": 1048576,
+          "reference": 1000000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheMiss",
+          "official": 0.75,
+          "reference": 0.75,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.015,
+          "reference": 0.015,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 2.95,
+          "reference": 2.95,
+          "status": "match"
+        }
+      ]
+    }
+  ]
+}

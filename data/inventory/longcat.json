@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "provider": "longcat",
+  "source": {
+    "url": "https://api.longcat.chat/openai/v1/models",
+    "retrievedAt": "2026-07-22T03:54:31.353Z",
+    "contentHash": "sha256:12443b91064162be4496ca30e75aff54006c5a2a6fe2505ebc28057831d193f4"
+  },
+  "models": [
+    {
+      "id": "LongCat-2.0",
+      "ownedBy": "LongCat",
+      "displayName": "LongCat-2.0",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 131072
+    }
+  ],
+  "comparison": {
+    "status": "match",
+    "pricedAndListed": [
+      "LongCat-2.0"
+    ],
+    "aliasesAndListed": [],
+    "listedWithoutPricing": [],
+    "pricedButNotListed": [],
+    "activeAliasesNotListed": []
+  }
+}

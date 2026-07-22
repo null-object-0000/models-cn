@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "provider": "deepseek",
+  "source": {
+    "url": "https://api.deepseek.com/models",
+    "retrievedAt": "2026-07-22T03:54:30.941Z",
+    "contentHash": "sha256:e15d3716480a21e2b713a22101c631246403499f4f42c77f35cdb0f5e325f870"
+  },
+  "models": [
+    {
+      "id": "deepseek-v4-flash",
+      "ownedBy": "deepseek"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "ownedBy": "deepseek"
+    }
+  ],
+  "comparison": {
+    "status": "mismatch",
+    "pricedAndListed": [
+      "deepseek-v4-flash",
+      "deepseek-v4-pro"
+    ],
+    "aliasesAndListed": [],
+    "listedWithoutPricing": [],
+    "pricedButNotListed": [],
+    "activeAliasesNotListed": [
+      "deepseek-chat",
+      "deepseek-reasoner"
+    ]
+  }
+}

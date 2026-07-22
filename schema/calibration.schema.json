@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://models-cn.dev/schema/calibration.schema.json",
+  "title": "models-cn external calibration report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "source", "models"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "retrievedAt", "contentHash"],
+      "properties": {
+        "url": { "const": "https://models.dev/api.json" },
+        "retrievedAt": { "type": "string", "format": "date-time" },
+        "contentHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "provider",
+          "model",
+          "referenceProvider",
+          "referenceModel",
+          "referenceUrl",
+          "status",
+          "checks"
+        ],
+        "properties": {
+          "provider": { "type": "string" },
+          "model": { "type": "string" },
+          "referenceProvider": { "type": "string" },
+          "referenceModel": { "type": "string" },
+          "referenceUrl": { "type": "string", "format": "uri" },
+          "status": {
+            "enum": ["match", "mismatch", "partial", "missing"]
+          },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["field", "official", "reference", "status"],
+              "properties": {
+                "field": { "type": "string" },
+                "official": { "$ref": "#/$defs/value" },
+                "reference": { "$ref": "#/$defs/value" },
+                "status": { "enum": ["match", "mismatch", "missing"] }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "value": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "null" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    }
+  }
+}

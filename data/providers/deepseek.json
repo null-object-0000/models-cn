@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0",
+  "id": "deepseek",
+  "name": "DeepSeek",
+  "ownedBy": "deepseek",
+  "baseUrls": {
+    "openai": "https://api.deepseek.com",
+    "anthropic": "https://api.deepseek.com/anthropic"
+  },
+  "models": [
+    {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek-V4-Flash",
+      "aliases": [
+        {
+          "id": "deepseek-chat",
+          "mode": "non-thinking",
+          "deprecatedAt": "2026-07-24T23:59:00+08:00"
+        },
+        {
+          "id": "deepseek-reasoner",
+          "mode": "thinking",
+          "deprecatedAt": "2026-07-24T23:59:00+08:00"
+        }
+      ],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "chatPrefixCompletion": true,
+        "fimCompletion": "non-thinking-only"
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 384000,
+        "concurrency": 2500
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.02,
+            "cacheMiss": 1
+          },
+          "output": 2,
+          "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+        },
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.0028,
+            "cacheMiss": 0.14
+          },
+          "output": 0.28,
+          "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
+        }
+      ]
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek-V4-Pro",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "chatPrefixCompletion": true,
+        "fimCompletion": "non-thinking-only"
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 384000,
+        "concurrency": 500
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.025,
+            "cacheMiss": 3
+          },
+          "output": 6,
+          "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+        },
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.003625,
+            "cacheMiss": 0.435
+          },
+          "output": 0.87,
+          "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "kind": "pricing",
+      "locale": "zh-CN",
+      "currency": "CNY",
+      "retrievedAt": "2026-07-22T03:03:12.107Z",
+      "contentHash": "sha256:8829814fa8202d5debd3af6244362ed7aabf81dc4f07cf3308c816e6e4c564fb"
+    },
+    {
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "kind": "pricing",
+      "locale": "en",
+      "currency": "USD",
+      "retrievedAt": "2026-07-22T03:03:12.107Z",
+      "contentHash": "sha256:103b24b4170e4d5f35a3296f69a4bc498e2df1861d4dd90cf2d4568108c8bb9e"
+    }
+  ]
+}

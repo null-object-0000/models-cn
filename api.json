@@ -1,0 +1,553 @@
+{
+  "schemaVersion": "1.0",
+  "providers": [
+    {
+      "schemaVersion": "1.0",
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "ownedBy": "deepseek",
+      "baseUrls": {
+        "openai": "https://api.deepseek.com",
+        "anthropic": "https://api.deepseek.com/anthropic"
+      },
+      "models": [
+        {
+          "id": "deepseek-v4-flash",
+          "name": "DeepSeek-V4-Flash",
+          "aliases": [
+            {
+              "id": "deepseek-chat",
+              "mode": "non-thinking",
+              "deprecatedAt": "2026-07-24T23:59:00+08:00"
+            },
+            {
+              "id": "deepseek-reasoner",
+              "mode": "thinking",
+              "deprecatedAt": "2026-07-24T23:59:00+08:00"
+            }
+          ],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "chatPrefixCompletion": true,
+            "fimCompletion": "non-thinking-only"
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 384000,
+            "concurrency": 2500
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "cacheHit": 0.02,
+                "cacheMiss": 1
+              },
+              "output": 2,
+              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+            },
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "cacheHit": 0.0028,
+                "cacheMiss": 0.14
+              },
+              "output": 0.28,
+              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
+            }
+          ]
+        },
+        {
+          "id": "deepseek-v4-pro",
+          "name": "DeepSeek-V4-Pro",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "chatPrefixCompletion": true,
+            "fimCompletion": "non-thinking-only"
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 384000,
+            "concurrency": 500
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "cacheHit": 0.025,
+                "cacheMiss": 3
+              },
+              "output": 6,
+              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+            },
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "cacheHit": 0.003625,
+                "cacheMiss": 0.435
+              },
+              "output": 0.87,
+              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+          "kind": "pricing",
+          "locale": "zh-CN",
+          "currency": "CNY",
+          "retrievedAt": "2026-07-22T03:03:12.107Z",
+          "contentHash": "sha256:8829814fa8202d5debd3af6244362ed7aabf81dc4f07cf3308c816e6e4c564fb"
+        },
+        {
+          "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "kind": "pricing",
+          "locale": "en",
+          "currency": "USD",
+          "retrievedAt": "2026-07-22T03:03:12.107Z",
+          "contentHash": "sha256:103b24b4170e4d5f35a3296f69a4bc498e2df1861d4dd90cf2d4568108c8bb9e"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "1.0",
+      "id": "longcat",
+      "name": "LongCat",
+      "ownedBy": "longcat",
+      "baseUrls": {
+        "openai": "https://api.longcat.chat/openai",
+        "anthropic": "https://api.longcat.chat/anthropic"
+      },
+      "models": [
+        {
+          "id": "LongCat-2.0",
+          "name": "LongCat-2.0",
+          "createdAt": "2026-03-12T16:00:00.000Z",
+          "tokenizer": "Other",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ],
+            "supportedParameters": [
+              "max_tokens",
+              "temperature",
+              "top_p",
+              "stream",
+              "tools",
+              "tool_choice",
+              "thinking"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1048576,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "cacheHit": 0.1,
+                "cacheMiss": 5
+              },
+              "output": 20,
+              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0"
+            },
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "promotional",
+              "input": {
+                "cacheHit": 0.04,
+                "cacheMiss": 2
+              },
+              "output": 8,
+              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0"
+            },
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "cacheHit": 0.015,
+                "cacheMiss": 0.75
+              },
+              "output": 2.95,
+              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0"
+            },
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "promotional",
+              "input": {
+                "cacheHit": 0.006,
+                "cacheMiss": 0.3
+              },
+              "output": 1.2,
+              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0",
+          "kind": "pricing",
+          "locale": "zh-CN",
+          "currency": "CNY",
+          "retrievedAt": "2026-07-22T03:33:15.688Z",
+          "contentHash": "sha256:e439bc7e04c6fc070198ff89fd1bb375cb550b562653062be487a599ad1dfb55"
+        },
+        {
+          "url": "https://longcat.chat/platform/docs/pricing/long-cat-2.0",
+          "kind": "pricing",
+          "locale": "en",
+          "currency": "USD",
+          "retrievedAt": "2026-07-22T03:33:15.688Z",
+          "contentHash": "sha256:0432f7e7ebe087b0fce0efedcd9c0796c9baf20019487dfd6223b183b4067d95"
+        },
+        {
+          "url": "https://longcat.chat/platform/docs/zh/api/model",
+          "kind": "model-metadata",
+          "locale": "zh-CN",
+          "retrievedAt": "2026-07-22T03:33:15.688Z",
+          "contentHash": "sha256:ebc0917bc2daf3eab9f936dd813e1db4568e97fdb0737e5dd923184d35c8545e"
+        },
+        {
+          "url": "https://longcat.chat/platform/docs/",
+          "kind": "model-metadata",
+          "locale": "en",
+          "retrievedAt": "2026-07-22T03:33:15.688Z",
+          "contentHash": "sha256:f1de634787fe5cc0fe96b0b7f617755847d22b30d06aee392ffb5787d7c9f1c9"
+        },
+        {
+          "url": "https://api.longcat.chat/openai/v1/models/LongCat-2.0",
+          "kind": "model-metadata",
+          "locale": "en",
+          "retrievedAt": "2026-07-22T03:54:28.935Z",
+          "contentHash": "sha256:ebc0917bc2daf3eab9f936dd813e1db4568e97fdb0737e5dd923184d35c8545e"
+        },
+        {
+          "url": "https://api.longcat.chat/openai/v1/models",
+          "kind": "model-metadata",
+          "locale": "en",
+          "retrievedAt": "2026-07-22T03:54:28.935Z",
+          "contentHash": "sha256:7a6f62083d26fb847782a0074648e388a16f6afef83ac0007d75c19b9a9568cc"
+        }
+      ]
+    }
+  ],
+  "inventories": [
+    {
+      "schemaVersion": "1.0",
+      "provider": "deepseek",
+      "source": {
+        "url": "https://api.deepseek.com/models",
+        "retrievedAt": "2026-07-22T03:54:30.941Z",
+        "contentHash": "sha256:e15d3716480a21e2b713a22101c631246403499f4f42c77f35cdb0f5e325f870"
+      },
+      "models": [
+        {
+          "id": "deepseek-v4-flash",
+          "ownedBy": "deepseek"
+        },
+        {
+          "id": "deepseek-v4-pro",
+          "ownedBy": "deepseek"
+        }
+      ],
+      "comparison": {
+        "status": "mismatch",
+        "pricedAndListed": [
+          "deepseek-v4-flash",
+          "deepseek-v4-pro"
+        ],
+        "aliasesAndListed": [],
+        "listedWithoutPricing": [],
+        "pricedButNotListed": [],
+        "activeAliasesNotListed": [
+          "deepseek-chat",
+          "deepseek-reasoner"
+        ]
+      }
+    },
+    {
+      "schemaVersion": "1.0",
+      "provider": "longcat",
+      "source": {
+        "url": "https://api.longcat.chat/openai/v1/models",
+        "retrievedAt": "2026-07-22T03:54:31.353Z",
+        "contentHash": "sha256:12443b91064162be4496ca30e75aff54006c5a2a6fe2505ebc28057831d193f4"
+      },
+      "models": [
+        {
+          "id": "LongCat-2.0",
+          "ownedBy": "LongCat",
+          "displayName": "LongCat-2.0",
+          "contextTokens": 1048576,
+          "maxOutputTokens": 131072
+        }
+      ],
+      "comparison": {
+        "status": "match",
+        "pricedAndListed": [
+          "LongCat-2.0"
+        ],
+        "aliasesAndListed": [],
+        "listedWithoutPricing": [],
+        "pricedButNotListed": [],
+        "activeAliasesNotListed": []
+      }
+    }
+  ],
+  "calibration": {
+    "modelsDev": {
+      "schemaVersion": "1.0",
+      "source": {
+        "url": "https://models.dev/api.json",
+        "retrievedAt": "2026-07-22T03:42:23.741Z",
+        "contentHash": "sha256:364940ebf8fe6c21796ca0a9b9beeb2b94511ceca3423b61115e5fb700126af2"
+      },
+      "models": [
+        {
+          "provider": "deepseek",
+          "model": "deepseek-v4-flash",
+          "referenceProvider": "deepseek",
+          "referenceModel": "deepseek-v4-flash",
+          "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-flash/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 384000,
+              "reference": 384000,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": null,
+              "reference": [
+                "text"
+              ],
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": null,
+              "reference": [
+                "text"
+              ],
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheMiss",
+              "official": 0.14,
+              "reference": 0.14,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.0028,
+              "reference": 0.0028,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 0.28,
+              "reference": 0.28,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "deepseek",
+          "model": "deepseek-v4-pro",
+          "referenceProvider": "deepseek",
+          "referenceModel": "deepseek-v4-pro",
+          "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-pro/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 384000,
+              "reference": 384000,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": null,
+              "reference": [
+                "text"
+              ],
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": null,
+              "reference": [
+                "text"
+              ],
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheMiss",
+              "official": 0.435,
+              "reference": 0.435,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.003625,
+              "reference": 0.003625,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 0.87,
+              "reference": 0.87,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "longcat",
+          "model": "LongCat-2.0",
+          "referenceProvider": "longcat",
+          "referenceModel": "LongCat-2.0",
+          "referenceUrl": "https://models.dev/models/meituan/longcat-2.0/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "limits.contextTokens",
+              "official": 1048576,
+              "reference": 1000000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheMiss",
+              "official": 0.75,
+              "reference": 0.75,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.015,
+              "reference": 0.015,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 2.95,
+              "reference": 2.95,
+              "status": "match"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

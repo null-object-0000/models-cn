@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0",
+  "id": "longcat",
+  "name": "LongCat",
+  "ownedBy": "longcat",
+  "baseUrls": {
+    "openai": "https://api.longcat.chat/openai",
+    "anthropic": "https://api.longcat.chat/anthropic"
+  },
+  "models": [
+    {
+      "id": "LongCat-2.0",
+      "name": "LongCat-2.0",
+      "createdAt": "2026-03-12T16:00:00.000Z",
+      "tokenizer": "Other",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "max_tokens",
+          "temperature",
+          "top_p",
+          "stream",
+          "tools",
+          "tool_choice",
+          "thinking"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1048576,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.1,
+            "cacheMiss": 5
+          },
+          "output": 20,
+          "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "promotional",
+          "input": {
+            "cacheHit": 0.04,
+            "cacheMiss": 2
+          },
+          "output": 8,
+          "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0"
+        },
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.015,
+            "cacheMiss": 0.75
+          },
+          "output": 2.95,
+          "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0"
+        },
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "promotional",
+          "input": {
+            "cacheHit": 0.006,
+            "cacheMiss": 0.3
+          },
+          "output": 1.2,
+          "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0",
+      "kind": "pricing",
+      "locale": "zh-CN",
+      "currency": "CNY",
+      "retrievedAt": "2026-07-22T03:33:15.688Z",
+      "contentHash": "sha256:e439bc7e04c6fc070198ff89fd1bb375cb550b562653062be487a599ad1dfb55"
+    },
+    {
+      "url": "https://longcat.chat/platform/docs/pricing/long-cat-2.0",
+      "kind": "pricing",
+      "locale": "en",
+      "currency": "USD",
+      "retrievedAt": "2026-07-22T03:33:15.688Z",
+      "contentHash": "sha256:0432f7e7ebe087b0fce0efedcd9c0796c9baf20019487dfd6223b183b4067d95"
+    },
+    {
+      "url": "https://longcat.chat/platform/docs/zh/api/model",
+      "kind": "model-metadata",
+      "locale": "zh-CN",
+      "retrievedAt": "2026-07-22T03:33:15.688Z",
+      "contentHash": "sha256:ebc0917bc2daf3eab9f936dd813e1db4568e97fdb0737e5dd923184d35c8545e"
+    },
+    {
+      "url": "https://longcat.chat/platform/docs/",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-07-22T03:33:15.688Z",
+      "contentHash": "sha256:f1de634787fe5cc0fe96b0b7f617755847d22b30d06aee392ffb5787d7c9f1c9"
+    },
+    {
+      "url": "https://api.longcat.chat/openai/v1/models/LongCat-2.0",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-07-22T03:54:28.935Z",
+      "contentHash": "sha256:ebc0917bc2daf3eab9f936dd813e1db4568e97fdb0737e5dd923184d35c8545e"
+    },
+    {
+      "url": "https://api.longcat.chat/openai/v1/models",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-07-22T03:54:28.935Z",
+      "contentHash": "sha256:7a6f62083d26fb847782a0074648e388a16f6afef83ac0007d75c19b9a9568cc"
+    }
+  ]
+}
