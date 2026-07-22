@@ -33,6 +33,8 @@ body {
   min-width: 320px;
   background: var(--bg);
   color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
 }
 body::before {
   content: "";
@@ -78,7 +80,7 @@ footer {
   align-items: center;
   gap: 10px;
   font:
-    650 15px/1 ui-monospace,
+    650 16px/1 ui-monospace,
     SFMono-Regular,
     Consolas,
     monospace;
@@ -95,7 +97,7 @@ nav {
   display: flex;
   gap: 28px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 nav a:hover,
 footer a:hover {
@@ -113,7 +115,7 @@ footer a:hover {
 .eyebrow,
 .section-index {
   font:
-    600 11px/1.4 ui-monospace,
+    600 12px/1.5 ui-monospace,
     SFMono-Regular,
     Consolas,
     monospace;
@@ -144,8 +146,8 @@ footer a:hover {
 .lede {
   max-width: 620px;
   color: #9db1aa;
-  font-size: 17px;
-  line-height: 1.8;
+  font-size: 18px;
+  line-height: 1.75;
 }
 .hero-actions {
   display: flex;
@@ -155,7 +157,7 @@ footer a:hover {
 .hero-actions a {
   padding: 13px 18px;
   border: 1px solid var(--line);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
 }
 .primary-action {
@@ -184,7 +186,7 @@ footer a:hover {
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   font:
-    600 10px/1 ui-monospace,
+    600 12px/1.2 ui-monospace,
     monospace;
   letter-spacing: 0.12em;
 }
@@ -207,7 +209,7 @@ footer a:hover {
 }
 .signal-panel dt {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 .signal-panel dd {
   margin: 8px 0 0;
@@ -226,7 +228,7 @@ footer a:hover {
   margin: 0;
   padding: 15px 18px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
 }
 .signal-panel time {
   float: right;
@@ -257,7 +259,7 @@ footer a:hover {
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .toolbar {
@@ -280,7 +282,7 @@ footer a:hover {
   padding: 0 14px;
   border: 1px solid var(--line);
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
 }
 .search-box span {
   font-family: ui-monospace, monospace;
@@ -308,7 +310,7 @@ footer a:hover {
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  font-size: 11px;
+  font-size: 13px;
 }
 .segment button[aria-pressed="true"] {
   background: var(--accent-soft);
@@ -318,7 +320,7 @@ footer a:hover {
   margin: 20px 0;
   color: var(--muted);
   font:
-    11px/1 ui-monospace,
+    13px/1.4 ui-monospace,
     monospace;
 }
 .model-grid {
@@ -347,7 +349,7 @@ footer a:hover {
   margin: 0 0 9px;
   color: var(--accent);
   font:
-    600 10px/1 ui-monospace,
+    600 12px/1.2 ui-monospace,
     monospace;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -360,7 +362,7 @@ footer a:hover {
 code {
   color: #98aea5;
   font:
-    11px/1.5 ui-monospace,
+    13px/1.6 ui-monospace,
     SFMono-Regular,
     Consolas,
     monospace;
@@ -370,7 +372,7 @@ code {
   padding: 6px 8px;
   border: 1px solid;
   font:
-    600 9px/1 ui-monospace,
+    600 11px/1 ui-monospace,
     monospace;
   white-space: nowrap;
 }
@@ -406,13 +408,13 @@ code {
 .price-grid span {
   display: block;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 .limits strong {
   display: block;
   margin-top: 6px;
   font:
-    500 15px/1 ui-monospace,
+    500 16px/1 ui-monospace,
     monospace;
 }
 .price-panel {
@@ -423,14 +425,14 @@ code {
   display: flex;
   justify-content: space-between;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
 }
 .price-label em {
   padding: 3px 6px;
   color: var(--warning);
   background: rgba(246, 189, 96, 0.08);
   font:
-    9px/1 ui-monospace,
+    11px/1.2 ui-monospace,
     monospace;
   font-style: normal;
 }
@@ -455,11 +457,11 @@ code {
   display: inline-block;
   margin-top: 15px;
   color: var(--accent);
-  font-size: 10px;
+  font-size: 12px;
 }
 .no-price {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 .card-footer {
   padding: 18px 24px 22px;
@@ -474,14 +476,14 @@ code {
   padding: 5px 7px;
   color: #a9bbb5;
   background: rgba(116, 151, 138, 0.08);
-  font-size: 9px;
+  font-size: 11px;
 }
 .aliases,
 .difference {
   margin: 14px 0 0;
   color: var(--muted);
-  font-size: 10px;
-  line-height: 1.6;
+  font-size: 12px;
+  line-height: 1.7;
 }
 .difference {
   color: var(--warning);
@@ -508,18 +510,18 @@ code {
 .method-grid span {
   color: var(--accent);
   font:
-    11px/1 ui-monospace,
+    12px/1 ui-monospace,
     monospace;
 }
 .method-grid h3 {
   margin: 42px 0 12px;
-  font-size: 18px;
+  font-size: 20px;
 }
 .method-grid p {
   margin: 0;
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.75;
 }
 
 footer {
@@ -530,7 +532,7 @@ footer {
   padding: 34px 0 44px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
 }
 .loading-shell,
 .error-shell {
@@ -541,7 +543,7 @@ footer {
   gap: 12px;
   color: var(--muted);
   font:
-    12px/1 ui-monospace,
+    14px/1.4 ui-monospace,
     monospace;
 }
 .loading-dot {
