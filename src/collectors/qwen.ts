@@ -186,6 +186,21 @@ export function isQwenDatedSnapshot(id: string): boolean {
   return /-(?:\d{4}|\d{8}|\d{4}-\d{2}-\d{2})$/.test(id);
 }
 
+export function isQwenOpenSourceModel(
+  displayName: string | undefined,
+  explicitlyOpenSource = false,
+): boolean {
+  return explicitlyOpenSource || displayName?.includes("开源模型") === true;
+}
+
+export function isExcludedQwenCategory(id: string): boolean {
+  return /(?:^|-)(?:ocr|character|tts|vl|math)(?:-|$)/i.test(id);
+}
+
+export function isLegacyQwenModel(id: string): boolean {
+  return /^qwen-/i.test(id);
+}
+
 function qwenModelId(model: QwenRawModel): string | undefined {
   return model.ModelAlias || model.Model || undefined;
 }
@@ -200,7 +215,12 @@ export function parseQwenDetails(
       return Boolean(
         id?.toLowerCase().startsWith("qwen") &&
         !isQwenDatedSnapshot(id) &&
-        model.OpenSource !== true,
+        !isExcludedQwenCategory(id) &&
+        !isLegacyQwenModel(id) &&
+        !isQwenOpenSourceModel(
+          model.GroupModel ?? model.Name,
+          model.OpenSource === true,
+        ),
       );
     })
     .flatMap<ModelData>((model) => {

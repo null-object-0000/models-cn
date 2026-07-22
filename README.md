@@ -78,7 +78,7 @@ const outputLimit =
 | Kimi 国内版 | `kimi-*` 系列 |   ✅   |    —     |    ✅    |    ✅    |
 | 千问国内版  | `qwen*` 系列  |   ✅   |    —     |    ✅    |    —     |
 
-项目只收录厂商自研模型。`moonshot-cn` 明确表示 **Kimi 国内版（Kimi China）**，国际版暂未接入；同时会过滤不在当前范围内的 `moonshot-v1-*`。`qwen-cn` 明确表示 **千问国内版（Qwen China）**，只保留千问模型市场中 `Provider=qwen` 的闭源稳定模型、国内 DashScope 地址和人民币价格，不收录开源模型及带日期后缀的快照版本。平台托管的第三方模型、国际版和聚合平台价格都不在范围内。
+项目只收录厂商自研模型。`moonshot-cn` 明确表示 **Kimi 国内版（Kimi China）**，国际版暂未接入；同时会过滤不在当前范围内的 `moonshot-v1-*`。`qwen-cn` 明确表示 **千问国内版（Qwen China）**，只保留千问模型市场中 `Provider=qwen` 的闭源稳定模型、国内 DashScope 地址和人民币价格；官方外显名称包含“开源模型”、官方开源标记为真的模型、带日期后缀的快照版本、没有代际版本号的旧 `qwen-*` 型号，以及 OCR、Character、TTS、VL、Math 类模型均不收录。平台托管的第三方模型、国际版和聚合平台价格都不在范围内。
 
 ## Agent 快速接入
 
@@ -178,7 +178,7 @@ Kimi 的最大输出长度与输入共享上下文窗口：K3 为 `1,048,576 - p
 - [国内版模型市场](https://www.qianwenai.com/models)
 - [Qwen3.7-Plus 模型详情](https://www.qianwenai.com/models/qwen3.7-plus)
 
-千问模型市场的数据由页面运行后动态加载。采集器使用浏览器拦截官方模型列表请求，再读取 `Provider=qwen` 系列的详情和人民币分档价格；不采集市场中的第三方模型、开源模型或带日期后缀的快照版本。
+千问模型市场的数据由页面运行后动态加载。采集器使用浏览器拦截官方模型列表请求，再读取 `Provider=qwen` 系列的详情和人民币分档价格；不采集市场中的第三方模型、开源模型、带日期后缀的快照版本、没有代际版本号的旧 `qwen-*` 型号，以及 OCR、Character、TTS、VL、Math 类模型。
 
 </details>
 

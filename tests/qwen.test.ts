@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
   collectQwen,
+  isExcludedQwenCategory,
+  isLegacyQwenModel,
   isQwenDatedSnapshot,
+  isQwenOpenSourceModel,
   parseQwenDetails,
   type QwenCapturedData,
 } from "../src/collectors/qwen.js";
@@ -153,11 +156,73 @@ const qwenDetail = {
           },
         ],
       },
+      {
+        GroupModel: "Qwen3.6开源模型",
+        Model: "qwen3.6-27b",
+        OpenSource: false,
+        ModelInfo: { ContextWindow: 262_144 },
+        Prices: [
+          {
+            Type: "input_token",
+            PriceUnit: "每百万tokens",
+            Price: "0.5",
+          },
+          {
+            Type: "output_token",
+            PriceUnit: "每百万tokens",
+            Price: "2",
+          },
+        ],
+      },
+      {
+        GroupModel: "Qwen3-Coder开源模型",
+        Model: "qwen3-coder-next",
+        ModelInfo: { ContextWindow: 262_144 },
+        Prices: [
+          {
+            Type: "input_token",
+            PriceUnit: "每百万tokens",
+            Price: "0.5",
+          },
+          {
+            Type: "output_token",
+            PriceUnit: "每百万tokens",
+            Price: "2",
+          },
+        ],
+      },
     ],
   },
 };
 
 describe("Qwen China collector", () => {
+  it("recognizes the official open-source display-name category", () => {
+    expect(isQwenOpenSourceModel("Qwen3.6开源模型", false)).toBe(true);
+    expect(isQwenOpenSourceModel("Qwen3开源模型")).toBe(true);
+    expect(isQwenOpenSourceModel("Qwen3.7-Max")).toBe(false);
+    expect(isQwenOpenSourceModel("Qwen3.6-Plus")).toBe(false);
+    expect(isQwenOpenSourceModel(undefined, true)).toBe(true);
+  });
+
+  it("excludes model categories that are outside the current scope", () => {
+    expect(isExcludedQwenCategory("qwen3.5-ocr")).toBe(true);
+    expect(isExcludedQwenCategory("qwen-flash-character")).toBe(true);
+    expect(isExcludedQwenCategory("qwen-tts-realtime-latest")).toBe(true);
+    expect(isExcludedQwenCategory("qwen3-vl-plus")).toBe(true);
+    expect(isExcludedQwenCategory("qwen-math-plus")).toBe(true);
+    expect(isExcludedQwenCategory("qwen3-coder-plus")).toBe(false);
+    expect(isExcludedQwenCategory("qwen3.7-max-preview")).toBe(false);
+  });
+
+  it("excludes legacy Qwen models without a generation number", () => {
+    expect(isLegacyQwenModel("qwen-flash")).toBe(true);
+    expect(isLegacyQwenModel("qwen-plus-latest")).toBe(true);
+    expect(isLegacyQwenModel("qwen-long")).toBe(true);
+    expect(isLegacyQwenModel("qwen-coder-plus")).toBe(true);
+    expect(isLegacyQwenModel("qwen3-coder-plus")).toBe(false);
+    expect(isLegacyQwenModel("qwen3.7-plus")).toBe(false);
+  });
+
   it("parses official tiered CNY prices and model metadata", () => {
     const parsed = parseQwenDetails([qwenDetail]);
     expect(parsed.models).toHaveLength(2);
