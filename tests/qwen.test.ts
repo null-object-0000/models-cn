@@ -111,6 +111,31 @@ const qwenDetail = {
         ],
       },
       {
+        GroupModel: "Qwen3.7-Max",
+        Name: "Qwen3.7-Max Preview",
+        ModelAlias: "qwen3.7-max-preview",
+        ModelInfo: {
+          ContextWindow: 1_000_000,
+          MaxOutputTokens: 65_536,
+        },
+        InferenceMetadata: {
+          RequestModality: ["Text"],
+          ResponseModality: ["Text"],
+        },
+        Prices: [
+          {
+            Type: "input_token",
+            PriceUnit: "每百万tokens",
+            Price: "12",
+          },
+          {
+            Type: "output_token",
+            PriceUnit: "每百万tokens",
+            Price: "36",
+          },
+        ],
+      },
+      {
         Name: "Third-party model",
         ModelAlias: "third-party-model",
         ModelInfo: { ContextWindow: 32_000 },

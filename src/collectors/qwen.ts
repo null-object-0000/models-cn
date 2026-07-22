@@ -296,7 +296,11 @@ export function parseQwenDetails(
       byId.set(model.id, model);
     }
   }
-  const models = [...byId.values()];
+  const models = [...byId.values()].filter((model) => {
+    if (!model.id.endsWith("-preview")) return true;
+    const stable = byId.get(model.id.slice(0, -"-preview".length));
+    return !stable || stable.name !== model.name;
+  });
   return {
     models,
     normalizedContent: JSON.stringify(rawModels),
