@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { chromium, type APIRequestContext, type Request } from "playwright";
 import type { ModelData, ModelPrice, ProviderData, Source } from "../types.js";
+import { SCHEMA_VERSION } from "../types.js";
 import { healthyHealth } from "../health.js";
 
 export const QWEN_MODELS_URL = "https://www.qianwenai.com/models";
@@ -465,7 +466,7 @@ export async function collectQwen(
     },
   ];
   return {
-    schemaVersion: "2.0",
+    schemaVersion: SCHEMA_VERSION,
     health: healthyHealth(now),
     id: "qwen-cn",
     name: "Qwen China",

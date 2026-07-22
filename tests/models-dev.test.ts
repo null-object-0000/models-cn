@@ -7,7 +7,7 @@ import type { ProviderData } from "../src/types.js";
 import { healthyHealth } from "../src/health.js";
 
 const longcat: ProviderData = {
-  schemaVersion: "2.0",
+  schemaVersion: "1.0",
   health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
   id: "longcat",
   name: "LongCat",
@@ -42,7 +42,7 @@ const longcat: ProviderData = {
 };
 
 const kimiChina: ProviderData = {
-  schemaVersion: "2.0",
+  schemaVersion: "1.0",
   health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
   id: "moonshot-cn",
   name: "Kimi China",
@@ -62,7 +62,7 @@ const kimiChina: ProviderData = {
 };
 
 const qwenChina: ProviderData = {
-  schemaVersion: "2.0",
+  schemaVersion: "1.0",
   health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
   id: "qwen-cn",
   name: "Qwen China",

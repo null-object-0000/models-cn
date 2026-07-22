@@ -1,5 +1,6 @@
 export type Currency = "CNY" | "USD";
 export type Market = "china" | "international";
+export const SCHEMA_VERSION = "1.0" as const;
 
 export interface ProviderHealth {
   status: "healthy" | "stale" | "error";
@@ -70,7 +71,7 @@ export interface ModelData {
 }
 
 export interface ProviderData {
-  schemaVersion: "2.0";
+  schemaVersion: typeof SCHEMA_VERSION;
   id: string;
   name: string;
   displayNames?: {
@@ -88,7 +89,7 @@ export interface ProviderData {
 }
 
 export interface Catalog {
-  schemaVersion: "2.0";
+  schemaVersion: typeof SCHEMA_VERSION;
   providers: ProviderData[];
   inventories?: ProviderInventory[];
   calibration?: {

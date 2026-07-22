@@ -61,7 +61,7 @@ Provider Schema：https://raw.githubusercontent.com/null-object-0000/models-cn/m
 - Calibration Schema：https://raw.githubusercontent.com/null-object-0000/models-cn/main/schema/calibration.schema.json
 
 数据解释规则：
-- 当前 Catalog 和 Provider 的 schemaVersion 为 2.0；价格输入字段使用 input.standard，不再使用 1.x 的 input.cacheMiss。
+- 当前 Catalog、Provider、Inventory 和 Calibration 的 `schemaVersion` 均为 `1.0`；价格输入字段使用 `input.standard`，缓存命中价格仅在 `input.cacheHit` 存在时处理。
 - providers 是官方数据，拥有最高优先级。
 - inventories 是官方 Models API 清单和对比结果，只用于可用性提示。
 - calibration.modelsDev 是交叉校准结果，只用于展示 match、mismatch、partial、missing。

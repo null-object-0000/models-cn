@@ -1,6 +1,6 @@
 # API 兼容性与版本策略
 
-models-cn 的公开 API 主版本与 JSON 文档内部的 `schemaVersion` 分别管理：URL 中的 `/v1/` 表示公开 API 兼容性承诺，`schemaVersion: "2.0"` 表示当前数据结构修订。二者不要求数字相同。
+models-cn 的公开 API 主版本与 JSON 文档内部的 `schemaVersion` 分别管理。首个公开 API 和当前数据契约均为 v1，因此 URL 使用 `/v1/`，JSON 文档使用 `schemaVersion: "1.0"`；项目软件版本则独立记录在 `package.json` 中。
 
 ## 稳定地址
 
@@ -38,7 +38,7 @@ models-cn 的公开 API 主版本与 JSON 文档内部的 `schemaVersion` 分别
 3. 提供替代字段和迁移示例。
 4. 仅在下一个 major 版本删除；旧 major 版本仍按至少 6 个月的保留期提供。
 
-当前已知历史迁移：数据 Schema 2.0 将 `input.cacheMiss` 更名为 `input.standard`。v1 API 从首次稳定发布起只承诺 `input.standard`，不会重新引入 `input.cacheMiss`。
+v1 数据契约从首次公开发布起使用 `input.standard` 表示普通输入价格，并仅在厂商明确提供缓存命中价格时提供 `input.cacheHit`。
 
 ## 数据健康语义
 

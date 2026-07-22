@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "1.0",
   "providers": [
     {
-      "schemaVersion": "2.0",
+      "schemaVersion": "1.0",
       "id": "deepseek",
       "health": {
         "status": "healthy",
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "schemaVersion": "2.0",
+      "schemaVersion": "1.0",
       "id": "longcat",
       "health": {
         "status": "healthy",
@@ -279,7 +279,7 @@
       ]
     },
     {
-      "schemaVersion": "2.0",
+      "schemaVersion": "1.0",
       "id": "moonshot-cn",
       "health": {
         "status": "healthy",
@@ -589,7 +589,7 @@
       ]
     },
     {
-      "schemaVersion": "2.0",
+      "schemaVersion": "1.0",
       "id": "qwen-cn",
       "health": {
         "status": "healthy",

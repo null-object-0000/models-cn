@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import type { ModelData, ModelPrice, ProviderData, Source } from "../types.js";
+import { SCHEMA_VERSION } from "../types.js";
 import { healthyHealth } from "../health.js";
 
 export const MOONSHOT_PRICING_SOURCES = [
@@ -268,7 +269,7 @@ export async function collectMoonshot(
     throw new Error("Kimi pricing pages contain duplicate model IDs");
   }
   return {
-    schemaVersion: "2.0",
+    schemaVersion: SCHEMA_VERSION,
     health: healthyHealth(now),
     id: "moonshot-cn",
     name: "Kimi China",

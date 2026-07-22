@@ -32,6 +32,8 @@ src/collectors/example.ts
 采集器应导出：
 
 ```ts
+import { SCHEMA_VERSION, type ProviderData } from "../types.js";
+
 export async function collectExample(): Promise<ProviderData>;
 ```
 
@@ -39,7 +41,7 @@ export async function collectExample(): Promise<ProviderData>;
 
 ```ts
 return {
-  schemaVersion: "2.0",
+  schemaVersion: SCHEMA_VERSION,
   id: "example-cn",
   name: "Example China",
   displayNames: {

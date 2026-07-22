@@ -10,7 +10,7 @@ import { healthyHealth } from "../src/health.js";
 
 function provider(output: number): ProviderData {
   return {
-    schemaVersion: "2.0",
+    schemaVersion: "1.0",
     id: "moonshot-cn",
     name: "Kimi China",
     ownedBy: "moonshot",
@@ -52,10 +52,10 @@ function provider(output: number): ProviderData {
 describe("automated update report", () => {
   it("reports field-level price changes and source health", () => {
     const before: Catalog = {
-      schemaVersion: "2.0",
+      schemaVersion: "1.0",
       providers: [provider(100)],
     };
-    const after: Catalog = { schemaVersion: "2.0", providers: [provider(80)] };
+    const after: Catalog = { schemaVersion: "1.0", providers: [provider(80)] };
     expect(diffCatalog(before, after).prices).toHaveLength(1);
     const report = renderUpdateReport(before, after);
     expect(report).toContain("- 价格变化：1");
@@ -69,20 +69,20 @@ describe("automated update report", () => {
 
   it("ignores successful timestamp-only refreshes", () => {
     const before: Catalog = {
-      schemaVersion: "2.0",
+      schemaVersion: "1.0",
       providers: [provider(80)],
     };
     const refreshed = provider(80);
     refreshed.health.lastAttemptAt = "2026-07-22T07:17:00Z";
     refreshed.health.lastSuccessfulAt = "2026-07-22T07:17:00Z";
     refreshed.sources[0]!.retrievedAt = "2026-07-22T07:17:00Z";
-    const after: Catalog = { schemaVersion: "2.0", providers: [refreshed] };
+    const after: Catalog = { schemaVersion: "1.0", providers: [refreshed] };
     expect(hasMaterialCatalogChanges(before, after)).toBe(false);
   });
 
   it("treats health state changes as material", () => {
     const before: Catalog = {
-      schemaVersion: "2.0",
+      schemaVersion: "1.0",
       providers: [provider(80)],
     };
     const failed = provider(80);
@@ -92,7 +92,7 @@ describe("automated update report", () => {
       consecutiveFailures: 1,
       message: "HTTP 503",
     };
-    const after: Catalog = { schemaVersion: "2.0", providers: [failed] };
+    const after: Catalog = { schemaVersion: "1.0", providers: [failed] };
     expect(hasMaterialCatalogChanges(before, after)).toBe(true);
   });
 
@@ -115,8 +115,8 @@ describe("automated update report", () => {
       message: "HTTP 503",
     };
     newProvider.sources[0]!.url = "https://platform.kimi.com/docs/pricing/v2";
-    const before: Catalog = { schemaVersion: "2.0", providers: [oldProvider] };
-    const after: Catalog = { schemaVersion: "2.0", providers: [newProvider] };
+    const before: Catalog = { schemaVersion: "1.0", providers: [oldProvider] };
+    const after: Catalog = { schemaVersion: "1.0", providers: [newProvider] };
     (after as unknown as { schemaVersion: string }).schemaVersion = "3.0";
     const risks = highRiskWarnings(before, after);
     expect(risks).toEqual(

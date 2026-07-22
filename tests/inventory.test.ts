@@ -8,7 +8,7 @@ import type { ProviderData } from "../src/types.js";
 import { healthyHealth } from "../src/health.js";
 
 const deepseek: ProviderData = {
-  schemaVersion: "2.0",
+  schemaVersion: "1.0",
   health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
   id: "deepseek",
   name: "DeepSeek",
@@ -96,7 +96,7 @@ describe("provider model inventory", () => {
       await readFile("tests/fixtures/moonshot-models.json", "utf8"),
     );
     const moonshot: ProviderData = {
-      schemaVersion: "2.0",
+      schemaVersion: "1.0",
       health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
       id: "moonshot-cn",
       name: "Kimi China",

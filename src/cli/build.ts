@@ -15,11 +15,31 @@ import type {
   ProviderData,
   ProviderInventory,
 } from "../types.js";
+import { SCHEMA_VERSION } from "../types.js";
 import {
   validateCalibration,
   validateInventory,
   validateProvider,
 } from "../validation.js";
+
+const schemaFiles = [
+  "provider.schema.json",
+  "inventory.schema.json",
+  "calibration.schema.json",
+];
+for (const schemaFile of schemaFiles) {
+  const source = await readFile(
+    path.join(rootDir, "schema", "v1", schemaFile),
+    "utf8",
+  );
+  const latest = source.replace(
+    `https://models-cn.dev/schema/v1/${schemaFile}`,
+    `https://models-cn.dev/schema/${schemaFile}`,
+  );
+  if (source === latest)
+    throw new Error(`Cannot publish schema/v1/${schemaFile} as latest`);
+  await writeFile(path.join(rootDir, "schema", schemaFile), latest, "utf8");
+}
 
 const files = (await readdir(providersDir))
   .filter((file) => file.endsWith(".json"))
@@ -53,7 +73,7 @@ try {
   if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
 }
 const catalog: Catalog = {
-  schemaVersion: "2.0",
+  schemaVersion: SCHEMA_VERSION,
   providers,
   ...(inventories?.length ? { inventories } : {}),
   ...(modelsDev ? { calibration: { modelsDev } } : {}),
@@ -61,26 +81,4 @@ const catalog: Catalog = {
 await writeJson(path.join(rootDir, "api.json"), catalog);
 await mkdir(path.join(rootDir, "v1"), { recursive: true });
 await writeJson(path.join(rootDir, "v1", "api.json"), catalog);
-await mkdir(path.join(rootDir, "schema", "v1"), { recursive: true });
-for (const schemaFile of [
-  "provider.schema.json",
-  "inventory.schema.json",
-  "calibration.schema.json",
-]) {
-  const source = await readFile(
-    path.join(rootDir, "schema", schemaFile),
-    "utf8",
-  );
-  const versioned = source.replace(
-    `https://models-cn.dev/schema/${schemaFile}`,
-    `https://models-cn.dev/schema/v1/${schemaFile}`,
-  );
-  if (source === versioned)
-    throw new Error(`Cannot version schema/${schemaFile}`);
-  await writeFile(
-    path.join(rootDir, "schema", "v1", schemaFile),
-    versioned,
-    "utf8",
-  );
-}
 console.log(`Built api.json with ${providers.length} provider(s)`);

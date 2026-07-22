@@ -127,7 +127,7 @@ const outputLimit =
 - `inputTokenRange` 表示按输入 Token 数分档的价格；缺失时表示该价格不分输入长度档位。
 - `input.standard` 是普通输入价格；没有独立缓存计费规则时，它适用于全部输入 Token。
 - `input.cacheHit` 仅在厂商明确设置缓存命中计费规则时提供。字段缺失表示“不存在该计费维度”，不是价格未公开。
-- 本字段约定自 `schemaVersion: "2.0"` 起生效；旧版 `input.cacheMiss` 已更名为 `input.standard`，避免暗示所有模型都存在缓存计费。
+- 当前数据契约版本为 `schemaVersion: "1.0"`。
 - 官网模型默认按发布时间倒序排列：优先使用厂商官方 `createdAt`，缺失时读取 models.dev 校准数据中的 `release_date`，仍缺失的排在最后。
 - `maxOutputTokens` 等非必填字段缺失时，可使用 models.dev 对应参考值补全；models.dev 也没有时应显示“未公开”，不能自行推断。
 - `sourceUrl`、`retrievedAt` 和 `contentHash` 用于追溯数据来源与变化。
