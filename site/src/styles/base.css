@@ -7,12 +7,13 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  min-height: 100vh;
+  color: var(--text);
   background-color: var(--bg);
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 44px 44px;
-  color: var(--text);
+  background-size: 43px 43px;
   font-size: 16px;
   line-height: 1.6;
 }
@@ -21,76 +22,86 @@ a {
   text-decoration: none;
 }
 button,
-input {
+input,
+select {
   font: inherit;
 }
-button {
-  color: inherit;
+button,
+a,
+select {
+  -webkit-tap-highlight-color: transparent;
 }
-
-.site-header,
-main,
-footer {
-  width: min(1180px, calc(100% - 48px));
+.shell {
+  width: min(1240px, calc(100% - 36px));
   margin-inline: auto;
 }
+code {
+  color: var(--code);
+  font:
+    13px/1.5 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+
 .site-header {
-  height: 76px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: blur(12px);
+}
+.header-inner {
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--line);
-  position: relative;
-  z-index: 5;
+  gap: 20px;
 }
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font:
-    650 16px/1 ui-monospace,
+    700 15px/1 ui-monospace,
     SFMono-Regular,
     Consolas,
     monospace;
   letter-spacing: -0.02em;
 }
 .brand-mark {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   display: inline-block;
-  border: 1px solid var(--accent);
-  box-shadow: inset 4px -4px 0 var(--accent);
+  border: 2px solid var(--accent);
+  box-shadow: inset 5px 0 0 var(--accent);
 }
+.header-actions,
 nav {
   display: flex;
-  gap: 28px;
-  color: var(--muted);
-  font-size: 14px;
-}
-.header-actions {
-  display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 8px;
 }
+nav a,
 .theme-switch {
-  display: flex;
-  padding: 3px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-}
-.theme-switch button {
-  padding: 6px 9px;
-  border: 0;
-  color: var(--muted);
+  border: 1px solid transparent;
   background: transparent;
-  font-size: 12px;
+  color: var(--muted);
+  padding: 9px 11px;
   cursor: pointer;
 }
-.theme-switch button[aria-pressed="true"] {
+nav a:hover,
+.theme-switch:hover {
+  color: var(--text);
+  border-color: var(--line);
+}
+nav a.active {
   color: var(--accent);
   background: var(--accent-soft);
 }
-nav a:hover,
-footer a:hover {
-  color: var(--accent);
+.theme-switch {
+  font:
+    600 13px/1 ui-monospace,
+    monospace;
 }

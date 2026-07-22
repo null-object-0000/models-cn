@@ -2,6 +2,14 @@ export type Currency = "CNY" | "USD";
 export type RateType = "standard" | "promotional";
 export type ThemePreference = "system" | "light" | "dark";
 
+export interface ProviderHealth {
+  status: "healthy" | "stale" | "error";
+  lastSuccessfulAt: string;
+  lastAttemptAt: string;
+  consecutiveFailures: number;
+  message?: string;
+}
+
 export interface Price {
   market: string;
   currency: Currency;
@@ -35,6 +43,7 @@ export interface Provider {
   id: string;
   name: string;
   displayNames?: { "zh-CN": string; en: string };
+  health: ProviderHealth;
   models: Model[];
   sources: Array<{ url: string; retrievedAt: string; kind: string }>;
 }
@@ -54,6 +63,7 @@ export interface CalibrationModel {
 
 export interface Inventory {
   provider: string;
+  health: ProviderHealth;
   source: { retrievedAt: string };
   comparison: {
     status: "match" | "mismatch";
@@ -65,5 +75,7 @@ export interface Inventory {
 export interface Catalog {
   providers: Provider[];
   inventories?: Inventory[];
-  calibration?: { modelsDev: { models: CalibrationModel[] } };
+  calibration?: {
+    modelsDev: { health: ProviderHealth; models: CalibrationModel[] };
+  };
 }

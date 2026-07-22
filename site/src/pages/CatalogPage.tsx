@@ -10,10 +10,29 @@ import type { Catalog } from "../types";
 export function CatalogPage({ catalog }: { catalog: Catalog }) {
   const [theme, setTheme] = useTheme();
   const stats = useMemo<HeroStats>(() => {
-    const dates = catalog.providers.flatMap((provider) =>
-      provider.sources.map((source) => source.retrievedAt),
+    const staleAfterMs = 36 * 60 * 60 * 1000;
+    const healthRecords = [
+      ...catalog.providers.map((provider) => provider.health),
+      ...(catalog.inventories ?? []).map((inventory) => inventory.health),
+      ...(catalog.calibration?.modelsDev.health
+        ? [catalog.calibration.modelsDev.health]
+        : []),
+    ].map((health) =>
+      health.status === "healthy" &&
+      Date.now() - Date.parse(health.lastAttemptAt) > staleAfterMs
+        ? { ...health, status: "stale" as const }
+        : health,
     );
+    const dates = healthRecords.map((health) => health.lastAttemptAt);
     const latest = dates.sort().at(-1);
+    const failedSources = healthRecords.filter(
+      (health) => health.status !== "healthy",
+    ).length;
+    const health = healthRecords.some((item) => item.status === "error")
+      ? "error"
+      : healthRecords.some((item) => item.status === "stale")
+        ? "stale"
+        : "healthy";
     return {
       providers: catalog.providers.length,
       models: catalog.providers.reduce(
@@ -29,6 +48,8 @@ export function CatalogPage({ catalog }: { catalog: Catalog }) {
           (inventory) => inventory.comparison.status === "match",
         ).length ?? 0,
       inventories: catalog.inventories?.length ?? 0,
+      health,
+      failedSources,
       ...(latest ? { latest } : {}),
     };
   }, [catalog]);
