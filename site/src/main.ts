@@ -2,6 +2,7 @@ import "./styles.css";
 
 type Currency = "CNY" | "USD";
 type RateType = "standard" | "promotional";
+type ThemePreference = "system" | "light" | "dark";
 
 interface Price {
   market: string;
@@ -66,6 +67,39 @@ const app = document.querySelector<HTMLDivElement>("#app")!;
 let currency: Currency = "CNY";
 let rateType: RateType = "promotional";
 let search = "";
+const themeMedia = matchMedia("(prefers-color-scheme: dark)");
+const themeStorageKey = "models-cn-theme";
+
+function readThemePreference(): ThemePreference {
+  try {
+    const value = localStorage.getItem(themeStorageKey);
+    return value === "light" || value === "dark" || value === "system"
+      ? value
+      : "system";
+  } catch {
+    return "system";
+  }
+}
+
+let themePreference = readThemePreference();
+
+function applyTheme(): void {
+  const theme =
+    themePreference === "system"
+      ? themeMedia.matches
+        ? "dark"
+        : "light"
+      : themePreference;
+  document.documentElement.dataset.theme = theme;
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute("content", theme === "dark" ? "#07110f" : "#f4f8f6");
+}
+
+applyTheme();
+themeMedia.addEventListener("change", () => {
+  if (themePreference === "system") applyTheme();
+});
 
 const number = new Intl.NumberFormat("zh-CN");
 
@@ -127,7 +161,7 @@ function calibrationBadge(calibration?: CalibrationModel): string {
   return `<a class="status status-${calibration.status}" href="${escapeHtml(calibration.referenceUrl)}" target="_blank" rel="noreferrer">${labels[calibration.status]}</a>`;
 }
 
-function modelCard(catalog: Catalog, provider: Provider, model: Model): string {
+function modelRow(catalog: Catalog, provider: Provider, model: Model): string {
   const selectedPrices = model.prices.filter(
     (price) => price.currency === currency,
   );
@@ -140,10 +174,9 @@ function modelCard(catalog: Catalog, provider: Provider, model: Model): string {
   );
   const capabilities = capabilityLabels(model.capabilities);
   return `
-    <article class="model-card">
+    <article class="model-row">
       <div class="model-heading">
         <div>
-          <p class="provider-label">${escapeHtml(provider.name)}</p>
           <h3>${escapeHtml(model.name)}</h3>
           <code>${escapeHtml(model.id)}</code>
         </div>
@@ -190,6 +223,14 @@ function render(catalog: Catalog): void {
       .toLowerCase()
       .includes(search.toLowerCase()),
   );
+  const providerGroups = catalog.providers
+    .map((provider) => ({
+      provider,
+      models: filtered
+        .filter((item) => item.provider.id === provider.id)
+        .map((item) => item.model),
+    }))
+    .filter((group) => group.models.length > 0);
   const updatedDates = catalog.providers.flatMap((provider) =>
     provider.sources.map((source) => source.retrievedAt),
   );
@@ -206,11 +247,18 @@ function render(catalog: Catalog): void {
   app.innerHTML = `
     <header class="site-header">
       <a class="brand" href="#top" aria-label="models-cn 首页"><span class="brand-mark"></span>models-cn</a>
-      <nav aria-label="主导航">
-        <a href="#models">模型</a>
-        <a href="#method">数据说明</a>
-        <a href="https://github.com/null-object-0000/models-cn" target="_blank" rel="noreferrer">GitHub ↗</a>
-      </nav>
+      <div class="header-actions">
+        <nav aria-label="主导航">
+          <a href="#models">模型</a>
+          <a href="#method">数据说明</a>
+          <a href="https://github.com/null-object-0000/models-cn" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </nav>
+        <div class="theme-switch" aria-label="颜色主题">
+          <button data-theme="system" aria-pressed="${themePreference === "system"}" title="跟随系统">自动</button>
+          <button data-theme="light" aria-pressed="${themePreference === "light"}" title="浅色模式">浅色</button>
+          <button data-theme="dark" aria-pressed="${themePreference === "dark"}" title="深色模式">深色</button>
+        </div>
+      </div>
     </header>
 
     <main id="top">
@@ -255,8 +303,28 @@ function render(catalog: Catalog): void {
         </div>
 
         <p class="result-count">显示 ${filtered.length} / ${models.length} 个模型</p>
-        <div class="model-grid">
-          ${filtered.length ? filtered.map(({ provider, model }) => modelCard(catalog, provider, model)).join("") : '<p class="empty-state">没有匹配的模型。</p>'}
+        <div class="provider-groups">
+          ${
+            providerGroups.length
+              ? providerGroups
+                  .map(
+                    ({ provider, models: providerModels }, index) => `
+                      <section class="provider-group" aria-labelledby="provider-${escapeHtml(provider.id)}">
+                        <div class="provider-heading">
+                          <div>
+                            <p>${String(index + 1).padStart(2, "0")} / PROVIDER</p>
+                            <h3 id="provider-${escapeHtml(provider.id)}">${escapeHtml(provider.name)}</h3>
+                          </div>
+                          <span>${providerModels.length} 个模型</span>
+                        </div>
+                        <div class="model-list">
+                          ${providerModels.map((model) => modelRow(catalog, provider, model)).join("")}
+                        </div>
+                      </section>`,
+                  )
+                  .join("")
+              : '<p class="empty-state">没有匹配的模型。</p>'
+          }
         </div>
       </section>
 
@@ -278,6 +346,20 @@ function render(catalog: Catalog): void {
       <a href="https://github.com/null-object-0000/models-cn" target="_blank" rel="noreferrer">MIT License · GitHub</a>
     </footer>`;
 
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-theme]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        themePreference = button.dataset.theme as ThemePreference;
+        try {
+          localStorage.setItem(themeStorageKey, themePreference);
+        } catch {
+          // Theme still applies for this page when storage is unavailable.
+        }
+        applyTheme();
+        render(catalog);
+      });
+    });
   document
     .querySelectorAll<HTMLButtonElement>("[data-currency]")
     .forEach((button) => {
