@@ -1,45 +1,81 @@
 # models-cn
 
-中国大陆大模型厂商官方 API 定价数据。
+> 中国大陆大模型厂商的官方 API 定价与模型信息，一份 JSON 即可接入。
 
-本项目采集厂商在中国大陆官方渠道提供的自研模型价格，不收录聚合平台或厂商托管的第三方模型。人民币价格来自中文官方定价页；厂商同时提供独立国际价格时，也会原样保留官方美元价格，不做汇率换算。
+[![Update prices](https://github.com/null-object-0000/models-cn/actions/workflows/update-prices.yml/badge.svg)](https://github.com/null-object-0000/models-cn/actions/workflows/update-prices.yml)
+[![GitHub Pages](https://github.com/null-object-0000/models-cn/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/null-object-0000/models-cn/actions/workflows/deploy-pages.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-087f5b.svg)](LICENSE)
 
-## 当前支持
+models-cn 收集中国大陆模型厂商在官方渠道提供的**自研模型人民币 API 定价**，同时维护模型能力、上下文限制、官方可用清单和 models.dev 交叉校准结果。
 
-| 厂商     | 自研模型      | CNY | USD | 基础信息 |
-| -------- | ------------- | --- | --- | -------- |
-| DeepSeek | DeepSeek 系列 | ✅  | ✅  | ✅       |
-| LongCat  | LongCat 系列  | ✅  | ✅  | ✅       |
-| Kimi     | Kimi 系列     | ✅  | —   | ✅       |
+- **官方优先**：价格来自厂商定价页，不采集聚合平台，不用汇率伪造人民币官方价。
+- **机器友好**：统一 JSON、JSON Schema、稳定字段和可追溯来源。
+- **持续更新**：GitHub Actions 定期采集，数据变化通过 Pull Request 审核。
+- **Agent 友好**：提供可直接交给 Codex、Claude Code、Cursor 等工具的接入提示词。
 
-DeepSeek 数据源：
+[浏览官网](https://null-object-0000.github.io/models-cn/) · [获取 api.json](https://null-object-0000.github.io/models-cn/api.json) · [查看 JSON Schema](schema/provider.schema.json) · [复制 Agent 接入提示词](docs/agent-integration-prompt.md)
 
-- [中文模型与价格](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)
-- [英文 Models & Pricing](https://api-docs.deepseek.com/quick_start/pricing/)
+## 30 秒开始使用
 
-LongCat 数据源：
+无需安装依赖，直接读取统一数据接口：
 
-- [中文模型与价格](https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0)
-- [英文 Models & Pricing](https://longcat.chat/platform/docs/pricing/long-cat-2.0)
-- [模型详情接口文档](https://longcat.chat/platform/docs/zh/api/model)
+```bash
+curl -L https://null-object-0000.github.io/models-cn/api.json
+```
 
-Kimi 数据源：
+在 JavaScript / TypeScript 中使用：
 
-- [模型推理价格说明](https://platform.kimi.com/docs/pricing/chat)
-- [模型参数参考](https://platform.kimi.com/docs/api/models-overview)
-- [官方模型列表接口](https://platform.kimi.com/docs/api/list-models)
+```ts
+const response = await fetch(
+  "https://null-object-0000.github.io/models-cn/api.json",
+);
+const catalog = await response.json();
 
-## 数据文件
+const provider = catalog.providers.find(
+  (item: { id: string }) => item.id === "moonshot",
+);
+const model = provider?.models.find(
+  (item: { id: string }) => item.id === "kimi-k3",
+);
+const cnyPrice = model?.prices.find(
+  (price: { currency: string; rateType: string }) =>
+    price.currency === "CNY" && price.rateType === "standard",
+);
 
-- `data/providers/deepseek.json`：DeepSeek 的规范化数据
-- `data/providers/longcat.json`：LongCat 的规范化数据
-- `data/providers/moonshot.json`：Kimi 的规范化数据
-- `data/calibration/models-dev.json`：与 models.dev 的逐字段校准结果
-- `data/inventory/{provider}.json`：官方模型列表接口返回的实时可用模型基准
-- `api.json`：所有厂商合并后的统一入口
-- `schema/provider.schema.json`：厂商数据 JSON Schema
+console.log(cnyPrice);
+// input.cacheHit / input.cacheMiss / output
+// 单位：人民币 / 1M Tokens
+```
 
-价格统一使用每百万 Token，`market` 和 `currency` 明确区分中国区人民币价与国际美元价：
+推荐使用 `provider.id + model.id` 作为模型价格的联合标识，不要只用模型名称。
+
+## 当前覆盖
+
+| 厂商     | 收录范围      | 人民币 | 官方美元 | 模型信息 | 官方清单 |
+| -------- | ------------- | :----: | :------: | :------: | :------: |
+| DeepSeek | DeepSeek 系列 |   ✅   |    ✅    |    ✅    |    ✅    |
+| LongCat  | LongCat 系列  |   ✅   |    ✅    |    ✅    |    ✅    |
+| Kimi     | `kimi-*` 系列 |   ✅   |    —     |    ✅    |    ✅    |
+
+项目只收录厂商自研模型。例如 Kimi 数据会过滤 `moonshot-v1-*`；平台托管的第三方模型和聚合平台价格不在范围内。
+
+## Agent 快速接入
+
+把下面这段话交给你的 Coding Agent，即可让它先分析项目，再完成类型定义、数据读取、价格选择、容错和测试：
+
+```text
+请按照 docs/agent-integration-prompt.md 的规则，将 models-cn 接入当前项目。
+数据地址：https://null-object-0000.github.io/models-cn/api.json
+目标：读取中国大陆模型厂商的官方价格和模型信息，并实现可测试的模型查询与费用估算能力。
+要求：官方数据优先；不得硬编码价格；不得用汇率补造缺失价格；正确处理币种、市场、标准价/优惠价、缓存价、缺失字段和 models.dev 校准差异。
+请先检查当前项目技术栈和已有模型配置，再实施修改、运行测试，并说明改动文件及使用方式。
+```
+
+完整的可定制提示词、字段规则和验收清单见 [Agent 接入提示词](docs/agent-integration-prompt.md)。
+
+## 数据约定
+
+价格统一为每百万 Token：
 
 ```json
 {
@@ -51,78 +87,124 @@ Kimi 数据源：
     "cacheHit": 0.02,
     "cacheMiss": 1
   },
-  "output": 2
+  "output": 2,
+  "sourceUrl": "https://provider.example/pricing"
 }
 ```
 
-## 本地开发
+使用时请注意：
+
+- `CNY + china` 表示中国大陆官方人民币价格。
+- `USD + international` 表示厂商独立国际渠道的官方美元价格，不是人民币换算价。
+- `standard` 是标准价；`promotional` 是厂商明确标注的优惠价。
+- `cacheHit`、`cacheMiss` 和 `output` 都是每百万 Token 的价格。
+- `maxOutputTokens` 等非必填字段缺失时，应显示“未公开”，不能自行推断。
+- `sourceUrl`、`retrievedAt` 和 `contentHash` 用于追溯数据来源与变化。
+
+## 数据可信度
+
+项目将三类数据分开保存，互不覆盖：
+
+1. **官方定价**：厂商中文或英文定价页，是价格的事实来源。
+2. **官方模型清单**：通过厂商 Models API 检查新增、下线和别名变化。
+3. **models.dev 校准**：对比美元价格、上下文、输出限制、模态和能力，只报告差异，不覆盖官方数据。
+
+模型级校准状态包括 `match`、`mismatch`、`partial` 和 `missing`。其中 `partial` 通常表示厂商未公开某些可比字段，不代表官方数据错误。
+
+<details>
+<summary>查看官方数据源</summary>
+
+### DeepSeek
+
+- [中文模型与价格](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)
+- [英文 Models & Pricing](https://api-docs.deepseek.com/quick_start/pricing/)
+
+### LongCat
+
+- [中文模型与价格](https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0)
+- [英文 Models & Pricing](https://longcat.chat/platform/docs/pricing/long-cat-2.0)
+- [模型详情接口文档](https://longcat.chat/platform/docs/zh/api/model)
+
+### Kimi
+
+- [模型推理价格说明](https://platform.kimi.com/docs/pricing/chat)
+- [模型参数参考](https://platform.kimi.com/docs/api/models-overview)
+- [官方模型列表接口](https://platform.kimi.com/docs/api/list-models)
+
+</details>
+
+## 数据文件
+
+| 路径                               | 内容                                   |
+| ---------------------------------- | -------------------------------------- |
+| `api.json`                         | 所有厂商、模型、价格、清单和校准的入口 |
+| `data/providers/{provider}.json`   | 单个厂商的规范化官方数据               |
+| `data/inventory/{provider}.json`   | 官方 Models API 可用清单及差异         |
+| `data/calibration/models-dev.json` | models.dev 逐字段校准报告              |
+| `schema/provider.schema.json`      | 厂商数据 JSON Schema                   |
+| `schema/inventory.schema.json`     | 模型清单 JSON Schema                   |
+| `schema/calibration.schema.json`   | 校准报告 JSON Schema                   |
+
+## 本地运行
 
 需要 Node.js 22+ 和 npm 10+：
 
 ```powershell
 npm install
 Copy-Item .env.example .env
-# 编辑 .env，填入新生成的 API Key
+# 编辑 .env，填入你自己新生成的 API Key
+
 npm run collect
 npm run discover
 npm run build
 npm run check
 ```
 
-LongCat 的公开文档足以完成基础采集。若希望同时调用官方模型接口校验元数据和当前价格，可在 `.env` 中设置：
-
-```dotenv
-DEEPSEEK_API_KEY=your-new-key
-LONGCAT_API_KEY=your-new-key
-MOONSHOT_API_KEY=your-new-key
-```
-
-GitHub Actions 中请将新 Key 配置为对应名称的 Repository Secret。不要将 Key 写入代码、数据文件或 Actions YAML。
-
-模型清单发现需要各厂商的 API Key，`npm run collect` 和 `npm run discover` 会自动读取项目根目录的 `.env`。系统环境变量或 GitHub Actions 注入的变量优先于 `.env`。
-
-GitHub Actions 对应使用 `DEEPSEEK_API_KEY`、`LONGCAT_API_KEY` 和 `MOONSHOT_API_KEY` 三个 Repository Secrets。未配置某个 Key 时会跳过该厂商并保留已有清单。
-
-采集器会校验官方页面结构。关键表格消失、字段缺失或价格无法解析时会直接失败，不会用空数据覆盖已有结果。标准价和限时优惠价分别以 `standard`、`promotional` 保存。只有规范化后的官方数据发生变化时，数据源的 `retrievedAt` 才会更新。
-
-## 自动更新
-
-GitHub Actions 每天检查一次官方价格。检测到数据变化后会更新 `bot/update-model-prices` 分支并创建 Pull Request，等待人工核对后合并。
-
-## 官网
-
-官网是读取 `api.json` 的纯静态页面，支持模型搜索、人民币/美元切换、标准价/优惠价切换，以及校准和模型清单状态展示。
-
-本地预览：
+本地预览官网：
 
 ```powershell
-npm run update
 npm run site:dev
 ```
 
-生产构建：
+只采集单个厂商时可以使用：
 
 ```powershell
-npm run site:build
+npm run collect -- --provider moonshot
 ```
 
-构建产物位于 `dist/site`。`.github/workflows/deploy-pages.yml` 会在 `main` 分支更新后自动构建并发布到 GitHub Pages。首次使用时，在仓库的 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。
+### 可选密钥
 
-## models.dev 校准
+公开定价页不需要密钥。官方模型清单校准需要在 `.env` 或 GitHub Repository Secrets 中配置：
 
-采集完成后会从 [models.dev API](https://models.dev/api.json) 获取对应模型的美元价格、上下文、输出上限、模态和能力信息，生成逐字段的 `match`、`mismatch` 或 `missing` 结果；模型级的 `partial` 表示部分字段因官方未披露而无法比较。校准数据只作为参考，不会覆盖厂商官方数据；models.dev 暂时不可用时，也不会阻止官方价格采集。
+```dotenv
+DEEPSEEK_API_KEY=
+LONGCAT_API_KEY=
+MOONSHOT_API_KEY=
+```
 
-## 模型清单基准
+不要把真实密钥写入代码、数据文件、日志或 Actions YAML。缺少某个密钥时，清单发现会跳过该厂商并保留已有快照。
 
-每个厂商通过官方模型列表接口维护当前可调用模型基准，并与价格采集结果比较：
+## 自动更新
 
-- `listedWithoutPricing`：API 已出现，但项目尚无价格
-- `pricedButNotListed`：价格页仍存在，但 API 已不再列出
-- `aliasesAndListed`：仍可调用的兼容别名
-- `activeAliasesNotListed`：尚未到弃用时间，但 API 已提前移除的别名
+定时任务执行以下流程：
 
-清单差异用于触发人工检查，不会自动新增、删除或改写价格记录。
+```text
+官方页面采集 → 模型清单发现 → Schema 校验 → models.dev 校准
+→ 生成 api.json → 创建更新 PR → 人工审核 → GitHub Pages 发布
+```
+
+采集器在关键表格消失、字段缺失或价格无法解析时会直接失败，不会用空数据覆盖已有结果。只有规范化内容发生变化时，对应来源的 `retrievedAt` 才会更新。
+
+## 参与贡献
+
+欢迎提交新的中国大陆模型厂商采集器、页面解析修复、Schema 改进和数据校验规则。新增厂商应满足：
+
+- 中国大陆模型厂商及其自研模型。
+- 官方公开 API 或官方定价页面。
+- 中国大陆人民币按量价格。
+- 可追溯的来源链接与采集时间。
+- 不混入聚合平台、第三方托管模型、会员订阅或无法验证的换算价格。
 
 ## License
 
-MIT
+[MIT](LICENSE)
