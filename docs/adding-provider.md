@@ -131,6 +131,8 @@ return {
 - `input.standard` 是普通输入价格。
 - `input.cacheHit` 仅在厂商明确设置独立缓存命中计费规则时提供。
 - 没有缓存计费维度时，不得生成 `cacheHit`，也不得显示为“未公开”。
+- `input.explicitCacheCreation` 和 `input.explicitCacheHit` 仅在厂商明确区分显式缓存创建、命中价格时提供；不要与 `input.cacheHit` 合并或重复计费。
+- 官方给出固定的模型级 RPM/TPM 时，分别写入 `limits.requestsPerMinute`、`limits.tokensPerMinute`。若限额随账号等级或套餐变化，则保留缺失，不把某一档账号限额写成模型固有限额。
 - 厂商明确标注的优惠价格使用独立的 `rateType: "promotional"`。
 - 按输入长度分档时使用 `inputTokenRange`。
 - 不得通过汇率换算生成官方人民币价格。

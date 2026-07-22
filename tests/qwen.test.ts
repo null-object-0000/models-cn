@@ -32,6 +32,20 @@ const qwenDetail = {
           RequestModality: ["Image", "Text", "Video"],
           ResponseModality: ["Text"],
         },
+        QpmInfo: {
+          ModelDefault: {
+            CountLimit: 1200,
+            CountLimitPeriod: 6,
+            UsageLimit: 1_500_000,
+            UsageLimitPeriod: 30,
+          },
+          ModelDefaultActual: {
+            CountLimit: 3000,
+            CountLimitPeriod: 6,
+            UsageLimit: 2_500_000,
+            UsageLimitPeriod: 30,
+          },
+        },
         MultiPrices: [
           {
             RangeName: "输入<=256k",
@@ -52,6 +66,18 @@ const qwenDetail = {
                 Type: "input_token_cache",
                 PriceUnit: "每百万tokens",
                 Price: "0.4",
+                Discount: "0.8",
+              },
+              {
+                Type: "input_token_cache_creation_5m",
+                PriceUnit: "每百万tokens",
+                Price: "2.5",
+                Discount: "0.8",
+              },
+              {
+                Type: "input_token_cache_read",
+                PriceUnit: "每百万tokens",
+                Price: "0.2",
                 Discount: "0.8",
               },
             ],
@@ -75,6 +101,18 @@ const qwenDetail = {
                 Type: "input_token_cache",
                 PriceUnit: "每百万tokens",
                 Price: "1.2",
+                Discount: "0.8",
+              },
+              {
+                Type: "input_token_cache_creation_5m",
+                PriceUnit: "每百万tokens",
+                Price: "7.5",
+                Discount: "0.8",
+              },
+              {
+                Type: "input_token_cache_read",
+                PriceUnit: "每百万tokens",
+                Price: "0.6",
                 Discount: "0.8",
               },
             ],
@@ -263,7 +301,12 @@ describe("Qwen China collector", () => {
         inputModalities: ["image", "text", "video"],
         outputModalities: ["text"],
       },
-      limits: { contextTokens: 1_000_000, maxOutputTokens: 65_536 },
+      limits: {
+        contextTokens: 1_000_000,
+        maxOutputTokens: 65_536,
+        requestsPerMinute: 30_000,
+        tokensPerMinute: 5_000_000,
+      },
     });
     expect(parsed.models[0]?.prices).toEqual([
       expect.objectContaining({
@@ -274,12 +317,22 @@ describe("Qwen China collector", () => {
           label: "输入<=256k",
           maxInclusive: 256_000,
         },
-        input: { cacheHit: 0.4, standard: 2 },
+        input: {
+          cacheHit: 0.4,
+          explicitCacheCreation: 2.5,
+          explicitCacheHit: 0.2,
+          standard: 2,
+        },
         output: 8,
       }),
       expect.objectContaining({
         rateType: "promotional",
-        input: { cacheHit: 0.32, standard: 1.6 },
+        input: {
+          cacheHit: 0.32,
+          explicitCacheCreation: 2,
+          explicitCacheHit: 0.16,
+          standard: 1.6,
+        },
         output: 6.4,
       }),
       expect.objectContaining({
@@ -289,12 +342,22 @@ describe("Qwen China collector", () => {
           minExclusive: 256_000,
           maxInclusive: 1_000_000,
         },
-        input: { cacheHit: 1.2, standard: 6 },
+        input: {
+          cacheHit: 1.2,
+          explicitCacheCreation: 7.5,
+          explicitCacheHit: 0.6,
+          standard: 6,
+        },
         output: 24,
       }),
       expect.objectContaining({
         rateType: "promotional",
-        input: { cacheHit: 0.96, standard: 4.8 },
+        input: {
+          cacheHit: 0.96,
+          explicitCacheCreation: 6,
+          explicitCacheHit: 0.48,
+          standard: 4.8,
+        },
         output: 19.2,
       }),
     ]);

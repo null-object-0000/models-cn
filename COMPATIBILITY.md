@@ -38,7 +38,7 @@ models-cn 的公开 API 主版本与 JSON 文档内部的 `schemaVersion` 分别
 3. 提供替代字段和迁移示例。
 4. 仅在下一个 major 版本删除；旧 major 版本仍按至少 6 个月的保留期提供。
 
-v1 数据契约从首次公开发布起使用 `input.standard` 表示普通输入价格，并仅在厂商明确提供缓存命中价格时提供 `input.cacheHit`。
+v1 数据契约从首次公开发布起使用 `input.standard` 表示普通输入价格，并仅在厂商明确提供缓存命中价格时提供 `input.cacheHit`。后续新增的 `input.explicitCacheCreation`、`input.explicitCacheHit`、`limits.requestsPerMinute` 和 `limits.tokensPerMinute` 均为可选字段，`schemaVersion` 仍为 `1.0`；旧客户端应按 Schema 的可选字段规则忽略未知字段。
 
 ## 数据健康语义
 

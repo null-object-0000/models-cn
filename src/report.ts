@@ -268,14 +268,18 @@ export function diffCatalog(before: Catalog, after: Catalog): CatalogDiff {
       for (const field of [
         "input.standard",
         "input.cacheHit",
+        "input.explicitCacheCreation",
+        "input.explicitCacheHit",
         "output",
       ] as const) {
-        const read = (price: ModelPrice | undefined) =>
-          field === "output"
-            ? price?.output
-            : field === "input.standard"
-              ? price?.input.standard
-              : price?.input.cacheHit;
+        const read = (price: ModelPrice | undefined) => {
+          if (field === "output") return price?.output;
+          if (field === "input.standard") return price?.input.standard;
+          if (field === "input.cacheHit") return price?.input.cacheHit;
+          if (field === "input.explicitCacheCreation")
+            return price?.input.explicitCacheCreation;
+          return price?.input.explicitCacheHit;
+        };
         if (!same(read(oldPrice), read(newPrice))) {
           const currency = newPrice?.currency ?? oldPrice?.currency;
           prices.push({

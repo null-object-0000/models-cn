@@ -37,6 +37,8 @@ export interface ModelPrice {
   };
   input: {
     cacheHit?: number;
+    explicitCacheCreation?: number;
+    explicitCacheHit?: number;
     standard: number;
   };
   output: number;
@@ -66,6 +68,8 @@ export interface ModelData {
     contextTokens: number;
     maxOutputTokens?: number;
     concurrency?: number;
+    requestsPerMinute?: number;
+    tokensPerMinute?: number;
   };
   prices: ModelPrice[];
 }

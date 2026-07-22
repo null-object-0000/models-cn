@@ -1,4 +1,4 @@
-import { Fragment, type KeyboardEvent, type MouseEvent } from "react";
+import { Fragment, useState, type KeyboardEvent, type MouseEvent } from "react";
 import {
   capabilityLabels,
   compactTokens,
@@ -219,6 +219,22 @@ function ModelRows({
                       ? numberFormatter.format(model.limits.concurrency)
                       : "—"}
                   </dd>
+                  {model.limits.requestsPerMinute ? (
+                    <>
+                      <dt>RPM</dt>
+                      <dd>
+                        {numberFormatter.format(model.limits.requestsPerMinute)}
+                      </dd>
+                    </>
+                  ) : null}
+                  {model.limits.tokensPerMinute ? (
+                    <>
+                      <dt>TPM</dt>
+                      <dd>
+                        {numberFormatter.format(model.limits.tokensPerMinute)}
+                      </dd>
+                    </>
+                  ) : null}
                   <dt>兼容别名</dt>
                   <dd>
                     {model.aliases.length
@@ -305,36 +321,101 @@ function PriceDetails({
   const sorted = [...prices].sort((a, b) =>
     a.rateType.localeCompare(b.rateType),
   );
+  const hasExplicitCacheCreation = sorted.some(
+    (price) => price.input.explicitCacheCreation !== undefined,
+  );
+  const hasExplicitCacheHit = sorted.some(
+    (price) => price.input.explicitCacheHit !== undefined,
+  );
+  const hasExplicitCache = hasExplicitCacheCreation || hasExplicitCacheHit;
+  const hasImplicitCache = sorted.some(
+    (price) => price.input.cacheHit !== undefined,
+  );
+  const [cacheMode, setCacheMode] = useState<"implicit" | "explicit">(() =>
+    hasImplicitCache ? "implicit" : "explicit",
+  );
   return (
-    <div className="price-table" aria-label="价格详情">
-      <div className="head">价格类型</div>
-      <div className="head">输入</div>
-      <div className="head">缓存命中</div>
-      <div className="head">输出</div>
-      {sorted.map((price, index) => (
-        <Fragment key={`${price.sourceUrl}-${price.rateType}-${index}`}>
-          <div className="row-label">
-            {price.rateType === "promotional" ? "当前价格" : "标准价格"}
-            {price.inputTokenRange ? (
-              <small>{price.inputTokenRange.label}</small>
-            ) : null}
+    <>
+      {hasExplicitCache ? (
+        <div className="cache-mode-toolbar">
+          <span>缓存计费</span>
+          <div className="cache-mode-switch" aria-label="缓存价格类型">
+            <button
+              type="button"
+              aria-pressed={cacheMode === "implicit"}
+              onClick={() => setCacheMode("implicit")}
+            >
+              隐式缓存
+            </button>
+            <button
+              type="button"
+              aria-pressed={cacheMode === "explicit"}
+              onClick={() => setCacheMode("explicit")}
+            >
+              显式缓存
+            </button>
           </div>
-          <div>
-            <strong>{formatPrice(price.input.standard, currency)}</strong>
-          </div>
-          <div>
-            <strong>
-              {price.input.cacheHit === undefined
-                ? "—"
-                : formatPrice(price.input.cacheHit, currency)}
-            </strong>
-          </div>
-          <div>
-            <strong>{formatPrice(price.output, currency)}</strong>
-          </div>
-        </Fragment>
-      ))}
-    </div>
+        </div>
+      ) : null}
+      <div
+        className="price-table"
+        aria-label={`${cacheMode === "explicit" ? "显式" : "隐式"}缓存价格详情`}
+      >
+        <div className="head">价格类型</div>
+        <div className="head">输入</div>
+        <div className="head">
+          {cacheMode === "explicit" ? "显式缓存" : "缓存命中"}
+        </div>
+        <div className="head">输出</div>
+        {sorted.map((price, index) => (
+          <Fragment key={`${price.sourceUrl}-${price.rateType}-${index}`}>
+            <div className="row-label">
+              {price.rateType === "promotional" ? "当前价格" : "标准价格"}
+              {price.inputTokenRange ? (
+                <small>{price.inputTokenRange.label}</small>
+              ) : null}
+            </div>
+            <div>
+              <strong>{formatPrice(price.input.standard, currency)}</strong>
+            </div>
+            {cacheMode === "implicit" ? (
+              <div>
+                <strong>
+                  {price.input.cacheHit === undefined
+                    ? "—"
+                    : formatPrice(price.input.cacheHit, currency)}
+                </strong>
+              </div>
+            ) : (
+              <div className="explicit-cache-prices">
+                <span>
+                  <small>创建</small>
+                  <strong>
+                    {price.input.explicitCacheCreation === undefined
+                      ? "—"
+                      : formatPrice(
+                          price.input.explicitCacheCreation,
+                          currency,
+                        )}
+                  </strong>
+                </span>
+                <span>
+                  <small>命中</small>
+                  <strong>
+                    {price.input.explicitCacheHit === undefined
+                      ? "—"
+                      : formatPrice(price.input.explicitCacheHit, currency)}
+                  </strong>
+                </span>
+              </div>
+            )}
+            <div>
+              <strong>{formatPrice(price.output, currency)}</strong>
+            </div>
+          </Fragment>
+        ))}
+      </div>
+    </>
   );
 }
 

@@ -48,7 +48,8 @@ const cnyPrice = model?.prices.find(
 );
 
 console.log(cnyPrice);
-// input.standard / input.cacheHit（可选）/ output
+// input.standard / input.cacheHit（可选）
+// input.explicitCacheCreation / input.explicitCacheHit（可选）/ output
 // 单位：人民币 / 1M Tokens
 ```
 
@@ -82,6 +83,8 @@ const outputLimit =
 
 项目只收录厂商自研模型。`moonshot-cn` 明确表示 **Kimi 国内版（Kimi China）**，国际版暂未接入；同时会过滤不在当前范围内的 `moonshot-v1-*`。`qwen-cn` 明确表示 **千问国内版（Qwen China）**，只保留千问模型市场中 `Provider=qwen` 的闭源稳定模型、国内 DashScope 地址和人民币价格；官方外显名称包含“开源模型”、官方开源标记为真的模型、带日期后缀的快照版本、已有同名稳定 ID 的 `*-preview`、没有代际版本号的旧 `qwen-*` 型号，以及 OCR、Character、TTS、VL、Math 类模型均不收录。平台托管的第三方模型、国际版和聚合平台价格都不在范围内。
 
+限流信息只收录能归属到具体模型的固定官方数值。目前千问模型页提供模型级 RPM/TPM，因此已写入数据；[Kimi 限流](https://platform.kimi.com/docs/pricing/limits)随账号充值等级变化，[DeepSeek](https://api-docs.deepseek.com/zh-cn/quick_start/rate_limit)与 [LongCat](https://longcat.chat/platform/docs/zh/APIDocs.html)当前官方文档也未公开可直接复用的固定模型级 RPM/TPM，因此这些渠道暂不生成对应字段。
+
 ## Agent 快速接入
 
 把下面这段话交给你的 Coding Agent，即可让它先分析项目，再完成类型定义、数据读取、价格选择、容错和测试：
@@ -90,7 +93,7 @@ const outputLimit =
 请按照 docs/agent-integration-prompt.md 的规则，将 models-cn 接入当前项目。
 数据地址：https://null-object-0000.github.io/models-cn/api.json
 目标：读取中国大陆模型厂商的官方价格和模型信息，并实现可测试的模型查询与费用估算能力。
-要求：人民币官方价格优先；不得硬编码价格或用汇率伪造人民币官方价；官方字段缺失时允许使用 models.dev 补全，但必须保留参考来源，不能覆盖官方值；正确处理币种、市场和标准价/优惠价；仅在 `input.cacheHit` 存在时处理缓存命中价格。
+要求：人民币官方价格优先；不得硬编码价格或用汇率伪造人民币官方价；官方字段缺失时允许使用 models.dev 补全，但必须保留参考来源，不能覆盖官方值；正确处理币种、市场、标准价/优惠价及可选的普通缓存、显式缓存价格。
 请先检查当前项目技术栈和已有模型配置，再实施修改、运行测试，并说明改动文件及使用方式。
 ```
 
@@ -112,7 +115,9 @@ const outputLimit =
   },
   "input": {
     "standard": 1,
-    "cacheHit": 0.02
+    "cacheHit": 0.2,
+    "explicitCacheCreation": 1.25,
+    "explicitCacheHit": 0.1
   },
   "output": 2,
   "sourceUrl": "https://provider.example/pricing"
@@ -127,6 +132,8 @@ const outputLimit =
 - `inputTokenRange` 表示按输入 Token 数分档的价格；缺失时表示该价格不分输入长度档位。
 - `input.standard` 是普通输入价格；没有独立缓存计费规则时，它适用于全部输入 Token。
 - `input.cacheHit` 仅在厂商明确设置缓存命中计费规则时提供。字段缺失表示“不存在该计费维度”，不是价格未公开。
+- `input.explicitCacheCreation`、`input.explicitCacheHit` 分别表示显式缓存创建和命中的输入 Token 价格；同一批 Token 应按实际命中的一种计费路径计算，不能与普通输入或其他缓存价格重复相加。
+- `limits.requestsPerMinute`、`limits.tokensPerMinute` 分别是厂商公开的模型级 RPM、TPM；按账号等级动态变化或未给出确定数值时不生成字段。
 - 当前数据契约版本为 `schemaVersion: "1.0"`。
 - 官网模型默认按发布时间倒序排列：优先使用厂商官方 `createdAt`，缺失时读取 models.dev 校准数据中的 `release_date`，仍缺失的排在最后。
 - `maxOutputTokens` 等非必填字段缺失时，可使用 models.dev 对应参考值补全；models.dev 也没有时应显示“未公开”，不能自行推断。

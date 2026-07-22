@@ -131,6 +131,16 @@
               "type": "number",
               "minimum": 0,
               "description": "Optional cached-input price, present only when the provider explicitly defines a cache-hit billing rule."
+            },
+            "explicitCacheCreation": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Optional explicit-cache creation price per 1M input tokens."
+            },
+            "explicitCacheHit": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Optional explicit-cache hit price per 1M input tokens."
             }
           }
         },
@@ -195,7 +205,9 @@
           "properties": {
             "contextTokens": { "type": "integer", "minimum": 1 },
             "maxOutputTokens": { "type": "integer", "minimum": 1 },
-            "concurrency": { "type": "integer", "minimum": 1 }
+            "concurrency": { "type": "integer", "minimum": 1 },
+            "requestsPerMinute": { "type": "integer", "minimum": 1 },
+            "tokensPerMinute": { "type": "integer", "minimum": 1 }
           }
         },
         "prices": {

@@ -20,7 +20,12 @@ export interface Price {
     minExclusive?: number;
     maxInclusive?: number;
   };
-  input: { cacheHit?: number; standard: number };
+  input: {
+    cacheHit?: number;
+    explicitCacheCreation?: number;
+    explicitCacheHit?: number;
+    standard: number;
+  };
   output: number;
   sourceUrl: string;
 }
@@ -35,6 +40,8 @@ export interface Model {
     contextTokens: number;
     maxOutputTokens?: number;
     concurrency?: number;
+    requestsPerMinute?: number;
+    tokensPerMinute?: number;
   };
   prices: Price[];
 }

@@ -58,6 +58,17 @@ interface QwenRawModel {
   Name?: string;
   OpenSource?: boolean;
   Prices?: QwenRawPrice[];
+  QpmInfo?: {
+    ModelDefault?: QwenRawRateLimit;
+    ModelDefaultActual?: QwenRawRateLimit;
+  };
+}
+
+interface QwenRawRateLimit {
+  CountLimit?: number;
+  CountLimitPeriod?: number;
+  UsageLimit?: number;
+  UsageLimitPeriod?: number;
 }
 
 interface QwenDetailData {
@@ -125,6 +136,21 @@ function priceByType(
   return range.Prices?.find((price) => price.Type === type);
 }
 
+function perMinute(limit: number | undefined, period: number | undefined) {
+  if (!limit || !period || limit < 1 || period < 1) return undefined;
+  const value = (limit / period) * 60;
+  return Number.isInteger(value) && value >= 1 ? value : undefined;
+}
+
+function rateLimits(model: QwenRawModel) {
+  const limits =
+    model.QpmInfo?.ModelDefaultActual ?? model.QpmInfo?.ModelDefault;
+  return {
+    requestsPerMinute: perMinute(limits?.CountLimit, limits?.CountLimitPeriod),
+    tokensPerMinute: perMinute(limits?.UsageLimit, limits?.UsageLimitPeriod),
+  };
+}
+
 function parsePrices(
   ranges: QwenPriceRange[] | undefined,
   sourceUrl: string,
@@ -134,11 +160,19 @@ function parsePrices(
     const input = priceByType(range, "input_token");
     const output = priceByType(range, "output_token");
     const cache = priceByType(range, "input_token_cache");
+    const explicitCacheCreation = priceByType(
+      range,
+      "input_token_cache_creation_5m",
+    );
+    const explicitCacheHit = priceByType(range, "input_token_cache_read");
     if (!input || !output) continue;
     if (
       input.PriceUnit !== "每百万tokens" ||
       output.PriceUnit !== "每百万tokens" ||
-      (cache && cache.PriceUnit !== "每百万tokens")
+      (cache && cache.PriceUnit !== "每百万tokens") ||
+      (explicitCacheCreation &&
+        explicitCacheCreation.PriceUnit !== "每百万tokens") ||
+      (explicitCacheHit && explicitCacheHit.PriceUnit !== "每百万tokens")
     ) {
       throw new Error(`Unexpected Qwen price unit in ${range.RangeName}`);
     }
@@ -152,6 +186,22 @@ function parsePrices(
       input: {
         standard: money(input.Price, "input"),
         ...(cache ? { cacheHit: money(cache.Price, "cache hit") } : {}),
+        ...(explicitCacheCreation
+          ? {
+              explicitCacheCreation: money(
+                explicitCacheCreation.Price,
+                "explicit cache creation",
+              ),
+            }
+          : {}),
+        ...(explicitCacheHit
+          ? {
+              explicitCacheHit: money(
+                explicitCacheHit.Price,
+                "explicit cache hit",
+              ),
+            }
+          : {}),
       },
       output: money(output.Price, "output"),
       sourceUrl,
@@ -169,6 +219,26 @@ function parsePrices(
                 cacheHit: cache.Discount
                   ? discountedPrice(cache, "cache hit")
                   : money(cache.Price, "cache hit"),
+              }
+            : {}),
+          ...(explicitCacheCreation
+            ? {
+                explicitCacheCreation: explicitCacheCreation.Discount
+                  ? discountedPrice(
+                      explicitCacheCreation,
+                      "explicit cache creation",
+                    )
+                  : money(
+                      explicitCacheCreation.Price,
+                      "explicit cache creation",
+                    ),
+              }
+            : {}),
+          ...(explicitCacheHit
+            ? {
+                explicitCacheHit: explicitCacheHit.Discount
+                  ? discountedPrice(explicitCacheHit, "explicit cache hit")
+                  : money(explicitCacheHit.Price, "explicit cache hit"),
               }
             : {}),
         },
@@ -250,6 +320,7 @@ export function parseQwenDetails(
         model.ModelInfo?.ReasoningMaxInputTokens ||
         model.ModelInfo?.ReasoningMaxOutputTokens,
       );
+      const qpm = rateLimits(model);
       return [
         {
           id,
@@ -270,6 +341,12 @@ export function parseQwenDetails(
             contextTokens,
             ...(model.ModelInfo?.MaxOutputTokens
               ? { maxOutputTokens: model.ModelInfo.MaxOutputTokens }
+              : {}),
+            ...(qpm.requestsPerMinute
+              ? { requestsPerMinute: qpm.requestsPerMinute }
+              : {}),
+            ...(qpm.tokensPerMinute
+              ? { tokensPerMinute: qpm.tokensPerMinute }
               : {}),
           },
           prices,

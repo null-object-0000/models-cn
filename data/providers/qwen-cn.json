@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.0",
-  "id": "qwen-cn",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-22T08:04:24.662Z",
-    "lastAttemptAt": "2026-07-22T08:04:24.662Z",
+    "lastSuccessfulAt": "2026-07-22T12:17:13.846Z",
+    "lastAttemptAt": "2026-07-22T12:17:13.846Z",
     "consecutiveFailures": 0
   },
+  "id": "qwen-cn",
   "name": "Qwen China",
   "displayNames": {
     "zh-CN": "千问国内版",
@@ -38,7 +38,9 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 30000,
+        "tokensPerMinute": 5000000
       },
       "prices": [
         {
@@ -52,7 +54,9 @@
           },
           "input": {
             "standard": 2,
-            "cacheHit": 0.4
+            "cacheHit": 0.4,
+            "explicitCacheCreation": 2.5,
+            "explicitCacheHit": 0.2
           },
           "output": 8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
@@ -68,7 +72,9 @@
           },
           "input": {
             "standard": 1.6,
-            "cacheHit": 0.32
+            "cacheHit": 0.32,
+            "explicitCacheCreation": 2,
+            "explicitCacheHit": 0.16
           },
           "output": 6.4,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
@@ -85,7 +91,9 @@
           },
           "input": {
             "standard": 6,
-            "cacheHit": 1.2
+            "cacheHit": 1.2,
+            "explicitCacheCreation": 7.5,
+            "explicitCacheHit": 0.6
           },
           "output": 24,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
@@ -102,7 +110,9 @@
           },
           "input": {
             "standard": 4.8,
-            "cacheHit": 0.96
+            "cacheHit": 0.96,
+            "explicitCacheCreation": 6,
+            "explicitCacheHit": 0.48
           },
           "output": 19.2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
@@ -127,7 +137,9 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 30000,
+        "tokensPerMinute": 5000000
       },
       "prices": [
         {
@@ -137,7 +149,9 @@
           "rateType": "standard",
           "input": {
             "standard": 12,
-            "cacheHit": 2.4
+            "cacheHit": 2.4,
+            "explicitCacheCreation": 15,
+            "explicitCacheHit": 1.2
           },
           "output": 36,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max"
@@ -149,7 +163,9 @@
           "rateType": "promotional",
           "input": {
             "standard": 6,
-            "cacheHit": 1.2
+            "cacheHit": 1.2,
+            "explicitCacheCreation": 7.5,
+            "explicitCacheHit": 0.6
           },
           "output": 18,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max"
@@ -177,7 +193,9 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 30000,
+        "tokensPerMinute": 5000000
       },
       "prices": [
         {
@@ -190,7 +208,9 @@
             "maxInclusive": 256000
           },
           "input": {
-            "standard": 2
+            "standard": 2,
+            "explicitCacheCreation": 2.5,
+            "explicitCacheHit": 0.2
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
@@ -206,7 +226,9 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "standard": 8
+            "standard": 8,
+            "explicitCacheCreation": 10,
+            "explicitCacheHit": 0.8
           },
           "output": 48,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
@@ -234,7 +256,9 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 30000,
+        "tokensPerMinute": 5000000
       },
       "prices": [
         {
@@ -247,7 +271,9 @@
             "maxInclusive": 128000
           },
           "input": {
-            "standard": 0.8
+            "standard": 0.8,
+            "explicitCacheCreation": 1,
+            "explicitCacheHit": 0.08
           },
           "output": 4.8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
@@ -263,7 +289,9 @@
             "maxInclusive": 256000
           },
           "input": {
-            "standard": 2
+            "standard": 2,
+            "explicitCacheCreation": 2.5,
+            "explicitCacheHit": 0.2
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
@@ -279,7 +307,9 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "standard": 4
+            "standard": 4,
+            "explicitCacheCreation": 5,
+            "explicitCacheHit": 0.4
           },
           "output": 24,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
@@ -305,7 +335,8 @@
       },
       "limits": {
         "contextTokens": 262144,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 600
       },
       "prices": [
         {
@@ -318,7 +349,9 @@
             "maxInclusive": 128000
           },
           "input": {
-            "standard": 9
+            "standard": 9,
+            "explicitCacheCreation": 11.25,
+            "explicitCacheHit": 0.9
           },
           "output": 54,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
@@ -334,7 +367,9 @@
             "maxInclusive": 256000
           },
           "input": {
-            "standard": 15
+            "standard": 15,
+            "explicitCacheCreation": 18.75,
+            "explicitCacheHit": 1.5
           },
           "output": 90,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
@@ -362,7 +397,9 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 30000,
+        "tokensPerMinute": 10000000
       },
       "prices": [
         {
@@ -375,7 +412,9 @@
             "maxInclusive": 128000
           },
           "input": {
-            "standard": 0.2
+            "standard": 0.2,
+            "explicitCacheCreation": 0.25,
+            "explicitCacheHit": 0.02
           },
           "output": 2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
@@ -391,7 +430,9 @@
             "maxInclusive": 256000
           },
           "input": {
-            "standard": 0.8
+            "standard": 0.8,
+            "explicitCacheCreation": 1,
+            "explicitCacheHit": 0.08
           },
           "output": 8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
@@ -407,7 +448,9 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "standard": 1.2
+            "standard": 1.2,
+            "explicitCacheCreation": 1.5,
+            "explicitCacheHit": 0.12
           },
           "output": 12,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
@@ -433,7 +476,9 @@
       },
       "limits": {
         "contextTokens": 262144,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 30000,
+        "tokensPerMinute": 5000000
       },
       "prices": [
         {
@@ -447,7 +492,9 @@
           },
           "input": {
             "standard": 2.5,
-            "cacheHit": 0.5
+            "cacheHit": 0.5,
+            "explicitCacheCreation": 3.125,
+            "explicitCacheHit": 0.25
           },
           "output": 10,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-max"
@@ -464,7 +511,9 @@
           },
           "input": {
             "standard": 4,
-            "cacheHit": 0.8
+            "cacheHit": 0.8,
+            "explicitCacheCreation": 5,
+            "explicitCacheHit": 0.4
           },
           "output": 16,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-max"
@@ -481,7 +530,9 @@
           },
           "input": {
             "standard": 7,
-            "cacheHit": 1.4
+            "cacheHit": 1.4,
+            "explicitCacheCreation": 8.75,
+            "explicitCacheHit": 0.7
           },
           "output": 28,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-max"
@@ -509,7 +560,9 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 30000,
+        "tokensPerMinute": 10000000
       },
       "prices": [
         {
@@ -522,7 +575,9 @@
             "maxInclusive": 256000
           },
           "input": {
-            "standard": 1.2
+            "standard": 1.2,
+            "explicitCacheCreation": 1.5,
+            "explicitCacheHit": 0.12
           },
           "output": 7.2,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
@@ -538,7 +593,9 @@
             "maxInclusive": 1000000
           },
           "input": {
-            "standard": 4.8
+            "standard": 4.8,
+            "explicitCacheCreation": 6,
+            "explicitCacheHit": 0.48
           },
           "output": 28.8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
@@ -561,7 +618,9 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 5000,
+        "tokensPerMinute": 5000000
       },
       "prices": [
         {
@@ -575,7 +634,9 @@
           },
           "input": {
             "standard": 4,
-            "cacheHit": 0.8
+            "cacheHit": 0.8,
+            "explicitCacheCreation": 5,
+            "explicitCacheHit": 0.4
           },
           "output": 16,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus"
@@ -592,7 +653,9 @@
           },
           "input": {
             "standard": 6,
-            "cacheHit": 1.2
+            "cacheHit": 1.2,
+            "explicitCacheCreation": 7.5,
+            "explicitCacheHit": 0.6
           },
           "output": 24,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus"
@@ -609,7 +672,9 @@
           },
           "input": {
             "standard": 10,
-            "cacheHit": 2
+            "cacheHit": 2,
+            "explicitCacheCreation": 12.5,
+            "explicitCacheHit": 1
           },
           "output": 40,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus"
@@ -626,7 +691,9 @@
           },
           "input": {
             "standard": 20,
-            "cacheHit": 4
+            "cacheHit": 4,
+            "explicitCacheCreation": 25,
+            "explicitCacheHit": 2
           },
           "output": 200,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus"
@@ -649,7 +716,9 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536
+        "maxOutputTokens": 65536,
+        "requestsPerMinute": 5000,
+        "tokensPerMinute": 5000000
       },
       "prices": [
         {
@@ -663,7 +732,9 @@
           },
           "input": {
             "standard": 1,
-            "cacheHit": 0.2
+            "cacheHit": 0.2,
+            "explicitCacheCreation": 1.25,
+            "explicitCacheHit": 0.1
           },
           "output": 4,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash"
@@ -680,7 +751,9 @@
           },
           "input": {
             "standard": 1.5,
-            "cacheHit": 0.3
+            "cacheHit": 0.3,
+            "explicitCacheCreation": 1.875,
+            "explicitCacheHit": 0.15
           },
           "output": 6,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash"
@@ -697,7 +770,9 @@
           },
           "input": {
             "standard": 2.5,
-            "cacheHit": 0.5
+            "cacheHit": 0.5,
+            "explicitCacheCreation": 3.125,
+            "explicitCacheHit": 0.25
           },
           "output": 10,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash"
@@ -714,7 +789,9 @@
           },
           "input": {
             "standard": 5,
-            "cacheHit": 1
+            "cacheHit": 1,
+            "explicitCacheCreation": 6.25,
+            "explicitCacheHit": 0.5
           },
           "output": 25,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash"
@@ -735,7 +812,7 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-07-22T08:04:24.662Z",
+      "retrievedAt": "2026-07-22T12:17:13.846Z",
       "contentHash": "sha256:21cceb95aca4daa3740fe30cd2d01d3d05bd4a4272a913458dc43f7bd8f422da"
     }
   ]
