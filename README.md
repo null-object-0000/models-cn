@@ -256,6 +256,8 @@ MOONSHOT_API_KEY=
 - 可追溯的来源链接与采集时间。
 - 不混入聚合平台、第三方托管模型、会员订阅或无法验证的换算价格。
 
+完整的采集器结构、模型和价格规范、注册位置、校准、Inventory、测试与验收流程，参见 [新增渠道指南](docs/adding-provider.md)。
+
 ## License
 
 [MIT](LICENSE)
