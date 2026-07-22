@@ -184,7 +184,6 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
                   <thead>
                     <tr>
                       <th>模型</th>
-                      <th>厂商</th>
                       <th>上下文</th>
                       <th className="num">输入</th>
                       <th className="num">缓存命中</th>

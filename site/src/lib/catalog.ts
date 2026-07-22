@@ -23,6 +23,26 @@ export function formatPrice(value: number, currency: Currency): string {
   return `${symbol}${value.toLocaleString("zh-CN", { maximumFractionDigits: 6 })}`;
 }
 
+export function formatPriceRange(
+  values: Array<number | undefined>,
+  currency: Currency,
+): string | undefined {
+  const available = values.filter(
+    (value): value is number => value !== undefined,
+  );
+  if (!available.length) return undefined;
+
+  const minimum = Math.min(...available);
+  const maximum = Math.max(...available);
+  if (minimum === maximum) return formatPrice(minimum, currency);
+
+  const symbol = currency === "CNY" ? "¥" : "$";
+  const formatter = new Intl.NumberFormat("zh-CN", {
+    maximumFractionDigits: 6,
+  });
+  return `${symbol}${formatter.format(minimum)} - ${formatter.format(maximum)}`;
+}
+
 export function compactTokens(value?: number): string {
   if (value === undefined) return "未公开";
   if (value >= 1_000_000) {

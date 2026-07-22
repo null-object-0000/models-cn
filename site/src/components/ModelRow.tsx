@@ -3,6 +3,7 @@ import {
   capabilityLabels,
   compactTokens,
   formatPrice,
+  formatPriceRange,
   modelDomId,
   modelKey,
   numberFormatter,
@@ -40,7 +41,7 @@ function Group({
   return (
     <>
       <tr className="provider-row">
-        <td colSpan={9}>
+        <td colSpan={8}>
           <div className="provider-head">
             <div>
               <div className="provider-kicker">
@@ -91,10 +92,14 @@ function ModelRows({
   )
     ? rateType
     : "standard";
-  const summary = selected.find((price) => price.rateType === preferredRate);
+  const summaryPrices = selected.filter(
+    (price) => price.rateType === preferredRate,
+  );
   const capabilities = capabilityLabels(model.capabilities);
   const source =
-    summary?.sourceUrl ?? selected[0]?.sourceUrl ?? model.prices[0]?.sourceUrl;
+    summaryPrices[0]?.sourceUrl ??
+    selected[0]?.sourceUrl ??
+    model.prices[0]?.sourceUrl;
   const retrievedAt =
     provider.sources
       .filter((item) => !source || item.url === source)
@@ -133,7 +138,6 @@ function ModelRows({
           <div className="model-title">{model.name}</div>
           <div className="model-id">{model.id}</div>
         </td>
-        <td className="cell-muted">{providerName(provider)}</td>
         <td>
           <strong>{compactTokens(model.limits.contextTokens)}</strong>
           <div className="model-id">
@@ -141,17 +145,17 @@ function ModelRows({
           </div>
         </td>
         <PriceCell
-          value={summary?.input.standard}
+          values={summaryPrices.map((price) => price.input.standard)}
           currency={currency}
           unit={priceUnit}
         />
         <PriceCell
-          value={summary?.input.cacheHit}
+          values={summaryPrices.map((price) => price.input.cacheHit)}
           currency={currency}
           unit={priceUnit}
         />
         <PriceCell
-          value={summary?.output}
+          values={summaryPrices.map((price) => price.output)}
           currency={currency}
           unit={priceUnit}
         />
@@ -183,7 +187,7 @@ function ModelRows({
       </tr>
       {expanded ? (
         <tr className="details-row">
-          <td colSpan={9}>
+          <td colSpan={8}>
             <div className="details-panel">
               <section className="detail-block">
                 <h3 className="detail-title">
@@ -272,19 +276,20 @@ function ModelRows({
 }
 
 function PriceCell({
-  value,
+  values,
   currency,
   unit,
 }: {
-  value: number | undefined;
+  values: Array<number | undefined>;
   currency: Currency;
   unit: string;
 }) {
+  const displayPrice = formatPriceRange(values, currency);
   return (
     <td className="num">
       <span className="price">
-        {value === undefined ? "—" : formatPrice(value, currency)}
-        <small>{value === undefined ? "未公开官方价" : unit}</small>
+        {displayPrice ?? "—"}
+        <small>{displayPrice ? unit : "未公开官方价"}</small>
       </span>
     </td>
   );

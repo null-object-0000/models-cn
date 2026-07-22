@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   compareModelsByReleaseDate,
+  formatPriceRange,
   modelDomId,
   modelHash,
   modelKey,
@@ -68,5 +69,16 @@ describe("site model identity", () => {
       "model-moonshot-cn-kimi-k3",
     );
     expect(modelHash("moonshot-cn", "kimi-k3")).toBe("moonshot-cn/kimi-k3");
+  });
+});
+
+describe("site catalog price summaries", () => {
+  it("shows a range for tiered prices and a single value otherwise", () => {
+    expect(formatPriceRange([1.6, 4.8], "CNY")).toBe("¥1.6 - 4.8");
+    expect(formatPriceRange([6.4, 6.4], "CNY")).toBe("¥6.4");
+    expect(formatPriceRange([undefined, 0.32, 0.96], "CNY")).toBe(
+      "¥0.32 - 0.96",
+    );
+    expect(formatPriceRange([undefined], "USD")).toBeUndefined();
   });
 });

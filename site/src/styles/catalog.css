@@ -93,7 +93,7 @@
 }
 table {
   width: 100%;
-  min-width: 1010px;
+  min-width: 960px;
   border-collapse: collapse;
 }
 thead th {
@@ -176,15 +176,12 @@ tbody .provider-row:first-child td {
     12px/1.45 ui-monospace,
     monospace;
 }
-.cell-muted {
-  color: var(--muted);
-  font-size: 14px;
-}
 .num {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 .price {
+  white-space: nowrap;
   font:
     700 16px/1 ui-monospace,
     monospace;
