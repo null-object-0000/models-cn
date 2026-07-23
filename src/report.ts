@@ -227,6 +227,7 @@ function omitVolatileCollectionFields(value: unknown): unknown {
             "contentHash",
           ].includes(key),
       )
+      .sort(([left], [right]) => left.localeCompare(right))
       .map(([key, child]) => [key, omitVolatileCollectionFields(child)]),
   );
 }

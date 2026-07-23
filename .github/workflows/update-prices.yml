@@ -75,4 +75,5 @@ jobs:
             gh pr edit "$pr_number" --body-file update-report.md
           fi
       - name: Assert collection health
+        if: always() && steps.report.conclusion == 'success'
         run: npm run health:check

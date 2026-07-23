@@ -72,10 +72,13 @@ describe("automated update report", () => {
       schemaVersion: "1.0",
       providers: [provider(80)],
     };
-    const refreshed = provider(80);
+    const original = provider(80);
+    const { health, id, ...rest } = original;
+    const refreshed: ProviderData = { ...rest, health, id };
     refreshed.health.lastAttemptAt = "2026-07-22T07:17:00Z";
     refreshed.health.lastSuccessfulAt = "2026-07-22T07:17:00Z";
     refreshed.sources[0]!.retrievedAt = "2026-07-22T07:17:00Z";
+    refreshed.sources[0]!.contentHash = `sha256:${"b".repeat(64)}`;
     const after: Catalog = { schemaVersion: "1.0", providers: [refreshed] };
     expect(hasMaterialCatalogChanges(before, after)).toBe(false);
   });
