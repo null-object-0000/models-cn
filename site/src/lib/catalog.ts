@@ -1,9 +1,4 @@
-import type {
-  CalibrationModel,
-  Currency,
-  Model,
-  Provider,
-} from "../types.js";
+import type { CalibrationModel, Currency, Model, Provider } from "../types.js";
 
 export type VersionViewMode = "merged" | "separate";
 
@@ -76,9 +71,7 @@ export function formatPriceRange(
   return `${symbol}${formatter.format(minimum)} - ${formatter.format(maximum)}`;
 }
 
-export function isPriceRange(
-  values: Array<number | undefined>,
-): boolean {
+export function isPriceRange(values: Array<number | undefined>): boolean {
   const available = values.filter(
     (value): value is number => value !== undefined,
   );
@@ -153,9 +146,7 @@ function providerBaseId(provider: Provider): string {
   return match?.[1] ?? provider.id;
 }
 
-function providerRegion(
-  provider: Provider,
-): "cn" | "intl" | "other" {
+function providerRegion(provider: Provider): "cn" | "intl" | "other" {
   if (provider.id.endsWith("-cn")) return "cn";
   if (provider.id.endsWith("-intl")) return "intl";
   return "other";
@@ -226,14 +217,21 @@ export function buildMergedGroups(
   }
 
   const groups: MergedGroup[] = [];
-  const regionModel = (provider: Provider, model: Model, region: "cn" | "intl"): RegionModel => ({
+  const regionModel = (
+    provider: Provider,
+    model: Model,
+    region: "cn" | "intl",
+  ): RegionModel => ({
     model,
     provider,
     region,
     calibration: calibrationMap.get(modelKey(provider.id, model.id)),
   });
 
-  const buildStandaloneGroup = (provider: Provider, region: "cn" | "intl"): MergedGroup => ({
+  const buildStandaloneGroup = (
+    provider: Provider,
+    region: "cn" | "intl",
+  ): MergedGroup => ({
     id: provider.id,
     name: provider.name,
     displayName: provider.displayNames?.["zh-CN"] ?? provider.name,
@@ -248,7 +246,8 @@ export function buildMergedGroups(
         mergeable: true,
         differences: [],
         cn: region === "cn" ? regionModel(provider, model, region) : undefined,
-        intl: region === "intl" ? regionModel(provider, model, region) : undefined,
+        intl:
+          region === "intl" ? regionModel(provider, model, region) : undefined,
       })),
   });
 

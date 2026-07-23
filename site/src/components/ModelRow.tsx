@@ -13,12 +13,7 @@ import {
   type MergedModel,
   type RegionModel,
 } from "../lib/catalog";
-import type {
-  CalibrationModel,
-  Currency,
-  Model,
-  Provider,
-} from "../types";
+import type { CalibrationModel, Currency, Model, Provider } from "../types";
 import { CalibrationBadge } from "./CalibrationBadge";
 
 type GroupProps = {
@@ -95,14 +90,17 @@ function ModelRows({
   expanded: boolean;
   onToggle: (key: string) => void;
 }) {
-  const model = active?.model ?? mergedModel.cn?.model ?? mergedModel.intl?.model;
+  const model =
+    active?.model ?? mergedModel.cn?.model ?? mergedModel.intl?.model;
   if (!model) return null;
 
   const selected = model.prices.filter((price) => price.currency === currency);
   const promotionalPrices = selected.filter(
     (price) => price.rateType === "promotional",
   );
-  const standardPrices = selected.filter((price) => price.rateType === "standard");
+  const standardPrices = selected.filter(
+    (price) => price.rateType === "standard",
+  );
   const hasPromotional = promotionalPrices.length > 0;
   const summaryPrices = hasPromotional ? promotionalPrices : standardPrices;
   const referencePrices = hasPromotional ? standardPrices : [];
@@ -113,7 +111,7 @@ function ModelRows({
     model.prices[0]?.sourceUrl;
   const provider = active?.provider ?? group.cn ?? group.intl;
   const retrievedAt = provider
-    ? provider.sources
+    ? (provider.sources
         .filter((item) => !source || item.url === source)
         .map((item) => item.retrievedAt)
         .sort()
@@ -121,7 +119,7 @@ function ModelRows({
       provider.sources
         .map((item) => item.retrievedAt)
         .sort()
-        .at(-1)
+        .at(-1))
     : undefined;
   const priceUnit = currency === "CNY" ? "人民币 / 1M" : "美元 / 1M";
   const key = `${group.id}/${mergedModel.id}`;
@@ -164,14 +162,10 @@ function ModelRows({
             {regionLabel ? (
               <span className="region-tag">{regionLabel}</span>
             ) : null}
-            {hasPromotional ? (
-              <span className="promo-tag">优惠</span>
-            ) : null}
+            {hasPromotional ? <span className="promo-tag">优惠</span> : null}
           </div>
           {showDifferenceWarning ? (
-            <div className="merge-warning">
-              国内版 / 国际版存在差异
-            </div>
+            <div className="merge-warning">国内版 / 国际版存在差异</div>
           ) : null}
         </td>
         <td>
@@ -191,8 +185,7 @@ function ModelRows({
           referenceValues={referencePrices.map((price) => price.input.cacheHit)}
           fallbackValues={summaryPrices.map(
             (price) =>
-              price.input.explicitCacheCreation ??
-              price.input.explicitCacheHit,
+              price.input.explicitCacheCreation ?? price.input.explicitCacheHit,
           )}
           fallbackLabel="显式缓存"
           currency={currency}
@@ -370,10 +363,12 @@ function PriceCell({
   const label = displayPrice
     ? unit
     : fallbackPrice
-      ? fallbackLabel ?? unit
+      ? (fallbackLabel ?? unit)
       : "未公开官方价";
   const displayIsRange = isPriceRange(values);
-  const referenceIsRange = referenceValues ? isPriceRange(referenceValues) : false;
+  const referenceIsRange = referenceValues
+    ? isPriceRange(referenceValues)
+    : false;
   const stackPrices = displayIsRange || referenceIsRange;
   return (
     <td className="num">

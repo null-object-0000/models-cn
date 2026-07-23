@@ -40,7 +40,10 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
     [catalog],
   );
   const matchesSearch = useMemo(() => {
-    return (provider: typeof models[0]["provider"], model: typeof models[0]["model"]) => {
+    return (
+      provider: (typeof models)[0]["provider"],
+      model: (typeof models)[0]["model"],
+    ) => {
       const capabilities = Object.values(model.capabilities).flat().join(" ");
       const aliases = model.aliases.map((alias) => alias.id).join(" ");
       return `${providerName(provider)} ${provider.name} ${provider.displayNames?.en ?? ""} ${provider.id} ${model.name} ${model.id} ${aliases} ${capabilities}`
@@ -50,7 +53,8 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
   }, [deferredSearch]);
 
   const filtered = useMemo(
-    () => models.filter(({ provider, model }) => matchesSearch(provider, model)),
+    () =>
+      models.filter(({ provider, model }) => matchesSearch(provider, model)),
     [models, matchesSearch],
   );
 
@@ -58,7 +62,10 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
     return (providerId: string) => {
       if (providerFilter === "all") return true;
       if (versionView === "merged") {
-        return providerId === providerFilter || providerId.startsWith(`${providerFilter}-`);
+        return (
+          providerId === providerFilter ||
+          providerId.startsWith(`${providerFilter}-`)
+        );
       }
       return providerId === providerFilter;
     };
@@ -73,7 +80,13 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
           providerPassesFilter(provider.id) && matchesSearch(provider, model),
         versionView,
       ).filter((group) => group.models.length > 0),
-    [catalog.providers, calibrationMap, providerPassesFilter, matchesSearch, versionView],
+    [
+      catalog.providers,
+      calibrationMap,
+      providerPassesFilter,
+      matchesSearch,
+      versionView,
+    ],
   );
 
   const providerSelectOptions = useMemo(() => {
@@ -91,13 +104,12 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
         })
         .map((base) => {
           const representative = catalog.providers.find(
-            (p) => p.id === `${base}-cn` || p.id === `${base}-intl` || p.id === base,
+            (p) =>
+              p.id === `${base}-cn` || p.id === `${base}-intl` || p.id === base,
           );
           return {
             value: base,
-            label: representative
-              ? providerName(representative)
-              : base,
+            label: representative ? providerName(representative) : base,
           };
         });
     }

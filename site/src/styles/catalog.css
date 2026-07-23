@@ -178,11 +178,7 @@ tbody .provider-row:first-child td {
   align-items: center;
   gap: 6px;
   color: var(--muted);
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Consolas,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: 11px;
   line-height: 1.4;
 }
@@ -191,11 +187,7 @@ tbody .provider-row:first-child td {
   background: var(--accent-soft);
   color: var(--accent);
   font-family:
-    Inter,
-    "PingFang SC",
-    "Microsoft YaHei",
-    "Noto Sans SC",
-    system-ui,
+    Inter, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui,
     sans-serif;
   font-size: 10px;
   font-weight: 600;
@@ -206,11 +198,7 @@ tbody .provider-row:first-child td {
   background: var(--warning-soft);
   color: var(--warning);
   font-family:
-    Inter,
-    "PingFang SC",
-    "Microsoft YaHei",
-    "Noto Sans SC",
-    system-ui,
+    Inter, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui,
     sans-serif;
   font-size: 10px;
   font-weight: 600;
