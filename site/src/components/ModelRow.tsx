@@ -151,6 +151,12 @@ function ModelRows({
         />
         <PriceCell
           values={summaryPrices.map((price) => price.input.cacheHit)}
+          fallbackValues={summaryPrices.map(
+            (price) =>
+              price.input.explicitCacheCreation ??
+              price.input.explicitCacheHit,
+          )}
+          fallbackLabel="显式缓存"
           currency={currency}
           unit={priceUnit}
         />
@@ -293,19 +299,32 @@ function ModelRows({
 
 function PriceCell({
   values,
+  fallbackValues,
+  fallbackLabel,
   currency,
   unit,
 }: {
   values: Array<number | undefined>;
+  fallbackValues?: Array<number | undefined>;
+  fallbackLabel?: string;
   currency: Currency;
   unit: string;
 }) {
   const displayPrice = formatPriceRange(values, currency);
+  let fallbackPrice: string | undefined;
+  if (!displayPrice && fallbackValues) {
+    fallbackPrice = formatPriceRange(fallbackValues, currency);
+  }
+  const label = displayPrice
+    ? unit
+    : fallbackPrice
+      ? fallbackLabel ?? unit
+      : "未公开官方价";
   return (
     <td className="num">
       <span className="price">
-        {displayPrice ?? "—"}
-        <small>{displayPrice ? unit : "未公开官方价"}</small>
+        {displayPrice ?? fallbackPrice ?? "—"}
+        <small>{label}</small>
       </span>
     </td>
   );
