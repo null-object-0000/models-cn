@@ -76,16 +76,15 @@
   gap: 16px;
   margin: 18px 0 10px;
   color: var(--muted);
-  font:
-    13px/1.5 ui-monospace,
-    monospace;
+  font-size: 13px;
+  line-height: 1.5;
 }
 .result-meta span:last-child {
   color: var(--warning);
 }
 .table-shell {
   border: 1px solid var(--line);
-  background: var(--panel-translucent);
+  background: var(--panel);
   overflow: clip;
 }
 .table-scroll {
@@ -102,11 +101,11 @@ thead th {
   background: var(--panel-raised);
   color: var(--muted);
   text-align: left;
-  font:
-    700 12px/1.25 ui-monospace,
-    monospace;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 thead th.num {
   text-align: right;
@@ -134,16 +133,16 @@ tbody .provider-row:first-child td {
   letter-spacing: 0.11em;
 }
 .provider-name {
-  margin-top: 8px;
-  font-size: 23px;
-  font-weight: 850;
-  letter-spacing: -0.025em;
+  margin-top: 7px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 .provider-count {
   color: var(--muted);
-  font:
-    13px/1 ui-monospace,
-    monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
 }
 .model-row {
   cursor: pointer;
@@ -158,7 +157,10 @@ tbody .provider-row:first-child td {
   background: color-mix(in srgb, var(--accent-soft) 75%, transparent);
 }
 .model-row td {
-  padding: 17px 14px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 14px;
+  padding-right: 14px;
   border-bottom: 1px solid var(--line);
   vertical-align: middle;
 }
@@ -166,15 +168,20 @@ tbody .provider-row:first-child td {
   min-width: 230px;
 }
 .model-title {
-  font-weight: 850;
-  font-size: 17px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.01em;
 }
 .model-id {
-  margin-top: 7px;
+  margin-top: 6px;
   color: var(--muted);
-  font:
-    12px/1.45 ui-monospace,
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Consolas,
     monospace;
+  font-size: 11px;
+  line-height: 1.4;
 }
 .num {
   text-align: right;
@@ -182,17 +189,19 @@ tbody .provider-row:first-child td {
 }
 .price {
   white-space: nowrap;
-  font:
-    700 16px/1 ui-monospace,
-    monospace;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
 }
 .price small {
   display: block;
-  margin-top: 6px;
+  margin-top: 7px;
   color: var(--muted);
-  font:
-    11px/1.1 ui-monospace,
-    monospace;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
 }
 .tags,
 .cap-list {
@@ -202,10 +211,11 @@ tbody .provider-row:first-child td {
   max-width: 220px;
 }
 .tag {
-  padding: 6px 8px;
-  background: var(--panel-raised);
-  color: var(--muted);
-  font-size: 12px;
+  padding: 5px 7px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 11px;
+  font-weight: 400;
   line-height: 1;
 }
 .status {
@@ -284,11 +294,11 @@ tbody .provider-row:first-child td {
 .detail-title {
   margin: 0 0 16px;
   color: var(--muted);
-  font:
-    700 12px/1 ui-monospace,
-    monospace;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 .price-table {
   display: grid;
@@ -319,9 +329,10 @@ tbody .provider-row:first-child td {
   margin-top: 4px;
 }
 .price-table strong {
-  font:
-    700 15px/1.25 ui-monospace,
-    monospace;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
 }
 .cache-mode-toolbar {
   display: flex;
@@ -331,6 +342,7 @@ tbody .provider-row:first-child td {
   margin: -4px 0 12px;
   color: var(--muted);
   font-size: 12px;
+  font-weight: 400;
 }
 .cache-mode-switch {
   display: inline-flex;
