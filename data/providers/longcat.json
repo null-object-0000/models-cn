@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.0",
-  "id": "longcat",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-22T03:54:28.935Z",
-    "lastAttemptAt": "2026-07-22T03:54:28.935Z",
+    "lastSuccessfulAt": "2026-07-23T01:47:24.251Z",
+    "lastAttemptAt": "2026-07-23T01:47:24.251Z",
     "consecutiveFailures": 0
   },
+  "id": "longcat",
   "name": "LongCat",
   "ownedBy": "longcat",
   "baseUrls": {
