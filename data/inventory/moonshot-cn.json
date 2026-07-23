@@ -3,35 +3,40 @@
   "provider": "moonshot-cn",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-23T01:48:02.417Z",
-    "lastAttemptAt": "2026-07-23T01:48:02.417Z",
+    "lastSuccessfulAt": "2026-07-23T09:12:43.934Z",
+    "lastAttemptAt": "2026-07-23T09:12:43.934Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://api.moonshot.cn/v1/models",
-    "retrievedAt": "2026-07-22T05:38:16.668Z",
-    "contentHash": "sha256:ccd7122a497a46b34e393f7e165458f7523180bc6f63051dc453ca87942adac2"
+    "retrievedAt": "2026-07-23T09:12:43.934Z",
+    "contentHash": "sha256:3f659883640ea7f7bdd4f2c370984fe76ceba22f9855fecc779f57e20a332bfc"
   },
   "models": [
     {
       "id": "kimi-k2.5",
-      "ownedBy": "moonshot"
+      "ownedBy": "moonshot",
+      "contextTokens": 262144
     },
     {
       "id": "kimi-k2.6",
-      "ownedBy": "moonshot"
+      "ownedBy": "moonshot",
+      "contextTokens": 262144
     },
     {
       "id": "kimi-k2.7-code",
-      "ownedBy": "moonshot"
+      "ownedBy": "moonshot",
+      "contextTokens": 262144
     },
     {
       "id": "kimi-k2.7-code-highspeed",
-      "ownedBy": "moonshot"
+      "ownedBy": "moonshot",
+      "contextTokens": 262144
     },
     {
       "id": "kimi-k3",
-      "ownedBy": "moonshot"
+      "ownedBy": "moonshot",
+      "contextTokens": 1048576
     }
   ],
   "comparison": {

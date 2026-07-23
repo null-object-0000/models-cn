@@ -127,6 +127,9 @@ describe("provider model inventory", () => {
     });
     expect(inventory.models).toHaveLength(5);
     expect(
+      inventory.models.find((model) => model.id === "kimi-k3")?.contextTokens,
+    ).toBe(1_048_576);
+    expect(
       inventory.models.every((model) => model.id.startsWith("kimi-")),
     ).toBe(true);
   });

@@ -1,18 +1,81 @@
 import { createHash } from "node:crypto";
-import type { ModelData, ModelPrice, ProviderData, Source } from "../types.js";
+import type {
+  Currency,
+  Market,
+  ModelData,
+  ModelPrice,
+  ProviderData,
+  Source,
+} from "../types.js";
 import { SCHEMA_VERSION } from "../types.js";
 import { healthyHealth } from "../health.js";
 
-export const MOONSHOT_PRICING_SOURCES = [
-  "https://platform.kimi.com/docs/pricing/chat-k3",
-  "https://platform.kimi.com/docs/pricing/chat-k27-code",
-  "https://platform.kimi.com/docs/pricing/chat-k26",
-  "https://platform.kimi.com/docs/pricing/chat-k25",
+interface MoonshotChannel {
+  id: "moonshot-cn" | "moonshot-intl";
+  name: string;
+  displayNames: NonNullable<ProviderData["displayNames"]>;
+  apiBaseUrl: string;
+  docsBaseUrl: string;
+  market: Market;
+  currency: Currency;
+  locale: Source["locale"];
+}
+
+export const MOONSHOT_CHANNELS = {
+  china: {
+    id: "moonshot-cn",
+    name: "Kimi China",
+    displayNames: {
+      "zh-CN": "Kimi 国内版",
+      en: "Kimi China",
+    },
+    apiBaseUrl: "https://api.moonshot.cn/v1",
+    docsBaseUrl: "https://platform.kimi.com",
+    market: "china",
+    currency: "CNY",
+    locale: "zh-CN",
+  },
+  international: {
+    id: "moonshot-intl",
+    name: "Kimi International",
+    displayNames: {
+      "zh-CN": "Kimi 国际版",
+      en: "Kimi International",
+    },
+    apiBaseUrl: "https://api.moonshot.ai/v1",
+    docsBaseUrl: "https://platform.kimi.ai",
+    market: "international",
+    currency: "USD",
+    locale: "en",
+  },
+} as const satisfies Record<string, MoonshotChannel>;
+
+const pricingPaths = [
+  "/docs/pricing/chat-k3",
+  "/docs/pricing/chat-k27-code",
+  "/docs/pricing/chat-k26",
+  "/docs/pricing/chat-k25",
 ] as const;
-export const MOONSHOT_MODELS_OVERVIEW_URL =
-  "https://platform.kimi.com/docs/api/models-overview";
-export const MOONSHOT_OUTPUT_LIMITS_URL =
-  "https://platform.kimi.com/docs/guide/troubleshooting#kimi";
+
+function pricingSources(channel: MoonshotChannel): string[] {
+  return pricingPaths.map((path) => `${channel.docsBaseUrl}${path}`);
+}
+
+function modelsOverviewUrl(channel: MoonshotChannel): string {
+  return `${channel.docsBaseUrl}/docs/api/models-overview`;
+}
+
+function outputLimitsUrl(channel: MoonshotChannel): string {
+  return `${channel.docsBaseUrl}/docs/guide/troubleshooting#kimi`;
+}
+
+export const MOONSHOT_PRICING_SOURCES = pricingSources(MOONSHOT_CHANNELS.china);
+export const MOONSHOT_MODELS_OVERVIEW_URL = modelsOverviewUrl(
+  MOONSHOT_CHANNELS.china,
+);
+export const MOONSHOT_OUTPUT_LIMITS_URL = outputLimitsUrl(
+  MOONSHOT_CHANNELS.china,
+);
 
 interface ParsedMoonshotPage {
   models: ModelData[];
@@ -40,7 +103,15 @@ function parseRows(markdown: string): string[][] {
     .split(/\r?\n/)
     .map((line) => line.trim().replace(/,$/, ""))
     .filter((line) => line.startsWith("["))
-    .map((line) => JSON.parse(line) as string[]);
+    .map(
+      (line) =>
+        JSON.parse(
+          line.replace(
+            /<>\s*\{\s*["']\$["']\s*\}\s*([\d.]+)\s*<\/>/g,
+            '"$$$1"',
+          ),
+        ) as string[],
+    );
   if (!rows.length) throw new Error("Kimi pricing table contains no models");
   return rows;
 }
@@ -48,9 +119,13 @@ function parseRows(markdown: string): string[][] {
 export function parseMoonshotOutputLimits(
   markdown: string,
 ): ReadonlyMap<string, number> {
-  const section = markdown
-    .split("Kimi 大模型的输出长度是多少")[1]
-    ?.split("Kimi 大模型支持的汉字数量是多少")[0];
+  const section =
+    markdown
+      .split("Kimi 大模型的输出长度是多少")[1]
+      ?.split("Kimi 大模型支持的汉字数量是多少")[0] ??
+    markdown
+      .split("What is the output length of the Kimi model?")[1]
+      ?.split("How many Chinese characters does the Kimi model support?")[0];
   if (!section) {
     throw new Error("Kimi troubleshooting page is missing output limits");
   }
@@ -163,6 +238,8 @@ function modelMetadata(id: string): Pick<ModelData, "name" | "capabilities"> {
 export function parseMoonshotPricingPage(
   markdown: string,
   sourceUrl: string,
+  market: Market = "china",
+  currency: Currency = "CNY",
 ): ParsedMoonshotPage {
   const rows = parseRows(markdown);
   const models = rows.map((row) => {
@@ -177,8 +254,8 @@ export function parseMoonshotPricingPage(
     const contextTokens = parseTokenCount(row[5]!);
     const metadata = modelMetadata(id);
     const price: ModelPrice = {
-      market: "china",
-      currency: "CNY",
+      market,
+      currency,
       unit: "1M_tokens",
       rateType: "standard",
       input: {
@@ -213,19 +290,28 @@ async function fetchMarkdown(url: string): Promise<string> {
   return response.text();
 }
 
-export async function collectMoonshot(
+async function collectMoonshotChannel(
+  channel: MoonshotChannel,
   now = new Date(),
   fetcher: (url: string) => Promise<string> = fetchMarkdown,
 ): Promise<ProviderData> {
+  const pricingUrls = pricingSources(channel);
+  const overviewUrl = modelsOverviewUrl(channel);
+  const limitsUrl = outputLimitsUrl(channel);
   const [pages, overview, troubleshooting] = await Promise.all([
     Promise.all(
-      MOONSHOT_PRICING_SOURCES.map(async (url) => ({
+      pricingUrls.map(async (url) => ({
         url,
-        parsed: parseMoonshotPricingPage(await fetcher(url), url),
+        parsed: parseMoonshotPricingPage(
+          await fetcher(url),
+          url,
+          channel.market,
+          channel.currency,
+        ),
       })),
     ),
-    fetcher(MOONSHOT_MODELS_OVERVIEW_URL),
-    fetcher(MOONSHOT_OUTPUT_LIMITS_URL),
+    fetcher(overviewUrl),
+    fetcher(limitsUrl),
   ]);
   for (const id of ["kimi-k3", "kimi-k2.7-code", "kimi-k2.6", "kimi-k2.5"]) {
     if (!overview.includes(id)) {
@@ -245,22 +331,22 @@ export async function collectMoonshot(
   const sources: Source[] = pages.map(({ url, parsed }) => ({
     url,
     kind: "pricing",
-    locale: "zh-CN",
-    currency: "CNY",
+    locale: channel.locale,
+    currency: channel.currency,
     retrievedAt,
     contentHash: `sha256:${createHash("sha256").update(parsed.normalizedTable).digest("hex")}`,
   }));
   sources.push({
-    url: MOONSHOT_MODELS_OVERVIEW_URL,
+    url: overviewUrl,
     kind: "model-metadata",
-    locale: "zh-CN",
+    locale: channel.locale,
     retrievedAt,
     contentHash: `sha256:${createHash("sha256").update(overview.replace(/\s+/g, " ").trim()).digest("hex")}`,
   });
   sources.push({
-    url: MOONSHOT_OUTPUT_LIMITS_URL,
+    url: limitsUrl,
     kind: "model-metadata",
-    locale: "zh-CN",
+    locale: channel.locale,
     retrievedAt,
     contentHash: `sha256:${createHash("sha256").update(troubleshooting.replace(/\s+/g, " ").trim()).digest("hex")}`,
   });
@@ -271,15 +357,28 @@ export async function collectMoonshot(
   return {
     schemaVersion: SCHEMA_VERSION,
     health: healthyHealth(now),
-    id: "moonshot-cn",
-    name: "Kimi China",
-    displayNames: {
-      "zh-CN": "Kimi 国内版",
-      en: "Kimi China",
-    },
+    id: channel.id,
+    name: channel.name,
+    displayNames: channel.displayNames,
     ownedBy: "moonshot",
-    baseUrls: { openai: "https://api.moonshot.cn/v1" },
+    baseUrls: { openai: channel.apiBaseUrl },
     models,
     sources,
   };
 }
+
+export function collectMoonshotChina(
+  now = new Date(),
+  fetcher: (url: string) => Promise<string> = fetchMarkdown,
+): Promise<ProviderData> {
+  return collectMoonshotChannel(MOONSHOT_CHANNELS.china, now, fetcher);
+}
+
+export function collectMoonshotInternational(
+  now = new Date(),
+  fetcher: (url: string) => Promise<string> = fetchMarkdown,
+): Promise<ProviderData> {
+  return collectMoonshotChannel(MOONSHOT_CHANNELS.international, now, fetcher);
+}
+
+export const collectMoonshot = collectMoonshotChina;

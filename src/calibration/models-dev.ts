@@ -26,6 +26,14 @@ export interface ModelsDevProvider {
 
 export type ModelsDevApi = Record<string, ModelsDevProvider>;
 
+const moonshotModelIds = [
+  "kimi-k3",
+  "kimi-k2.7-code",
+  "kimi-k2.7-code-highspeed",
+  "kimi-k2.6",
+  "kimi-k2.5",
+] as const;
+
 const mappings = [
   {
     provider: "deepseek",
@@ -48,42 +56,15 @@ const mappings = [
     referenceModel: "LongCat-2.0",
     referenceUrl: "https://models.dev/models/meituan/longcat-2.0/",
   },
-  {
-    provider: "moonshot-cn",
-    model: "kimi-k3",
-    referenceProvider: "moonshotai",
-    referenceModel: "kimi-k3",
-    referenceUrl: "https://models.dev/models/moonshotai/kimi-k3/",
-  },
-  {
-    provider: "moonshot-cn",
-    model: "kimi-k2.7-code",
-    referenceProvider: "moonshotai",
-    referenceModel: "kimi-k2.7-code",
-    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.7-code/",
-  },
-  {
-    provider: "moonshot-cn",
-    model: "kimi-k2.7-code-highspeed",
-    referenceProvider: "moonshotai",
-    referenceModel: "kimi-k2.7-code-highspeed",
-    referenceUrl:
-      "https://models.dev/models/moonshotai/kimi-k2.7-code-highspeed/",
-  },
-  {
-    provider: "moonshot-cn",
-    model: "kimi-k2.6",
-    referenceProvider: "moonshotai",
-    referenceModel: "kimi-k2.6",
-    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.6/",
-  },
-  {
-    provider: "moonshot-cn",
-    model: "kimi-k2.5",
-    referenceProvider: "moonshotai",
-    referenceModel: "kimi-k2.5",
-    referenceUrl: "https://models.dev/models/moonshotai/kimi-k2.5/",
-  },
+  ...(["moonshot-cn", "moonshot-intl"] as const).flatMap((provider) =>
+    moonshotModelIds.map((model) => ({
+      provider,
+      model,
+      referenceProvider: "moonshotai",
+      referenceModel: model,
+      referenceUrl: `https://models.dev/models/moonshotai/${model}/`,
+    })),
+  ),
   {
     provider: "qwen-cn",
     model: "qwen3.7-plus",

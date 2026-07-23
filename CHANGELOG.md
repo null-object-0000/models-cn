@@ -2,6 +2,17 @@
 
 本项目遵循语义化版本，并在 [API 兼容性与版本策略](COMPATIBILITY.md) 中单独定义数据 API 的兼容性承诺。
 
+## [Unreleased]
+
+### Added
+
+- Kimi 国际版美元定价、模型元数据和官方 Models API 清单。
+
+### Changed
+
+- 国内版密钥改用 `MOONSHOT_CHINA_API_KEY`，并暂时兼容旧的 `MOONSHOT_API_KEY`。
+- Kimi Models API 清单支持官方 `context_length` 字段。
+
 ## [0.1.0] - 2026-07-22
 
 首个公开稳定版本。

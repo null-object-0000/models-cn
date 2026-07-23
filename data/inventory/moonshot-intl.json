@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "provider": "moonshot-intl",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-07-23T09:12:44.157Z",
+    "lastAttemptAt": "2026-07-23T09:12:44.157Z",
+    "consecutiveFailures": 0
+  },
+  "source": {
+    "url": "https://api.moonshot.ai/v1/models",
+    "retrievedAt": "2026-07-23T09:12:44.157Z",
+    "contentHash": "sha256:3b62322cca3b0a7d1ea876508bf70eaa0ec578109fdb5e3f11c9e79c031e4faf"
+  },
+  "models": [
+    {
+      "id": "kimi-k2.6",
+      "ownedBy": "moonshot",
+      "contextTokens": 262144
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "ownedBy": "moonshot",
+      "contextTokens": 262144
+    }
+  ],
+  "comparison": {
+    "status": "mismatch",
+    "pricedAndListed": [
+      "kimi-k2.6",
+      "kimi-k2.7-code"
+    ],
+    "aliasesAndListed": [],
+    "listedWithoutPricing": [],
+    "pricedButNotListed": [
+      "kimi-k2.5",
+      "kimi-k2.7-code-highspeed",
+      "kimi-k3"
+    ],
+    "activeAliasesNotListed": []
+  }
+}

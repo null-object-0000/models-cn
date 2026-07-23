@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-07-23T09:12:31.262Z",
+    "lastAttemptAt": "2026-07-23T09:12:31.262Z",
+    "consecutiveFailures": 0
+  },
+  "id": "moonshot-intl",
+  "name": "Kimi International",
+  "displayNames": {
+    "zh-CN": "Kimi 国际版",
+    "en": "Kimi International"
+  },
+  "ownedBy": "moonshot",
+  "baseUrls": {
+    "openai": "https://api.moonshot.ai/v1"
+  },
+  "models": [
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "dynamicTools": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "reasoning_effort",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "aliases": [],
+      "limits": {
+        "contextTokens": 1048576,
+        "maxOutputTokens": 1048576
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.3,
+            "standard": 3
+          },
+          "output": 15,
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k3"
+        }
+      ]
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "thinking",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "aliases": [],
+      "limits": {
+        "contextTokens": 262144
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.19,
+            "standard": 0.95
+          },
+          "output": 4,
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code"
+        }
+      ]
+    },
+    {
+      "id": "kimi-k2.7-code-highspeed",
+      "name": "Kimi K2.7 Code HighSpeed",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "thinking",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "aliases": [],
+      "limits": {
+        "contextTokens": 262144
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.38,
+            "standard": 1.9
+          },
+          "output": 8,
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code"
+        }
+      ]
+    },
+    {
+      "id": "kimi-k2.6",
+      "name": "Kimi K2.6",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking",
+          "non-thinking"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "thinking",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "aliases": [],
+      "limits": {
+        "contextTokens": 262144,
+        "maxOutputTokens": 262144
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.16,
+            "standard": 0.95
+          },
+          "output": 4,
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k26"
+        }
+      ]
+    },
+    {
+      "id": "kimi-k2.5",
+      "name": "Kimi K2.5",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking",
+          "non-thinking"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "thinking",
+          "temperature"
+        ]
+      },
+      "aliases": [],
+      "limits": {
+        "contextTokens": 262144,
+        "maxOutputTokens": 262144
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 0.1,
+            "standard": 0.6
+          },
+          "output": 3,
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k25"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://platform.kimi.ai/docs/pricing/chat-k3",
+      "kind": "pricing",
+      "locale": "en",
+      "currency": "USD",
+      "retrievedAt": "2026-07-23T09:12:31.262Z",
+      "contentHash": "sha256:df6b4de65d4135072941381d0e627c1eb17efdd659f0b052181e7206beeac00e"
+    },
+    {
+      "url": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+      "kind": "pricing",
+      "locale": "en",
+      "currency": "USD",
+      "retrievedAt": "2026-07-23T09:12:31.262Z",
+      "contentHash": "sha256:5213733dc22098ecbfd47a9e349e4fd49e903371bc0122314fe30fed9aacdb4d"
+    },
+    {
+      "url": "https://platform.kimi.ai/docs/pricing/chat-k26",
+      "kind": "pricing",
+      "locale": "en",
+      "currency": "USD",
+      "retrievedAt": "2026-07-23T09:12:31.262Z",
+      "contentHash": "sha256:0117b5bacedecd716ded845938a84abd60193984bf1e211eac7135c6559f0bb4"
+    },
+    {
+      "url": "https://platform.kimi.ai/docs/pricing/chat-k25",
+      "kind": "pricing",
+      "locale": "en",
+      "currency": "USD",
+      "retrievedAt": "2026-07-23T09:12:31.262Z",
+      "contentHash": "sha256:4057729c1e319745050485749ac3921be302e1c3e565de7ecc90438fd66e37d5"
+    },
+    {
+      "url": "https://platform.kimi.ai/docs/api/models-overview",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-07-23T09:12:31.262Z",
+      "contentHash": "sha256:d00d9c13f347cf185e3e6a8c0633cea7b08cad4700f6d7f445546ad14539978a"
+    },
+    {
+      "url": "https://platform.kimi.ai/docs/guide/troubleshooting#kimi",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-07-23T09:12:31.262Z",
+      "contentHash": "sha256:e21138bff0a69cc1ea905f558e22accd56e124ff64772f681135889d89394043"
+    }
+  ]
+}

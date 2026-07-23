@@ -4,7 +4,10 @@ import "../env.js";
 import { collectModelsDevCalibration } from "../calibration/models-dev.js";
 import { collectDeepSeek } from "../collectors/deepseek.js";
 import { collectLongCat } from "../collectors/longcat.js";
-import { collectMoonshot } from "../collectors/moonshot.js";
+import {
+  collectMoonshotChina,
+  collectMoonshotInternational,
+} from "../collectors/moonshot.js";
 import { collectQwen } from "../collectors/qwen.js";
 import {
   calibrationDir,
@@ -22,7 +25,8 @@ await mkdir(providersDir, { recursive: true });
 const collectors = [
   { id: "deepseek", collect: collectDeepSeek },
   { id: "longcat", collect: collectLongCat },
-  { id: "moonshot-cn", collect: collectMoonshot },
+  { id: "moonshot-cn", collect: collectMoonshotChina },
+  { id: "moonshot-intl", collect: collectMoonshotInternational },
   { id: "qwen-cn", collect: collectQwen },
 ];
 

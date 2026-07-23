@@ -8,7 +8,13 @@ async function json(path: string): Promise<Record<string, unknown>> {
 
 describe("public schema v1 contract", () => {
   it("uses the shared v1 version in providers and generated catalogs", async () => {
-    const providerFiles = ["deepseek", "longcat", "moonshot-cn", "qwen-cn"];
+    const providerFiles = [
+      "deepseek",
+      "longcat",
+      "moonshot-cn",
+      "moonshot-intl",
+      "qwen-cn",
+    ];
     const providers = await Promise.all(
       providerFiles.map((provider) => json(`data/providers/${provider}.json`)),
     );

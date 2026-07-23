@@ -11,8 +11,12 @@ interface ModelsResponse {
     id: string;
     owned_by: string;
     display_name?: string;
+    context_length?: number;
     context_window?: number;
     max_output_tokens?: number;
+    supports_image_in?: boolean;
+    supports_video_in?: boolean;
+    supports_reasoning?: boolean;
   }>;
 }
 
@@ -29,8 +33,15 @@ export const INVENTORY_PROVIDERS = [
   },
   {
     provider: "moonshot-cn",
-    env: "MOONSHOT_API_KEY",
+    env: "MOONSHOT_CHINA_API_KEY",
+    legacyEnv: "MOONSHOT_API_KEY",
     url: "https://api.moonshot.cn/v1/models",
+    modelIdPrefix: "kimi-",
+  },
+  {
+    provider: "moonshot-intl",
+    env: "MOONSHOT_INTERNATIONAL_API_KEY",
+    url: "https://api.moonshot.ai/v1/models",
     modelIdPrefix: "kimi-",
   },
 ] as const;
@@ -97,7 +108,9 @@ export function buildProviderInventory(
       id: model.id,
       ownedBy: model.owned_by,
       ...(model.display_name ? { displayName: model.display_name } : {}),
-      ...(model.context_window ? { contextTokens: model.context_window } : {}),
+      ...((model.context_length ?? model.context_window)
+        ? { contextTokens: model.context_length ?? model.context_window }
+        : {}),
       ...(model.max_output_tokens
         ? { maxOutputTokens: model.max_output_tokens }
         : {}),

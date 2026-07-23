@@ -19,12 +19,15 @@ import { failedHealth } from "../health.js";
 await mkdir(inventoryDir, { recursive: true });
 let refreshed = 0;
 for (const config of INVENTORY_PROVIDERS) {
-  const apiKey = process.env[config.env];
+  const legacyEnv = "legacyEnv" in config ? config.legacyEnv : undefined;
+  const apiKey =
+    process.env[config.env] ?? (legacyEnv ? process.env[legacyEnv] : undefined);
+  const acceptedEnvs = legacyEnv ? `${config.env} or ${legacyEnv}` : config.env;
   if (!apiKey) {
     const output = path.join(inventoryDir, `${config.provider}.json`);
     const previous = await readJson<ProviderInventory>(output);
     if (previous) {
-      const error = new Error(`${config.env} is not configured`);
+      const error = new Error(`${acceptedEnvs} is not configured`);
       const fallback = {
         ...previous,
         health: failedHealth(previous.health, error),
@@ -33,7 +36,7 @@ for (const config of INVENTORY_PROVIDERS) {
       await writeJson(output, fallback);
     }
     console.error(
-      `${config.provider} inventory skipped: ${config.env} is not configured`,
+      `${config.provider} inventory skipped: ${acceptedEnvs} is not configured`,
     );
     continue;
   }
