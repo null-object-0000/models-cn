@@ -2,15 +2,15 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-23T01:47:24.268Z",
-    "lastAttemptAt": "2026-07-23T01:47:24.268Z",
+    "lastSuccessfulAt": "2026-07-23T10:29:47.856Z",
+    "lastAttemptAt": "2026-07-23T10:29:47.856Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
   "name": "Qwen China",
   "displayNames": {
-    "zh-CN": "千问国内版",
-    "en": "Qwen China"
+    "zh-CN": "阿里巴巴",
+    "en": "Alibaba"
   },
   "ownedBy": "alibaba",
   "baseUrls": {
@@ -812,7 +812,7 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-07-23T01:47:24.268Z",
+      "retrievedAt": "2026-07-23T10:29:47.856Z",
       "contentHash": "sha256:42527556a7deea239337c8a1138f8770b4f087803156707867bad898e97af2c7"
     }
   ]

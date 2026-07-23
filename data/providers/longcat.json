@@ -2,12 +2,16 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-23T01:47:24.251Z",
-    "lastAttemptAt": "2026-07-23T01:47:24.251Z",
+    "lastSuccessfulAt": "2026-07-23T10:29:47.840Z",
+    "lastAttemptAt": "2026-07-23T10:29:47.840Z",
     "consecutiveFailures": 0
   },
   "id": "longcat",
   "name": "LongCat",
+  "displayNames": {
+    "zh-CN": "美团",
+    "en": "Meituan"
+  },
   "ownedBy": "longcat",
   "baseUrls": {
     "openai": "https://api.longcat.chat/openai",

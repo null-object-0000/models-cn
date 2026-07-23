@@ -26,8 +26,8 @@ export const MOONSHOT_CHANNELS = {
     id: "moonshot-cn",
     name: "Kimi China",
     displayNames: {
-      "zh-CN": "Kimi 国内版",
-      en: "Kimi China",
+      "zh-CN": "月之暗面",
+      en: "Moonshot AI",
     },
     apiBaseUrl: "https://api.moonshot.cn/v1",
     docsBaseUrl: "https://platform.kimi.com",
@@ -39,8 +39,8 @@ export const MOONSHOT_CHANNELS = {
     id: "moonshot-intl",
     name: "Kimi International",
     displayNames: {
-      "zh-CN": "Kimi 国际版",
-      en: "Kimi International",
+      "zh-CN": "月之暗面",
+      en: "Moonshot AI",
     },
     apiBaseUrl: "https://api.moonshot.ai/v1",
     docsBaseUrl: "https://platform.kimi.ai",

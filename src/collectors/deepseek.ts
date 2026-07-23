@@ -298,6 +298,10 @@ export async function collectDeepSeek(
     health: healthyHealth(now),
     id: "deepseek",
     name: "DeepSeek",
+    displayNames: {
+      "zh-CN": "深度求索",
+      en: "DeepSeek",
+    },
     ownedBy: "deepseek",
     baseUrls: first.parsed.baseUrls,
     models: [...byId.values()],

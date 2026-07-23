@@ -96,8 +96,7 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
           return {
             value: base,
             label: representative
-              ? representative.displayNames?.["zh-CN"]?.replace(/\s*(国内版|国际版)\s*/g, "").trim() ??
-                representative.name.replace(/\s*(China|International)\s*/gi, "").trim()
+              ? providerName(representative)
               : base,
           };
         });

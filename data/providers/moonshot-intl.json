@@ -2,15 +2,15 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-23T09:12:31.262Z",
-    "lastAttemptAt": "2026-07-23T09:12:31.262Z",
+    "lastSuccessfulAt": "2026-07-23T10:29:47.853Z",
+    "lastAttemptAt": "2026-07-23T10:29:47.853Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-intl",
   "name": "Kimi International",
   "displayNames": {
-    "zh-CN": "Kimi 国际版",
-    "en": "Kimi International"
+    "zh-CN": "月之暗面",
+    "en": "Moonshot AI"
   },
   "ownedBy": "moonshot",
   "baseUrls": {

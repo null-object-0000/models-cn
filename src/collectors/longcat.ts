@@ -314,6 +314,10 @@ export async function collectLongCat(
     health: healthyHealth(now),
     id: "longcat",
     name: "LongCat",
+    displayNames: {
+      "zh-CN": "美团",
+      en: "Meituan",
+    },
     ownedBy: "longcat",
     baseUrls: {
       openai: "https://api.longcat.chat/openai",

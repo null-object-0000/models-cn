@@ -397,7 +397,7 @@ describe("Qwen China collector", () => {
     expect(provider).toMatchObject({
       id: "qwen-cn",
       name: "Qwen China",
-      displayNames: { "zh-CN": "千问国内版", en: "Qwen China" },
+      displayNames: { "zh-CN": "阿里巴巴", en: "Alibaba" },
       ownedBy: "alibaba",
       baseUrls: {
         openai: "https://dashscope.aliyuncs.com/compatible-mode/v1",

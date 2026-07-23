@@ -2,12 +2,16 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-23T01:47:24.229Z",
-    "lastAttemptAt": "2026-07-23T01:47:24.229Z",
+    "lastSuccessfulAt": "2026-07-23T10:29:47.824Z",
+    "lastAttemptAt": "2026-07-23T10:29:47.824Z",
     "consecutiveFailures": 0
   },
   "id": "deepseek",
   "name": "DeepSeek",
+  "displayNames": {
+    "zh-CN": "深度求索",
+    "en": "DeepSeek"
+  },
   "ownedBy": "deepseek",
   "baseUrls": {
     "openai": "https://api.deepseek.com",
