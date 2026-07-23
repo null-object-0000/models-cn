@@ -72,6 +72,12 @@
   .method-grid {
     grid-template-columns: 1fr;
   }
+  .price-toolbar-field > span {
+    display: none;
+  }
+  .price-toolbar-field select {
+    padding-right: 24px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html {

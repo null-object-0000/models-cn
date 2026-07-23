@@ -174,6 +174,9 @@ tbody .provider-row:first-child td {
 }
 .model-id {
   margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--muted);
   font-family:
     ui-monospace,
@@ -183,12 +186,50 @@ tbody .provider-row:first-child td {
   font-size: 11px;
   line-height: 1.4;
 }
+.region-tag {
+  padding: 2px 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family:
+    Inter,
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.promo-tag {
+  padding: 2px 6px;
+  background: var(--warning-soft);
+  color: var(--warning);
+  font-family:
+    Inter,
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.merge-warning {
+  margin-top: 6px;
+  color: var(--warning);
+  font-size: 11px;
+  font-weight: 500;
+}
 .num {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 .price {
-  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   font-size: 15px;
   font-weight: 650;
   line-height: 1.1;
@@ -196,12 +237,30 @@ tbody .provider-row:first-child td {
   font-variant-numeric: tabular-nums;
 }
 .price small {
-  display: block;
   margin-top: 7px;
   color: var(--muted);
   font-size: 11px;
   font-weight: 400;
   line-height: 1.2;
+}
+.reference-price {
+  margin-bottom: 2px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: line-through;
+  line-height: 1;
+}
+.price-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.reference-price-inline {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: line-through;
 }
 .tags,
 .cap-list {
@@ -334,34 +393,53 @@ tbody .provider-row:first-child td {
   line-height: 1.25;
   font-variant-numeric: tabular-nums;
 }
-.cache-mode-toolbar {
+.price-with-reference {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.price-table .reference-price-inline {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+.price-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
   margin: -4px 0 12px;
   color: var(--muted);
   font-size: 12px;
   font-weight: 400;
 }
-.cache-mode-switch {
+.price-toolbar-field {
   display: inline-flex;
-  padding: 2px;
-  border: 1px solid var(--line);
-  background: var(--panel);
+  align-items: center;
+  gap: 8px;
 }
-.cache-mode-switch button {
-  min-height: 28px;
-  padding: 0 9px;
-  border: 0;
-  background: transparent;
+.price-toolbar-field > span {
   color: var(--muted);
-  cursor: pointer;
 }
-.cache-mode-switch button[aria-pressed="true"] {
-  color: var(--accent);
-  background: var(--accent-soft);
-  font-weight: 750;
+.price-toolbar-field select {
+  min-height: 32px;
+  padding: 0 28px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--panel);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23526b61' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.price-toolbar-field select:focus {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  outline: none;
 }
 .explicit-cache-prices {
   gap: 5px;

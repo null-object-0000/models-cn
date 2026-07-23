@@ -1,19 +1,22 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import {
+  buildMergedGroups,
   compareModelsByReleaseDate,
   modelDomId,
   modelHash,
   modelKey,
   providerName,
+  type MergedGroup,
+  type VersionViewMode,
 } from "../lib/catalog";
-import type { CalibrationModel, Catalog, Currency, RateType } from "../types";
+import type { CalibrationModel, Catalog, Currency } from "../types";
 import { ModelRow } from "./ModelRow";
 
 export function CatalogSection({ catalog }: { catalog: Catalog }) {
   const [currency, setCurrency] = useState<Currency>("CNY");
-  const [rateType, setRateType] = useState<RateType>("promotional");
   const [providerFilter, setProviderFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [versionView, setVersionView] = useState<VersionViewMode>("merged");
   const [expanded, setExpanded] = useState<string | null>(
     () => decodeURIComponent(window.location.hash.slice(1)) || null,
   );
@@ -36,32 +39,74 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
       ),
     [catalog],
   );
+  const matchesSearch = useMemo(() => {
+    return (provider: typeof models[0]["provider"], model: typeof models[0]["model"]) => {
+      const capabilities = Object.values(model.capabilities).flat().join(" ");
+      const aliases = model.aliases.map((alias) => alias.id).join(" ");
+      return `${providerName(provider)} ${provider.name} ${provider.displayNames?.en ?? ""} ${provider.id} ${model.name} ${model.id} ${aliases} ${capabilities}`
+        .toLowerCase()
+        .includes(deferredSearch);
+    };
+  }, [deferredSearch]);
+
   const filtered = useMemo(
-    () =>
-      models.filter(({ provider, model }) => {
-        if (providerFilter !== "all" && provider.id !== providerFilter) {
-          return false;
-        }
-        const capabilities = Object.values(model.capabilities).flat().join(" ");
-        const aliases = model.aliases.map((alias) => alias.id).join(" ");
-        return `${providerName(provider)} ${provider.name} ${provider.displayNames?.en ?? ""} ${provider.id} ${model.name} ${model.id} ${aliases} ${capabilities}`
-          .toLowerCase()
-          .includes(deferredSearch);
-      }),
-    [deferredSearch, models, providerFilter],
+    () => models.filter(({ provider, model }) => matchesSearch(provider, model)),
+    [models, matchesSearch],
   );
-  const groups = catalog.providers
-    .map((provider) => ({
-      provider,
-      models: filtered
-        .filter((item) => item.provider.id === provider.id)
-        .map((item) => ({
-          model: item.model,
-          calibration: calibrationMap.get(modelKey(provider.id, item.model.id)),
-        }))
-        .sort(compareModelsByReleaseDate),
-    }))
-    .filter((group) => group.models.length > 0);
+
+  const providerPassesFilter = useMemo(() => {
+    return (providerId: string) => {
+      if (providerFilter === "all") return true;
+      if (versionView === "merged") {
+        return providerId === providerFilter || providerId.startsWith(`${providerFilter}-`);
+      }
+      return providerId === providerFilter;
+    };
+  }, [providerFilter, versionView]);
+
+  const groups: MergedGroup[] = useMemo(
+    () =>
+      buildMergedGroups(
+        catalog.providers,
+        calibrationMap,
+        (provider, model) =>
+          providerPassesFilter(provider.id) && matchesSearch(provider, model),
+        versionView,
+      ).filter((group) => group.models.length > 0),
+    [catalog.providers, calibrationMap, providerPassesFilter, matchesSearch, versionView],
+  );
+
+  const providerSelectOptions = useMemo(() => {
+    if (versionView === "merged") {
+      const seen = new Set<string>();
+      return catalog.providers
+        .map((provider) => {
+          const match = provider.id.match(/^(.+)-(cn|intl)$/);
+          return match?.[1] ?? provider.id;
+        })
+        .filter((base) => {
+          if (seen.has(base)) return false;
+          seen.add(base);
+          return true;
+        })
+        .map((base) => {
+          const representative = catalog.providers.find(
+            (p) => p.id === `${base}-cn` || p.id === `${base}-intl` || p.id === base,
+          );
+          return {
+            value: base,
+            label: representative
+              ? representative.displayNames?.["zh-CN"]?.replace(/\s*(国内版|国际版)\s*/g, "").trim() ??
+                representative.name.replace(/\s*(China|International)\s*/gi, "").trim()
+              : base,
+          };
+        });
+    }
+    return catalog.providers.map((provider) => ({
+      value: provider.id,
+      label: providerName(provider),
+    }));
+  }, [catalog.providers, versionView]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -136,11 +181,22 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
               aria-label="筛选厂商"
             >
               <option value="all">全部厂商</option>
-              {catalog.providers.map((provider) => (
-                <option key={provider.id} value={provider.id}>
-                  {providerName(provider)}
+              {providerSelectOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
                 </option>
               ))}
+            </select>
+            <select
+              className="provider-select"
+              value={versionView}
+              onChange={(event) =>
+                setVersionView(event.target.value as VersionViewMode)
+              }
+              aria-label="版本展示"
+            >
+              <option value="merged">合并区域版本</option>
+              <option value="separate">分开显示版本</option>
             </select>
             <div className="segment" aria-label="货币">
               <button
@@ -154,20 +210,6 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
                 onClick={() => setCurrency("USD")}
               >
                 USD 美元
-              </button>
-            </div>
-            <div className="segment" aria-label="价格类型">
-              <button
-                aria-pressed={rateType === "promotional"}
-                onClick={() => setRateType("promotional")}
-              >
-                当前价格
-              </button>
-              <button
-                aria-pressed={rateType === "standard"}
-                onClick={() => setRateType("standard")}
-              >
-                标准价格
               </button>
             </div>
           </div>
@@ -194,20 +236,16 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {groups.map(
-                      ({ provider, models: providerModels }, index) => (
-                        <ModelRow.Group
-                          key={provider.id}
-                          provider={provider}
-                          models={providerModels}
-                          groupIndex={index}
-                          currency={currency}
-                          rateType={rateType}
-                          expanded={expanded}
-                          onToggle={toggleModel}
-                        />
-                      ),
-                    )}
+                    {groups.map((group, index) => (
+                      <ModelRow.Group
+                        key={group.id}
+                        group={group}
+                        groupIndex={index}
+                        currency={currency}
+                        expanded={expanded}
+                        onToggle={toggleModel}
+                      />
+                    ))}
                   </tbody>
                 </table>
               </div>

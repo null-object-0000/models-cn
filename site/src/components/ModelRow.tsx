@@ -4,37 +4,35 @@ import {
   compactTokens,
   formatPrice,
   formatPriceRange,
+  isPriceRange,
   modelDomId,
   modelKey,
   numberFormatter,
   providerName,
+  type MergedGroup,
+  type MergedModel,
+  type RegionModel,
 } from "../lib/catalog";
 import type {
   CalibrationModel,
   Currency,
   Model,
   Provider,
-  RateType,
 } from "../types";
 import { CalibrationBadge } from "./CalibrationBadge";
 
-type ModelItem = { model: Model; calibration: CalibrationModel | undefined };
 type GroupProps = {
-  provider: Provider;
-  models: ModelItem[];
+  group: MergedGroup;
   groupIndex: number;
   currency: Currency;
-  rateType: RateType;
   expanded: string | null;
   onToggle: (key: string) => void;
 };
 
 function Group({
-  provider,
-  models,
+  group,
   groupIndex,
   currency,
-  rateType,
   expanded,
   onToggle,
 }: GroupProps) {
@@ -47,71 +45,96 @@ function Group({
               <div className="provider-kicker">
                 {String(groupIndex + 1).padStart(2, "0")} / PROVIDER
               </div>
-              <div className="provider-name">{providerName(provider)}</div>
+              <div className="provider-name">{group.displayName}</div>
             </div>
-            <div className="provider-count">{models.length} 个模型</div>
+            <div className="provider-count">{group.models.length} 个模型</div>
           </div>
         </td>
       </tr>
-      {models.map(({ model, calibration }) => (
-        <ModelRows
-          key={modelKey(provider.id, model.id)}
-          provider={provider}
-          model={model}
-          calibration={calibration}
-          currency={currency}
-          rateType={rateType}
-          expanded={expanded === modelKey(provider.id, model.id)}
-          onToggle={onToggle}
-        />
-      ))}
+      {group.models.map((mergedModel) => {
+        const key = `${group.id}/${mergedModel.id}`;
+        const active = selectRegionModel(mergedModel, currency);
+        return (
+          <ModelRows
+            key={key}
+            mergedModel={mergedModel}
+            active={active}
+            group={group}
+            currency={currency}
+            expanded={expanded === key}
+            onToggle={onToggle}
+          />
+        );
+      })}
     </>
   );
 }
 
+function selectRegionModel(
+  merged: MergedModel,
+  currency: Currency,
+): RegionModel | undefined {
+  if (currency === "CNY") {
+    return merged.cn ?? merged.intl;
+  }
+  return merged.intl ?? merged.cn;
+}
+
 function ModelRows({
-  provider,
-  model,
-  calibration,
+  mergedModel,
+  active,
+  group,
   currency,
-  rateType,
   expanded,
   onToggle,
 }: {
-  provider: Provider;
-  model: Model;
-  calibration: CalibrationModel | undefined;
+  mergedModel: MergedModel;
+  active: RegionModel | undefined;
+  group: MergedGroup;
   currency: Currency;
-  rateType: RateType;
   expanded: boolean;
   onToggle: (key: string) => void;
 }) {
+  const model = active?.model ?? mergedModel.cn?.model ?? mergedModel.intl?.model;
+  if (!model) return null;
+
   const selected = model.prices.filter((price) => price.currency === currency);
-  const preferredRate: RateType = selected.some(
-    (price) => price.rateType === rateType,
-  )
-    ? rateType
-    : "standard";
-  const summaryPrices = selected.filter(
-    (price) => price.rateType === preferredRate,
+  const promotionalPrices = selected.filter(
+    (price) => price.rateType === "promotional",
   );
+  const standardPrices = selected.filter((price) => price.rateType === "standard");
+  const hasPromotional = promotionalPrices.length > 0;
+  const summaryPrices = hasPromotional ? promotionalPrices : standardPrices;
+  const referencePrices = hasPromotional ? standardPrices : [];
   const capabilities = capabilityLabels(model.capabilities);
   const source =
     summaryPrices[0]?.sourceUrl ??
     selected[0]?.sourceUrl ??
     model.prices[0]?.sourceUrl;
-  const retrievedAt =
-    provider.sources
-      .filter((item) => !source || item.url === source)
-      .map((item) => item.retrievedAt)
-      .sort()
-      .at(-1) ??
-    provider.sources
-      .map((item) => item.retrievedAt)
-      .sort()
-      .at(-1);
+  const provider = active?.provider ?? group.cn ?? group.intl;
+  const retrievedAt = provider
+    ? provider.sources
+        .filter((item) => !source || item.url === source)
+        .map((item) => item.retrievedAt)
+        .sort()
+        .at(-1) ??
+      provider.sources
+        .map((item) => item.retrievedAt)
+        .sort()
+        .at(-1)
+    : undefined;
   const priceUnit = currency === "CNY" ? "人民币 / 1M" : "美元 / 1M";
-  const key = modelKey(provider.id, model.id);
+  const key = `${group.id}/${mergedModel.id}`;
+  const regionLabel = active
+    ? active.region === "cn"
+      ? "国内版"
+      : "国际版"
+    : null;
+  const showDifferenceWarning =
+    group.merged &&
+    mergedModel.cn &&
+    mergedModel.intl &&
+    !mergedModel.mergeable;
 
   const activate = (event: MouseEvent<HTMLTableRowElement>) => {
     if ((event.target as HTMLElement).closest("a, button")) return;
@@ -127,7 +150,7 @@ function ModelRows({
   return (
     <Fragment>
       <tr
-        id={modelDomId(provider.id, model.id)}
+        id={modelDomId(group.id, mergedModel.id)}
         className="model-row"
         tabIndex={0}
         aria-expanded={expanded}
@@ -136,7 +159,20 @@ function ModelRows({
       >
         <td className="model-main">
           <div className="model-title">{model.name}</div>
-          <div className="model-id">{model.id}</div>
+          <div className="model-id">
+            {model.id}
+            {regionLabel ? (
+              <span className="region-tag">{regionLabel}</span>
+            ) : null}
+            {hasPromotional ? (
+              <span className="promo-tag">优惠</span>
+            ) : null}
+          </div>
+          {showDifferenceWarning ? (
+            <div className="merge-warning">
+              国内版 / 国际版存在差异
+            </div>
+          ) : null}
         </td>
         <td>
           <strong>{compactTokens(model.limits.contextTokens)}</strong>
@@ -146,11 +182,13 @@ function ModelRows({
         </td>
         <PriceCell
           values={summaryPrices.map((price) => price.input.standard)}
+          referenceValues={referencePrices.map((price) => price.input.standard)}
           currency={currency}
           unit={priceUnit}
         />
         <PriceCell
           values={summaryPrices.map((price) => price.input.cacheHit)}
+          referenceValues={referencePrices.map((price) => price.input.cacheHit)}
           fallbackValues={summaryPrices.map(
             (price) =>
               price.input.explicitCacheCreation ??
@@ -162,6 +200,7 @@ function ModelRows({
         />
         <PriceCell
           values={summaryPrices.map((price) => price.output)}
+          referenceValues={referencePrices.map((price) => price.output)}
           currency={currency}
           unit={priceUnit}
         />
@@ -175,7 +214,7 @@ function ModelRows({
           </div>
         </td>
         <td>
-          <CalibrationBadge calibration={calibration} />
+          <CalibrationBadge calibration={active?.calibration} />
         </td>
         <td className="num">
           <button
@@ -259,6 +298,14 @@ function ModelRows({
               <section className="detail-block">
                 <h3 className="detail-title">Source & calibration</h3>
                 <dl className="kv">
+                  {group.merged ? (
+                    <>
+                      <dt>渠道版本</dt>
+                      <dd>{regionLabel ?? "—"}</dd>
+                      <dt>计价币种</dt>
+                      <dd>{currency === "CNY" ? "CNY 人民币" : "USD 美元"}</dd>
+                    </>
+                  ) : null}
                   <dt>数据来源</dt>
                   <dd>
                     {source ? (
@@ -284,10 +331,10 @@ function ModelRows({
                   </dd>
                   <dt>校准状态</dt>
                   <dd>
-                    <CalibrationBadge calibration={calibration} />
+                    <CalibrationBadge calibration={active?.calibration} />
                   </dd>
                 </dl>
-                <CalibrationNote calibration={calibration} />
+                <CalibrationNote calibration={active?.calibration} />
               </section>
             </div>
           </td>
@@ -299,18 +346,23 @@ function ModelRows({
 
 function PriceCell({
   values,
+  referenceValues,
   fallbackValues,
   fallbackLabel,
   currency,
   unit,
 }: {
   values: Array<number | undefined>;
+  referenceValues?: Array<number | undefined>;
   fallbackValues?: Array<number | undefined>;
   fallbackLabel?: string;
   currency: Currency;
   unit: string;
 }) {
   const displayPrice = formatPriceRange(values, currency);
+  const referencePrice = referenceValues
+    ? formatPriceRange(referenceValues, currency)
+    : undefined;
   let fallbackPrice: string | undefined;
   if (!displayPrice && fallbackValues) {
     fallbackPrice = formatPriceRange(fallbackValues, currency);
@@ -320,10 +372,23 @@ function PriceCell({
     : fallbackPrice
       ? fallbackLabel ?? unit
       : "未公开官方价";
+  const displayIsRange = isPriceRange(values);
+  const referenceIsRange = referenceValues ? isPriceRange(referenceValues) : false;
+  const stackPrices = displayIsRange || referenceIsRange;
   return (
     <td className="num">
       <span className="price">
-        {displayPrice ?? fallbackPrice ?? "—"}
+        {displayPrice && referencePrice && stackPrices ? (
+          <span className="reference-price">{referencePrice}</span>
+        ) : null}
+        {displayPrice && referencePrice && !stackPrices ? (
+          <span className="price-inline">
+            <span className="reference-price-inline">{referencePrice}</span>
+            <span>{displayPrice}</span>
+          </span>
+        ) : (
+          <span>{displayPrice ?? fallbackPrice ?? "—"}</span>
+        )}
         <small>{label}</small>
       </span>
     </td>
@@ -337,102 +402,131 @@ function PriceDetails({
   prices: Model["prices"];
   currency: Currency;
 }) {
-  const sorted = [...prices].sort((a, b) =>
-    a.rateType.localeCompare(b.rateType),
-  );
-  const hasExplicitCacheCreation = sorted.some(
+  const hasExplicitCacheCreation = prices.some(
     (price) => price.input.explicitCacheCreation !== undefined,
   );
-  const hasExplicitCacheHit = sorted.some(
+  const hasExplicitCacheHit = prices.some(
     (price) => price.input.explicitCacheHit !== undefined,
   );
   const hasExplicitCache = hasExplicitCacheCreation || hasExplicitCacheHit;
-  const hasImplicitCache = sorted.some(
+  const hasImplicitCache = prices.some(
     (price) => price.input.cacheHit !== undefined,
   );
   const [cacheMode, setCacheMode] = useState<"implicit" | "explicit">(() =>
     hasImplicitCache ? "implicit" : "explicit",
   );
+
+  const grouped = new Map<string, Model["prices"]>();
+  for (const price of prices) {
+    const key = price.inputTokenRange?.label ?? "";
+    const existing = grouped.get(key) ?? [];
+    existing.push(price);
+    grouped.set(key, existing);
+  }
+
+  const renderWithReference = (
+    value: number | undefined,
+    referenceValue: number | undefined,
+  ) => {
+    if (value === undefined) return <span>—</span>;
+    const formatted = formatPrice(value, currency);
+    if (referenceValue === undefined) {
+      return <strong>{formatted}</strong>;
+    }
+    return (
+      <div className="price-with-reference">
+        <span className="reference-price-inline">
+          {formatPrice(referenceValue, currency)}
+        </span>
+        <strong>{formatted}</strong>
+      </div>
+    );
+  };
+
+  const renderRow = (groupPrices: Model["prices"], label: string) => {
+    const promotional = groupPrices.find((p) => p.rateType === "promotional");
+    const standard = groupPrices.find((p) => p.rateType === "standard");
+    const primary = promotional ?? standard;
+    if (!primary) return null;
+
+    return (
+      <Fragment key={label}>
+        <div className="row-label">{label || "—"}</div>
+        <div>
+          {renderWithReference(
+            primary.input.standard,
+            promotional ? standard?.input.standard : undefined,
+          )}
+        </div>
+        {cacheMode === "implicit" ? (
+          <div>
+            {renderWithReference(
+              primary.input.cacheHit,
+              promotional ? standard?.input.cacheHit : undefined,
+            )}
+          </div>
+        ) : (
+          <div className="explicit-cache-prices">
+            <span>
+              <small>创建</small>
+              {renderWithReference(
+                primary.input.explicitCacheCreation,
+                promotional ? standard?.input.explicitCacheCreation : undefined,
+              )}
+            </span>
+            <span>
+              <small>命中</small>
+              {renderWithReference(
+                primary.input.explicitCacheHit,
+                promotional ? standard?.input.explicitCacheHit : undefined,
+              )}
+            </span>
+          </div>
+        )}
+        <div>
+          {renderWithReference(
+            primary.output,
+            promotional ? standard?.output : undefined,
+          )}
+        </div>
+      </Fragment>
+    );
+  };
+
   return (
     <>
       {hasExplicitCache ? (
-        <div className="cache-mode-toolbar">
-          <span>缓存计费</span>
-          <div className="cache-mode-switch" aria-label="缓存价格类型">
-            <button
-              type="button"
-              aria-pressed={cacheMode === "implicit"}
-              onClick={() => setCacheMode("implicit")}
+        <div className="price-toolbar">
+          <label className="price-toolbar-field">
+            <span>缓存计费</span>
+            <select
+              value={cacheMode}
+              onChange={(event) =>
+                setCacheMode(event.target.value as "implicit" | "explicit")
+              }
+              aria-label="缓存价格类型"
             >
-              隐式缓存
-            </button>
-            <button
-              type="button"
-              aria-pressed={cacheMode === "explicit"}
-              onClick={() => setCacheMode("explicit")}
-            >
-              显式缓存
-            </button>
-          </div>
+              {hasImplicitCache ? (
+                <option value="implicit">隐式缓存</option>
+              ) : null}
+              <option value="explicit">显式缓存</option>
+            </select>
+          </label>
         </div>
       ) : null}
       <div
         className="price-table"
         aria-label={`${cacheMode === "explicit" ? "显式" : "隐式"}缓存价格详情`}
       >
-        <div className="head">价格类型</div>
+        <div className="head">输入区间</div>
         <div className="head">输入</div>
         <div className="head">
           {cacheMode === "explicit" ? "显式缓存" : "缓存命中"}
         </div>
         <div className="head">输出</div>
-        {sorted.map((price, index) => (
-          <Fragment key={`${price.sourceUrl}-${price.rateType}-${index}`}>
-            <div className="row-label">
-              {price.rateType === "promotional" ? "当前价格" : "标准价格"}
-              {price.inputTokenRange ? (
-                <small>{price.inputTokenRange.label}</small>
-              ) : null}
-            </div>
-            <div>
-              <strong>{formatPrice(price.input.standard, currency)}</strong>
-            </div>
-            {cacheMode === "implicit" ? (
-              <div>
-                <strong>
-                  {price.input.cacheHit === undefined
-                    ? "—"
-                    : formatPrice(price.input.cacheHit, currency)}
-                </strong>
-              </div>
-            ) : (
-              <div className="explicit-cache-prices">
-                <span>
-                  <small>创建</small>
-                  <strong>
-                    {price.input.explicitCacheCreation === undefined
-                      ? "—"
-                      : formatPrice(
-                          price.input.explicitCacheCreation,
-                          currency,
-                        )}
-                  </strong>
-                </span>
-                <span>
-                  <small>命中</small>
-                  <strong>
-                    {price.input.explicitCacheHit === undefined
-                      ? "—"
-                      : formatPrice(price.input.explicitCacheHit, currency)}
-                  </strong>
-                </span>
-              </div>
-            )}
-            <div>
-              <strong>{formatPrice(price.output, currency)}</strong>
-            </div>
-          </Fragment>
-        ))}
+        {Array.from(grouped.entries()).map(([label, groupPrices]) =>
+          renderRow(groupPrices, label),
+        )}
       </div>
     </>
   );
