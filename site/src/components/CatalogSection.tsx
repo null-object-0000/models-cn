@@ -82,9 +82,16 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "/" && document.activeElement !== searchRef.current) {
+      const isSearchShortcut =
+        (event.key === "/" ||
+          ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f")) &&
+        document.activeElement !== searchRef.current &&
+        document.activeElement?.tagName !== "INPUT" &&
+        document.activeElement?.tagName !== "TEXTAREA";
+      if (isSearchShortcut) {
         event.preventDefault();
         searchRef.current?.focus();
+        searchRef.current?.select();
       }
       if (event.key === "Escape" && expanded) setExpanded(null);
     };
