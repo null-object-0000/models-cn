@@ -12,10 +12,12 @@ import {
 import type { CalibrationModel, Catalog, Currency } from "../types";
 import { ModelRow } from "./ModelRow";
 
+export type SortMode = "newest" | "cheapest";
+
 export function CatalogSection({ catalog }: { catalog: Catalog }) {
   const [currency, setCurrency] = useState<Currency>("CNY");
-  const [providerFilter, setProviderFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [sortMode, setSortMode] = useState<SortMode>("newest");
   const [versionView, setVersionView] = useState<VersionViewMode>("merged");
   const [expanded, setExpanded] = useState<string | null>(
     () => decodeURIComponent(window.location.hash.slice(1)) || null,
@@ -58,66 +60,25 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
     [models, matchesSearch],
   );
 
-  const providerPassesFilter = useMemo(() => {
-    return (providerId: string) => {
-      if (providerFilter === "all") return true;
-      if (versionView === "merged") {
-        return (
-          providerId === providerFilter ||
-          providerId.startsWith(`${providerFilter}-`)
-        );
-      }
-      return providerId === providerFilter;
-    };
-  }, [providerFilter, versionView]);
-
   const groups: MergedGroup[] = useMemo(
     () =>
       buildMergedGroups(
         catalog.providers,
         calibrationMap,
-        (provider, model) =>
-          providerPassesFilter(provider.id) && matchesSearch(provider, model),
+        (provider, model) => matchesSearch(provider, model),
         versionView,
+        sortMode,
+        currency,
       ).filter((group) => group.models.length > 0),
     [
       catalog.providers,
       calibrationMap,
-      providerPassesFilter,
       matchesSearch,
       versionView,
+      sortMode,
+      currency,
     ],
   );
-
-  const providerSelectOptions = useMemo(() => {
-    if (versionView === "merged") {
-      const seen = new Set<string>();
-      return catalog.providers
-        .map((provider) => {
-          const match = provider.id.match(/^(.+)-(cn|intl)$/);
-          return match?.[1] ?? provider.id;
-        })
-        .filter((base) => {
-          if (seen.has(base)) return false;
-          seen.add(base);
-          return true;
-        })
-        .map((base) => {
-          const representative = catalog.providers.find(
-            (p) =>
-              p.id === `${base}-cn` || p.id === `${base}-intl` || p.id === base,
-          );
-          return {
-            value: base,
-            label: representative ? providerName(representative) : base,
-          };
-        });
-    }
-    return catalog.providers.map((provider) => ({
-      value: provider.id,
-      label: providerName(provider),
-    }));
-  }, [catalog.providers, versionView]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -184,19 +145,15 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
             </label>
             <select
               className="provider-select"
-              value={providerFilter}
+              value={sortMode}
               onChange={(event) => {
-                setProviderFilter(event.target.value);
+                setSortMode(event.target.value as SortMode);
                 setExpanded(null);
               }}
-              aria-label="筛选厂商"
+              aria-label="排序方式"
             >
-              <option value="all">全部厂商</option>
-              {providerSelectOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
+              <option value="newest">最新模型</option>
+              <option value="cheapest">最便宜模型</option>
             </select>
             <select
               className="provider-select"
@@ -242,7 +199,7 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
                       <th className="num">缓存命中</th>
                       <th className="num">输出</th>
                       <th>能力</th>
-                      <th>校准</th>
+                      <th>发布时间</th>
                       <th aria-label="展开详情" />
                     </tr>
                   </thead>

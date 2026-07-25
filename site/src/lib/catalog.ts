@@ -1,6 +1,20 @@
 import type { CalibrationModel, Currency, Model, Provider } from "../types.js";
 
 export type VersionViewMode = "merged" | "separate";
+export type SortMode = "newest" | "cheapest";
+
+function modelInputPrice(model: Model, currency: Currency): number | undefined {
+  const inCurrency = model.prices.filter((price) => price.currency === currency);
+  if (!inCurrency.length) return undefined;
+  const promotional = inCurrency.filter(
+    (price) => price.rateType === "promotional",
+  );
+  const source = promotional.length ? promotional : inCurrency;
+  const prices = source
+    .map((price) => price.input.standard)
+    .filter((price): price is number => price !== undefined);
+  return prices.length ? Math.min(...prices) : undefined;
+}
 
 export interface RegionModel {
   model: Model;
@@ -141,6 +155,54 @@ export function compareModelsByReleaseDate(
   );
 }
 
+function compareModelsByPrice(
+  left: { model: Model },
+  right: { model: Model },
+  currency: Currency,
+): number {
+  const leftPrice = modelInputPrice(left.model, currency);
+  const rightPrice = modelInputPrice(right.model, currency);
+  const leftValue = leftPrice ?? Number.POSITIVE_INFINITY;
+  const rightValue = rightPrice ?? Number.POSITIVE_INFINITY;
+  return (
+    leftValue - rightValue ||
+    left.model.id.localeCompare(right.model.id)
+  );
+}
+
+function sortModels(
+  models: MergedModel[],
+  sortMode: SortMode,
+  currency: Currency,
+): void {
+  if (sortMode === "cheapest") {
+    models.sort((left, right) => {
+      const leftModel = left.cn ?? left.intl;
+      const rightModel = right.cn ?? right.intl;
+      if (leftModel && rightModel) {
+        return compareModelsByPrice(
+          { model: leftModel.model },
+          { model: rightModel.model },
+          currency,
+        );
+      }
+      return left.id.localeCompare(right.id);
+    });
+  } else {
+    models.sort((left, right) => {
+      const leftModel = left.cn ?? left.intl;
+      const rightModel = right.cn ?? right.intl;
+      if (leftModel && rightModel) {
+        return compareModelsByReleaseDate(
+          { model: leftModel.model, calibration: leftModel.calibration },
+          { model: rightModel.model, calibration: rightModel.calibration },
+        );
+      }
+      return left.id.localeCompare(right.id);
+    });
+  }
+}
+
 function providerBaseId(provider: Provider): string {
   const match = provider.id.match(/^(.+)-(cn|intl)$/);
   return match?.[1] ?? provider.id;
@@ -202,6 +264,8 @@ export function buildMergedGroups(
   calibrationMap: Map<string, CalibrationModel>,
   filter: (provider: Provider, model: Model) => boolean,
   viewMode: VersionViewMode = "merged",
+  sortMode: SortMode = "newest",
+  currency: Currency = "CNY",
 ): MergedGroup[] {
   const byBase = new Map<string, Provider[]>();
   const order: string[] = [];
@@ -257,12 +321,16 @@ export function buildMergedGroups(
     const intl = members.find((p) => providerRegion(p) === "intl");
 
     if (cn && intl && viewMode === "merged") {
-      groups.push(mergePair(cn, intl, calibrationMap, filter));
+      const group = mergePair(cn, intl, calibrationMap, filter);
+      sortModels(group.models, sortMode, currency);
+      groups.push(group);
     } else {
       for (const provider of members) {
         const region: "cn" | "intl" =
           providerRegion(provider) === "cn" ? "cn" : "intl";
-        groups.push(buildStandaloneGroup(provider, region));
+        const group = buildStandaloneGroup(provider, region);
+        sortModels(group.models, sortMode, currency);
+        groups.push(group);
       }
     }
   }

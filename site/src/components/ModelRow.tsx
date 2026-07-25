@@ -7,6 +7,7 @@ import {
   isPriceRange,
   modelDomId,
   modelKey,
+  modelReleaseDate,
   numberFormatter,
   providerName,
   type MergedGroup,
@@ -206,8 +207,12 @@ function ModelRows({
             ))}
           </div>
         </td>
-        <td>
-          <CalibrationBadge calibration={active?.calibration} />
+        <td className="num">
+          {modelReleaseDate(model, active?.calibration)
+            ? new Date(
+                modelReleaseDate(model, active?.calibration)!,
+              ).toLocaleDateString("zh-CN", { timeZone: "Asia/Shanghai" })
+            : "—"}
         </td>
         <td className="num">
           <button
