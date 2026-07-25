@@ -124,8 +124,9 @@ function ModelRows({
     : undefined;
   const priceUnit = currency === "CNY" ? "人民币 / 1M" : "美元 / 1M";
   const key = `${group.id}/${mergedModel.id}`;
-  const regionLabel = active
-    ? active.region === "cn"
+  const showRegionLabel = group.merged && mergedModel.cn && mergedModel.intl;
+  const regionLabel = showRegionLabel
+    ? active?.region === "cn"
       ? "国内版"
       : "国际版"
     : null;

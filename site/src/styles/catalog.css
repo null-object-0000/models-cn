@@ -179,7 +179,7 @@ tbody .provider-row:first-child td {
   gap: 6px;
   color: var(--muted);
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
 }
 .region-tag {
