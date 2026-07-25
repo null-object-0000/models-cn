@@ -84,7 +84,8 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
     const onKeyDown = (event: KeyboardEvent) => {
       const isSearchShortcut =
         (event.key === "/" ||
-          ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f")) &&
+          ((event.ctrlKey || event.metaKey) &&
+            event.key.toLowerCase() === "f")) &&
         document.activeElement !== searchRef.current &&
         document.activeElement?.tagName !== "INPUT" &&
         document.activeElement?.tagName !== "TEXTAREA";

@@ -4,7 +4,9 @@ export type VersionViewMode = "merged" | "separate";
 export type SortMode = "newest" | "cheapest";
 
 function modelInputPrice(model: Model, currency: Currency): number | undefined {
-  const inCurrency = model.prices.filter((price) => price.currency === currency);
+  const inCurrency = model.prices.filter(
+    (price) => price.currency === currency,
+  );
   if (!inCurrency.length) return undefined;
   const promotional = inCurrency.filter(
     (price) => price.rateType === "promotional",
@@ -164,10 +166,7 @@ function compareModelsByPrice(
   const rightPrice = modelInputPrice(right.model, currency);
   const leftValue = leftPrice ?? Number.POSITIVE_INFINITY;
   const rightValue = rightPrice ?? Number.POSITIVE_INFINITY;
-  return (
-    leftValue - rightValue ||
-    left.model.id.localeCompare(right.model.id)
-  );
+  return leftValue - rightValue || left.model.id.localeCompare(right.model.id);
 }
 
 function sortModels(
