@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-25T04:30:21.152Z",
-    "lastAttemptAt": "2026-07-25T04:30:21.152Z",
+    "lastSuccessfulAt": "2026-07-26T04:44:49.244Z",
+    "lastAttemptAt": "2026-07-26T04:44:49.244Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
@@ -896,7 +896,7 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-07-25T04:30:21.152Z",
+      "retrievedAt": "2026-07-26T04:44:49.244Z",
       "contentHash": "sha256:1a1a2cc746201ffa7a23ec2d20a4f171ebb2f0339428a72f51e3bf3510d0c971"
     }
   ]

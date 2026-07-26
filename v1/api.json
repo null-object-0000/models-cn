@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:30:21.118Z",
-        "lastAttemptAt": "2026-07-25T04:30:21.118Z",
+        "lastSuccessfulAt": "2026-07-26T04:44:49.199Z",
+        "lastAttemptAt": "2026-07-26T04:44:49.199Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -142,8 +142,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:30:21.136Z",
-        "lastAttemptAt": "2026-07-25T04:30:21.136Z",
+        "lastSuccessfulAt": "2026-07-26T04:44:49.217Z",
+        "lastAttemptAt": "2026-07-26T04:44:49.217Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -289,10 +289,11 @@
     {
       "schemaVersion": "1.0",
       "health": {
-        "status": "healthy",
+        "status": "error",
         "lastSuccessfulAt": "2026-07-25T04:30:21.141Z",
-        "lastAttemptAt": "2026-07-25T04:30:21.141Z",
-        "consecutiveFailures": 0
+        "lastAttemptAt": "2026-07-26T04:44:59.727Z",
+        "consecutiveFailures": 1,
+        "message": "fetch failed"
       },
       "id": "moonshot-cn",
       "name": "Kimi China",
@@ -600,8 +601,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:30:21.148Z",
-        "lastAttemptAt": "2026-07-25T04:30:21.148Z",
+        "lastSuccessfulAt": "2026-07-26T04:44:49.230Z",
+        "lastAttemptAt": "2026-07-26T04:44:49.230Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -910,8 +911,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:30:21.152Z",
-        "lastAttemptAt": "2026-07-25T04:30:21.152Z",
+        "lastSuccessfulAt": "2026-07-26T04:44:49.244Z",
+        "lastAttemptAt": "2026-07-26T04:44:49.244Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1526,7 +1527,7 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-07-25T04:30:21.152Z",
+          "retrievedAt": "2026-07-26T04:44:49.244Z",
           "contentHash": "sha256:1a1a2cc746201ffa7a23ec2d20a4f171ebb2f0339428a72f51e3bf3510d0c971"
         }
       ]
@@ -1538,8 +1539,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:30:55.595Z",
-        "lastAttemptAt": "2026-07-25T04:30:55.595Z",
+        "lastSuccessfulAt": "2026-07-26T04:45:22.488Z",
+        "lastAttemptAt": "2026-07-26T04:45:22.488Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1574,8 +1575,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:30:56.025Z",
-        "lastAttemptAt": "2026-07-25T04:30:56.025Z",
+        "lastSuccessfulAt": "2026-07-26T04:45:23.005Z",
+        "lastAttemptAt": "2026-07-26T04:45:23.005Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1608,8 +1609,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:30:56.303Z",
-        "lastAttemptAt": "2026-07-25T04:30:56.303Z",
+        "lastSuccessfulAt": "2026-07-26T04:45:23.286Z",
+        "lastAttemptAt": "2026-07-26T04:45:23.286Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1664,8 +1665,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:31:00.772Z",
-        "lastAttemptAt": "2026-07-25T04:31:00.772Z",
+        "lastSuccessfulAt": "2026-07-26T04:45:29.087Z",
+        "lastAttemptAt": "2026-07-26T04:45:29.087Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1707,8 +1708,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-25T04:30:54.919Z",
-        "lastAttemptAt": "2026-07-25T04:30:54.919Z",
+        "lastSuccessfulAt": "2026-07-26T04:45:21.853Z",
+        "lastAttemptAt": "2026-07-26T04:45:21.853Z",
         "consecutiveFailures": 0
       },
       "source": {
