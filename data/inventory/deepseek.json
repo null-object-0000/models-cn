@@ -3,8 +3,8 @@
   "provider": "deepseek",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-25T04:30:55.595Z",
-    "lastAttemptAt": "2026-07-25T04:30:55.595Z",
+    "lastSuccessfulAt": "2026-07-27T04:55:15.140Z",
+    "lastAttemptAt": "2026-07-27T04:55:15.140Z",
     "consecutiveFailures": 0
   },
   "source": {
@@ -23,7 +23,7 @@
     }
   ],
   "comparison": {
-    "status": "match",
+    "status": "mismatch",
     "pricedAndListed": [
       "deepseek-v4-flash",
       "deepseek-v4-pro"
@@ -31,6 +31,9 @@
     "aliasesAndListed": [],
     "listedWithoutPricing": [],
     "pricedButNotListed": [],
-    "activeAliasesNotListed": []
+    "activeAliasesNotListed": [
+      "deepseek-chat",
+      "deepseek-reasoner"
+    ]
   }
 }
