@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:23:57.596Z",
-        "lastAttemptAt": "2026-07-30T04:23:57.596Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:24.396Z",
+        "lastAttemptAt": "2026-08-01T09:23:24.396Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -23,7 +23,7 @@
       "models": [
         {
           "id": "deepseek-v4-flash",
-          "name": "DeepSeek-V4-Flash",
+          "name": "DeepSeek-V4-Flash-0731",
           "aliases": [
             {
               "id": "deepseek-chat",
@@ -123,16 +123,16 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-07-27T04:54:33.728Z",
-          "contentHash": "sha256:b7827418447438f8d7ce38dd172cceef7b2c7f5bbb17e0898d21ee2358ffdf52"
+          "retrievedAt": "2026-08-01T09:23:24.396Z",
+          "contentHash": "sha256:e8a83d7d5aa702fe711b68a0bb1f0c0cefe7d35c34d6e073293dc2fbffe37e6f"
         },
         {
           "url": "https://api-docs.deepseek.com/quick_start/pricing/",
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-07-27T04:54:33.728Z",
-          "contentHash": "sha256:435c51b06e70ec16f93eeb3309d5dee34574cf1ab69ee8bc3a451069ec873e07"
+          "retrievedAt": "2026-08-01T09:23:24.396Z",
+          "contentHash": "sha256:7edeefabecf9382f6909183c7b2d7295182862834ee4fe29622b5b302170bb45"
         }
       ]
     },
@@ -140,8 +140,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:23:57.612Z",
-        "lastAttemptAt": "2026-07-30T04:23:57.612Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:24.414Z",
+        "lastAttemptAt": "2026-08-01T09:23:24.414Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -288,8 +288,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:23:57.617Z",
-        "lastAttemptAt": "2026-07-30T04:23:57.617Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:24.419Z",
+        "lastAttemptAt": "2026-08-01T09:23:24.419Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -598,8 +598,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:23:57.623Z",
-        "lastAttemptAt": "2026-07-30T04:23:57.623Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:24.425Z",
+        "lastAttemptAt": "2026-08-01T09:23:24.425Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -908,8 +908,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:23:57.626Z",
-        "lastAttemptAt": "2026-07-30T04:23:57.626Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:24.428Z",
+        "lastAttemptAt": "2026-08-01T09:23:24.428Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -944,7 +944,7 @@
           },
           "limits": {
             "contextTokens": 1000000,
-            "maxOutputTokens": 65536,
+            "maxOutputTokens": 131072,
             "requestsPerMinute": 30000,
             "tokensPerMinute": 5000000
           },
@@ -1028,7 +1028,7 @@
           },
           "limits": {
             "contextTokens": 1000000,
-            "maxOutputTokens": 65536,
+            "maxOutputTokens": 131072,
             "requestsPerMinute": 30000,
             "tokensPerMinute": 5000000
           },
@@ -1128,7 +1128,7 @@
           },
           "limits": {
             "contextTokens": 1000000,
-            "maxOutputTokens": 65536,
+            "maxOutputTokens": 131072,
             "requestsPerMinute": 30000,
             "tokensPerMinute": 5000000
           },
@@ -1517,16 +1517,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-07-30T04:23:57.626Z",
-          "contentHash": "sha256:984155c3c6502b53d86d14813ba1d5fb8983480b7c3ea3aa41c8673d7b988466"
+          "retrievedAt": "2026-08-01T09:23:24.428Z",
+          "contentHash": "sha256:573d4eda253156e8c8f38ab0bc88b6a15dba966aa2b960a6da36435e49024e26"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-07-30T04:23:57.626Z",
-          "contentHash": "sha256:9bba996200f5c4c0f9d1439a839a017bac589f789a464167d189aa5919a6ba48"
+          "retrievedAt": "2026-08-01T09:23:24.428Z",
+          "contentHash": "sha256:cb3952e22f6a9376b333124a3b474381be3897ceaff5f587d177caf7eff61b8d"
         }
       ]
     }
@@ -1537,8 +1537,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:24:36.531Z",
-        "lastAttemptAt": "2026-07-30T04:24:36.531Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:58.095Z",
+        "lastAttemptAt": "2026-08-01T09:23:58.095Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1576,8 +1576,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:24:37.195Z",
-        "lastAttemptAt": "2026-07-30T04:24:37.195Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:58.578Z",
+        "lastAttemptAt": "2026-08-01T09:23:58.578Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1610,8 +1610,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:24:37.856Z",
-        "lastAttemptAt": "2026-07-30T04:24:37.856Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:58.883Z",
+        "lastAttemptAt": "2026-08-01T09:23:58.883Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1666,8 +1666,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:24:39.315Z",
-        "lastAttemptAt": "2026-07-30T04:24:39.315Z",
+        "lastSuccessfulAt": "2026-08-01T09:24:06.325Z",
+        "lastAttemptAt": "2026-08-01T09:24:06.325Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1709,14 +1709,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-07-30T04:24:35.748Z",
-        "lastAttemptAt": "2026-07-30T04:24:35.748Z",
+        "lastSuccessfulAt": "2026-08-01T09:23:57.338Z",
+        "lastAttemptAt": "2026-08-01T09:23:57.338Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-07-23T09:12:32.157Z",
-        "contentHash": "sha256:e9926385749117ce78195aa9446a5fd2cac1227937817790273fe296ad9fe2b8"
+        "retrievedAt": "2026-08-01T09:23:57.338Z",
+        "contentHash": "sha256:5eea07459d39aeae86f54a959cddd9a51e9916acba7367cb387a59517d449e2a"
       },
       "models": [
         {
@@ -2787,9 +2787,9 @@
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 65536,
+              "official": 131072,
               "reference": 65536,
-              "status": "match"
+              "status": "mismatch"
             },
             {
               "field": "capabilities.thinking",
@@ -2853,7 +2853,7 @@
           "referenceProvider": "alibaba",
           "referenceModel": "qwen3.7-max",
           "referenceUrl": "https://models.dev/models/alibaba/qwen3.7-max/",
-          "status": "partial",
+          "status": "mismatch",
           "checks": [
             {
               "field": "createdAt",
@@ -2869,9 +2869,9 @@
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 65536,
+              "official": 131072,
               "reference": 65536,
-              "status": "match"
+              "status": "mismatch"
             },
             {
               "field": "capabilities.thinking",
