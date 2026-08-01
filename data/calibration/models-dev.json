@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-30T04:24:35.748Z",
-    "lastAttemptAt": "2026-07-30T04:24:35.748Z",
+    "lastSuccessfulAt": "2026-08-01T09:23:57.338Z",
+    "lastAttemptAt": "2026-08-01T09:23:57.338Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-07-23T09:12:32.157Z",
-    "contentHash": "sha256:e9926385749117ce78195aa9446a5fd2cac1227937817790273fe296ad9fe2b8"
+    "retrievedAt": "2026-08-01T09:23:57.338Z",
+    "contentHash": "sha256:5eea07459d39aeae86f54a959cddd9a51e9916acba7367cb387a59517d449e2a"
   },
   "models": [
     {
@@ -1080,9 +1080,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 65536,
+          "official": 131072,
           "reference": 65536,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",
@@ -1146,7 +1146,7 @@
       "referenceProvider": "alibaba",
       "referenceModel": "qwen3.7-max",
       "referenceUrl": "https://models.dev/models/alibaba/qwen3.7-max/",
-      "status": "partial",
+      "status": "mismatch",
       "checks": [
         {
           "field": "createdAt",
@@ -1162,9 +1162,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 65536,
+          "official": 131072,
           "reference": 65536,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",

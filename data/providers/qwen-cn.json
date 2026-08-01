@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-07-30T04:23:57.626Z",
-    "lastAttemptAt": "2026-07-30T04:23:57.626Z",
+    "lastSuccessfulAt": "2026-08-01T09:23:24.428Z",
+    "lastAttemptAt": "2026-08-01T09:23:24.428Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
@@ -38,7 +38,7 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536,
+        "maxOutputTokens": 131072,
         "requestsPerMinute": 30000,
         "tokensPerMinute": 5000000
       },
@@ -122,7 +122,7 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536,
+        "maxOutputTokens": 131072,
         "requestsPerMinute": 30000,
         "tokensPerMinute": 5000000
       },
@@ -222,7 +222,7 @@
       },
       "limits": {
         "contextTokens": 1000000,
-        "maxOutputTokens": 65536,
+        "maxOutputTokens": 131072,
         "requestsPerMinute": 30000,
         "tokensPerMinute": 5000000
       },
@@ -889,16 +889,16 @@
       "url": "https://www.qianwenai.com/models",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-07-30T04:23:57.626Z",
-      "contentHash": "sha256:984155c3c6502b53d86d14813ba1d5fb8983480b7c3ea3aa41c8673d7b988466"
+      "retrievedAt": "2026-08-01T09:23:24.428Z",
+      "contentHash": "sha256:573d4eda253156e8c8f38ab0bc88b6a15dba966aa2b960a6da36435e49024e26"
     },
     {
       "url": "https://www.qianwenai.com/models",
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-07-30T04:23:57.626Z",
-      "contentHash": "sha256:9bba996200f5c4c0f9d1439a839a017bac589f789a464167d189aa5919a6ba48"
+      "retrievedAt": "2026-08-01T09:23:24.428Z",
+      "contentHash": "sha256:cb3952e22f6a9376b333124a3b474381be3897ceaff5f587d177caf7eff61b8d"
     }
   ]
 }
