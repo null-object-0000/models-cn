@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-01T09:23:57.338Z",
-    "lastAttemptAt": "2026-08-01T09:23:57.338Z",
+    "lastSuccessfulAt": "2026-08-03T04:50:09.669Z",
+    "lastAttemptAt": "2026-08-03T04:50:09.669Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-08-01T09:23:57.338Z",
-    "contentHash": "sha256:5eea07459d39aeae86f54a959cddd9a51e9916acba7367cb387a59517d449e2a"
+    "retrievedAt": "2026-08-03T04:50:09.669Z",
+    "contentHash": "sha256:b2d15b4a1bf62f56b021ddb58264433984558116d76be7a7664c89732aed26e4"
   },
   "models": [
     {
@@ -23,7 +23,7 @@
         {
           "field": "createdAt",
           "official": null,
-          "reference": "2026-04-24",
+          "reference": "2026-07-31",
           "status": "missing"
         },
         {

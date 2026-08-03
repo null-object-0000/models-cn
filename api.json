@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:24.396Z",
-        "lastAttemptAt": "2026-08-01T09:23:24.396Z",
+        "lastSuccessfulAt": "2026-08-03T04:49:31.333Z",
+        "lastAttemptAt": "2026-08-03T04:49:31.333Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -140,8 +140,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:24.414Z",
-        "lastAttemptAt": "2026-08-01T09:23:24.414Z",
+        "lastSuccessfulAt": "2026-08-03T04:49:31.399Z",
+        "lastAttemptAt": "2026-08-03T04:49:31.399Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -288,8 +288,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:24.419Z",
-        "lastAttemptAt": "2026-08-01T09:23:24.419Z",
+        "lastSuccessfulAt": "2026-08-03T04:49:31.360Z",
+        "lastAttemptAt": "2026-08-03T04:49:31.360Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -598,8 +598,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:24.425Z",
-        "lastAttemptAt": "2026-08-01T09:23:24.425Z",
+        "lastSuccessfulAt": "2026-08-03T04:49:31.368Z",
+        "lastAttemptAt": "2026-08-03T04:49:31.368Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -908,8 +908,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:24.428Z",
-        "lastAttemptAt": "2026-08-01T09:23:24.428Z",
+        "lastSuccessfulAt": "2026-08-03T04:49:31.375Z",
+        "lastAttemptAt": "2026-08-03T04:49:31.375Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1517,16 +1517,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-01T09:23:24.428Z",
-          "contentHash": "sha256:573d4eda253156e8c8f38ab0bc88b6a15dba966aa2b960a6da36435e49024e26"
+          "retrievedAt": "2026-08-03T04:49:31.375Z",
+          "contentHash": "sha256:611621e719d0bc2fcd55f9a4f80cfa5b2657aa4b32bf214839924a5184cb692a"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-01T09:23:24.428Z",
-          "contentHash": "sha256:cb3952e22f6a9376b333124a3b474381be3897ceaff5f587d177caf7eff61b8d"
+          "retrievedAt": "2026-08-03T04:49:31.375Z",
+          "contentHash": "sha256:43ce74ae79a30c159ffcfacfa87981c1fe52b9e4d39f410f019a80f5bf48fc0a"
         }
       ]
     }
@@ -1537,8 +1537,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:58.095Z",
-        "lastAttemptAt": "2026-08-01T09:23:58.095Z",
+        "lastSuccessfulAt": "2026-08-03T04:50:10.399Z",
+        "lastAttemptAt": "2026-08-03T04:50:10.399Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1576,8 +1576,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:58.578Z",
-        "lastAttemptAt": "2026-08-01T09:23:58.578Z",
+        "lastSuccessfulAt": "2026-08-03T04:50:10.957Z",
+        "lastAttemptAt": "2026-08-03T04:50:10.957Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1610,8 +1610,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:58.883Z",
-        "lastAttemptAt": "2026-08-01T09:23:58.883Z",
+        "lastSuccessfulAt": "2026-08-03T04:50:11.298Z",
+        "lastAttemptAt": "2026-08-03T04:50:11.298Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1666,8 +1666,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:24:06.325Z",
-        "lastAttemptAt": "2026-08-01T09:24:06.325Z",
+        "lastSuccessfulAt": "2026-08-03T04:50:12.649Z",
+        "lastAttemptAt": "2026-08-03T04:50:12.649Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1709,14 +1709,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-01T09:23:57.338Z",
-        "lastAttemptAt": "2026-08-01T09:23:57.338Z",
+        "lastSuccessfulAt": "2026-08-03T04:50:09.669Z",
+        "lastAttemptAt": "2026-08-03T04:50:09.669Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-01T09:23:57.338Z",
-        "contentHash": "sha256:5eea07459d39aeae86f54a959cddd9a51e9916acba7367cb387a59517d449e2a"
+        "retrievedAt": "2026-08-03T04:50:09.669Z",
+        "contentHash": "sha256:b2d15b4a1bf62f56b021ddb58264433984558116d76be7a7664c89732aed26e4"
       },
       "models": [
         {
@@ -1730,7 +1730,7 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-04-24",
+              "reference": "2026-07-31",
               "status": "missing"
             },
             {
