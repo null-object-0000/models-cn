@@ -428,4 +428,82 @@ describe("Qwen China collector", () => {
     expect(isQwenDatedSnapshot("qwen3.7-plus")).toBe(false);
     expect(isQwenDatedSnapshot("qwen3.6-max-preview")).toBe(false);
   });
+
+  it("falls back to top-level prices when MultiPrices is an empty placeholder", () => {
+    const detail = {
+      code: "200",
+      data: {
+        Data: [
+          {
+            GroupModel: "Qwen3.8-Max",
+            Name: "Qwen3.8-Max",
+            ModelAlias: "qwen3.8-max",
+            LatestOnlineAt: "2026-08-02T04:14:32.000+00:00",
+            ModelInfo: {
+              ContextWindow: 1_000_000,
+              MaxOutputTokens: 131_072,
+              ReasoningMaxInputTokens: 983_616,
+            },
+            InferenceMetadata: {
+              RequestModality: ["Image", "Text", "Video"],
+              ResponseModality: ["Text"],
+            },
+            MultiPrices: [{ Prices: [{}] }],
+            Prices: [
+              {
+                Type: "input_token",
+                PriceUnit: "每百万tokens",
+                Price: "12",
+              },
+              {
+                Type: "output_token",
+                PriceUnit: "每百万tokens",
+                Price: "36",
+              },
+              {
+                Type: "input_token_cache",
+                PriceUnit: "每百万tokens",
+                Price: "1.5",
+              },
+              {
+                Type: "input_token_cache_creation_5m",
+                PriceUnit: "每百万tokens",
+                Price: "15",
+              },
+              {
+                Type: "input_token_cache_read",
+                PriceUnit: "每百万tokens",
+                Price: "1",
+              },
+            ],
+          },
+        ],
+      },
+    };
+    const parsed = parseQwenDetails([detail]);
+    expect(parsed.models).toHaveLength(1);
+    expect(parsed.models[0]).toMatchObject({
+      id: "qwen3.8-max",
+      name: "Qwen3.8-Max",
+      createdAt: "2026-08-02T04:14:32.000+00:00",
+      limits: {
+        contextTokens: 1_000_000,
+        maxOutputTokens: 131_072,
+      },
+      prices: [
+        {
+          market: "china",
+          currency: "CNY",
+          rateType: "standard",
+          input: {
+            standard: 12,
+            cacheHit: 1.5,
+            explicitCacheCreation: 15,
+            explicitCacheHit: 1,
+          },
+          output: 36,
+        },
+      ],
+    });
+  });
 });

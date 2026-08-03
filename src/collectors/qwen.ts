@@ -136,6 +136,17 @@ function priceByType(
   return range.Prices?.find((price) => price.Type === type);
 }
 
+function hasTokenPricedRanges(
+  ranges: QwenPriceRange[] | undefined,
+): boolean {
+  return Boolean(
+    ranges?.some(
+      (range) =>
+        priceByType(range, "input_token") && priceByType(range, "output_token"),
+    ),
+  );
+}
+
 function perMinute(limit: number | undefined, period: number | undefined) {
   if (!limit || !period || limit < 1 || period < 1) return undefined;
   const value = (limit / period) * 60;
@@ -298,7 +309,7 @@ export function parseQwenDetails(
     .flatMap<ModelData>((model) => {
       const id = qwenModelId(model)!;
       const sourceUrl = `${QWEN_MODELS_URL}/${encodeURIComponent(id)}`;
-      const priceRanges = model.MultiPrices?.length
+      const priceRanges = hasTokenPricedRanges(model.MultiPrices)
         ? model.MultiPrices
         : model.Prices?.length
           ? [{ Prices: model.Prices }]
