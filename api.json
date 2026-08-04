@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.291Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.291Z",
+        "lastSuccessfulAt": "2026-08-04T08:53:21.110Z",
+        "lastAttemptAt": "2026-08-04T08:53:21.110Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -57,7 +57,8 @@
                 "standard": 1
               },
               "output": 2,
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+              "validFrom": "2026-08-01T09:23:24.396Z"
             },
             {
               "market": "international",
@@ -69,7 +70,8 @@
                 "standard": 0.14
               },
               "output": 0.28,
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
+              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+              "validFrom": "2026-08-01T09:23:24.396Z"
             }
           ]
         },
@@ -100,7 +102,8 @@
                 "standard": 3
               },
               "output": 6,
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+              "validFrom": "2026-08-01T09:23:24.396Z"
             },
             {
               "market": "international",
@@ -112,7 +115,8 @@
                 "standard": 0.435
               },
               "output": 0.87,
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
+              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+              "validFrom": "2026-08-01T09:23:24.396Z"
             }
           ]
         }
@@ -140,8 +144,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.306Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.306Z",
+        "lastSuccessfulAt": "2026-08-04T08:53:21.130Z",
+        "lastAttemptAt": "2026-08-04T08:53:21.130Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -196,7 +200,8 @@
                 "standard": 5
               },
               "output": 20,
-              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0"
+              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0",
+              "validFrom": "2026-07-22T03:33:15.688Z"
             },
             {
               "market": "china",
@@ -208,7 +213,8 @@
                 "standard": 2
               },
               "output": 8,
-              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0"
+              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0",
+              "validFrom": "2026-07-22T03:33:15.688Z"
             },
             {
               "market": "international",
@@ -220,7 +226,8 @@
                 "standard": 0.75
               },
               "output": 2.95,
-              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0"
+              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0",
+              "validFrom": "2026-07-22T03:33:15.688Z"
             },
             {
               "market": "international",
@@ -232,7 +239,8 @@
                 "standard": 0.3
               },
               "output": 1.2,
-              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0"
+              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0",
+              "validFrom": "2026-07-22T03:33:15.688Z"
             }
           ]
         }
@@ -288,8 +296,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.330Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.330Z",
+        "lastSuccessfulAt": "2026-08-04T08:53:21.135Z",
+        "lastAttemptAt": "2026-08-04T08:53:21.135Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -353,7 +361,8 @@
                 "standard": 20
               },
               "output": 100,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k3"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k3",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         },
@@ -400,7 +409,8 @@
                 "standard": 6.5
               },
               "output": 27,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         },
@@ -447,7 +457,8 @@
                 "standard": 13
               },
               "output": 54,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         },
@@ -496,7 +507,8 @@
                 "standard": 6.5
               },
               "output": 27,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k26"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k26",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         },
@@ -540,7 +552,8 @@
                 "standard": 4
               },
               "output": 21,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k25"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k25",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         }
@@ -598,8 +611,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.324Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.324Z",
+        "lastSuccessfulAt": "2026-08-04T08:53:21.141Z",
+        "lastAttemptAt": "2026-08-04T08:53:21.141Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -663,7 +676,8 @@
                 "standard": 3
               },
               "output": 15,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k3"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k3",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         },
@@ -710,7 +724,8 @@
                 "standard": 0.95
               },
               "output": 4,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         },
@@ -757,7 +772,8 @@
                 "standard": 1.9
               },
               "output": 8,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         },
@@ -806,7 +822,8 @@
                 "standard": 0.95
               },
               "output": 4,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k26"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k26",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         },
@@ -850,7 +867,8 @@
                 "standard": 0.6
               },
               "output": 3,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k25"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k25",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         }
@@ -908,8 +926,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.310Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.310Z",
+        "lastSuccessfulAt": "2026-08-04T08:53:21.144Z",
+        "lastAttemptAt": "2026-08-04T08:53:21.144Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -960,61 +978,8 @@
                 "explicitCacheHit": 1
               },
               "output": 36,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max"
-            }
-          ]
-        },
-        {
-          "id": "qwen3.7-max",
-          "name": "Qwen3.7-Max",
-          "createdAt": "2026-05-21T06:37:11.000+00:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "chatPrefixCompletion": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 1000000,
-            "maxOutputTokens": 131072,
-            "requestsPerMinute": 30000,
-            "tokensPerMinute": 5000000
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "standard": 12,
-                "cacheHit": 2.4,
-                "explicitCacheCreation": 15,
-                "explicitCacheHit": 1.2
-              },
-              "output": 36,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "promotional",
-              "input": {
-                "standard": 6,
-                "cacheHit": 1.2,
-                "explicitCacheCreation": 7.5,
-                "explicitCacheHit": 0.6
-              },
-              "output": 18,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1060,7 +1025,8 @@
                 "explicitCacheHit": 0.2
               },
               "output": 8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1078,7 +1044,8 @@
                 "explicitCacheHit": 0.16
               },
               "output": 6.4,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1097,7 +1064,8 @@
                 "explicitCacheHit": 0.6
               },
               "output": 24,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1116,7 +1084,64 @@
                 "explicitCacheHit": 0.48
               },
               "output": 19.2,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
+            }
+          ]
+        },
+        {
+          "id": "qwen3.7-max",
+          "name": "Qwen3.7-Max",
+          "createdAt": "2026-05-21T06:37:11.000+00:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "chatPrefixCompletion": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 131072,
+            "requestsPerMinute": 30000,
+            "tokensPerMinute": 5000000
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 12,
+                "cacheHit": 2.4,
+                "explicitCacheCreation": 15,
+                "explicitCacheHit": 1.2
+              },
+              "output": 36,
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
+              "validFrom": "2026-08-03T05:19:40.310Z"
+            },
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "promotional",
+              "input": {
+                "standard": 6,
+                "cacheHit": 1.2,
+                "explicitCacheCreation": 7.5,
+                "explicitCacheHit": 0.6
+              },
+              "output": 18,
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1162,7 +1187,8 @@
                 "explicitCacheHit": 0.02
               },
               "output": 0.8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1181,7 +1207,8 @@
                 "explicitCacheHit": 0.06
               },
               "output": 2.4,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1200,7 +1227,8 @@
                 "explicitCacheHit": 0.12
               },
               "output": 4.8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1242,7 +1270,8 @@
                 "explicitCacheHit": 0.9
               },
               "output": 54,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1260,7 +1289,8 @@
                 "explicitCacheHit": 1.5
               },
               "output": 90,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1305,7 +1335,8 @@
                 "explicitCacheHit": 0.2
               },
               "output": 12,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1323,7 +1354,8 @@
                 "explicitCacheHit": 0.8
               },
               "output": 48,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1368,7 +1400,8 @@
                 "explicitCacheHit": 0.08
               },
               "output": 4.8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1386,7 +1419,8 @@
                 "explicitCacheHit": 0.2
               },
               "output": 12,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1404,7 +1438,8 @@
                 "explicitCacheHit": 0.4
               },
               "output": 24,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1449,7 +1484,8 @@
                 "explicitCacheHit": 0.02
               },
               "output": 2,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1467,7 +1503,8 @@
                 "explicitCacheHit": 0.08
               },
               "output": 8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1485,7 +1522,8 @@
                 "explicitCacheHit": 0.12
               },
               "output": 12,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1530,7 +1568,8 @@
                 "explicitCacheHit": 0.12
               },
               "output": 7.2,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1548,7 +1587,8 @@
                 "explicitCacheHit": 0.48
               },
               "output": 28.8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         }
@@ -1558,16 +1598,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-03T05:19:40.310Z",
-          "contentHash": "sha256:140288dff7f7f2a73be0b530089f641a0b8a85818e4f07b877909a2a54f2491c"
+          "retrievedAt": "2026-08-04T08:53:21.144Z",
+          "contentHash": "sha256:8ec3bdc2e9737b60a39a848be3b6e783aed7c55c181ab4febc195e73f2a3cb99"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-03T05:19:40.310Z",
-          "contentHash": "sha256:7dd5391d3f246f70d5e5bebcdb14448684a4db6a83a349153b8fcb496f361862"
+          "retrievedAt": "2026-08-04T08:53:21.144Z",
+          "contentHash": "sha256:c04c5d3b79c6b5b12c2b5f05fe12c0916ae05fa49b6816d00722baa4a3c10aa5"
         }
       ]
     }
@@ -1578,8 +1618,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:55.570Z",
-        "lastAttemptAt": "2026-08-03T05:19:55.570Z",
+        "lastSuccessfulAt": "2026-08-04T08:54:04.548Z",
+        "lastAttemptAt": "2026-08-04T08:54:04.548Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1617,8 +1657,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:55.857Z",
-        "lastAttemptAt": "2026-08-03T05:19:55.857Z",
+        "lastSuccessfulAt": "2026-08-04T08:54:05.095Z",
+        "lastAttemptAt": "2026-08-04T08:54:05.095Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1651,8 +1691,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:56.064Z",
-        "lastAttemptAt": "2026-08-03T05:19:56.064Z",
+        "lastSuccessfulAt": "2026-08-04T08:54:05.438Z",
+        "lastAttemptAt": "2026-08-04T08:54:05.438Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1707,8 +1747,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:56.307Z",
-        "lastAttemptAt": "2026-08-03T05:19:56.307Z",
+        "lastSuccessfulAt": "2026-08-04T08:54:07.092Z",
+        "lastAttemptAt": "2026-08-04T08:54:07.092Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -1750,8 +1790,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:53.032Z",
-        "lastAttemptAt": "2026-08-03T05:19:53.032Z",
+        "lastSuccessfulAt": "2026-08-04T08:54:03.849Z",
+        "lastAttemptAt": "2026-08-04T08:54:03.849Z",
         "consecutiveFailures": 0
       },
       "source": {
