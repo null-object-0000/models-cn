@@ -182,27 +182,27 @@ tbody .provider-row:first-child td {
   font-size: 12px;
   line-height: 1.4;
 }
-.region-tag {
-  padding: 2px 6px;
-  background: var(--accent-soft);
-  color: var(--accent);
+.region-tag,
+.promo-tag {
+  padding: 2px 7px;
+  border-radius: 6px;
   font-family:
     Inter, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui,
     sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
+  line-height: 1.3;
   letter-spacing: 0.02em;
 }
+.region-tag {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
 .promo-tag {
-  padding: 2px 6px;
   background: var(--warning-soft);
   color: var(--warning);
-  font-family:
-    Inter, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui,
-    sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  border: 1px solid color-mix(in srgb, var(--warning) 35%, transparent);
 }
 .merge-warning {
   margin-top: 6px;
