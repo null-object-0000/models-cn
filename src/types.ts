@@ -43,6 +43,21 @@ export interface ModelPrice {
   };
   output: number;
   sourceUrl: string;
+  /**
+   * ISO date-time when this price was first observed by models-cn.
+   * Present on current prices and on every historical snapshot.
+   */
+  validFrom?: string;
+}
+
+/**
+ * A price snapshot that is no longer current. `validTo` is the moment when a
+ * replacement price was observed; the price applies to the window
+ * [validFrom, validTo]. Newest snapshots come first.
+ */
+export interface PriceSnapshot extends ModelPrice {
+  validFrom: string;
+  validTo: string;
 }
 
 export interface ModelData {
@@ -72,6 +87,8 @@ export interface ModelData {
     tokensPerMinute?: number;
   };
   prices: ModelPrice[];
+  /** Replaced price snapshots for this model, newest first. */
+  priceHistory?: PriceSnapshot[];
 }
 
 export interface ProviderData {

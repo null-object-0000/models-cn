@@ -145,8 +145,23 @@
           }
         },
         "output": { "type": "number", "minimum": 0 },
-        "sourceUrl": { "type": "string", "format": "uri" }
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO date-time when this price was first observed by models-cn."
+        },
+        "validTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Present only on historical price snapshots: the moment this price was replaced."
+        }
       }
+    },
+    "priceSnapshot": {
+      "type": "object",
+      "allOf": [{ "$ref": "#/$defs/price" }],
+      "required": ["validFrom", "validTo"]
     },
     "model": {
       "type": "object",
@@ -214,6 +229,11 @@
           "type": "array",
           "minItems": 1,
           "items": { "$ref": "#/$defs/price" }
+        },
+        "priceHistory": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/priceSnapshot" },
+          "description": "Replaced price snapshots for this model, newest first."
         }
       }
     }

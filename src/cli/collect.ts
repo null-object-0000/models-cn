@@ -20,6 +20,7 @@ import {
 import type { ModelsDevCalibration } from "../types.js";
 import { validateCalibration, validateProvider } from "../validation.js";
 import { failedHealth } from "../health.js";
+import { applyPriceHistory } from "../history.js";
 
 await mkdir(providersDir, { recursive: true });
 const collectors = [
@@ -48,7 +49,10 @@ await Promise.all(
     const output = path.join(providersDir, `${id}.json`);
     const previous = await readProvider(output);
     try {
-      const data = preserveUnchangedSourceTimestamps(await collect(), previous);
+      const data = applyPriceHistory(
+        previous,
+        preserveUnchangedSourceTimestamps(await collect(), previous),
+      );
       await validateProvider(data);
       await writeJson(output, data);
       console.log(

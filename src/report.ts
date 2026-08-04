@@ -4,6 +4,7 @@ import type {
   ModelPrice,
   ProviderHealth,
 } from "./types.js";
+import { priceKey } from "./history.js";
 
 export type Change = {
   provider: string;
@@ -25,15 +26,6 @@ function modelMap(
       ]),
     ),
   );
-}
-
-function priceKey(price: ModelPrice): string {
-  return JSON.stringify({
-    market: price.market,
-    currency: price.currency,
-    rateType: price.rateType,
-    inputTokenRange: price.inputTokenRange ?? null,
-  });
 }
 
 function same(left: unknown, right: unknown): boolean {
@@ -210,6 +202,7 @@ export interface CatalogDiff {
   prices: Change[];
   modelInfo: Change[];
   calibration: Change[];
+  historyAdded: Array<{ provider: string; model: string; snapshots: number }>;
 }
 
 function omitVolatileCollectionFields(value: unknown): unknown {
@@ -225,6 +218,9 @@ function omitVolatileCollectionFields(value: unknown): unknown {
             "lastSuccessfulAt",
             "retrievedAt",
             "contentHash",
+            "validFrom",
+            "validTo",
+            "priceHistory",
           ].includes(key),
       )
       .sort(([left], [right]) => left.localeCompare(right))
@@ -316,6 +312,21 @@ export function diffCatalog(before: Catalog, after: Catalog): CatalogDiff {
     }
   }
 
+  const historyAdded: CatalogDiff["historyAdded"] = [];
+  for (const [key, next] of newModels) {
+    const previous = oldModels.get(key);
+    if (!previous) continue;
+    const beforeCount = previous.model.priceHistory?.length ?? 0;
+    const afterCount = next.model.priceHistory?.length ?? 0;
+    if (afterCount > beforeCount) {
+      historyAdded.push({
+        provider: next.provider,
+        model: next.model.id,
+        snapshots: afterCount - beforeCount,
+      });
+    }
+  }
+
   const calibrationRows = (catalog: Catalog) =>
     new Map(
       (catalog.calibration?.modelsDev.models ?? []).flatMap((model) =>
@@ -345,7 +356,7 @@ export function diffCatalog(before: Catalog, after: Catalog): CatalogDiff {
     }
   }
 
-  return { added, removed, prices, modelInfo, calibration };
+  return { added, removed, prices, modelInfo, calibration, historyAdded };
 }
 
 function changeTable(changes: Change[]): string {
@@ -359,6 +370,17 @@ function changeTable(changes: Change[]): string {
     "|---|---|---|---:|---:|",
     ...rows,
   ].join("\n");
+}
+
+function historyTable(history: CatalogDiff["historyAdded"]): string {
+  if (!history.length) return "无。";
+  const rows = history.map(
+    (entry) =>
+      `| ${cell(entry.provider)} | ${cell(entry.model)} | ${entry.snapshots} |`,
+  );
+  return ["| 厂商 | 模型 | 新增历史记录 |", "|---|---|---:|", ...rows].join(
+    "\n",
+  );
 }
 
 function priceChangeTable(changes: Change[]): string {
@@ -403,6 +425,7 @@ export function renderUpdateReport(before: Catalog, after: Catalog): string {
 - 新增模型：${diff.added.length}
 - 下线模型：${diff.removed.length}
 - 价格变化：${diff.prices.length}
+- 新增历史价格记录：${diff.historyAdded.reduce((sum, entry) => sum + entry.snapshots, 0)}
 - 模型信息变化：${changedModels}
 - 校准差异：${diff.calibration.length}
 - 数据源异常：${sourceAnomalies}
@@ -410,6 +433,10 @@ export function renderUpdateReport(before: Catalog, after: Catalog): string {
 ### 价格变化
 
 ${priceChangeTable(diff.prices)}
+
+### 历史价格记录
+
+${historyTable(diff.historyAdded)}
 
 ### 模型清单
 

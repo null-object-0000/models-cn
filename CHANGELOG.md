@@ -7,6 +7,7 @@
 ### Added
 
 - Kimi 国际版美元定价、模型元数据和官方 Models API 清单。
+- 历史价格记录：价格变动时旧价自动归档到模型下的 `priceHistory`（含 `validFrom`/`validTo`），当前价格带可选 `validFrom`，均由共享流水线维护。
 
 ### Changed
 

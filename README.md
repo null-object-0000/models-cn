@@ -135,10 +135,54 @@ const outputLimit =
 - `input.cacheHit` 仅在厂商明确设置缓存命中计费规则时提供。字段缺失表示“不存在该计费维度”，不是价格未公开。
 - `input.explicitCacheCreation`、`input.explicitCacheHit` 分别表示显式缓存创建和命中的输入 Token 价格；同一批 Token 应按实际命中的一种计费路径计算，不能与普通输入或其他缓存价格重复相加。
 - `limits.requestsPerMinute`、`limits.tokensPerMinute` 分别是厂商公开的模型级 RPM、TPM；按账号等级动态变化或未给出确定数值时不生成字段。
+- `prices` 中价格的可选 `validFrom` 表示该价格首次被 models-cn 记录的时间；`priceHistory` 记录被替换的历史价格快照。两者均由共享流水线自动维护，采集器不需要也不应该手工写入。
 - 当前数据契约版本为 `schemaVersion: "1.0"`。
 - 官网模型默认按发布时间倒序排列：优先使用厂商官方 `createdAt`，缺失时读取 models.dev 校准数据中的 `release_date`，仍缺失的排在最后。
 - `maxOutputTokens` 等非必填字段缺失时，可使用 models.dev 对应参考值补全；models.dev 也没有时应显示“未公开”，不能自行推断。
 - `sourceUrl`、`retrievedAt` 和 `contentHash` 用于追溯数据来源与变化。
+
+## 历史价格
+
+每次采集都会对比上一次已提交的快照，把被替换的价格自动归档到模型下的 `priceHistory`（新记录在前），价格变化不会丢失历史：
+
+```json
+{
+  "id": "example-model",
+  "prices": [
+    {
+      "market": "china",
+      "currency": "CNY",
+      "unit": "1M_tokens",
+      "rateType": "standard",
+      "input": { "standard": 6 },
+      "output": 24,
+      "sourceUrl": "https://provider.example/pricing",
+      "validFrom": "2026-08-04T09:00:00.000Z"
+    }
+  ],
+  "priceHistory": [
+    {
+      "market": "china",
+      "currency": "CNY",
+      "unit": "1M_tokens",
+      "rateType": "standard",
+      "input": { "standard": 4 },
+      "output": 18,
+      "sourceUrl": "https://provider.example/pricing",
+      "validFrom": "2026-07-20T03:00:00.000Z",
+      "validTo": "2026-08-04T09:00:00.000Z"
+    }
+  ]
+}
+```
+
+使用约定：
+
+- `priceHistory` 中每条记录是曾经的完整价格对象，额外带 `validFrom` 与 `validTo`，表示该价格在 `[validFrom, validTo]` 期间有效；`validTo` 是观察到新价格的时刻。
+- 当前 `prices` 中的 `validFrom` 表示该价格首次被 models-cn 记录的时间；价格未变化时跨采集保持稳定。
+- 只刷新时间戳、价格未变时不会产生新历史记录，也不会因为新增 `validFrom` 或 `priceHistory` 单独触发更新 PR。
+- 没有历史记录（价格从未变化）时 `priceHistory` 字段不存在，不是“未公开”。
+- 历史价格随官方价格页变化自动维护，不需要手工编辑。
 
 ## 官方优先，缺失补全
 

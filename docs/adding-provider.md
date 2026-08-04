@@ -145,6 +145,8 @@ return {
 - 必填的上下文、输入价或输出价缺失。
 - 官网关键结构发生无法解释的变化。
 
+`validFrom` 和 `priceHistory` 由共享流水线在 `collect.ts` 中自动维护，采集器**不要**手工写入这两个字段：价格变化时旧价会自动归档到 `priceHistory` 并记录 `validTo`，价格不变时保留原有 `validFrom`。新增采集器只需输出当前的 `prices` 数组即可。
+
 ## 5. 注册采集器
 
 在 `src/cli/collect.ts` 中导入并注册：

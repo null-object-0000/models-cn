@@ -40,6 +40,8 @@ models-cn 的公开 API 主版本与 JSON 文档内部的 `schemaVersion` 分别
 
 v1 数据契约从首次公开发布起使用 `input.standard` 表示普通输入价格，并仅在厂商明确提供缓存命中价格时提供 `input.cacheHit`。后续新增的 `input.explicitCacheCreation`、`input.explicitCacheHit`、`limits.requestsPerMinute` 和 `limits.tokensPerMinute` 均为可选字段，`schemaVersion` 仍为 `1.0`；旧客户端应按 Schema 的可选字段规则忽略未知字段。
 
+价格历史同样以可选字段加入 v1，不改变既有语义：当前价格可选的 `validFrom` 表示首次被 models-cn 记录的时间；模型下可选的 `priceHistory` 数组存放被替换的历史价格快照（每条带 `validFrom`/`validTo`）。调用方不处理这两个字段时，行为与旧版本完全一致。
+
 ## 数据健康语义
 
 `health.status: "healthy"` 表示最近一次采集成功；`"error"` 表示最近一次尝试失败且正在提供上一份成功快照；`"stale"` 表示数据超过新鲜度窗口。官网和 CI 采用 36 小时窗口，确保每天一次的任务有合理延迟余量，同时不会让长期未运行的任务继续显示 `LIVE`。调用方也应结合 `lastAttemptAt` 判断时效性。
