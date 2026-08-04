@@ -1,0 +1,5 @@
+# Normalize all text files to LF on every platform.
+# Prettier requires LF; this prevents Windows CRLF checkouts from breaking
+# `npm run format:check` locally while keeping the index canonical.
+* text=auto eol=lf
+*.png binary

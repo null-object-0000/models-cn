@@ -136,9 +136,7 @@ function priceByType(
   return range.Prices?.find((price) => price.Type === type);
 }
 
-function hasTokenPricedRanges(
-  ranges: QwenPriceRange[] | undefined,
-): boolean {
+function hasTokenPricedRanges(ranges: QwenPriceRange[] | undefined): boolean {
   return Boolean(
     ranges?.some(
       (range) =>
