@@ -4,6 +4,7 @@ import {
   parseZhipuInternationalPricing,
   parseZhipuOverview,
   parseZhipuPricingDom,
+  parseZhipuReleaseNotes,
   type ZhipuDomCell,
 } from "../src/collectors/zhipu.js";
 
@@ -341,5 +342,51 @@ describe("Zhipu capability parser", () => {
       toolCalls: false,
       jsonOutput: false,
     });
+  });
+});
+
+describe("Zhipu release notes parser", () => {
+  const RELEASES = `# 新品发布
+
+<Update label="2026-06-16" description="GLM-5.2 新一代旗舰模型上线">
+  💬 [**GLM-5.2**](/cn/guide/models/text/glm-5.2)
+</Update>
+
+<Update label="2026-03-15" description="GLM-5-Turbo">
+  💬 [**GLM-5-Turbo**](/cn/guide/models/text/glm-5-turbo)
+</Update>
+
+<Update label="2026-01-19" description="GLM-4.7-Flash 开源">
+  💬 [**GLM-4.7-Flash**](/cn/guide/models/free/glm-4.7-flash)
+</Update>
+
+<Update label="2026-01-14" description="GLM-Image">
+  📷 [**GLM-Image**](/cn/guide/models/text/glm-4.7)
+</Update>
+
+<Update label="2025-12-22" description="GLM-4.7 新一代旗舰模型上线">
+  💬 [**GLM-4.7**](/cn/guide/models/text/glm-4.7)
+</Update>
+
+<Update label="2025-07-28" description="GLM-4.5 上线">
+  💬 [**GLM-4.5**](/cn/guide/models/text/glm-4.5)
+</Update>
+`;
+
+  it("maps each model to its earliest release date", () => {
+    const dates = parseZhipuReleaseNotes(RELEASES);
+    expect(dates.get("glm-5.2")).toBe("2026-06-16T00:00:00.000+08:00");
+    expect(dates.get("glm-5-turbo")).toBe("2026-03-15T00:00:00.000+08:00");
+    expect(dates.get("glm-4.7-flash")).toBe("2026-01-19T00:00:00.000+08:00");
+    expect(dates.get("glm-4.7")).toBe("2025-12-22T00:00:00.000+08:00");
+    // GLM-Image 公告链接指向 glm-4.7，但按显示名提取，不污染 glm-4.7 日期。
+    expect(dates.get("glm-4.7")).toBe("2025-12-22T00:00:00.000+08:00");
+    // 不在目标清单内的模型（glm-4.5、glm-image）不返回。
+    expect(dates.has("glm-4.5")).toBe(false);
+    expect(dates.has("glm-image")).toBe(false);
+  });
+
+  it("returns an empty map for markdown without updates", () => {
+    expect(parseZhipuReleaseNotes("# no updates").size).toBe(0);
   });
 });

@@ -45,14 +45,19 @@ const files = (await readdir(providersDir))
   .filter((file) => file.endsWith(".json"))
   .sort();
 const releaseCutoff = Date.parse("2026-01-01T00:00:00.000Z");
+// 智谱 GLM-4.7 于 2025-12-22 发布但至今在售且为官方旗舰主力，不应被
+// releaseCutoff 误伤。新渠道的 createdAt 来自官方发布页，均属当前在售模型。
+const isZhipuChannel = (id: string) => id === "zhipu-cn" || id === "zhipu-intl";
 const providers: ProviderData[] = [];
 for (const file of files) {
   const provider = await readProvider(path.join(providersDir, file));
   if (!provider) continue;
-  const filteredModels = provider.models.filter((model) => {
-    if (!model.createdAt) return true;
-    return Date.parse(model.createdAt) >= releaseCutoff;
-  });
+  const filteredModels = isZhipuChannel(provider.id)
+    ? provider.models
+    : provider.models.filter((model) => {
+        if (!model.createdAt) return true;
+        return Date.parse(model.createdAt) >= releaseCutoff;
+      });
   if (filteredModels.length < provider.models.length) {
     console.log(
       `Filtered ${provider.models.length - filteredModels.length} pre-2026 model(s) from ${provider.name}`,

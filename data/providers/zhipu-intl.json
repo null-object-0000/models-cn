@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-07T05:06:28.770Z",
-    "lastAttemptAt": "2026-08-07T05:06:28.770Z",
+    "lastSuccessfulAt": "2026-08-07T05:32:31.512Z",
+    "lastAttemptAt": "2026-08-07T05:32:31.512Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -20,6 +20,7 @@
     {
       "id": "glm-5.2",
       "name": "GLM-5.2",
+      "createdAt": "2026-06-16T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -55,6 +56,7 @@
     {
       "id": "glm-5.1",
       "name": "GLM-5.1",
+      "createdAt": "2026-04-07T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -90,6 +92,7 @@
     {
       "id": "glm-5-turbo",
       "name": "GLM-5-Turbo",
+      "createdAt": "2026-03-15T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -125,6 +128,7 @@
     {
       "id": "glm-5",
       "name": "GLM-5",
+      "createdAt": "2026-02-12T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -160,6 +164,7 @@
     {
       "id": "glm-4.7",
       "name": "GLM-4.7",
+      "createdAt": "2025-12-22T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -265,6 +270,7 @@
     {
       "id": "glm-4.7-flash",
       "name": "GLM-4.7-Flash",
+      "createdAt": "2026-01-19T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -311,8 +317,15 @@
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-07T05:06:28.770Z",
-      "contentHash": "sha256:aaf67e8f6afafb15582edeed410ade7758aaa5bb9a89bec82444128c5cfcedb1"
+      "retrievedAt": "2026-08-07T05:32:31.512Z",
+      "contentHash": "sha256:72836683e08f9229e8c496d37308d9f038488edbb50af884acb85cc8e2d2c871"
+    },
+    {
+      "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
+      "kind": "model-metadata",
+      "locale": "zh-CN",
+      "retrievedAt": "2026-08-07T05:32:31.512Z",
+      "contentHash": "sha256:a78e25c1fe769bc5c02fd318f0b4e3728ea49f57ff55f58d72300fc129509c7f"
     }
   ]
 }

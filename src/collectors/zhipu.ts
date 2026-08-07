@@ -46,6 +46,8 @@ export const ZHIPU_INTL_PRICING_URL =
   "https://docs.z.ai/guides/overview/pricing" as const;
 export const ZHIPU_OVERVIEW_URL =
   "https://docs.bigmodel.cn/cn/guide/start/model-overview.md" as const;
+export const ZHIPU_RELEASES_URL =
+  "https://docs.bigmodel.cn/cn/update/new-releases.md" as const;
 export const ZHIPU_DOCS_BASE = "https://docs.bigmodel.cn" as const;
 
 interface ZhipuChannel {
@@ -304,6 +306,32 @@ export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
   return models;
 }
 
+/**
+ * 解析智谱「新品发布」页，返回每个模型首次发布的 ISO 日期。
+ * 公告块形如 `<Update label="2026-06-16" description="GLM-5.2 新一代旗舰模型上线">`，
+ * 正文里用 `[**GLM-5.2**](/cn/guide/models/text/glm-5.2)` 指向模型。
+ * 取每个目标模型**最早**出现的公告日期作为发布时间；未出现在公告中的模型不设日期。
+ */
+export function parseZhipuReleaseNotes(markdown: string): Map<string, string> {
+  const result = new Map<string, string>();
+  const blocks = markdown.matchAll(
+    /<Update label="([^"]+)"[^>]*>([\s\S]*?)<\/Update>/g,
+  );
+  for (const [, label, body] of blocks) {
+    if (!label || !body || !/^\d{4}-\d{2}-\d{2}$/.test(label)) continue;
+    const names = body.matchAll(/\*\*([^*\]]+)\*\*/g);
+    for (const match of names) {
+      const id = match[1]?.toLowerCase().match(/(glm[-a-z0-9.]+)/)?.[1];
+      if (!id || !isZhipuModelId(id)) continue;
+      const iso = `${label}T00:00:00.000+08:00`;
+      const existing = result.get(id);
+      // 取最早日期（首次发布）；ISO 字符串可直接按字典序比较。
+      if (!existing || iso < existing) result.set(id, iso);
+    }
+  }
+  return result;
+}
+
 export interface ZhipuCapabilities {
   thinking: boolean;
   toolCalls: boolean;
@@ -329,13 +357,17 @@ export function parseZhipuCapabilities(markdown: string): ZhipuCapabilities {
 
 interface ZhipuMetadata extends ZhipuOverviewModel {
   capabilities: ZhipuCapabilities;
+  createdAt?: string;
 }
 
-/** 抓取国内站元数据（上下文 / 最大输出 + 能力），按模型 id 返回。 */
+/** 抓取国内站元数据（上下文 / 最大输出 + 能力 + 发布页发布时间），按模型 id 返回。 */
 async function loadZhipuMetadata(): Promise<Map<string, ZhipuMetadata>> {
-  const overviewMarkdown = await fetchMarkdown(ZHIPU_OVERVIEW_URL);
+  const [overviewMarkdown, releasesMarkdown] = await Promise.all([
+    fetchMarkdown(ZHIPU_OVERVIEW_URL),
+    fetchMarkdown(ZHIPU_RELEASES_URL),
+  ]);
   const overview = parseZhipuOverview(overviewMarkdown);
-  const byId = new Map(overview.map((model) => [model.id, model]));
+  const releaseDates = parseZhipuReleaseNotes(releasesMarkdown);
   // 去重详情页 URL（glm-4.7-flashx / glm-4.5-air 与同系列共享详情页）。
   const uniqueUrls = [...new Set(overview.map((model) => model.url))];
   const capabilityMarkdown = new Map<string, string>();
@@ -349,9 +381,11 @@ async function loadZhipuMetadata(): Promise<Map<string, ZhipuMetadata>> {
   for (const model of overview) {
     const markdown = capabilityMarkdown.get(model.url);
     if (!markdown) continue;
+    const createdAt = releaseDates.get(model.id);
     metadata.set(model.id, {
       ...model,
       capabilities: parseZhipuCapabilities(markdown),
+      ...(createdAt ? { createdAt } : {}),
     });
   }
   return metadata;
@@ -368,6 +402,26 @@ function metadataSource(
     retrievedAt: now.toISOString(),
     contentHash: `sha256:${createHash("sha256")
       .update(JSON.stringify([...metadata].map(([, m]) => m)))
+      .digest("hex")}`,
+  };
+}
+
+/** 发布页来源：内容哈希基于解析出的 createdAt，发布时间变化时同步更新。 */
+function releasesSource(
+  now: Date,
+  metadata: Map<string, ZhipuMetadata>,
+): Source {
+  const dates = [...metadata]
+    .map(([, m]) => m.createdAt)
+    .filter((date): date is string => Boolean(date))
+    .sort();
+  return {
+    url: ZHIPU_RELEASES_URL,
+    kind: "model-metadata",
+    locale: "zh-CN",
+    retrievedAt: now.toISOString(),
+    contentHash: `sha256:${createHash("sha256")
+      .update(JSON.stringify(dates))
       .digest("hex")}`,
   };
 }
@@ -395,6 +449,7 @@ export async function collectZhipuChina(
     models.push({
       id,
       name: meta.name,
+      ...(meta.createdAt ? { createdAt: meta.createdAt } : {}),
       aliases: [],
       capabilities: {
         thinking: meta.capabilities.thinking,
@@ -438,6 +493,7 @@ export async function collectZhipuChina(
       contentHash: `sha256:${pricingHash}`,
     },
     metadataSource(now, metadata),
+    releasesSource(now, metadata),
   ];
   return {
     schemaVersion: SCHEMA_VERSION,
@@ -516,6 +572,7 @@ export async function collectZhipuInternational(
     models.push({
       id,
       name: meta.name,
+      ...(meta.createdAt ? { createdAt: meta.createdAt } : {}),
       aliases: [],
       capabilities: {
         thinking: meta.capabilities.thinking,
@@ -545,6 +602,7 @@ export async function collectZhipuInternational(
       contentHash: `sha256:${pricingHash}`,
     },
     metadataSource(now, metadata),
+    releasesSource(now, metadata),
   ];
   return {
     schemaVersion: SCHEMA_VERSION,
