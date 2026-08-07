@@ -2,10 +2,11 @@
   "schemaVersion": "1.0",
   "provider": "moonshot-cn",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-08-07T05:38:24.290Z",
-    "lastAttemptAt": "2026-08-07T05:38:24.290Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-08-07T08:33:32.405Z",
+    "consecutiveFailures": 1,
+    "message": "The operation was aborted due to timeout"
   },
   "source": {
     "url": "https://api.moonshot.cn/v1/models",

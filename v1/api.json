@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:34.976Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.976Z",
+        "lastSuccessfulAt": "2026-08-07T08:32:21.651Z",
+        "lastAttemptAt": "2026-08-07T08:32:21.651Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -144,8 +144,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:34.994Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.994Z",
+        "lastSuccessfulAt": "2026-08-07T08:32:21.670Z",
+        "lastAttemptAt": "2026-08-07T08:32:21.670Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -296,8 +296,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:34.999Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.999Z",
+        "lastSuccessfulAt": "2026-08-07T08:32:21.675Z",
+        "lastAttemptAt": "2026-08-07T08:32:21.675Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -611,8 +611,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.006Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.006Z",
+        "lastSuccessfulAt": "2026-08-07T08:32:21.704Z",
+        "lastAttemptAt": "2026-08-07T08:32:21.704Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -926,8 +926,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.009Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.009Z",
+        "lastSuccessfulAt": "2026-08-07T08:32:21.684Z",
+        "lastAttemptAt": "2026-08-07T08:32:21.684Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1606,7 +1606,7 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-07T05:37:35.009Z",
+          "retrievedAt": "2026-08-07T08:32:21.684Z",
           "contentHash": "sha256:d7862908eeb323dda7f619ebfe61afb4e64977a86f02ac358d5190ae0c2176a9"
         }
       ]
@@ -1615,8 +1615,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.022Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.022Z",
+        "lastSuccessfulAt": "2026-08-07T08:32:21.710Z",
+        "lastAttemptAt": "2026-08-07T08:32:21.710Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2103,8 +2103,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.033Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.033Z",
+        "lastSuccessfulAt": "2026-08-07T08:32:21.713Z",
+        "lastAttemptAt": "2026-08-07T08:32:21.713Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2437,8 +2437,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:23.331Z",
-        "lastAttemptAt": "2026-08-07T05:38:23.331Z",
+        "lastSuccessfulAt": "2026-08-07T08:33:01.471Z",
+        "lastAttemptAt": "2026-08-07T08:33:01.471Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2476,8 +2476,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:23.955Z",
-        "lastAttemptAt": "2026-08-07T05:38:23.955Z",
+        "lastSuccessfulAt": "2026-08-07T08:33:02.042Z",
+        "lastAttemptAt": "2026-08-07T08:33:02.042Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2509,10 +2509,11 @@
       "schemaVersion": "1.0",
       "provider": "moonshot-cn",
       "health": {
-        "status": "healthy",
+        "status": "error",
         "lastSuccessfulAt": "2026-08-07T05:38:24.290Z",
-        "lastAttemptAt": "2026-08-07T05:38:24.290Z",
-        "consecutiveFailures": 0
+        "lastAttemptAt": "2026-08-07T08:33:32.405Z",
+        "consecutiveFailures": 1,
+        "message": "The operation was aborted due to timeout"
       },
       "source": {
         "url": "https://api.moonshot.cn/v1/models",
@@ -2566,8 +2567,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:25.756Z",
-        "lastAttemptAt": "2026-08-07T05:38:25.756Z",
+        "lastSuccessfulAt": "2026-08-07T08:33:32.445Z",
+        "lastAttemptAt": "2026-08-07T08:33:32.445Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2608,8 +2609,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:26.357Z",
-        "lastAttemptAt": "2026-08-07T05:38:26.357Z",
+        "lastSuccessfulAt": "2026-08-07T08:33:33.132Z",
+        "lastAttemptAt": "2026-08-07T08:33:33.132Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2678,8 +2679,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:27.441Z",
-        "lastAttemptAt": "2026-08-07T05:38:27.441Z",
+        "lastSuccessfulAt": "2026-08-07T08:33:33.792Z",
+        "lastAttemptAt": "2026-08-07T08:33:33.792Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2749,8 +2750,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:22.735Z",
-        "lastAttemptAt": "2026-08-07T05:38:22.735Z",
+        "lastSuccessfulAt": "2026-08-07T08:33:00.449Z",
+        "lastAttemptAt": "2026-08-07T08:33:00.449Z",
         "consecutiveFailures": 0
       },
       "source": {
