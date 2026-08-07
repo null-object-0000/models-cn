@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-07T05:06:28.770Z",
-    "lastAttemptAt": "2026-08-07T05:06:28.770Z",
+    "lastSuccessfulAt": "2026-08-07T05:19:19.913Z",
+    "lastAttemptAt": "2026-08-07T05:19:19.913Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
