@@ -34,6 +34,17 @@ const moonshotModelIds = [
   "kimi-k2.5",
 ] as const;
 
+const zhipuModelIds = [
+  "glm-5.2",
+  "glm-5.1",
+  "glm-5-turbo",
+  "glm-5",
+  "glm-4.7",
+  "glm-4.5-air",
+  "glm-4.7-flashx",
+  "glm-4.7-flash",
+] as const;
+
 const mappings = [
   {
     provider: "deepseek",
@@ -127,6 +138,29 @@ const mappings = [
     referenceProvider: "alibaba",
     referenceModel: "qwen3-coder-flash",
     referenceUrl: "https://models.dev/models/alibaba/qwen3-coder-flash/",
+  },
+  ...zhipuModelIds.map((model) => ({
+    provider: "zhipu-intl",
+    model,
+    referenceProvider: "zai",
+    referenceModel: model,
+    referenceUrl: `https://models.dev/models/zai/${model}/`,
+  })),
+  ...zhipuModelIds
+    .filter((model) => model !== "glm-5-turbo")
+    .map((model) => ({
+      provider: "zhipu-cn",
+      model,
+      referenceProvider: "zhipuai",
+      referenceModel: model,
+      referenceUrl: `https://models.dev/models/zhipuai/${model}/`,
+    })),
+  {
+    provider: "zhipu-cn",
+    model: "glm-5-turbo",
+    referenceProvider: "zai",
+    referenceModel: "glm-5-turbo",
+    referenceUrl: "https://models.dev/models/zai/glm-5-turbo/",
   },
 ] as const;
 

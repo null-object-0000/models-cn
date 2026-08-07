@@ -10,6 +10,10 @@ import {
 } from "../collectors/moonshot.js";
 import { collectQwen } from "../collectors/qwen.js";
 import {
+  collectZhipuChina,
+  collectZhipuInternational,
+} from "../collectors/zhipu.js";
+import {
   calibrationDir,
   preserveUnchangedSourceTimestamps,
   providersDir,
@@ -29,6 +33,8 @@ const collectors = [
   { id: "moonshot-cn", collect: collectMoonshotChina },
   { id: "moonshot-intl", collect: collectMoonshotInternational },
   { id: "qwen-cn", collect: collectQwen },
+  { id: "zhipu-cn", collect: collectZhipuChina },
+  { id: "zhipu-intl", collect: collectZhipuInternational },
 ];
 
 const providerOption = process.argv.indexOf("--provider");

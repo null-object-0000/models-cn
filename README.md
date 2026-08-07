@@ -81,8 +81,10 @@ const outputLimit =
 | Kimi 国内版 | `kimi-*` 系列 |   ✅   |    —     |    ✅    |    ✅    |
 | Kimi 国际版 | `kimi-*` 系列 |   —    |    ✅    |    ✅    |    ✅    |
 | 千问国内版  | `qwen*` 系列  |   ✅   |    —     |    ✅    |    —     |
+| 智谱国内版  | `glm-*` 系列  |   ✅   |    —     |    ✅    |    ✅    |
+| 智谱国际版  | `glm-*` 系列  |   —    |    ✅    |    ✅    |    ✅    |
 
-项目只收录厂商自研模型。`moonshot-cn` 表示 **Kimi 国内版（Kimi China）**，`moonshot-intl` 表示 **Kimi 国际版（Kimi International）**；两个渠道使用独立的 API 地址、密钥和官方币种价格，同时都会过滤不在当前范围内的 `moonshot-v1-*`。`qwen-cn` 明确表示 **千问国内版（Qwen China）**，只保留千问模型市场中 `Provider=qwen` 的闭源稳定模型、国内 DashScope 地址和人民币价格；官方外显名称包含“开源模型”、官方开源标记为真的模型、带日期后缀的快照版本、已有同名稳定 ID 的 `*-preview`、没有代际版本号的旧 `qwen-*` 型号，以及 OCR、Character、TTS、VL、Math 类模型均不收录。平台托管的第三方模型、尚未单独接入的国际版和聚合平台价格都不在范围内。
+项目只收录厂商自研模型。`moonshot-cn` 表示 **Kimi 国内版（Kimi China）**，`moonshot-intl` 表示 **Kimi 国际版（Kimi International）**；两个渠道使用独立的 API 地址、密钥和官方币种价格，同时都会过滤不在当前范围内的 `moonshot-v1-*`。`qwen-cn` 明确表示 **千问国内版（Qwen China）**，只保留千问模型市场中 `Provider=qwen` 的闭源稳定模型、国内 DashScope 地址和人民币价格；官方外显名称包含“开源模型”、官方开源标记为真的模型、带日期后缀的快照版本、已有同名稳定 ID 的 `*-preview`、没有代际版本号的旧 `qwen-*` 型号，以及 OCR、Character、TTS、VL、Math 类模型均不收录。`zhipu-cn` 与 `zhipu-intl` 分别表示**智谱国内版（智谱 / Zhipu）**与**智谱国际版（Z.AI）**，只收录国内定价页「旗舰模型」区块的 8 个文本模型（GLM-5.2 / GLM-5.1 / GLM-5-Turbo / GLM-5 / GLM-4.7 / GLM-4.5-Air / GLM-4.7-FlashX / GLM-4.7-Flash，含免费模型），排除视觉、图像、语音、视频等专项模型以及只有 Batch / 私有化计价的旧型号；`/models` 清单返回的 `glm-4.5`、`glm-4.6` 因国内定价页没有标准按量价不收录。平台托管的第三方模型、尚未单独接入的国际版和聚合平台价格都不在范围内。
 
 限流信息只收录能归属到具体模型的固定官方数值。目前千问模型页提供模型级 RPM/TPM，因此已写入数据；[Kimi 限流](https://platform.kimi.com/docs/pricing/limits)随账号充值等级变化，[DeepSeek](https://api-docs.deepseek.com/zh-cn/quick_start/rate_limit)与 [LongCat](https://longcat.chat/platform/docs/zh/APIDocs.html)当前官方文档也未公开可直接复用的固定模型级 RPM/TPM，因此这些渠道暂不生成对应字段。
 
@@ -131,6 +133,7 @@ const outputLimit =
 - `USD + international` 表示厂商独立国际渠道的官方美元价格，不是人民币换算价。
 - `standard` 是标准价；`promotional` 是厂商明确标注的优惠价。
 - `inputTokenRange` 表示按输入 Token 数分档的价格；缺失时表示该价格不分输入长度档位。
+- `outputTokenRange` 表示按输出 Token 数分档的价格；与 `inputTokenRange` 可同时存在，表达「输入长度 + 输出长度」组合分档（如智谱 GLM-4.7 / GLM-4.5-Air 的短输出与长输出分档）。缺失时表示该价格不分输出长度档位。
 - `input.standard` 是普通输入价格；没有独立缓存计费规则时，它适用于全部输入 Token。
 - `input.cacheHit` 仅在厂商明确设置缓存命中计费规则时提供。字段缺失表示“不存在该计费维度”，不是价格未公开。
 - `input.explicitCacheCreation`、`input.explicitCacheHit` 分别表示显式缓存创建和命中的输入 Token 价格；同一批 Token 应按实际命中的一种计费路径计算，不能与普通输入或其他缓存价格重复相加。
@@ -232,6 +235,13 @@ models.dev 补充值必须携带 `referenceUrl` 和校准状态，并在界面�
 
 千问模型市场的数据由页面运行后动态加载。采集器使用浏览器拦截官方模型列表请求，再读取 `Provider=qwen` 系列的详情和人民币分档价格；不采集市场中的第三方模型、开源模型、带日期后缀的快照版本、已有同名稳定 ID 的 `*-preview`、没有代际版本号的旧 `qwen-*` 型号，以及 OCR、Character、TTS、VL、Math 类模型。
 
+### 智谱
+
+- 国内版：[API 价格](https://bigmodel.cn/pricing)、[模型概览](https://docs.bigmodel.cn/cn/guide/start/model-overview)、[模型详情](https://docs.bigmodel.cn/cn/guide/models/text/glm-4.7)、[Models API](https://open.bigmodel.cn/api/paas/v4/models)
+- 国际版：[Model Pricing](https://docs.z.ai/guides/overview/pricing)、[Models API](https://api.z.ai/api/paas/v4/models)
+
+智谱国内定价页为动态渲染页面，采集器使用 Playwright 读取渲染后的「旗舰模型」文本模型表格，解析输入长度、输出长度组合分档与缓存命中价；国际版定价页为静态 markdown，直接抓取 USD 价格。上下文、最大输出与能力字段来自国内文档站的模型概览和各模型详情页。
+
 </details>
 
 ## 数据文件
@@ -276,6 +286,8 @@ npm run site:dev
 npm run collect -- --provider moonshot-cn
 npm run collect -- --provider moonshot-intl
 npm run collect -- --provider qwen-cn
+npm run collect -- --provider zhipu-cn
+npm run collect -- --provider zhipu-intl
 ```
 
 ### 可选密钥
@@ -287,6 +299,8 @@ DEEPSEEK_API_KEY=
 LONGCAT_API_KEY=
 MOONSHOT_CHINA_API_KEY=
 MOONSHOT_INTERNATIONAL_API_KEY=
+ZHIPU_API_KEY=
+ZAI_API_KEY=
 ```
 
 `MOONSHOT_API_KEY` 暂时作为 `MOONSHOT_CHINA_API_KEY` 的兼容别名。不要把真实密钥写入代码、数据文件、日志或 Actions YAML。缺少某个密钥时，清单发现会跳过该渠道并保留已有快照。

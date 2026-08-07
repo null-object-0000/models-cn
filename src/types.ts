@@ -35,6 +35,11 @@ export interface ModelPrice {
     minExclusive?: number;
     maxInclusive?: number;
   };
+  outputTokenRange?: {
+    label: string;
+    minExclusive?: number;
+    maxInclusive?: number;
+  };
   input: {
     cacheHit?: number;
     explicitCacheCreation?: number;

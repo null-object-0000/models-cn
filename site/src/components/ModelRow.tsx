@@ -419,7 +419,10 @@ function PriceDetails({
 
   const grouped = new Map<string, Model["prices"]>();
   for (const price of prices) {
-    const key = price.inputTokenRange?.label ?? "";
+    const key =
+      [price.inputTokenRange?.label, price.outputTokenRange?.label]
+        .filter(Boolean)
+        .join(" / ") || "—";
     const existing = grouped.get(key) ?? [];
     existing.push(price);
     grouped.set(key, existing);
@@ -519,7 +522,7 @@ function PriceDetails({
         className="price-table"
         aria-label={`${cacheMode === "explicit" ? "显式" : "隐式"}缓存价格详情`}
       >
-        <div className="head">输入区间</div>
+        <div className="head">计费区间</div>
         <div className="head">输入</div>
         <div className="head">
           {cacheMode === "explicit" ? "显式缓存" : "缓存命中"}

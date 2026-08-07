@@ -6,6 +6,8 @@
 
 ### Added
 
+- 智谱国内版 `zhipu-cn`（人民币）与国际版 `zhipu-intl`（美元）渠道，覆盖 GLM-5.2 / GLM-5.1 / GLM-5-Turbo / GLM-5 / GLM-4.7 / GLM-4.5-Air / GLM-4.7-FlashX / GLM-4.7-Flash 共 8 个文本模型（含免费模型）。
+- 价格新增可选 `outputTokenRange` 字段，支持「输入长度 + 输出长度」组合分档（如 GLM-4.7 / GLM-4.5-Air 的短输出与长输出分档）。
 - Kimi 国际版美元定价、模型元数据和官方 Models API 清单。
 - 历史价格记录：价格变动时旧价自动归档到模型下的 `priceHistory`（含 `validFrom`/`validTo`），当前价格带可选 `validFrom`，均由共享流水线维护。
 

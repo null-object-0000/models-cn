@@ -197,4 +197,108 @@ describe("models.dev calibration", () => {
       result?.checks.find((check) => check.field === "limits.contextTokens"),
     ).toMatchObject({ status: "match", reference: 1_000_000 });
   });
+
+  it("maps Zhipu models to the zai and zhipuai namespaces", async () => {
+    const zhipuIntl: ProviderData = {
+      schemaVersion: "1.0",
+      health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
+      id: "zhipu-intl",
+      name: "Zhipu International",
+      ownedBy: "zhipu",
+      baseUrls: { openai: "https://api.z.ai/api/paas/v4" },
+      models: [
+        {
+          id: "glm-4.7",
+          name: "GLM-4.7",
+          aliases: [],
+          capabilities: { thinking: true },
+          limits: { contextTokens: 204_800, maxOutputTokens: 131_072 },
+          prices: [
+            {
+              market: "international",
+              currency: "USD",
+              unit: "1M_tokens",
+              rateType: "standard",
+              input: { standard: 0.6, cacheHit: 0.11 },
+              output: 2.2,
+              sourceUrl: "https://docs.z.ai/guides/overview/pricing",
+            },
+          ],
+        },
+      ],
+      sources: [],
+    };
+    const api: ModelsDevApi = {
+      zai: {
+        models: {
+          "glm-4.7": {
+            id: "glm-4.7",
+            release_date: "2025-12-22",
+            reasoning: true,
+            tool_call: true,
+            modalities: { input: ["text"], output: ["text"] },
+            limit: { context: 204_800, output: 131_072 },
+            cost: { input: 0.6, cache_read: 0.11, output: 2.2 },
+          },
+        },
+      },
+    };
+    const report = await collectModelsDevCalibration(
+      [zhipuIntl],
+      undefined,
+      new Date("2026-07-22T00:00:00Z"),
+      async () => api,
+    );
+    const result = report.models.find(
+      (model) => model.provider === "zhipu-intl" && model.model === "glm-4.7",
+    );
+    expect(result).toMatchObject({
+      referenceProvider: "zai",
+      referenceModel: "glm-4.7",
+      referenceUrl: "https://models.dev/models/zai/glm-4.7/",
+      // 官方 createdAt 缺失使 createdAt 检查为 missing，整体为 partial
+      status: "partial",
+    });
+    // 官方 createdAt 缺失 → createdAt 校准为 missing（partial 状态的一部分）
+    expect(
+      result?.checks.find((check) => check.field === "createdAt")?.status,
+    ).toBe("missing");
+  });
+
+  it("maps Zhipu China glm-5-turbo to zai and other models to zhipuai", async () => {
+    const zhipuChina: ProviderData = {
+      schemaVersion: "1.0",
+      health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
+      id: "zhipu-cn",
+      name: "Zhipu China",
+      ownedBy: "zhipu",
+      baseUrls: { openai: "https://open.bigmodel.cn/api/paas/v4" },
+      models: ["glm-5-turbo", "glm-4.7"].map((id) => ({
+        id,
+        name: id,
+        aliases: [],
+        capabilities: { thinking: true },
+        limits: { contextTokens: 204_800 },
+        prices: [],
+      })),
+      sources: [],
+    };
+    const report = await collectModelsDevCalibration(
+      [zhipuChina],
+      undefined,
+      new Date("2026-07-22T00:00:00Z"),
+      async () => ({}),
+    );
+    const glm57 = report.models.find(
+      (model) => model.model === "glm-5-turbo" && model.provider === "zhipu-cn",
+    );
+    const glm47 = report.models.find(
+      (model) => model.model === "glm-4.7" && model.provider === "zhipu-cn",
+    );
+    expect(glm57).toMatchObject({
+      referenceProvider: "zai",
+      referenceModel: "glm-5-turbo",
+    });
+    expect(glm47?.referenceProvider).toBe("zhipuai");
+  });
 });

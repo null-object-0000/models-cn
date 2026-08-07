@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "provider": "zhipu-intl",
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-08-07T05:07:12.530Z",
+    "lastAttemptAt": "2026-08-07T05:07:12.530Z",
+    "consecutiveFailures": 0
+  },
+  "source": {
+    "url": "https://api.z.ai/api/paas/v4/models",
+    "retrievedAt": "2026-08-07T05:07:12.530Z",
+    "contentHash": "sha256:477a410dee7a8c166fb8c9665d082a1a69aa935a3e6ee9167e109da1499bb1ed"
+  },
+  "models": [
+    {
+      "id": "glm-4.5",
+      "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-4.5-air",
+      "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-4.6",
+      "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-4.7",
+      "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-5",
+      "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-5-turbo",
+      "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-5.1",
+      "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-5.2",
+      "ownedBy": "z-ai"
+    }
+  ],
+  "comparison": {
+    "status": "mismatch",
+    "pricedAndListed": [
+      "glm-4.5-air",
+      "glm-4.7",
+      "glm-5",
+      "glm-5-turbo",
+      "glm-5.1",
+      "glm-5.2"
+    ],
+    "aliasesAndListed": [],
+    "listedWithoutPricing": [
+      "glm-4.5",
+      "glm-4.6"
+    ],
+    "pricedButNotListed": [
+      "glm-4.7-flash",
+      "glm-4.7-flashx"
+    ],
+    "activeAliasesNotListed": []
+  }
+}

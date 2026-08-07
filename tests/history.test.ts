@@ -79,6 +79,18 @@ describe("priceKey", () => {
     ).not.toBe(
       priceKey(price(1, 2, { inputTokenRange: { label: "输入>256k" } })),
     );
+    expect(
+      priceKey(
+        price(1, 2, { outputTokenRange: { label: "输出长度 [0, 0.2)" } }),
+      ),
+    ).not.toBe(
+      priceKey(price(1, 2, { outputTokenRange: { label: "输出长度 [0.2+)" } })),
+    );
+    expect(
+      priceKey(
+        price(1, 2, { outputTokenRange: { label: "输出长度 [0, 0.2)" } }),
+      ),
+    ).not.toBe(priceKey(price(1, 2)));
   });
 });
 
@@ -174,6 +186,53 @@ describe("applyPriceHistory", () => {
     expect(standard?.validFrom).toBe("2026-07-01T00:00:00.000Z");
     expect(promotional?.validFrom).toBe(AS_OF);
     expect(result.models[0]?.priceHistory).toBeUndefined();
+  });
+
+  it("treats output token ranges as distinct billing dimensions", () => {
+    const previous = provider(
+      [
+        model("m1", [
+          price(1, 2, {
+            outputTokenRange: { label: "输出长度 [0, 0.2)", maxInclusive: 200 },
+            validFrom: "2026-07-01T00:00:00.000Z",
+          }),
+          price(1, 6, {
+            outputTokenRange: { label: "输出长度 [0.2+)", minExclusive: 200 },
+            validFrom: "2026-07-01T00:00:00.000Z",
+          }),
+        ]),
+      ],
+      pricingSource(),
+    );
+    const next = provider([
+      model("m1", [
+        price(1, 2, {
+          outputTokenRange: { label: "输出长度 [0, 0.2)", maxInclusive: 200 },
+        }),
+        price(1, 8, {
+          outputTokenRange: { label: "输出长度 [0.2+)", minExclusive: 200 },
+        }),
+      ]),
+    ]);
+    const result = applyPriceHistory(previous, next, AS_OF);
+    const prices = result.models[0]?.prices ?? [];
+    expect(prices).toHaveLength(2);
+    const shortOutput = prices.find(
+      (item) => item.outputTokenRange?.label === "输出长度 [0, 0.2)",
+    );
+    const longOutput = prices.find(
+      (item) => item.outputTokenRange?.label === "输出长度 [0.2+)",
+    );
+    // 未变化的输出档保留原 validFrom；变化的输出档产生历史快照。
+    expect(shortOutput?.validFrom).toBe("2026-07-01T00:00:00.000Z");
+    expect(longOutput?.output).toBe(8);
+    const history = result.models[0]?.priceHistory;
+    expect(history).toHaveLength(1);
+    expect(history?.[0]).toMatchObject({
+      output: 6,
+      outputTokenRange: { label: "输出长度 [0.2+)", minExclusive: 200 },
+      validTo: AS_OF,
+    });
   });
 
   it("backfills validFrom from the previous pricing source when missing", () => {

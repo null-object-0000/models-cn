@@ -44,6 +44,18 @@ export const INVENTORY_PROVIDERS = [
     url: "https://api.moonshot.ai/v1/models",
     modelIdPrefix: "kimi-",
   },
+  {
+    provider: "zhipu-cn",
+    env: "ZHIPU_API_KEY",
+    url: "https://open.bigmodel.cn/api/paas/v4/models",
+    modelIdPrefix: "glm-",
+  },
+  {
+    provider: "zhipu-intl",
+    env: "ZAI_API_KEY",
+    url: "https://api.z.ai/api/paas/v4/models",
+    modelIdPrefix: "glm-",
+  },
 ] as const;
 
 export type InventoryProviderConfig = (typeof INVENTORY_PROVIDERS)[number];

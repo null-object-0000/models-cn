@@ -34,6 +34,8 @@ jobs:
           LONGCAT_API_KEY: ${{ secrets.LONGCAT_API_KEY }}
           MOONSHOT_CHINA_API_KEY: ${{ secrets.MOONSHOT_CHINA_API_KEY || secrets.MOONSHOT_API_KEY }}
           MOONSHOT_INTERNATIONAL_API_KEY: ${{ secrets.MOONSHOT_INTERNATIONAL_API_KEY }}
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
       - run: npm run build
       - run: npm run check
       - run: npm run format:check

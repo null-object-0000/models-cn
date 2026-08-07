@@ -133,4 +133,45 @@ describe("provider model inventory", () => {
       inventory.models.every((model) => model.id.startsWith("kimi-")),
     ).toBe(true);
   });
+
+  it("filters the Zhipu API inventory to the GLM family", async () => {
+    const zhipu: ProviderData = {
+      schemaVersion: "1.0",
+      health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
+      id: "zhipu-cn",
+      name: "Zhipu China",
+      displayNames: { "zh-CN": "智谱", en: "Zhipu AI" },
+      ownedBy: "zhipu",
+      baseUrls: { openai: "https://open.bigmodel.cn/api/paas/v4" },
+      models: [
+        {
+          id: "glm-4.7",
+          name: "GLM-4.7",
+          aliases: [],
+          capabilities: { thinking: true },
+          limits: { contextTokens: 204_800 },
+          prices: [],
+        },
+      ],
+      sources: [],
+    };
+    const inventory = buildProviderInventory(INVENTORY_PROVIDERS[4], zhipu, {
+      data: [
+        { id: "glm-4.7", owned_by: "z-ai" },
+        { id: "glm-4.5", owned_by: "z-ai" },
+        { id: "some-other-model", owned_by: "third-party" },
+      ],
+    });
+    expect(inventory.comparison).toMatchObject({
+      status: "mismatch",
+      listedWithoutPricing: ["glm-4.5"],
+    });
+    expect(inventory.models.map((model) => model.id)).toEqual([
+      "glm-4.5",
+      "glm-4.7",
+    ]);
+    expect(inventory.models.every((model) => model.id.startsWith("glm-"))).toBe(
+      true,
+    );
+  });
 });
