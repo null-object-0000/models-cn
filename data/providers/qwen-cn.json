@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-03T05:19:40.310Z",
-    "lastAttemptAt": "2026-08-03T05:19:40.310Z",
+    "lastSuccessfulAt": "2026-08-07T05:19:19.889Z",
+    "lastAttemptAt": "2026-08-07T05:19:19.889Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
@@ -54,61 +54,8 @@
             "explicitCacheHit": 1
           },
           "output": 36,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max"
-        }
-      ]
-    },
-    {
-      "id": "qwen3.7-max",
-      "name": "Qwen3.7-Max",
-      "createdAt": "2026-05-21T06:37:11.000+00:00",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "chatPrefixCompletion": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 1000000,
-        "maxOutputTokens": 131072,
-        "requestsPerMinute": 30000,
-        "tokensPerMinute": 5000000
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 12,
-            "cacheHit": 2.4,
-            "explicitCacheCreation": 15,
-            "explicitCacheHit": 1.2
-          },
-          "output": 36,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max"
-        },
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "promotional",
-          "input": {
-            "standard": 6,
-            "cacheHit": 1.2,
-            "explicitCacheCreation": 7.5,
-            "explicitCacheHit": 0.6
-          },
-          "output": 18,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -154,7 +101,8 @@
             "explicitCacheHit": 0.2
           },
           "output": 8,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -172,7 +120,8 @@
             "explicitCacheHit": 0.16
           },
           "output": 6.4,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -191,7 +140,8 @@
             "explicitCacheHit": 0.6
           },
           "output": 24,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -210,7 +160,64 @@
             "explicitCacheHit": 0.48
           },
           "output": 19.2,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
+        }
+      ]
+    },
+    {
+      "id": "qwen3.7-max",
+      "name": "Qwen3.7-Max",
+      "createdAt": "2026-05-21T06:37:11.000+00:00",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "chatPrefixCompletion": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072,
+        "requestsPerMinute": 30000,
+        "tokensPerMinute": 5000000
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 12,
+            "cacheHit": 2.4,
+            "explicitCacheCreation": 15,
+            "explicitCacheHit": 1.2
+          },
+          "output": 36,
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
+          "validFrom": "2026-08-03T05:19:40.310Z"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "promotional",
+          "input": {
+            "standard": 6,
+            "cacheHit": 1.2,
+            "explicitCacheCreation": 7.5,
+            "explicitCacheHit": 0.6
+          },
+          "output": 18,
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -256,7 +263,8 @@
             "explicitCacheHit": 0.02
           },
           "output": 0.8,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -275,7 +283,8 @@
             "explicitCacheHit": 0.06
           },
           "output": 2.4,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -294,7 +303,8 @@
             "explicitCacheHit": 0.12
           },
           "output": 4.8,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -336,7 +346,8 @@
             "explicitCacheHit": 0.9
           },
           "output": 54,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -354,7 +365,8 @@
             "explicitCacheHit": 1.5
           },
           "output": 90,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -399,7 +411,8 @@
             "explicitCacheHit": 0.2
           },
           "output": 12,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -417,7 +430,8 @@
             "explicitCacheHit": 0.8
           },
           "output": 48,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -462,7 +476,8 @@
             "explicitCacheHit": 0.08
           },
           "output": 4.8,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -480,7 +495,8 @@
             "explicitCacheHit": 0.2
           },
           "output": 12,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -498,7 +514,8 @@
             "explicitCacheHit": 0.4
           },
           "output": 24,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -543,7 +560,8 @@
             "explicitCacheHit": 0.02
           },
           "output": 2,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -561,7 +579,8 @@
             "explicitCacheHit": 0.08
           },
           "output": 8,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -579,7 +598,8 @@
             "explicitCacheHit": 0.12
           },
           "output": 12,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -623,7 +643,8 @@
             "explicitCacheHit": 0.25
           },
           "output": 10,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -642,7 +663,8 @@
             "explicitCacheHit": 0.4
           },
           "output": 16,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -661,7 +683,8 @@
             "explicitCacheHit": 0.7
           },
           "output": 28,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -706,7 +729,8 @@
             "explicitCacheHit": 0.12
           },
           "output": 7.2,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -724,7 +748,8 @@
             "explicitCacheHit": 0.48
           },
           "output": 28.8,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -765,7 +790,8 @@
             "explicitCacheHit": 0.4
           },
           "output": 16,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -784,7 +810,8 @@
             "explicitCacheHit": 0.6
           },
           "output": 24,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -803,7 +830,8 @@
             "explicitCacheHit": 1
           },
           "output": 40,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -822,7 +850,8 @@
             "explicitCacheHit": 2
           },
           "output": 200,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -863,7 +892,8 @@
             "explicitCacheHit": 0.1
           },
           "output": 4,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -882,7 +912,8 @@
             "explicitCacheHit": 0.15
           },
           "output": 6,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -901,7 +932,8 @@
             "explicitCacheHit": 0.25
           },
           "output": 10,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         },
         {
           "market": "china",
@@ -920,7 +952,8 @@
             "explicitCacheHit": 0.5
           },
           "output": 25,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash"
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-flash",
+          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     }
@@ -930,16 +963,16 @@
       "url": "https://www.qianwenai.com/models",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-03T05:19:40.310Z",
-      "contentHash": "sha256:140288dff7f7f2a73be0b530089f641a0b8a85818e4f07b877909a2a54f2491c"
+      "retrievedAt": "2026-08-07T05:19:19.889Z",
+      "contentHash": "sha256:da1110b4c16f8cc7dfbd02de668906aaf30b9e339ebc7603d7d17f47bb57de8f"
     },
     {
       "url": "https://www.qianwenai.com/models",
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-08-03T05:19:40.310Z",
-      "contentHash": "sha256:7dd5391d3f246f70d5e5bebcdb14448684a4db6a83a349153b8fcb496f361862"
+      "retrievedAt": "2026-08-07T05:19:19.889Z",
+      "contentHash": "sha256:d7862908eeb323dda7f619ebfe61afb4e64977a86f02ac358d5190ae0c2176a9"
     }
   ]
 }

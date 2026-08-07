@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-03T05:19:53.032Z",
-    "lastAttemptAt": "2026-08-03T05:19:53.032Z",
+    "lastSuccessfulAt": "2026-08-07T05:20:04.867Z",
+    "lastAttemptAt": "2026-08-07T05:20:04.867Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-08-03T04:50:09.669Z",
-    "contentHash": "sha256:b2d15b4a1bf62f56b021ddb58264433984558116d76be7a7664c89732aed26e4"
+    "retrievedAt": "2026-08-07T05:20:04.867Z",
+    "contentHash": "sha256:050838f735e90d4b4d9d26312e4f04e3c93856ca9588118c428f862e470af564"
   },
   "models": [
     {
@@ -1772,6 +1772,1254 @@
           "field": "prices.USD.output",
           "official": null,
           "reference": 1.5,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-5.2",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-5.2",
+      "referenceUrl": "https://models.dev/models/zai/glm-5.2/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-06-13",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 1.4,
+          "reference": 1.4,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.26,
+          "reference": 0.26,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 4.4,
+          "reference": 4.4,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-5.1",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-5.1",
+      "referenceUrl": "https://models.dev/models/zai/glm-5.1/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-04-07",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 200000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 1.4,
+          "reference": 1.4,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.26,
+          "reference": 0.26,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 4.4,
+          "reference": 4.4,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-5-turbo",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-5-turbo",
+      "referenceUrl": "https://models.dev/models/zai/glm-5-turbo/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-03-16",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 200000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 1.2,
+          "reference": 1.2,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.24,
+          "reference": 0.24,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 4,
+          "reference": 4,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-5",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-5",
+      "referenceUrl": "https://models.dev/models/zai/glm-5/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-02-12",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 204800,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 1,
+          "reference": 1,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.2,
+          "reference": 0.2,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 3.2,
+          "reference": 3.2,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-4.7",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-4.7",
+      "referenceUrl": "https://models.dev/models/zai/glm-4.7/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2025-12-22",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 204800,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 0.6,
+          "reference": 0.6,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.11,
+          "reference": 0.11,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 2.2,
+          "reference": 2.2,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-4.5-air",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-4.5-air",
+      "referenceUrl": "https://models.dev/models/zai/glm-4.5-air/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2025-07-28",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 98304,
+          "reference": 98304,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 0.2,
+          "reference": 0.2,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.03,
+          "reference": 0.03,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 1.1,
+          "reference": 1.1,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-4.7-flashx",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-4.7-flashx",
+      "referenceUrl": "https://models.dev/models/zai/glm-4.7-flashx/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-01-19",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 200000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 0.07,
+          "reference": 0.07,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.01,
+          "reference": 0.01,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 0.4,
+          "reference": 0.4,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-4.7-flash",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-4.7-flash",
+      "referenceUrl": "https://models.dev/models/zai/glm-4.7-flash/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-01-19",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 200000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 0,
+          "reference": 0,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0,
+          "reference": 0,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 0,
+          "reference": 0,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-cn",
+      "model": "glm-5.2",
+      "referenceProvider": "zhipuai",
+      "referenceModel": "glm-5.2",
+      "referenceUrl": "https://models.dev/models/zhipuai/glm-5.2/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-06-13",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 1.4,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.26,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 4.4,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-cn",
+      "model": "glm-5.1",
+      "referenceProvider": "zhipuai",
+      "referenceModel": "glm-5.1",
+      "referenceUrl": "https://models.dev/models/zhipuai/glm-5.1/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-03-27",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 200000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 1.4,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.26,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 4.4,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-cn",
+      "model": "glm-5",
+      "referenceProvider": "zhipuai",
+      "referenceModel": "glm-5",
+      "referenceUrl": "https://models.dev/models/zhipuai/glm-5/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-02-11",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 204800,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 1,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.2,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 3.2,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-cn",
+      "model": "glm-4.7",
+      "referenceProvider": "zhipuai",
+      "referenceModel": "glm-4.7",
+      "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2025-12-22",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 204800,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.6,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.11,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 2.2,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-cn",
+      "model": "glm-4.5-air",
+      "referenceProvider": "zhipuai",
+      "referenceModel": "glm-4.5-air",
+      "referenceUrl": "https://models.dev/models/zhipuai/glm-4.5-air/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2025-07-28",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 98304,
+          "reference": 98304,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.2,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.03,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 1.1,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-cn",
+      "model": "glm-4.7-flashx",
+      "referenceProvider": "zhipuai",
+      "referenceModel": "glm-4.7-flashx",
+      "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flashx/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-01-19",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 200000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.07,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.01,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 0.4,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-cn",
+      "model": "glm-4.7-flash",
+      "referenceProvider": "zhipuai",
+      "referenceModel": "glm-4.7-flash",
+      "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flash/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-01-19",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 200000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 0,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-cn",
+      "model": "glm-5-turbo",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-5-turbo",
+      "referenceUrl": "https://models.dev/models/zai/glm-5-turbo/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-03-16",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 204800,
+          "reference": 200000,
+          "status": "mismatch"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 1.2,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.24,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 4,
           "status": "missing"
         }
       ]

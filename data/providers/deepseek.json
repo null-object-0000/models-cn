@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-03T05:19:40.291Z",
-    "lastAttemptAt": "2026-08-03T05:19:40.291Z",
+    "lastSuccessfulAt": "2026-08-07T05:19:19.856Z",
+    "lastAttemptAt": "2026-08-07T05:19:19.856Z",
     "consecutiveFailures": 0
   },
   "id": "deepseek",
@@ -54,7 +54,8 @@
             "standard": 1
           },
           "output": 2,
-          "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+          "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+          "validFrom": "2026-08-01T09:23:24.396Z"
         },
         {
           "market": "international",
@@ -66,7 +67,8 @@
             "standard": 0.14
           },
           "output": 0.28,
-          "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
+          "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "validFrom": "2026-08-01T09:23:24.396Z"
         }
       ]
     },
@@ -97,7 +99,8 @@
             "standard": 3
           },
           "output": 6,
-          "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/"
+          "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+          "validFrom": "2026-08-01T09:23:24.396Z"
         },
         {
           "market": "international",
@@ -109,7 +112,8 @@
             "standard": 0.435
           },
           "output": 0.87,
-          "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/"
+          "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "validFrom": "2026-08-01T09:23:24.396Z"
         }
       ]
     }
