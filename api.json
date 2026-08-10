@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:34.976Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.976Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:02.145Z",
+        "lastAttemptAt": "2026-08-10T14:33:02.145Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -144,8 +144,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:34.994Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.994Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:02.083Z",
+        "lastAttemptAt": "2026-08-10T14:33:02.083Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -295,10 +295,11 @@
     {
       "schemaVersion": "1.0",
       "health": {
-        "status": "healthy",
+        "status": "error",
         "lastSuccessfulAt": "2026-08-07T05:37:34.999Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.999Z",
-        "consecutiveFailures": 0
+        "lastAttemptAt": "2026-08-10T14:33:12.589Z",
+        "consecutiveFailures": 1,
+        "message": "fetch failed"
       },
       "id": "moonshot-cn",
       "name": "Kimi China",
@@ -611,8 +612,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.006Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.006Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:02.112Z",
+        "lastAttemptAt": "2026-08-10T14:33:02.112Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -926,8 +927,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.009Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.009Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:02.116Z",
+        "lastAttemptAt": "2026-08-10T14:33:02.116Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1598,16 +1599,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-07T05:37:35.009Z",
-          "contentHash": "sha256:da1110b4c16f8cc7dfbd02de668906aaf30b9e339ebc7603d7d17f47bb57de8f"
+          "retrievedAt": "2026-08-10T14:33:02.116Z",
+          "contentHash": "sha256:5953fdfe45d566d2f415f2f11fa1e0c8cd5796d86fc2cc0f04a1d25141291009"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-07T05:37:35.009Z",
-          "contentHash": "sha256:d7862908eeb323dda7f619ebfe61afb4e64977a86f02ac358d5190ae0c2176a9"
+          "retrievedAt": "2026-08-10T14:33:02.116Z",
+          "contentHash": "sha256:9d01adaa2dc05733a00c34d2ab7a43619d3e5c477747149441a4cd179da83ec0"
         }
       ]
     },
@@ -1615,8 +1616,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.022Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.022Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:02.130Z",
+        "lastAttemptAt": "2026-08-10T14:33:02.130Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2103,8 +2104,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.033Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.033Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:02.141Z",
+        "lastAttemptAt": "2026-08-10T14:33:02.141Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2437,8 +2438,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:23.331Z",
-        "lastAttemptAt": "2026-08-07T05:38:23.331Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:40.730Z",
+        "lastAttemptAt": "2026-08-10T14:33:40.730Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2476,8 +2477,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:23.955Z",
-        "lastAttemptAt": "2026-08-07T05:38:23.955Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:41.418Z",
+        "lastAttemptAt": "2026-08-10T14:33:41.418Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2510,8 +2511,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:24.290Z",
-        "lastAttemptAt": "2026-08-07T05:38:24.290Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:41.772Z",
+        "lastAttemptAt": "2026-08-10T14:33:41.772Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2566,8 +2567,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:25.756Z",
-        "lastAttemptAt": "2026-08-07T05:38:25.756Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:43.160Z",
+        "lastAttemptAt": "2026-08-10T14:33:43.160Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2608,8 +2609,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:26.357Z",
-        "lastAttemptAt": "2026-08-07T05:38:26.357Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:43.669Z",
+        "lastAttemptAt": "2026-08-10T14:33:43.669Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2678,8 +2679,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:27.441Z",
-        "lastAttemptAt": "2026-08-07T05:38:27.441Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:45.237Z",
+        "lastAttemptAt": "2026-08-10T14:33:45.237Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2749,8 +2750,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:22.735Z",
-        "lastAttemptAt": "2026-08-07T05:38:22.735Z",
+        "lastSuccessfulAt": "2026-08-10T14:33:39.992Z",
+        "lastAttemptAt": "2026-08-10T14:33:39.992Z",
         "consecutiveFailures": 0
       },
       "source": {
