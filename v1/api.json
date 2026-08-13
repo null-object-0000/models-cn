@@ -5,8 +5,13 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
+<<<<<<< HEAD
         "lastSuccessfulAt": "2026-08-13T12:09:03.972Z",
         "lastAttemptAt": "2026-08-13T12:09:03.972Z",
+=======
+        "lastSuccessfulAt": "2026-08-13T03:33:49.228Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.228Z",
+>>>>>>> 804e06faefa89a0d9b8014dae1417288c5d2a6d1
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -57,6 +62,7 @@
                 "standard": 1
               },
               "output": 2,
+<<<<<<< HEAD
               "effectiveTo": "2026-08-17T00:00:00+08:00",
               "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
               "validFrom": "2026-08-01T09:23:24.396Z"
@@ -120,6 +126,10 @@
               "effectiveFrom": "2026-08-17T00:00:00+08:00",
               "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
               "validFrom": "2026-08-13T12:09:04.166Z"
+=======
+              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+              "validFrom": "2026-08-01T09:23:24.396Z"
+>>>>>>> 804e06faefa89a0d9b8014dae1417288c5d2a6d1
             },
             {
               "market": "international",
@@ -131,6 +141,7 @@
                 "standard": 0.14
               },
               "output": 0.28,
+<<<<<<< HEAD
               "effectiveTo": "2026-08-16T16:00:00Z",
               "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
               "validFrom": "2026-08-01T09:23:24.396Z"
@@ -194,6 +205,10 @@
               "effectiveFrom": "2026-08-16T16:00:00Z",
               "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
               "validFrom": "2026-08-13T12:09:04.166Z"
+=======
+              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+              "validFrom": "2026-08-01T09:23:24.396Z"
+>>>>>>> 804e06faefa89a0d9b8014dae1417288c5d2a6d1
             }
           ]
         },
@@ -224,6 +239,7 @@
                 "standard": 3
               },
               "output": 6,
+<<<<<<< HEAD
               "effectiveTo": "2026-08-17T00:00:00+08:00",
               "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
               "validFrom": "2026-08-01T09:23:24.396Z"
@@ -287,6 +303,10 @@
               "effectiveFrom": "2026-08-17T00:00:00+08:00",
               "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
               "validFrom": "2026-08-13T12:09:04.166Z"
+=======
+              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+              "validFrom": "2026-08-01T09:23:24.396Z"
+>>>>>>> 804e06faefa89a0d9b8014dae1417288c5d2a6d1
             },
             {
               "market": "international",
@@ -298,6 +318,7 @@
                 "standard": 0.435
               },
               "output": 0.87,
+<<<<<<< HEAD
               "effectiveTo": "2026-08-16T16:00:00Z",
               "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
               "validFrom": "2026-08-01T09:23:24.396Z"
@@ -361,6 +382,10 @@
               "effectiveFrom": "2026-08-16T16:00:00Z",
               "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
               "validFrom": "2026-08-13T12:09:04.166Z"
+=======
+              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+              "validFrom": "2026-08-01T09:23:24.396Z"
+>>>>>>> 804e06faefa89a0d9b8014dae1417288c5d2a6d1
             }
           ]
         }
@@ -371,7 +396,11 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
+<<<<<<< HEAD
           "retrievedAt": "2026-08-13T12:09:03.972Z",
+=======
+          "retrievedAt": "2026-08-13T03:33:49.228Z",
+>>>>>>> 804e06faefa89a0d9b8014dae1417288c5d2a6d1
           "contentHash": "sha256:7d47abef244c07b754b1e63fdea2fde911fb37f769d038269dc7c653d4f209fd"
         },
         {
@@ -379,7 +408,11 @@
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
+<<<<<<< HEAD
           "retrievedAt": "2026-08-13T12:09:03.972Z",
+=======
+          "retrievedAt": "2026-08-13T03:33:49.228Z",
+>>>>>>> 804e06faefa89a0d9b8014dae1417288c5d2a6d1
           "contentHash": "sha256:cb39b0bfe2951773ff1ac802171b858ae65f6abeadec81183bab48f9b9bf2d9d"
         }
       ]
@@ -388,8 +421,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.306Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.306Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.243Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.243Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -444,7 +477,8 @@
                 "standard": 5
               },
               "output": 20,
-              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0"
+              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0",
+              "validFrom": "2026-07-22T03:33:15.688Z"
             },
             {
               "market": "china",
@@ -456,7 +490,8 @@
                 "standard": 2
               },
               "output": 8,
-              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0"
+              "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/long-cat-2.0",
+              "validFrom": "2026-07-22T03:33:15.688Z"
             },
             {
               "market": "international",
@@ -468,7 +503,8 @@
                 "standard": 0.75
               },
               "output": 2.95,
-              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0"
+              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0",
+              "validFrom": "2026-07-22T03:33:15.688Z"
             },
             {
               "market": "international",
@@ -480,7 +516,8 @@
                 "standard": 0.3
               },
               "output": 1.2,
-              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0"
+              "sourceUrl": "https://longcat.chat/platform/docs/pricing/long-cat-2.0",
+              "validFrom": "2026-07-22T03:33:15.688Z"
             }
           ]
         }
@@ -536,8 +573,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.330Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.330Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.247Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.247Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -601,7 +638,8 @@
                 "standard": 20
               },
               "output": 100,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k3"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k3",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         },
@@ -648,7 +686,8 @@
                 "standard": 6.5
               },
               "output": 27,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         },
@@ -695,7 +734,8 @@
                 "standard": 13
               },
               "output": 54,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         },
@@ -744,7 +784,8 @@
                 "standard": 6.5
               },
               "output": 27,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k26"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k26",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         },
@@ -788,7 +829,8 @@
                 "standard": 4
               },
               "output": 21,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k25"
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k25",
+              "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
         }
@@ -846,8 +888,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.324Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.324Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.253Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.253Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -911,7 +953,8 @@
                 "standard": 3
               },
               "output": 15,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k3"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k3",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         },
@@ -958,7 +1001,8 @@
                 "standard": 0.95
               },
               "output": 4,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         },
@@ -1005,7 +1049,8 @@
                 "standard": 1.9
               },
               "output": 8,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         },
@@ -1054,7 +1099,8 @@
                 "standard": 0.95
               },
               "output": 4,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k26"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k26",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         },
@@ -1098,7 +1144,8 @@
                 "standard": 0.6
               },
               "output": 3,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k25"
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k25",
+              "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
         }
@@ -1156,8 +1203,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:40.310Z",
-        "lastAttemptAt": "2026-08-03T05:19:40.310Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.257Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.257Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1208,61 +1255,8 @@
                 "explicitCacheHit": 1
               },
               "output": 36,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max"
-            }
-          ]
-        },
-        {
-          "id": "qwen3.7-max",
-          "name": "Qwen3.7-Max",
-          "createdAt": "2026-05-21T06:37:11.000+00:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "chatPrefixCompletion": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 1000000,
-            "maxOutputTokens": 131072,
-            "requestsPerMinute": 30000,
-            "tokensPerMinute": 5000000
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "standard": 12,
-                "cacheHit": 2.4,
-                "explicitCacheCreation": 15,
-                "explicitCacheHit": 1.2
-              },
-              "output": 36,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "promotional",
-              "input": {
-                "standard": 6,
-                "cacheHit": 1.2,
-                "explicitCacheCreation": 7.5,
-                "explicitCacheHit": 0.6
-              },
-              "output": 18,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1308,7 +1302,8 @@
                 "explicitCacheHit": 0.2
               },
               "output": 8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1326,7 +1321,8 @@
                 "explicitCacheHit": 0.16
               },
               "output": 6.4,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1345,7 +1341,8 @@
                 "explicitCacheHit": 0.6
               },
               "output": 24,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1364,7 +1361,64 @@
                 "explicitCacheHit": 0.48
               },
               "output": 19.2,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
+            }
+          ]
+        },
+        {
+          "id": "qwen3.7-max",
+          "name": "Qwen3.7-Max",
+          "createdAt": "2026-05-21T06:37:11.000+00:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "chatPrefixCompletion": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 131072,
+            "requestsPerMinute": 30000,
+            "tokensPerMinute": 5000000
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 12,
+                "cacheHit": 2.4,
+                "explicitCacheCreation": 15,
+                "explicitCacheHit": 1.2
+              },
+              "output": 36,
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
+              "validFrom": "2026-08-03T05:19:40.310Z"
+            },
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "promotional",
+              "input": {
+                "standard": 6,
+                "cacheHit": 1.2,
+                "explicitCacheCreation": 7.5,
+                "explicitCacheHit": 0.6
+              },
+              "output": 18,
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1410,7 +1464,8 @@
                 "explicitCacheHit": 0.02
               },
               "output": 0.8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1429,7 +1484,8 @@
                 "explicitCacheHit": 0.06
               },
               "output": 2.4,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1448,7 +1504,8 @@
                 "explicitCacheHit": 0.12
               },
               "output": 4.8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1490,7 +1547,8 @@
                 "explicitCacheHit": 0.9
               },
               "output": 54,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1508,7 +1566,8 @@
                 "explicitCacheHit": 1.5
               },
               "output": 90,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1553,7 +1612,8 @@
                 "explicitCacheHit": 0.2
               },
               "output": 12,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1571,7 +1631,8 @@
                 "explicitCacheHit": 0.8
               },
               "output": 48,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1616,7 +1677,8 @@
                 "explicitCacheHit": 0.08
               },
               "output": 4.8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1634,7 +1696,8 @@
                 "explicitCacheHit": 0.2
               },
               "output": 12,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1652,7 +1715,8 @@
                 "explicitCacheHit": 0.4
               },
               "output": 24,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-plus",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1697,7 +1761,8 @@
                 "explicitCacheHit": 0.02
               },
               "output": 2,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1715,7 +1780,8 @@
                 "explicitCacheHit": 0.08
               },
               "output": 8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1733,7 +1799,8 @@
                 "explicitCacheHit": 0.12
               },
               "output": 12,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.5-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -1778,7 +1845,8 @@
                 "explicitCacheHit": 0.12
               },
               "output": 7.2,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             },
             {
               "market": "china",
@@ -1796,7 +1864,8 @@
                 "explicitCacheHit": 0.48
               },
               "output": 28.8,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash"
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash",
+              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         }
@@ -1806,16 +1875,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-03T05:19:40.310Z",
-          "contentHash": "sha256:140288dff7f7f2a73be0b530089f641a0b8a85818e4f07b877909a2a54f2491c"
+          "retrievedAt": "2026-08-13T03:33:49.257Z",
+          "contentHash": "sha256:e672097c6a18df3345c864f7f051f2bf0154d0278cf7d0eb2732a287ec2a2c2e"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-03T05:19:40.310Z",
-          "contentHash": "sha256:7dd5391d3f246f70d5e5bebcdb14448684a4db6a83a349153b8fcb496f361862"
+          "retrievedAt": "2026-08-13T03:33:49.257Z",
+          "contentHash": "sha256:f93f0fc12dc3702ec05fb1d227998550f6ebd19ebd8d2db6b7e0221773bca76d"
         }
       ]
     },
@@ -1823,8 +1892,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:31:44.971Z",
-        "lastAttemptAt": "2026-08-07T05:31:44.971Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.271Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.271Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2311,8 +2380,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:32:31.512Z",
-        "lastAttemptAt": "2026-08-07T05:32:31.512Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.288Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.288Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2645,8 +2714,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:07:04.867Z",
-        "lastAttemptAt": "2026-08-07T05:07:04.867Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:24.739Z",
+        "lastAttemptAt": "2026-08-13T03:34:24.739Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2684,8 +2753,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:07:05.169Z",
-        "lastAttemptAt": "2026-08-07T05:07:05.169Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:25.205Z",
+        "lastAttemptAt": "2026-08-13T03:34:25.205Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2718,8 +2787,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:07:05.486Z",
-        "lastAttemptAt": "2026-08-07T05:07:05.486Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:25.574Z",
+        "lastAttemptAt": "2026-08-13T03:34:25.574Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2774,8 +2843,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:07:10.431Z",
-        "lastAttemptAt": "2026-08-07T05:07:10.431Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:27.029Z",
+        "lastAttemptAt": "2026-08-13T03:34:27.029Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2816,8 +2885,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:07:12.181Z",
-        "lastAttemptAt": "2026-08-07T05:07:12.181Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:27.976Z",
+        "lastAttemptAt": "2026-08-13T03:34:27.976Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2886,8 +2955,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:07:12.530Z",
-        "lastAttemptAt": "2026-08-07T05:07:12.530Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:28.793Z",
+        "lastAttemptAt": "2026-08-13T03:34:28.793Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2957,14 +3026,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-03T05:19:53.032Z",
-        "lastAttemptAt": "2026-08-03T05:19:53.032Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:23.984Z",
+        "lastAttemptAt": "2026-08-13T03:34:23.984Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-03T04:50:09.669Z",
-        "contentHash": "sha256:b2d15b4a1bf62f56b021ddb58264433984558116d76be7a7664c89732aed26e4"
+        "retrievedAt": "2026-08-13T03:34:23.984Z",
+        "contentHash": "sha256:49ef917b3787372100222cdee35017048ed2b83282c24d31012679956522b2cd"
       },
       "models": [
         {
@@ -3052,7 +3121,7 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-04-24",
+              "reference": "2026-08-12",
               "status": "missing"
             },
             {
@@ -4727,6 +4796,1254 @@
               "field": "prices.USD.output",
               "official": null,
               "reference": 1.5,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-5.2",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-5.2",
+          "referenceUrl": "https://models.dev/models/zai/glm-5.2/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-06-16",
+              "reference": "2026-06-13",
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 1.4,
+              "reference": 1.4,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.26,
+              "reference": 0.26,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 4.4,
+              "reference": 4.4,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-5.1",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-5.1",
+          "referenceUrl": "https://models.dev/models/zai/glm-5.1/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-04-07",
+              "reference": "2026-04-07",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 200000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 1.4,
+              "reference": 1.4,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.26,
+              "reference": 0.26,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 4.4,
+              "reference": 4.4,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-5-turbo",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-5-turbo",
+          "referenceUrl": "https://models.dev/models/zai/glm-5-turbo/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-03-15",
+              "reference": "2026-03-16",
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 200000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 1.2,
+              "reference": 1.2,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.24,
+              "reference": 0.24,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 4,
+              "reference": 4,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-5",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-5",
+          "referenceUrl": "https://models.dev/models/zai/glm-5/",
+          "status": "match",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-02-12",
+              "reference": "2026-02-12",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 204800,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 1,
+              "reference": 1,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.2,
+              "reference": 0.2,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 3.2,
+              "reference": 3.2,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-4.7",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-4.7",
+          "referenceUrl": "https://models.dev/models/zai/glm-4.7/",
+          "status": "match",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2025-12-22",
+              "reference": "2025-12-22",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 204800,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 0.6,
+              "reference": 0.6,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.11,
+              "reference": 0.11,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 2.2,
+              "reference": 2.2,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-4.5-air",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-4.5-air",
+          "referenceUrl": "https://models.dev/models/zai/glm-4.5-air/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": null,
+              "reference": "2025-07-28",
+              "status": "missing"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 98304,
+              "reference": 98304,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 0.2,
+              "reference": 0.2,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.03,
+              "reference": 0.03,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 1.1,
+              "reference": 1.1,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-4.7-flashx",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-4.7-flashx",
+          "referenceUrl": "https://models.dev/models/zai/glm-4.7-flashx/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": null,
+              "reference": "2026-01-19",
+              "status": "missing"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 200000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 0.07,
+              "reference": 0.07,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.01,
+              "reference": 0.01,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 0.4,
+              "reference": 0.4,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-4.7-flash",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-4.7-flash",
+          "referenceUrl": "https://models.dev/models/zai/glm-4.7-flash/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-01-19",
+              "reference": "2026-01-19",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 200000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 0,
+              "reference": 0,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0,
+              "reference": 0,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 0,
+              "reference": 0,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-5.2",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-5.2",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-5.2/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-06-16",
+              "reference": "2026-06-13",
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 1.4,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.26,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 4.4,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-5.1",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-5.1",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-5.1/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-04-07",
+              "reference": "2026-03-27",
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 200000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 1.4,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.26,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 4.4,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-5",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-5",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-5/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-02-12",
+              "reference": "2026-02-11",
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 204800,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 1,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.2,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 3.2,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-4.7",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-4.7",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2025-12-22",
+              "reference": "2025-12-22",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 204800,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.6,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.11,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 2.2,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-4.5-air",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-4.5-air",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-4.5-air/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": null,
+              "reference": "2025-07-28",
+              "status": "missing"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 98304,
+              "reference": 98304,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.2,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.03,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 1.1,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-4.7-flashx",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-4.7-flashx",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flashx/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": null,
+              "reference": "2026-01-19",
+              "status": "missing"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 200000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.07,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.01,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 0.4,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-4.7-flash",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-4.7-flash",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flash/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-01-19",
+              "reference": "2026-01-19",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 200000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 0,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-5-turbo",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-5-turbo",
+          "referenceUrl": "https://models.dev/models/zai/glm-5-turbo/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-03-15",
+              "reference": "2026-03-16",
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 200000,
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 1.2,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.24,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 4,
               "status": "missing"
             }
           ]

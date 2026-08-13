@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-03T05:19:40.330Z",
-    "lastAttemptAt": "2026-08-03T05:19:40.330Z",
+    "lastSuccessfulAt": "2026-08-13T03:33:49.247Z",
+    "lastAttemptAt": "2026-08-13T03:33:49.247Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-cn",
@@ -67,7 +67,8 @@
             "standard": 20
           },
           "output": 100,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k3"
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k3",
+          "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
     },
@@ -114,7 +115,8 @@
             "standard": 6.5
           },
           "output": 27,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code"
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+          "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
     },
@@ -161,7 +163,8 @@
             "standard": 13
           },
           "output": 54,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code"
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+          "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
     },
@@ -210,7 +213,8 @@
             "standard": 6.5
           },
           "output": 27,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k26"
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k26",
+          "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
     },
@@ -254,7 +258,8 @@
             "standard": 4
           },
           "output": 21,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k25"
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k25",
+          "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
     }
