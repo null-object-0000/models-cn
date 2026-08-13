@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:34.976Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.976Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.228Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.228Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -77,7 +77,7 @@
         },
         {
           "id": "deepseek-v4-pro",
-          "name": "DeepSeek-V4-Pro",
+          "name": "DeepSeek-V4-Pro-0813",
           "aliases": [],
           "capabilities": {
             "thinking": true,
@@ -127,16 +127,16 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-01T09:23:24.396Z",
-          "contentHash": "sha256:e8a83d7d5aa702fe711b68a0bb1f0c0cefe7d35c34d6e073293dc2fbffe37e6f"
+          "retrievedAt": "2026-08-13T03:33:49.228Z",
+          "contentHash": "sha256:7d47abef244c07b754b1e63fdea2fde911fb37f769d038269dc7c653d4f209fd"
         },
         {
           "url": "https://api-docs.deepseek.com/quick_start/pricing/",
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-08-01T09:23:24.396Z",
-          "contentHash": "sha256:7edeefabecf9382f6909183c7b2d7295182862834ee4fe29622b5b302170bb45"
+          "retrievedAt": "2026-08-13T03:33:49.228Z",
+          "contentHash": "sha256:cb39b0bfe2951773ff1ac802171b858ae65f6abeadec81183bab48f9b9bf2d9d"
         }
       ]
     },
@@ -144,8 +144,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:34.994Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.994Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.243Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.243Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -296,8 +296,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:34.999Z",
-        "lastAttemptAt": "2026-08-07T05:37:34.999Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.247Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.247Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -611,8 +611,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.006Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.006Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.253Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.253Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -926,8 +926,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.009Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.009Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.257Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.257Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1598,16 +1598,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-07T05:37:35.009Z",
-          "contentHash": "sha256:da1110b4c16f8cc7dfbd02de668906aaf30b9e339ebc7603d7d17f47bb57de8f"
+          "retrievedAt": "2026-08-13T03:33:49.257Z",
+          "contentHash": "sha256:e672097c6a18df3345c864f7f051f2bf0154d0278cf7d0eb2732a287ec2a2c2e"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-07T05:37:35.009Z",
-          "contentHash": "sha256:d7862908eeb323dda7f619ebfe61afb4e64977a86f02ac358d5190ae0c2176a9"
+          "retrievedAt": "2026-08-13T03:33:49.257Z",
+          "contentHash": "sha256:f93f0fc12dc3702ec05fb1d227998550f6ebd19ebd8d2db6b7e0221773bca76d"
         }
       ]
     },
@@ -1615,8 +1615,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.022Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.022Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.271Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.271Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2103,8 +2103,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:37:35.033Z",
-        "lastAttemptAt": "2026-08-07T05:37:35.033Z",
+        "lastSuccessfulAt": "2026-08-13T03:33:49.288Z",
+        "lastAttemptAt": "2026-08-13T03:33:49.288Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2437,8 +2437,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:23.331Z",
-        "lastAttemptAt": "2026-08-07T05:38:23.331Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:24.739Z",
+        "lastAttemptAt": "2026-08-13T03:34:24.739Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2476,8 +2476,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:23.955Z",
-        "lastAttemptAt": "2026-08-07T05:38:23.955Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:25.205Z",
+        "lastAttemptAt": "2026-08-13T03:34:25.205Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2510,8 +2510,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:24.290Z",
-        "lastAttemptAt": "2026-08-07T05:38:24.290Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:25.574Z",
+        "lastAttemptAt": "2026-08-13T03:34:25.574Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2566,8 +2566,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:25.756Z",
-        "lastAttemptAt": "2026-08-07T05:38:25.756Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:27.029Z",
+        "lastAttemptAt": "2026-08-13T03:34:27.029Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2608,8 +2608,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:26.357Z",
-        "lastAttemptAt": "2026-08-07T05:38:26.357Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:27.976Z",
+        "lastAttemptAt": "2026-08-13T03:34:27.976Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2678,8 +2678,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:27.441Z",
-        "lastAttemptAt": "2026-08-07T05:38:27.441Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:28.793Z",
+        "lastAttemptAt": "2026-08-13T03:34:28.793Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2749,14 +2749,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-07T05:38:22.735Z",
-        "lastAttemptAt": "2026-08-07T05:38:22.735Z",
+        "lastSuccessfulAt": "2026-08-13T03:34:23.984Z",
+        "lastAttemptAt": "2026-08-13T03:34:23.984Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-07T05:38:22.735Z",
-        "contentHash": "sha256:050838f735e90d4b4d9d26312e4f04e3c93856ca9588118c428f862e470af564"
+        "retrievedAt": "2026-08-13T03:34:23.984Z",
+        "contentHash": "sha256:49ef917b3787372100222cdee35017048ed2b83282c24d31012679956522b2cd"
       },
       "models": [
         {
@@ -2844,7 +2844,7 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-04-24",
+              "reference": "2026-08-12",
               "status": "missing"
             },
             {
