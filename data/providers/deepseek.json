@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-07T05:37:34.976Z",
-    "lastAttemptAt": "2026-08-07T05:37:34.976Z",
+    "lastSuccessfulAt": "2026-08-13T03:33:49.228Z",
+    "lastAttemptAt": "2026-08-13T03:33:49.228Z",
     "consecutiveFailures": 0
   },
   "id": "deepseek",
@@ -74,7 +74,7 @@
     },
     {
       "id": "deepseek-v4-pro",
-      "name": "DeepSeek-V4-Pro",
+      "name": "DeepSeek-V4-Pro-0813",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -124,16 +124,16 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-08-01T09:23:24.396Z",
-      "contentHash": "sha256:e8a83d7d5aa702fe711b68a0bb1f0c0cefe7d35c34d6e073293dc2fbffe37e6f"
+      "retrievedAt": "2026-08-13T03:33:49.228Z",
+      "contentHash": "sha256:7d47abef244c07b754b1e63fdea2fde911fb37f769d038269dc7c653d4f209fd"
     },
     {
       "url": "https://api-docs.deepseek.com/quick_start/pricing/",
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-08-01T09:23:24.396Z",
-      "contentHash": "sha256:7edeefabecf9382f6909183c7b2d7295182862834ee4fe29622b5b302170bb45"
+      "retrievedAt": "2026-08-13T03:33:49.228Z",
+      "contentHash": "sha256:cb39b0bfe2951773ff1ac802171b858ae65f6abeadec81183bab48f9b9bf2d9d"
     }
   ]
 }
