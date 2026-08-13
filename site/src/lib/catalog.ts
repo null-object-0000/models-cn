@@ -17,6 +17,23 @@ export function activePricesAt<T extends Model["prices"][number]>(
   });
 }
 
+export function nextPricesAt<T extends Model["prices"][number]>(
+  prices: T[],
+  at = new Date(),
+): T[] {
+  const timestamp = at.getTime();
+  const future = prices.filter(
+    (price) =>
+      price.effectiveFrom && Date.parse(price.effectiveFrom) > timestamp,
+  );
+  const nextStart = Math.min(
+    ...future.map((price) => Date.parse(price.effectiveFrom!)),
+  );
+  return Number.isFinite(nextStart)
+    ? future.filter((price) => Date.parse(price.effectiveFrom!) === nextStart)
+    : [];
+}
+
 function modelInputPrice(model: Model, currency: Currency): number | undefined {
   const inCurrency = activePricesAt(model.prices).filter(
     (price) => price.currency === currency,

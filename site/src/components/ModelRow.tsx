@@ -9,6 +9,7 @@ import {
   modelDomId,
   modelKey,
   modelReleaseDate,
+  nextPricesAt,
   numberFormatter,
   providerName,
   type MergedGroup,
@@ -96,9 +97,11 @@ function ModelRows({
     active?.model ?? mergedModel.cn?.model ?? mergedModel.intl?.model;
   if (!model) return null;
 
-  const selected = activePricesAt(model.prices).filter(
+  const currencyPrices = model.prices.filter(
     (price) => price.currency === currency,
   );
+  const selected = activePricesAt(currencyPrices);
+  const upcomingPrices = nextPricesAt(currencyPrices);
   const promotionalPrices = selected.filter(
     (price) => price.rateType === "promotional",
   );
@@ -168,6 +171,9 @@ function ModelRows({
               <span className="region-tag">{regionLabel}</span>
             ) : null}
             {hasPromotional ? <span className="promo-tag">优惠</span> : null}
+            {upcomingPrices.some((price) => price.dailyTimeRange) ? (
+              <span className="schedule-tag">分时价将生效</span>
+            ) : null}
           </div>
           {showDifferenceWarning ? (
             <div className="merge-warning">国内版 / 国际版存在差异</div>
@@ -241,7 +247,26 @@ function ModelRows({
                   Pricing · {currency === "CNY" ? "人民币" : "美元"} / 1M Tokens
                 </h3>
                 {selected.length ? (
-                  <PriceDetails prices={selected} currency={currency} />
+                  <>
+                    <PriceScheduleHeading label="当前价格" />
+                    <PriceDetails prices={selected} currency={currency} />
+                    {upcomingPrices.length ? (
+                      <div className="upcoming-price-block">
+                        <PriceScheduleHeading
+                          label="即将生效"
+                          {...(upcomingPrices[0]?.effectiveFrom
+                            ? {
+                                effectiveFrom: upcomingPrices[0].effectiveFrom,
+                              }
+                            : {})}
+                        />
+                        <PriceDetails
+                          prices={upcomingPrices}
+                          currency={currency}
+                        />
+                      </div>
+                    ) : null}
+                  </>
                 ) : (
                   <div className="calibration">
                     该厂商没有公开的官方{currency === "CNY" ? "人民币" : "美元"}
@@ -346,6 +371,45 @@ function ModelRows({
   );
 }
 
+function formatEffectiveDate(value: string): string {
+  return new Date(value).toLocaleString("zh-CN", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+}
+
+function PriceScheduleHeading({
+  label,
+  effectiveFrom,
+}: {
+  label: string;
+  effectiveFrom?: string;
+}) {
+  return (
+    <div className="price-schedule-heading">
+      <strong>{label}</strong>
+      {effectiveFrom ? (
+        <span>北京时间 {formatEffectiveDate(effectiveFrom)}</span>
+      ) : null}
+    </div>
+  );
+}
+
+function formatDailyTimeRange(
+  range: NonNullable<Model["prices"][number]["dailyTimeRange"]>,
+): string {
+  const zone = range.timeZone === "Asia/Shanghai" ? "北京时间" : range.timeZone;
+  const intervals = range.intervals
+    .map(({ start, end }) => `${start}–${end === "00:00" ? "24:00" : end}`)
+    .join("、");
+  return `${range.label} · ${zone} ${intervals}`;
+}
+
 function PriceCell({
   values,
   referenceValues,
@@ -427,7 +491,7 @@ function PriceDetails({
         price.inputTokenRange?.label,
         price.outputTokenRange?.label,
         price.dailyTimeRange
-          ? `${price.dailyTimeRange.label}（${price.dailyTimeRange.timeZone}）`
+          ? formatDailyTimeRange(price.dailyTimeRange)
           : undefined,
       ]
         .filter(Boolean)
@@ -453,6 +517,68 @@ function PriceDetails({
         </span>
         <strong>{formatted}</strong>
       </div>
+    );
+  };
+
+  const renderTimeRangeTable = (
+    groupPrices: Model["prices"],
+    label: string,
+  ) => {
+    const promotional = groupPrices.find((p) => p.rateType === "promotional");
+    const standard = groupPrices.find((p) => p.rateType === "standard");
+    const primary = promotional ?? standard;
+    if (!primary) return null;
+
+    return (
+      <section className="time-price-card" key={label}>
+        <h4>{label}</h4>
+        <div className="time-price-table">
+          <div className="head">输入</div>
+          <div className="head">
+            {cacheMode === "explicit" ? "显式缓存" : "缓存命中"}
+          </div>
+          <div className="head">输出</div>
+          <div>
+            {renderWithReference(
+              primary.input.standard,
+              promotional ? standard?.input.standard : undefined,
+            )}
+          </div>
+          {cacheMode === "implicit" ? (
+            <div>
+              {renderWithReference(
+                primary.input.cacheHit,
+                promotional ? standard?.input.cacheHit : undefined,
+              )}
+            </div>
+          ) : (
+            <div className="explicit-cache-prices">
+              <span>
+                <small>创建</small>
+                {renderWithReference(
+                  primary.input.explicitCacheCreation,
+                  promotional
+                    ? standard?.input.explicitCacheCreation
+                    : undefined,
+                )}
+              </span>
+              <span>
+                <small>命中</small>
+                {renderWithReference(
+                  primary.input.explicitCacheHit,
+                  promotional ? standard?.input.explicitCacheHit : undefined,
+                )}
+              </span>
+            </div>
+          )}
+          <div>
+            {renderWithReference(
+              primary.output,
+              promotional ? standard?.output : undefined,
+            )}
+          </div>
+        </div>
+      </section>
     );
   };
 
@@ -527,20 +653,31 @@ function PriceDetails({
           </label>
         </div>
       ) : null}
-      <div
-        className="price-table"
-        aria-label={`${cacheMode === "explicit" ? "显式" : "隐式"}缓存价格详情`}
-      >
-        <div className="head">计费区间</div>
-        <div className="head">输入</div>
-        <div className="head">
-          {cacheMode === "explicit" ? "显式缓存" : "缓存命中"}
+      {prices.some((price) => price.dailyTimeRange) ? (
+        <div
+          className="time-price-list"
+          aria-label={`${cacheMode === "explicit" ? "显式" : "隐式"}缓存分时价格详情`}
+        >
+          {Array.from(grouped.entries()).map(([label, groupPrices]) =>
+            renderTimeRangeTable(groupPrices, label),
+          )}
         </div>
-        <div className="head">输出</div>
-        {Array.from(grouped.entries()).map(([label, groupPrices]) =>
-          renderRow(groupPrices, label),
-        )}
-      </div>
+      ) : (
+        <div
+          className="price-table"
+          aria-label={`${cacheMode === "explicit" ? "显式" : "隐式"}缓存价格详情`}
+        >
+          <div className="head">计费区间</div>
+          <div className="head">输入</div>
+          <div className="head">
+            {cacheMode === "explicit" ? "显式缓存" : "缓存命中"}
+          </div>
+          <div className="head">输出</div>
+          {Array.from(grouped.entries()).map(([label, groupPrices]) =>
+            renderRow(groupPrices, label),
+          )}
+        </div>
+      )}
     </>
   );
 }

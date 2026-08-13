@@ -183,7 +183,8 @@ tbody .provider-row:first-child td {
   line-height: 1.4;
 }
 .region-tag,
-.promo-tag {
+.promo-tag,
+.schedule-tag {
   padding: 2px 7px;
   border-radius: 6px;
   font-family:
@@ -347,6 +348,82 @@ tbody .provider-row:first-child td {
   letter-spacing: 0.02em;
   text-transform: none;
 }
+.price-schedule-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.price-schedule-heading strong {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 650;
+}
+.upcoming-price-block {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+}
+.schedule-tag {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.time-price-list {
+  display: grid;
+  gap: 12px;
+}
+.time-price-card {
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.time-price-card h4 {
+  margin: 0;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel-raised);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.time-price-table {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.time-price-table > div {
+  min-width: 0;
+  min-height: 48px;
+  padding: 9px 12px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.time-price-table > div:nth-child(3n) {
+  border-right: 0;
+}
+.time-price-table .head {
+  min-height: auto;
+  padding-block: 7px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+}
+.time-price-table strong {
+  font-size: 15px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.time-price-table .reference-price-inline {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: line-through;
+}
 .price-table {
   display: grid;
   grid-template-columns: minmax(90px, 1.2fr) repeat(3, 1fr);
@@ -370,6 +447,7 @@ tbody .provider-row:first-child td {
 .price-table .row-label {
   color: var(--muted);
   font-size: 13px;
+  line-height: 1.45;
 }
 .price-table .row-label small {
   display: block;

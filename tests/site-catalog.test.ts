@@ -7,6 +7,7 @@ import {
   modelHash,
   modelKey,
   modelReleaseDate,
+  nextPricesAt,
 } from "../site/src/lib/catalog.js";
 import type { CalibrationModel, Model } from "../site/src/types.js";
 
@@ -83,6 +84,18 @@ describe("site catalog price summaries", () => {
       prices[0],
     ]);
     expect(activePricesAt(prices, new Date("2026-08-16T16:00:00Z"))).toEqual([
+      prices[1],
+    ]);
+  });
+
+  it("selects the nearest upcoming price schedule", () => {
+    const prices = [
+      { effectiveFrom: "2026-08-17T00:00:00+08:00", output: 4.5 },
+      { effectiveFrom: "2026-08-17T00:00:00+08:00", output: 9 },
+      { effectiveFrom: "2026-09-01T00:00:00+08:00", output: 10 },
+    ] as never[];
+    expect(nextPricesAt(prices, new Date("2026-08-13T00:00:00Z"))).toEqual([
+      prices[0],
       prices[1],
     ]);
   });
