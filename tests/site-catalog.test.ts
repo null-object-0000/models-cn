@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  activePricesAt,
   compareModelsByReleaseDate,
   formatPriceRange,
   modelDomId,
@@ -73,6 +74,19 @@ describe("site model identity", () => {
 });
 
 describe("site catalog price summaries", () => {
+  it("selects provider-announced prices by effective time", () => {
+    const prices = [
+      { effectiveTo: "2026-08-17T00:00:00+08:00", output: 2 },
+      { effectiveFrom: "2026-08-17T00:00:00+08:00", output: 4.5 },
+    ] as never[];
+    expect(activePricesAt(prices, new Date("2026-08-16T15:59:59Z"))).toEqual([
+      prices[0],
+    ]);
+    expect(activePricesAt(prices, new Date("2026-08-16T16:00:00Z"))).toEqual([
+      prices[1],
+    ]);
+  });
+
   it("shows a range for tiered prices and a single value otherwise", () => {
     expect(formatPriceRange([1.6, 4.8], "CNY")).toBe("¥1.6 - 4.8");
     expect(formatPriceRange([6.4, 6.4], "CNY")).toBe("¥6.4");

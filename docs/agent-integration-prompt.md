@@ -121,6 +121,13 @@ type CostEstimate = {
   currency: "CNY" | "USD";
   market: "china" | "international";
   rateType: "standard" | "promotional";
+  dailyTimeRange?: {
+    label: string;
+    timeZone: string;
+    intervals: Array<{ start: string; end: string }>;
+  };
+  effectiveFrom?: string;
+  effectiveTo?: string;
   standardInputCost: number;
   cachedInputCost?: number;
   outputCost: number;

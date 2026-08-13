@@ -16,6 +16,8 @@ export function priceKey(price: ModelPrice): string {
     rateType: price.rateType,
     inputTokenRange: price.inputTokenRange ?? null,
     outputTokenRange: price.outputTokenRange ?? null,
+    dailyTimeRange: price.dailyTimeRange ?? null,
+    effectiveFrom: price.effectiveFrom ?? null,
   });
 }
 
@@ -33,6 +35,9 @@ function samePriceValue(left: ModelPrice, right: ModelPrice): boolean {
       JSON.stringify(right.inputTokenRange ?? null) &&
     JSON.stringify(left.outputTokenRange ?? null) ===
       JSON.stringify(right.outputTokenRange ?? null) &&
+    JSON.stringify(left.dailyTimeRange ?? null) ===
+      JSON.stringify(right.dailyTimeRange ?? null) &&
+    left.effectiveFrom === right.effectiveFrom &&
     JSON.stringify(left.input) === JSON.stringify(right.input) &&
     left.output === right.output
   );

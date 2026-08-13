@@ -21,7 +21,16 @@ const html = `
 <tr><td>百万tokens输入（缓存未命中）</td><td>1元</td><td>3元</td></tr>
 <tr><td>百万tokens输出</td><td>2元</td><td>6元</td></tr>
 <tr><td colspan="2">并发限制</td><td>2500</td><td>500</td></tr>
-</table></div><p>deepseek-chat 与 deepseek-reasoner 两个模型名将于北京时间 2026/07/24 23:59 弃用。</p></body></html>`;
+</table></div>
+<p>我们将采用峰谷定价。新价格将于北京时间 2026 年 8 月 17 日 00:00 开始生效：</p>
+<table>
+<tr><td>模型</td><td></td><td>百万tokens输入（缓存命中）</td><td>百万tokens输入（缓存未命中）</td><td>百万tokens输出</td></tr>
+<tr><td rowspan="2">deepseek-v4-flash</td><td>空闲时段</td><td>0.05元</td><td>1.5元</td><td>4.5元</td></tr>
+<tr><td>高峰时段</td><td>0.10元</td><td>3.0元</td><td>9.0元</td></tr>
+<tr><td rowspan="2">deepseek-v4-pro</td><td>空闲时段</td><td>0.15元</td><td>4.5元</td><td>13.5元</td></tr>
+<tr><td>高峰时段</td><td>0.30元</td><td>9.0元</td><td>27.0元</td></tr>
+</table>
+<p>deepseek-chat 与 deepseek-reasoner 两个模型名将于北京时间 2026/07/24 23:59 弃用。</p></body></html>`;
 
 const englishHtml = html
   .replace("模型版本", "MODEL VERSION")
@@ -31,6 +40,12 @@ const englishHtml = html
   .replace("百万tokens输入（缓存未命中）", "1M INPUT TOKENS (CACHE MISS)")
   .replace("百万tokens输出", "1M OUTPUT TOKENS")
   .replace("并发限制", "Concurrency Limit")
+  .replace(
+    "我们将采用峰谷定价。新价格将于北京时间 2026 年 8 月 17 日 00:00 开始生效：",
+    "The new prices take effect at 16:00 UTC on August 16, 2026:",
+  )
+  .replaceAll("空闲时段", "OFF-PEAK")
+  .replaceAll("高峰时段", "PEAK")
   .replace("0.02元", "$0.0028")
   .replace("0.025元", "$0.003625")
   .replace("1元", "$0.14")
@@ -54,11 +69,12 @@ describe("parseDeepSeekPage", () => {
         maxOutputTokens: 384_000,
         concurrency: 2500,
       },
-      price: {
-        currency: "CNY",
-        input: { cacheHit: 0.02, standard: 1 },
-        output: 2,
-      },
+    });
+    expect(data.models[0]?.prices[0]).toMatchObject({
+      currency: "CNY",
+      input: { cacheHit: 0.02, standard: 1 },
+      output: 2,
+      effectiveTo: "2026-08-17T00:00:00+08:00",
     });
     expect(data.aliases).toEqual([
       {
@@ -74,6 +90,35 @@ describe("parseDeepSeekPage", () => {
     ]);
   });
 
+  it("extracts announced peak and off-peak CNY prices with daily windows", () => {
+    const data = parseDeepSeekPage(html, DEEPSEEK_SOURCES[0]);
+    expect(data.models[0]?.prices.slice(1)).toEqual([
+      {
+        market: "china",
+        currency: "CNY",
+        unit: "1M_tokens",
+        rateType: "standard",
+        dailyTimeRange: {
+          label: "空闲时段",
+          timeZone: "Asia/Shanghai",
+          intervals: [
+            { start: "00:00", end: "09:00" },
+            { start: "12:00", end: "14:00" },
+            { start: "18:00", end: "00:00" },
+          ],
+        },
+        input: { cacheHit: 0.05, standard: 1.5 },
+        output: 4.5,
+        effectiveFrom: "2026-08-17T00:00:00+08:00",
+      },
+      expect.objectContaining({
+        dailyTimeRange: expect.objectContaining({ label: "高峰时段" }),
+        input: { cacheHit: 0.1, standard: 3 },
+        output: 9,
+      }),
+    ]);
+  });
+
   it("fails loudly when the pricing table disappears", () => {
     expect(() =>
       parseDeepSeekPage("<html></html>", DEEPSEEK_SOURCES[0]),
@@ -82,13 +127,14 @@ describe("parseDeepSeekPage", () => {
 
   it("extracts the independent official USD prices", () => {
     const data = parseDeepSeekPage(englishHtml, DEEPSEEK_SOURCES[1]);
-    expect(data.models[0]?.price).toEqual({
+    expect(data.models[0]?.prices[0]).toEqual({
       market: "international",
       currency: "USD",
       unit: "1M_tokens",
       rateType: "standard",
       input: { cacheHit: 0.0028, standard: 0.14 },
       output: 0.28,
+      effectiveTo: "2026-08-16T16:00:00Z",
     });
     expect(data.aliases[0]?.deprecatedAt).toBe("2026-07-24T15:59:00Z");
   });

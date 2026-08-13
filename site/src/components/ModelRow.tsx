@@ -1,5 +1,6 @@
 import { Fragment, useState, type KeyboardEvent, type MouseEvent } from "react";
 import {
+  activePricesAt,
   capabilityLabels,
   compactTokens,
   formatPrice,
@@ -95,7 +96,9 @@ function ModelRows({
     active?.model ?? mergedModel.cn?.model ?? mergedModel.intl?.model;
   if (!model) return null;
 
-  const selected = model.prices.filter((price) => price.currency === currency);
+  const selected = activePricesAt(model.prices).filter(
+    (price) => price.currency === currency,
+  );
   const promotionalPrices = selected.filter(
     (price) => price.rateType === "promotional",
   );
@@ -420,7 +423,13 @@ function PriceDetails({
   const grouped = new Map<string, Model["prices"]>();
   for (const price of prices) {
     const key =
-      [price.inputTokenRange?.label, price.outputTokenRange?.label]
+      [
+        price.inputTokenRange?.label,
+        price.outputTokenRange?.label,
+        price.dailyTimeRange
+          ? `${price.dailyTimeRange.label}（${price.dailyTimeRange.timeZone}）`
+          : undefined,
+      ]
         .filter(Boolean)
         .join(" / ") || "—";
     const existing = grouped.get(key) ?? [];

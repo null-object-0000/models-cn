@@ -136,6 +136,7 @@ return {
 - 官方给出固定的模型级 RPM/TPM 时，分别写入 `limits.requestsPerMinute`、`limits.tokensPerMinute`。若限额随账号等级或套餐变化，则保留缺失，不把某一档账号限额写成模型固有限额。
 - 厂商明确标注的优惠价格使用独立的 `rateType: "promotional"`。
 - 按输入长度分档时使用 `inputTokenRange`。
+- 按每日时段计价时使用 `dailyTimeRange`，并用 IANA `timeZone` 明确时区；厂商提前公告的新旧价格使用 `effectiveFrom` / `effectiveTo` 表达适用窗口。
 - 不得通过汇率换算生成官方人民币价格。
 
 采集器应在以下情况直接失败，不能生成不可信数据：

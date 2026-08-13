@@ -33,12 +33,122 @@ type SourceConfig = (typeof DEEPSEEK_SOURCES)[number];
 interface ParsedPage {
   models: Array<
     Omit<ModelData, "prices" | "aliases"> & {
-      price: Omit<ModelPrice, "sourceUrl">;
+      prices: Array<Omit<ModelPrice, "sourceUrl">>;
     }
   >;
   aliases: ModelAlias[];
   baseUrls: ProviderData["baseUrls"];
   normalizedTable: string;
+}
+
+function announcedEffectiveFrom(
+  pageText: string,
+  config: SourceConfig,
+): string | undefined {
+  if (config.locale === "zh-CN") {
+    const match = pageText.match(
+      /北京时间\s*(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日\s*(\d{2}):(\d{2})\s*开始生效/,
+    );
+    return match
+      ? `${match[1]}-${match[2]!.padStart(2, "0")}-${match[3]!.padStart(2, "0")}T${match[4]}:${match[5]}:00+08:00`
+      : undefined;
+  }
+  const match = pageText.match(
+    /take effect at\s*(\d{2}):(\d{2})\s*UTC on ([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})/i,
+  );
+  if (!match) return undefined;
+  const month = new Date(`${match[3]} 1, 2000 UTC`).getUTCMonth() + 1;
+  return `${match[5]}-${String(month).padStart(2, "0")}-${match[4]!.padStart(2, "0")}T${match[1]}:${match[2]}:00Z`;
+}
+
+function timeRange(
+  config: SourceConfig,
+  peak: boolean,
+): NonNullable<ModelPrice["dailyTimeRange"]> {
+  if (config.locale === "zh-CN") {
+    return peak
+      ? {
+          label: "高峰时段",
+          timeZone: "Asia/Shanghai",
+          intervals: [
+            { start: "09:00", end: "12:00" },
+            { start: "14:00", end: "18:00" },
+          ],
+        }
+      : {
+          label: "空闲时段",
+          timeZone: "Asia/Shanghai",
+          intervals: [
+            { start: "00:00", end: "09:00" },
+            { start: "12:00", end: "14:00" },
+            { start: "18:00", end: "00:00" },
+          ],
+        };
+  }
+  return peak
+    ? {
+        label: "Peak",
+        timeZone: "UTC",
+        intervals: [
+          { start: "01:00", end: "04:00" },
+          { start: "06:00", end: "10:00" },
+        ],
+      }
+    : {
+        label: "Off-peak",
+        timeZone: "UTC",
+        intervals: [
+          { start: "00:00", end: "01:00" },
+          { start: "04:00", end: "06:00" },
+          { start: "10:00", end: "00:00" },
+        ],
+      };
+}
+
+function parseScheduledPrices(
+  $: cheerio.CheerioAPI,
+  config: SourceConfig,
+  effectiveFrom: string | undefined,
+): Map<string, Array<Omit<ModelPrice, "sourceUrl">>> {
+  if (!effectiveFrom) return new Map();
+  const table = $("table")
+    .filter((_, element) => /空闲时段|OFF-PEAK/i.test($(element).text()))
+    .first();
+  if (!table.length) return new Map();
+
+  const result = new Map<string, Array<Omit<ModelPrice, "sourceUrl">>>();
+  let currentModel: string | undefined;
+  for (const row of table.find("tr").toArray()) {
+    const texts = rowTexts($, row);
+    const model = texts.find((text) => text.startsWith("deepseek-"));
+    if (model) currentModel = model;
+    const peakIndex = texts.findIndex((text) =>
+      /^(高峰时段|PEAK)$/i.test(text),
+    );
+    const offPeakIndex = texts.findIndex((text) =>
+      /^(空闲时段|OFF-PEAK)$/i.test(text),
+    );
+    const periodIndex = peakIndex >= 0 ? peakIndex : offPeakIndex;
+    if (!currentModel || periodIndex < 0) continue;
+    const values = texts.slice(periodIndex + 1);
+    if (values.length < 3) continue;
+    const prices = result.get(currentModel) ?? [];
+    prices.push({
+      market: config.market,
+      currency: config.currency,
+      unit: "1M_tokens",
+      rateType: "standard",
+      dailyTimeRange: timeRange(config, peakIndex >= 0),
+      input: {
+        cacheHit: parseMoney(values[0]!),
+        standard: parseMoney(values[1]!),
+      },
+      output: parseMoney(values[2]!),
+      effectiveFrom,
+    });
+    result.set(currentModel, prices);
+  }
+  return result;
 }
 
 function cleanText(value: string): string {
@@ -169,6 +279,8 @@ export function parseDeepSeekPage(
   };
 
   const pageText = cleanText($.root().text());
+  const effectiveFrom = announcedEffectiveFrom(pageText, config);
+  const scheduledPrices = parseScheduledPrices($, config, effectiveFrom);
   const deprecatedMatch =
     config.locale === "zh-CN"
       ? pageText.match(
@@ -218,17 +330,21 @@ export function parseDeepSeekPage(
       maxOutputTokens,
       concurrency: Number(concurrencies[index]),
     },
-    price: {
-      market: config.market as Market,
-      currency: config.currency as Currency,
-      unit: "1M_tokens" as const,
-      rateType: "standard" as const,
-      input: {
-        cacheHit: parseMoney(cacheHits[index] ?? ""),
-        standard: parseMoney(standardPrices[index] ?? ""),
+    prices: [
+      {
+        market: config.market as Market,
+        currency: config.currency as Currency,
+        unit: "1M_tokens" as const,
+        rateType: "standard" as const,
+        input: {
+          cacheHit: parseMoney(cacheHits[index] ?? ""),
+          standard: parseMoney(standardPrices[index] ?? ""),
+        },
+        output: parseMoney(outputPrices[index] ?? ""),
+        ...(effectiveFrom ? { effectiveTo: effectiveFrom } : {}),
       },
-      output: parseMoney(outputPrices[index] ?? ""),
-    },
+      ...(scheduledPrices.get(id) ?? []),
+    ],
   }));
 
   return {
@@ -275,10 +391,18 @@ export async function collectDeepSeek(
           aliases: model.id === "deepseek-v4-flash" ? first.parsed.aliases : [],
           capabilities: model.capabilities,
           limits: model.limits,
-          prices: [{ ...model.price, sourceUrl: config.url }],
+          prices: model.prices.map((price) => ({
+            ...price,
+            sourceUrl: config.url,
+          })),
         });
       } else {
-        existing.prices.push({ ...model.price, sourceUrl: config.url });
+        existing.prices.push(
+          ...model.prices.map((price) => ({
+            ...price,
+            sourceUrl: config.url,
+          })),
+        );
       }
     }
   }

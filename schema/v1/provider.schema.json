@@ -127,6 +127,34 @@
             "maxInclusive": { "type": "integer", "minimum": 1 }
           }
         },
+        "dailyTimeRange": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "timeZone", "intervals"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1 },
+            "timeZone": { "type": "string", "minLength": 1 },
+            "intervals": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["start", "end"],
+                "properties": {
+                  "start": {
+                    "type": "string",
+                    "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$"
+                  },
+                  "end": {
+                    "type": "string",
+                    "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$"
+                  }
+                }
+              }
+            }
+          }
+        },
         "input": {
           "type": "object",
           "additionalProperties": false,
@@ -156,6 +184,16 @@
         },
         "output": { "type": "number", "minimum": 0 },
         "sourceUrl": { "type": "string", "format": "uri" },
+        "effectiveFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Provider-announced start of the price's applicability."
+        },
+        "effectiveTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Provider-announced end of the price's applicability."
+        },
         "validFrom": {
           "type": "string",
           "format": "date-time",

@@ -69,7 +69,7 @@ function pricingSource(retrievedAt = RETRIEVED_AT): ProviderData["sources"] {
 }
 
 describe("priceKey", () => {
-  it("distinguishes billing dimensions by market, currency, rateType and token range", () => {
+  it("distinguishes billing dimensions by market, currency, rate type, token and time range", () => {
     expect(priceKey(price(1, 2))).toBe(priceKey(price(9, 9)));
     expect(priceKey(price(1, 2))).not.toBe(
       priceKey(price(1, 2, { rateType: "promotional" })),
@@ -91,6 +91,23 @@ describe("priceKey", () => {
         price(1, 2, { outputTokenRange: { label: "输出长度 [0, 0.2)" } }),
       ),
     ).not.toBe(priceKey(price(1, 2)));
+    expect(
+      priceKey(
+        price(1, 2, {
+          dailyTimeRange: {
+            label: "高峰时段",
+            timeZone: "Asia/Shanghai",
+            intervals: [{ start: "09:00", end: "12:00" }],
+          },
+        }),
+      ),
+    ).not.toBe(priceKey(price(1, 2)));
+    expect(
+      priceKey(price(1, 2, { effectiveFrom: "2026-08-17T00:00:00+08:00" })),
+    ).not.toBe(priceKey(price(1, 2)));
+    expect(
+      priceKey(price(1, 2, { effectiveTo: "2026-08-17T00:00:00+08:00" })),
+    ).toBe(priceKey(price(1, 2)));
   });
 });
 

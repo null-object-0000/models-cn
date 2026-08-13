@@ -3,8 +3,22 @@ import type { CalibrationModel, Currency, Model, Provider } from "../types.js";
 export type VersionViewMode = "merged" | "separate";
 export type SortMode = "newest" | "cheapest";
 
+export function activePricesAt<T extends Model["prices"][number]>(
+  prices: T[],
+  at = new Date(),
+): T[] {
+  const timestamp = at.getTime();
+  return prices.filter((price) => {
+    const from = price.effectiveFrom
+      ? Date.parse(price.effectiveFrom)
+      : -Infinity;
+    const to = price.effectiveTo ? Date.parse(price.effectiveTo) : Infinity;
+    return timestamp >= from && timestamp < to;
+  });
+}
+
 function modelInputPrice(model: Model, currency: Currency): number | undefined {
-  const inCurrency = model.prices.filter(
+  const inCurrency = activePricesAt(model.prices).filter(
     (price) => price.currency === currency,
   );
   if (!inCurrency.length) return undefined;

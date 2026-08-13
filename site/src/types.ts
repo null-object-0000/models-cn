@@ -25,6 +25,11 @@ export interface Price {
     minExclusive?: number;
     maxInclusive?: number;
   };
+  dailyTimeRange?: {
+    label: string;
+    timeZone: string;
+    intervals: Array<{ start: string; end: string }>;
+  };
   input: {
     cacheHit?: number;
     explicitCacheCreation?: number;
@@ -33,6 +38,8 @@ export interface Price {
   };
   output: number;
   sourceUrl: string;
+  effectiveFrom?: string;
+  effectiveTo?: string;
 }
 
 export interface Model {

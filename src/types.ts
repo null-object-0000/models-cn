@@ -40,6 +40,15 @@ export interface ModelPrice {
     minExclusive?: number;
     maxInclusive?: number;
   };
+  /** Recurring local-time window in which this price applies. */
+  dailyTimeRange?: {
+    label: string;
+    timeZone: string;
+    intervals: Array<{
+      start: string;
+      end: string;
+    }>;
+  };
   input: {
     cacheHit?: number;
     explicitCacheCreation?: number;
@@ -48,6 +57,9 @@ export interface ModelPrice {
   };
   output: number;
   sourceUrl: string;
+  /** Provider-announced applicability window, independent of observation history. */
+  effectiveFrom?: string;
+  effectiveTo?: string;
   /**
    * ISO date-time when this price was first observed by models-cn.
    * Present on current prices and on every historical snapshot.
