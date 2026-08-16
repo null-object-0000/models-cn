@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T12:09:03.972Z",
-        "lastAttemptAt": "2026-08-13T12:09:03.972Z",
+        "lastSuccessfulAt": "2026-08-16T02:35:44.302Z",
+        "lastAttemptAt": "2026-08-16T02:35:44.302Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -388,8 +388,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:33:49.243Z",
-        "lastAttemptAt": "2026-08-13T03:33:49.243Z",
+        "lastSuccessfulAt": "2026-08-16T02:35:44.325Z",
+        "lastAttemptAt": "2026-08-16T02:35:44.325Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -540,8 +540,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:33:49.247Z",
-        "lastAttemptAt": "2026-08-13T03:33:49.247Z",
+        "lastSuccessfulAt": "2026-08-16T02:35:44.330Z",
+        "lastAttemptAt": "2026-08-16T02:35:44.330Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -855,8 +855,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:33:49.253Z",
-        "lastAttemptAt": "2026-08-13T03:33:49.253Z",
+        "lastSuccessfulAt": "2026-08-16T02:35:44.336Z",
+        "lastAttemptAt": "2026-08-16T02:35:44.336Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1170,8 +1170,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:33:49.257Z",
-        "lastAttemptAt": "2026-08-13T03:33:49.257Z",
+        "lastSuccessfulAt": "2026-08-16T02:35:44.344Z",
+        "lastAttemptAt": "2026-08-16T02:35:44.344Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1842,16 +1842,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-13T03:33:49.257Z",
-          "contentHash": "sha256:e672097c6a18df3345c864f7f051f2bf0154d0278cf7d0eb2732a287ec2a2c2e"
+          "retrievedAt": "2026-08-16T02:35:44.344Z",
+          "contentHash": "sha256:763f65a6feec7db3431e987f32c74d394b15a668f7b537578fd103f2265d99db"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-13T03:33:49.257Z",
-          "contentHash": "sha256:f93f0fc12dc3702ec05fb1d227998550f6ebd19ebd8d2db6b7e0221773bca76d"
+          "retrievedAt": "2026-08-16T02:35:44.344Z",
+          "contentHash": "sha256:640043edc13aea3452c37a0ffbd74068f46fedeb21eb6c2ad79025681cdca3f9"
         }
       ]
     },
@@ -1859,8 +1859,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:33:49.271Z",
-        "lastAttemptAt": "2026-08-13T03:33:49.271Z",
+        "lastSuccessfulAt": "2026-08-16T02:35:44.357Z",
+        "lastAttemptAt": "2026-08-16T02:35:44.357Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2331,8 +2331,8 @@
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-07T05:31:44.971Z",
-          "contentHash": "sha256:72836683e08f9229e8c496d37308d9f038488edbb50af884acb85cc8e2d2c871"
+          "retrievedAt": "2026-08-16T02:35:44.357Z",
+          "contentHash": "sha256:ecaf38981b7c068199059b3007b686ac8ff8dc509343cdbc1a6cc43a33da8a41"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
@@ -2347,8 +2347,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:33:49.288Z",
-        "lastAttemptAt": "2026-08-13T03:33:49.288Z",
+        "lastSuccessfulAt": "2026-08-16T02:35:44.360Z",
+        "lastAttemptAt": "2026-08-16T02:35:44.360Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2662,8 +2662,8 @@
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-07T05:32:31.512Z",
-          "contentHash": "sha256:72836683e08f9229e8c496d37308d9f038488edbb50af884acb85cc8e2d2c871"
+          "retrievedAt": "2026-08-16T02:35:44.360Z",
+          "contentHash": "sha256:ecaf38981b7c068199059b3007b686ac8ff8dc509343cdbc1a6cc43a33da8a41"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
@@ -2681,8 +2681,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:34:24.739Z",
-        "lastAttemptAt": "2026-08-13T03:34:24.739Z",
+        "lastSuccessfulAt": "2026-08-16T02:36:19.921Z",
+        "lastAttemptAt": "2026-08-16T02:36:19.921Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2720,8 +2720,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:34:25.205Z",
-        "lastAttemptAt": "2026-08-13T03:34:25.205Z",
+        "lastSuccessfulAt": "2026-08-16T02:36:20.564Z",
+        "lastAttemptAt": "2026-08-16T02:36:20.564Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2754,8 +2754,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:34:25.574Z",
-        "lastAttemptAt": "2026-08-13T03:34:25.574Z",
+        "lastSuccessfulAt": "2026-08-16T02:36:20.848Z",
+        "lastAttemptAt": "2026-08-16T02:36:20.848Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2810,8 +2810,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:34:27.029Z",
-        "lastAttemptAt": "2026-08-13T03:34:27.029Z",
+        "lastSuccessfulAt": "2026-08-16T02:36:22.199Z",
+        "lastAttemptAt": "2026-08-16T02:36:22.199Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2852,14 +2852,14 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:34:27.976Z",
-        "lastAttemptAt": "2026-08-13T03:34:27.976Z",
+        "lastSuccessfulAt": "2026-08-16T02:36:22.749Z",
+        "lastAttemptAt": "2026-08-16T02:36:22.749Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://open.bigmodel.cn/api/paas/v4/models",
-        "retrievedAt": "2026-08-07T05:07:12.181Z",
-        "contentHash": "sha256:477a410dee7a8c166fb8c9665d082a1a69aa935a3e6ee9167e109da1499bb1ed"
+        "retrievedAt": "2026-08-16T02:36:22.749Z",
+        "contentHash": "sha256:97737e5e8370fb8d1233b2f7062fc31dfa757541260ae193f93fd75f1c83cf5b"
       },
       "models": [
         {
@@ -2893,6 +2893,10 @@
         {
           "id": "glm-5.2",
           "ownedBy": "z-ai"
+        },
+        {
+          "id": "glm-5.3",
+          "ownedBy": "z-ai"
         }
       ],
       "comparison": {
@@ -2908,7 +2912,8 @@
         "aliasesAndListed": [],
         "listedWithoutPricing": [
           "glm-4.5",
-          "glm-4.6"
+          "glm-4.6",
+          "glm-5.3"
         ],
         "pricedButNotListed": [
           "glm-4.7-flash",
@@ -2922,14 +2927,14 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:34:28.793Z",
-        "lastAttemptAt": "2026-08-13T03:34:28.793Z",
+        "lastSuccessfulAt": "2026-08-16T02:36:23.559Z",
+        "lastAttemptAt": "2026-08-16T02:36:23.559Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://api.z.ai/api/paas/v4/models",
-        "retrievedAt": "2026-08-07T05:07:12.530Z",
-        "contentHash": "sha256:477a410dee7a8c166fb8c9665d082a1a69aa935a3e6ee9167e109da1499bb1ed"
+        "retrievedAt": "2026-08-16T02:36:23.559Z",
+        "contentHash": "sha256:97737e5e8370fb8d1233b2f7062fc31dfa757541260ae193f93fd75f1c83cf5b"
       },
       "models": [
         {
@@ -2963,6 +2968,10 @@
         {
           "id": "glm-5.2",
           "ownedBy": "z-ai"
+        },
+        {
+          "id": "glm-5.3",
+          "ownedBy": "z-ai"
         }
       ],
       "comparison": {
@@ -2978,7 +2987,8 @@
         "aliasesAndListed": [],
         "listedWithoutPricing": [
           "glm-4.5",
-          "glm-4.6"
+          "glm-4.6",
+          "glm-5.3"
         ],
         "pricedButNotListed": [
           "glm-4.7-flash",
@@ -2993,8 +3003,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-13T03:34:23.984Z",
-        "lastAttemptAt": "2026-08-13T03:34:23.984Z",
+        "lastSuccessfulAt": "2026-08-16T02:36:19.150Z",
+        "lastAttemptAt": "2026-08-16T02:36:19.150Z",
         "consecutiveFailures": 0
       },
       "source": {
