@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-cn" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>模型 &amp; 价格 | DeepSeek API Docs</title>
+</head>
+<body>
+<div id="__docusaurus">
+<div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12">
+<h1>模型 &amp; 价格</h1>
+<p>下表所列模型价格以“百万 tokens”为单位。Token 是模型用来表示自然语言文本的的最小单位，可以是一个词、一个数字或一个标点符号等。我们将根据模型输入和输出的总 token 数进行计量计费。</p>
+<hr>
+<h2 id="模型细节">模型细节</h2>
+<div style="font-size:14px"><b><table style="text-align:center"><tr><td colspan="3" style="text-align:center">模型</td><td>deepseek-v4-flash</td><td>deepseek-v4-pro</td></tr><tr><td colspan="3">BASE URL (OpenAI 格式)</td><td colspan="2"><a href="https://api.deepseek.com" target="_blank" rel="noopener noreferrer">https://api.deepseek.com</a></td></tr><tr><td colspan="3">BASE URL (Anthropic 格式)</td><td colspan="2"><a href="https://api.deepseek.com/anthropic" target="_blank" rel="noopener noreferrer">https://api.deepseek.com/anthropic</a></td></tr><tr><td colspan="3" style="text-align:center">模型版本</td><td>DeepSeek-V4-Flash-0731</td><td>DeepSeek-V4-Pro-0813</td></tr><tr><td colspan="3">思考模式</td><td colspan="2">支持非思考与思考模式（默认）<br>切换方式详见<a href="/zh-cn/guides/thinking_mode">思考模式</a></td></tr><tr><td colspan="3">上下文长度</td><td colspan="2">1M</td></tr><tr><td colspan="3">输出长度</td><td colspan="2">最大 384K</td></tr><tr><td rowspan="6">功能</td><td colspan="2"><a href="/zh-cn/guides/json_mode">Json Output</a></td><td>支持</td><td>支持</td></tr><tr><td colspan="2"><a href="/zh-cn/guides/tool_calls">Tool Calls</a></td><td>支持</td><td>支持</td></tr><tr><td colspan="2"><a href="/zh-cn/guides/responses_api">Responses API</a></td><td>支持</td><td>支持</td></tr><tr><td colspan="2"><a href="/zh-cn/guides/anthropic_api">Anthropic API</a></td><td>支持</td><td>支持</td></tr><tr><td colspan="2"><a href="/zh-cn/guides/chat_prefix_completion">对话前缀续写（Beta）</a></td><td>支持</td><td>支持</td></tr><tr><td colspan="2"><a href="/zh-cn/guides/fim_completion">FIM 补全（Beta）</a></td><td>仅非思考模式支持</td><td>仅非思考模式支持</td></tr><tr><td rowspan="6">价格<sup>(1)</sup></td><td rowspan="2">百万tokens输入（缓存命中）</td><td>空闲时段</td><td>0.05元</td><td>0.15元</td></tr><tr><td>高峰时段</td><td>0.10元</td><td>0.30元</td></tr><tr><td rowspan="2">百万tokens输入（缓存未命中）</td><td>空闲时段</td><td>1.5元</td><td>4.5元</td></tr><tr><td>高峰时段</td><td>3.0元</td><td>9.0元</td></tr><tr><td rowspan="2">百万tokens输出</td><td>空闲时段</td><td>4.5元</td><td>13.5元</td></tr><tr><td>高峰时段</td><td>9.0元</td><td>27.0元</td></tr><tr><td colspan="3">并发限制<sup>(2)</sup></td><td>2500</td><td>500</td></tr></table></b></div>
+<p>(1) 空闲时段价格为高峰时段价格的一半。高峰时段为北京时间 9:00 - 12:00、14:00 - 18:00（其余为空闲时段）。</p>
+<p>(2) 更多并发限制细节，请参考<a href="/zh-cn/quick_start/rate_limit">限速与隔离</a></p>
+<hr>
+<h2 id="扣费规则">扣费规则</h2>
+<p>扣减费用 = token 消耗量 × 模型单价，对应的费用将直接从充值余额或赠送余额中进行扣减。</p>
+<p>当充值余额与赠送余额同时存在时，优先扣减赠送余额。</p>
+<p>产品价格可能发生变动，DeepSeek 保留修改价格的权利。请您依据实际用量按需充值，定期查看此页面以获知最新价格信息。</p>
+</div></div></div>
+</div>
+</body>
+</html>

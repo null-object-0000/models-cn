@@ -151,6 +151,102 @@ function parseScheduledPrices(
   return result;
 }
 
+const PERIOD_LABEL = /^(空闲时段|OFF-PEAK|高峰时段|PEAK)$/i;
+
+/**
+ * Parse the finalized pricing layout where the off-peak / peak prices are
+ * listed directly in the main model table (row-spanned price dimensions, one
+ * row per period), e.g.:
+ *
+ *   `<td rowspan="2">百万tokens输入（缓存命中）</td><td>空闲时段</td><td>…</td>`
+ *   `<td>高峰时段</td><td>…</td>`
+ *
+ * The previous transitional layout (plain current prices + a separate
+ * "prices take effect" table) is handled separately by
+ * `parseScheduledPrices`. Returns an empty map when the main table does not
+ * use period-labeled price rows.
+ */
+function parseFinalizedPrices(
+  $: cheerio.CheerioAPI,
+  config: SourceConfig,
+  modelIds: string[],
+): Map<string, Array<Omit<ModelPrice, "sourceUrl">>> {
+  const result = new Map<string, Array<Omit<ModelPrice, "sourceUrl">>>();
+  const table = $("table")
+    .filter((_, element) => $(element).text().includes("deepseek-"))
+    .first();
+  if (!table.length) return result;
+
+  const rows = table.find("tr").toArray();
+  const hasPeriodRows = rows.some((row) =>
+    rowTexts($, row).some((text) => PERIOD_LABEL.test(text)),
+  );
+  if (!hasPeriodRows) return result;
+
+  const perPeriod = new Map<
+    "idle" | "peak",
+    { cacheHit: number[]; standard: number[]; output: number[] }
+  >();
+  let dimension: "cacheHit" | "standard" | "output" | undefined;
+  for (const row of rows) {
+    const texts = rowTexts($, row);
+    const joined = texts.join(" ");
+    if (/缓存命中|CACHE HIT/i.test(joined)) dimension = "cacheHit";
+    else if (/缓存未命中|CACHE MISS/i.test(joined)) dimension = "standard";
+    else if (/百万tokens输出|1M OUTPUT TOKENS/i.test(joined))
+      dimension = "output";
+    const periodText = texts.find((text) => PERIOD_LABEL.test(text));
+    if (!periodText || !dimension) continue;
+    const period: "idle" | "peak" = /^(高峰时段|PEAK)$/i.test(periodText)
+      ? "peak"
+      : "idle";
+    const values = valuesForModels(texts, modelIds.length).map(parseMoney);
+    const slot = perPeriod.get(period) ?? {
+      cacheHit: [],
+      standard: [],
+      output: [],
+    };
+    slot[dimension] = values;
+    perPeriod.set(period, slot);
+  }
+
+  const expected = modelIds.length;
+  for (const period of ["idle", "peak"] as const) {
+    const slot = perPeriod.get(period);
+    if (
+      !slot ||
+      slot.cacheHit.length !== expected ||
+      slot.standard.length !== expected ||
+      slot.output.length !== expected
+    ) {
+      throw new Error(
+        `DeepSeek pricing table is missing ${period} period values for every model`,
+      );
+    }
+  }
+
+  for (const [index, id] of modelIds.entries()) {
+    const prices: Array<Omit<ModelPrice, "sourceUrl">> = [];
+    for (const period of ["idle", "peak"] as const) {
+      const slot = perPeriod.get(period)!;
+      prices.push({
+        market: config.market as Market,
+        currency: config.currency as Currency,
+        unit: "1M_tokens" as const,
+        rateType: "standard" as const,
+        dailyTimeRange: timeRange(config, period === "peak"),
+        input: {
+          cacheHit: slot.cacheHit[index]!,
+          standard: slot.standard[index]!,
+        },
+        output: slot.output[index]!,
+      });
+    }
+    result.set(id, prices);
+  }
+  return result;
+}
+
 function cleanText(value: string): string {
   return value.replace(/\s+/g, " ").trim();
 }
@@ -281,6 +377,7 @@ export function parseDeepSeekPage(
   const pageText = cleanText($.root().text());
   const effectiveFrom = announcedEffectiveFrom(pageText, config);
   const scheduledPrices = parseScheduledPrices($, config, effectiveFrom);
+  const finalizedPrices = parseFinalizedPrices($, config, modelIds);
   const deprecatedMatch =
     config.locale === "zh-CN"
       ? pageText.match(
@@ -308,7 +405,8 @@ export function parseDeepSeekPage(
     );
   }
 
-  const supported = (value: string) => /支持|✓/.test(value);
+  const supported = (value: string) => /支持|✓|Supported|Yes/i.test(value);
+  const finalized = finalizedPrices.size > 0;
   const models = modelIds.map((id, index) => ({
     id,
     name: versions[index] ?? id,
@@ -330,21 +428,23 @@ export function parseDeepSeekPage(
       maxOutputTokens,
       concurrency: Number(concurrencies[index]),
     },
-    prices: [
-      {
-        market: config.market as Market,
-        currency: config.currency as Currency,
-        unit: "1M_tokens" as const,
-        rateType: "standard" as const,
-        input: {
-          cacheHit: parseMoney(cacheHits[index] ?? ""),
-          standard: parseMoney(standardPrices[index] ?? ""),
-        },
-        output: parseMoney(outputPrices[index] ?? ""),
-        ...(effectiveFrom ? { effectiveTo: effectiveFrom } : {}),
-      },
-      ...(scheduledPrices.get(id) ?? []),
-    ],
+    prices: finalized
+      ? (finalizedPrices.get(id) ?? [])
+      : [
+          {
+            market: config.market as Market,
+            currency: config.currency as Currency,
+            unit: "1M_tokens" as const,
+            rateType: "standard" as const,
+            input: {
+              cacheHit: parseMoney(cacheHits[index] ?? ""),
+              standard: parseMoney(standardPrices[index] ?? ""),
+            },
+            output: parseMoney(outputPrices[index] ?? ""),
+            ...(effectiveFrom ? { effectiveTo: effectiveFrom } : {}),
+          },
+          ...(scheduledPrices.get(id) ?? []),
+        ],
   }));
 
   return {

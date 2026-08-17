@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Models &amp; Pricing | DeepSeek API Docs</title>
+</head>
+<body>
+<div id="__docusaurus">
+<div class="theme-doc-markdown markdown"><div class="row"><div class="col col--12">
+<h1>Models &amp; Pricing</h1>
+<p>All prices below are per million tokens. A token is the smallest unit that a model uses to represent natural language text; it can be a word, a number, or a punctuation mark. You are billed based on the total number of input and output tokens.</p>
+<hr>
+<h2 id="model-details">Model Details</h2>
+<div style="font-size:14px"><b><table style="text-align:center"><tr><td colspan="3" style="text-align:center">Model</td><td>deepseek-v4-flash</td><td>deepseek-v4-pro</td></tr><tr><td colspan="3">BASE URL (OpenAI format)</td><td colspan="2"><a href="https://api.deepseek.com" target="_blank" rel="noopener noreferrer">https://api.deepseek.com</a></td></tr><tr><td colspan="3">BASE URL (Anthropic format)</td><td colspan="2"><a href="https://api.deepseek.com/anthropic" target="_blank" rel="noopener noreferrer">https://api.deepseek.com/anthropic</a></td></tr><tr><td colspan="3" style="text-align:center">MODEL VERSION</td><td>DeepSeek-V4-Flash-0731</td><td>DeepSeek-V4-Pro-0813</td></tr><tr><td colspan="3">Thinking Mode</td><td colspan="2">Non-thinking and thinking modes are supported (default)<br>See <a href="/guides/thinking_mode">Thinking Mode</a> for switching</td></tr><tr><td colspan="3">CONTEXT LENGTH</td><td colspan="2">1M</td></tr><tr><td colspan="3">MAX OUTPUT</td><td colspan="2">384K</td></tr><tr><td rowspan="6">Capabilities</td><td colspan="2"><a href="/guides/json_mode">JSON Output</a></td><td>Supported</td><td>Supported</td></tr><tr><td colspan="2"><a href="/guides/tool_calls">Tool Calls</a></td><td>Supported</td><td>Supported</td></tr><tr><td colspan="2"><a href="/guides/responses_api">Responses API</a></td><td>Supported</td><td>Supported</td></tr><tr><td colspan="2"><a href="/guides/anthropic_api">Anthropic API</a></td><td>Supported</td><td>Supported</td></tr><tr><td colspan="2"><a href="/guides/chat_prefix_completion">Chat Prefix Completion (Beta)</a></td><td>Supported</td><td>Supported</td></tr><tr><td colspan="2"><a href="/guides/fim_completion">FIM Completion (Beta)</a></td><td>Non-thinking mode only</td><td>Non-thinking mode only</td></tr><tr><td rowspan="6">Pricing<sup>(1)</sup></td><td rowspan="2">1M INPUT TOKENS (CACHE HIT)</td><td>OFF-PEAK</td><td>$0.007</td><td>$0.022</td></tr><tr><td>PEAK</td><td>$0.014</td><td>$0.044</td></tr><tr><td rowspan="2">1M INPUT TOKENS (CACHE MISS)</td><td>OFF-PEAK</td><td>$0.22</td><td>$0.66</td></tr><tr><td>PEAK</td><td>$0.44</td><td>$1.32</td></tr><tr><td rowspan="2">1M OUTPUT TOKENS</td><td>OFF-PEAK</td><td>$0.66</td><td>$1.98</td></tr><tr><td>PEAK</td><td>$1.32</td><td>$3.96</td></tr><tr><td colspan="3">Concurrency Limit<sup>(2)</sup></td><td>2500</td><td>500</td></tr></table></b></div>
+<p>(1) Off-peak prices are half of the peak prices. Peak hours are 01:00 - 04:00 and 06:00 - 10:00 UTC (all other hours are off-peak).</p>
+<p>(2) For more details on concurrency limits, see <a href="/quick_start/rate_limit">Rate Limits &amp; Isolation</a></p>
+<hr>
+<h2 id="billing">Billing</h2>
+<p>The charge equals token consumption multiplied by the model unit price, and is deducted from your top-up balance or gift balance. When both balances exist, the gift balance is deducted first.</p>
+<p>Prices are subject to change. DeepSeek reserves the right to modify prices. Please top up based on your actual usage and check this page regularly for the latest prices.</p>
+</div></div></div>
+</div>
+</body>
+</html>

@@ -1,8 +1,24 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import {
   DEEPSEEK_SOURCES,
   parseDeepSeekPage,
 } from "../src/collectors/deepseek.js";
+
+const fixtureDir = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "fixtures",
+);
+const finalZhHtml = readFileSync(
+  path.join(fixtureDir, "deepseek-final-zh.html"),
+  "utf8",
+);
+const finalEnHtml = readFileSync(
+  path.join(fixtureDir, "deepseek-final-en.html"),
+  "utf8",
+);
 
 const html = `
 <html><body><div><table>
@@ -137,5 +153,133 @@ describe("parseDeepSeekPage", () => {
       effectiveTo: "2026-08-16T16:00:00Z",
     });
     expect(data.aliases[0]?.deprecatedAt).toBe("2026-07-24T15:59:00Z");
+  });
+
+  it("parses the finalized off-peak/peak CNY layout into current prices", () => {
+    const data = parseDeepSeekPage(finalZhHtml, DEEPSEEK_SOURCES[0]);
+    expect(data.models).toHaveLength(2);
+    expect(data.models[0]).toMatchObject({
+      id: "deepseek-v4-flash",
+      name: "DeepSeek-V4-Flash-0731",
+      capabilities: {
+        thinking: true,
+        jsonOutput: true,
+        toolCalls: true,
+        chatPrefixCompletion: true,
+        fimCompletion: "non-thinking-only",
+      },
+      limits: {
+        contextTokens: 1_000_000,
+        maxOutputTokens: 384_000,
+        concurrency: 2500,
+      },
+    });
+    expect(data.models[0]?.prices).toEqual([
+      {
+        market: "china",
+        currency: "CNY",
+        unit: "1M_tokens",
+        rateType: "standard",
+        dailyTimeRange: {
+          label: "空闲时段",
+          timeZone: "Asia/Shanghai",
+          intervals: [
+            { start: "00:00", end: "09:00" },
+            { start: "12:00", end: "14:00" },
+            { start: "18:00", end: "00:00" },
+          ],
+        },
+        input: { cacheHit: 0.05, standard: 1.5 },
+        output: 4.5,
+      },
+      {
+        market: "china",
+        currency: "CNY",
+        unit: "1M_tokens",
+        rateType: "standard",
+        dailyTimeRange: {
+          label: "高峰时段",
+          timeZone: "Asia/Shanghai",
+          intervals: [
+            { start: "09:00", end: "12:00" },
+            { start: "14:00", end: "18:00" },
+          ],
+        },
+        input: { cacheHit: 0.1, standard: 3 },
+        output: 9,
+      },
+    ]);
+    expect(data.models[1]?.prices).toMatchObject([
+      {
+        dailyTimeRange: { label: "空闲时段" },
+        input: { cacheHit: 0.15, standard: 4.5 },
+        output: 13.5,
+      },
+      {
+        dailyTimeRange: { label: "高峰时段" },
+        input: { cacheHit: 0.3, standard: 9 },
+        output: 27,
+      },
+    ]);
+    // 定型页面不再携带“即将生效”的公告窗口
+    expect(data.models[0]?.prices[0]).not.toHaveProperty("effectiveFrom");
+    expect(data.models[0]?.prices[0]).not.toHaveProperty("effectiveTo");
+  });
+
+  it("parses the finalized off-peak/peak USD layout with English labels", () => {
+    const data = parseDeepSeekPage(finalEnHtml, DEEPSEEK_SOURCES[1]);
+    expect(data.models[0]?.capabilities).toMatchObject({
+      jsonOutput: true,
+      toolCalls: true,
+      chatPrefixCompletion: true,
+      fimCompletion: "non-thinking-only",
+    });
+    expect(data.models[0]?.prices).toEqual([
+      {
+        market: "international",
+        currency: "USD",
+        unit: "1M_tokens",
+        rateType: "standard",
+        dailyTimeRange: {
+          label: "Off-peak",
+          timeZone: "UTC",
+          intervals: [
+            { start: "00:00", end: "01:00" },
+            { start: "04:00", end: "06:00" },
+            { start: "10:00", end: "00:00" },
+          ],
+        },
+        input: { cacheHit: 0.007, standard: 0.22 },
+        output: 0.66,
+      },
+      {
+        market: "international",
+        currency: "USD",
+        unit: "1M_tokens",
+        rateType: "standard",
+        dailyTimeRange: {
+          label: "Peak",
+          timeZone: "UTC",
+          intervals: [
+            { start: "01:00", end: "04:00" },
+            { start: "06:00", end: "10:00" },
+          ],
+        },
+        input: { cacheHit: 0.014, standard: 0.44 },
+        output: 1.32,
+      },
+    ]);
+    expect(data.models[1]?.prices).toMatchObject([
+      {
+        dailyTimeRange: { label: "Off-peak" },
+        input: { cacheHit: 0.022, standard: 0.66 },
+        output: 1.98,
+      },
+      {
+        dailyTimeRange: { label: "Peak" },
+        input: { cacheHit: 0.044, standard: 1.32 },
+        output: 3.96,
+      },
+    ]);
   });
 });
