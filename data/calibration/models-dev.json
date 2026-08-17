@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-16T02:36:19.150Z",
-    "lastAttemptAt": "2026-08-16T02:36:19.150Z",
+    "lastSuccessfulAt": "2026-08-17T02:35:47.662Z",
+    "lastAttemptAt": "2026-08-17T02:35:47.662Z",
     "consecutiveFailures": 0
   },
   "source": {
@@ -18,7 +18,7 @@
       "referenceProvider": "deepseek",
       "referenceModel": "deepseek-v4-flash",
       "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-flash/",
-      "status": "partial",
+      "status": "mismatch",
       "checks": [
         {
           "field": "createdAt",
@@ -68,21 +68,21 @@
         },
         {
           "field": "prices.USD.input.standard",
-          "official": 0.14,
+          "official": 0.22,
           "reference": 0.14,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "prices.USD.input.cacheHit",
-          "official": 0.0028,
+          "official": 0.007,
           "reference": 0.0028,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "prices.USD.output",
-          "official": 0.28,
+          "official": 0.66,
           "reference": 0.28,
-          "status": "match"
+          "status": "mismatch"
         }
       ]
     },
@@ -92,7 +92,7 @@
       "referenceProvider": "deepseek",
       "referenceModel": "deepseek-v4-pro",
       "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-pro/",
-      "status": "partial",
+      "status": "mismatch",
       "checks": [
         {
           "field": "createdAt",
@@ -142,21 +142,21 @@
         },
         {
           "field": "prices.USD.input.standard",
-          "official": 0.435,
+          "official": 0.66,
           "reference": 0.435,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "prices.USD.input.cacheHit",
-          "official": 0.003625,
+          "official": 0.022,
           "reference": 0.003625,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "prices.USD.output",
-          "official": 0.87,
+          "official": 1.98,
           "reference": 0.87,
-          "status": "match"
+          "status": "mismatch"
         }
       ]
     },

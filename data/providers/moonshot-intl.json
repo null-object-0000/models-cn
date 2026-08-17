@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-16T02:35:44.336Z",
-    "lastAttemptAt": "2026-08-16T02:35:44.336Z",
+    "lastSuccessfulAt": "2026-08-17T02:35:03.087Z",
+    "lastAttemptAt": "2026-08-17T02:35:03.087Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-intl",
@@ -301,15 +301,15 @@
       "url": "https://platform.kimi.ai/docs/api/models-overview",
       "kind": "model-metadata",
       "locale": "en",
-      "retrievedAt": "2026-07-23T09:12:31.262Z",
-      "contentHash": "sha256:d00d9c13f347cf185e3e6a8c0633cea7b08cad4700f6d7f445546ad14539978a"
+      "retrievedAt": "2026-08-17T02:35:03.087Z",
+      "contentHash": "sha256:ceee8673432d882032637b1f9a30d748bdf4e8e79c42ce03da40fa72cb28cff6"
     },
     {
       "url": "https://platform.kimi.ai/docs/guide/troubleshooting#kimi",
       "kind": "model-metadata",
       "locale": "en",
-      "retrievedAt": "2026-07-23T09:12:31.262Z",
-      "contentHash": "sha256:e21138bff0a69cc1ea905f558e22accd56e124ff64772f681135889d89394043"
+      "retrievedAt": "2026-08-17T02:35:03.087Z",
+      "contentHash": "sha256:9e867a4ec4e2d90f8420ff1819c0e62ca579a7c53de4a0ad8be8bbc5fa96d158"
     }
   ]
 }
