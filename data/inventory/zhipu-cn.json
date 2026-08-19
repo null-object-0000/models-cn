@@ -3,8 +3,8 @@
   "provider": "zhipu-cn",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-17T02:35:53.663Z",
-    "lastAttemptAt": "2026-08-17T02:35:53.663Z",
+    "lastSuccessfulAt": "2026-08-19T05:54:09.357Z",
+    "lastAttemptAt": "2026-08-19T05:54:09.357Z",
     "consecutiveFailures": 0
   },
   "source": {
@@ -58,13 +58,13 @@
       "glm-5",
       "glm-5-turbo",
       "glm-5.1",
-      "glm-5.2"
+      "glm-5.2",
+      "glm-5.3"
     ],
     "aliasesAndListed": [],
     "listedWithoutPricing": [
       "glm-4.5",
-      "glm-4.6",
-      "glm-5.3"
+      "glm-4.6"
     ],
     "pricedButNotListed": [
       "glm-4.7-flash",

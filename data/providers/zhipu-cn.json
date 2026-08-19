@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-17T02:35:03.103Z",
-    "lastAttemptAt": "2026-08-17T02:35:03.103Z",
+    "lastSuccessfulAt": "2026-08-19T05:53:14.974Z",
+    "lastAttemptAt": "2026-08-19T05:53:14.974Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-cn",
@@ -17,6 +17,42 @@
     "openai": "https://open.bigmodel.cn/api/paas/v4"
   },
   "models": [
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "createdAt": "2026-08-19T00:00:00.000+08:00",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 8,
+            "cacheHit": 2
+          },
+          "output": 28,
+          "sourceUrl": "https://bigmodel.cn/pricing",
+          "validFrom": "2026-08-19T05:53:26.770Z"
+        }
+      ]
+    },
     {
       "id": "glm-5.2",
       "name": "GLM-5.2",
@@ -467,22 +503,22 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-08-07T05:03:57.390Z",
-      "contentHash": "sha256:4746ca20438b4eaf6da279c23270e5fe47161bf19ad0138582e4fee23f2d8238"
+      "retrievedAt": "2026-08-19T05:53:14.974Z",
+      "contentHash": "sha256:034d1a10a73cd892536efd1104cad731f3fb41df0930ad8a9f1d5100356537b7"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-16T02:35:44.357Z",
-      "contentHash": "sha256:ecaf38981b7c068199059b3007b686ac8ff8dc509343cdbc1a6cc43a33da8a41"
+      "retrievedAt": "2026-08-19T05:53:14.974Z",
+      "contentHash": "sha256:ce316cac59cf1b4a71fbc26354db0637de026c28b7e0eb15b30816ec0710dd55"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-07T05:31:44.971Z",
-      "contentHash": "sha256:a78e25c1fe769bc5c02fd318f0b4e3728ea49f57ff55f58d72300fc129509c7f"
+      "retrievedAt": "2026-08-19T05:53:14.974Z",
+      "contentHash": "sha256:aaf70dfac3fe13fa73185d0409c066a6b6d37c40501f7a5a230444cc90a93c83"
     }
   ]
 }

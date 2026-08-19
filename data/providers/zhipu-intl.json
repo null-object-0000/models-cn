@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-17T02:35:03.116Z",
-    "lastAttemptAt": "2026-08-17T02:35:03.116Z",
+    "lastSuccessfulAt": "2026-08-19T05:53:14.978Z",
+    "lastAttemptAt": "2026-08-19T05:53:14.978Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -17,6 +17,42 @@
     "openai": "https://api.z.ai/api/paas/v4"
   },
   "models": [
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "createdAt": "2026-08-19T00:00:00.000+08:00",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 1.4,
+            "cacheHit": 0.26
+          },
+          "output": 4.4,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-08-19T05:53:18.328Z"
+        }
+      ]
+    },
     {
       "id": "glm-5.2",
       "name": "GLM-5.2",
@@ -310,22 +346,22 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-08-07T05:06:28.770Z",
-      "contentHash": "sha256:bdf0f1b02433c96c3522d64ec1f9e808e99ae369feaf908067d64d10aae76967"
+      "retrievedAt": "2026-08-19T05:53:14.978Z",
+      "contentHash": "sha256:00fb8f70e9baf0f7e3dfbecb2838ef6437e2a631ed646ef7533466790bc61b36"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-16T02:35:44.360Z",
-      "contentHash": "sha256:ecaf38981b7c068199059b3007b686ac8ff8dc509343cdbc1a6cc43a33da8a41"
+      "retrievedAt": "2026-08-19T05:53:14.978Z",
+      "contentHash": "sha256:ce316cac59cf1b4a71fbc26354db0637de026c28b7e0eb15b30816ec0710dd55"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-07T05:32:31.512Z",
-      "contentHash": "sha256:a78e25c1fe769bc5c02fd318f0b4e3728ea49f57ff55f58d72300fc129509c7f"
+      "retrievedAt": "2026-08-19T05:53:14.978Z",
+      "contentHash": "sha256:aaf70dfac3fe13fa73185d0409c066a6b6d37c40501f7a5a230444cc90a93c83"
     }
   ]
 }
