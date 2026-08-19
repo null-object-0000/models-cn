@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T07:45:18.777Z",
-        "lastAttemptAt": "2026-08-17T07:45:18.777Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:14.929Z",
+        "lastAttemptAt": "2026-08-19T05:53:14.929Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -627,8 +627,8 @@
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-08-17T07:45:18.777Z",
-          "contentHash": "sha256:c60d460d3a9d2d557fd0b2b4c4f04e156e32a95a2e1eee27c34b387a3e6fc781"
+          "retrievedAt": "2026-08-19T05:53:14.929Z",
+          "contentHash": "sha256:eae39d726ef9e82a8af1a92489df63b4ec06bf845c1536f66ac313b07f40d4e5"
         }
       ]
     },
@@ -636,8 +636,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:03.076Z",
-        "lastAttemptAt": "2026-08-17T02:35:03.076Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:14.947Z",
+        "lastAttemptAt": "2026-08-19T05:53:14.947Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -788,8 +788,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:03.080Z",
-        "lastAttemptAt": "2026-08-17T02:35:03.080Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:14.951Z",
+        "lastAttemptAt": "2026-08-19T05:53:14.951Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1103,8 +1103,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:03.087Z",
-        "lastAttemptAt": "2026-08-17T02:35:03.087Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:14.958Z",
+        "lastAttemptAt": "2026-08-19T05:53:14.958Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1418,8 +1418,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:03.090Z",
-        "lastAttemptAt": "2026-08-17T02:35:03.090Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:14.962Z",
+        "lastAttemptAt": "2026-08-19T05:53:14.962Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2090,16 +2090,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-16T02:35:44.344Z",
-          "contentHash": "sha256:763f65a6feec7db3431e987f32c74d394b15a668f7b537578fd103f2265d99db"
+          "retrievedAt": "2026-08-19T05:53:14.962Z",
+          "contentHash": "sha256:add1c866aca0b5b6c9481bc7c82db9bfd1f4d21a0b4727e4111278d674c72394"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-17T02:35:03.090Z",
-          "contentHash": "sha256:640043edc13aea3452c37a0ffbd74068f46fedeb21eb6c2ad79025681cdca3f9"
+          "retrievedAt": "2026-08-19T05:53:14.962Z",
+          "contentHash": "sha256:9bde9b264d69921127f2c8f1f92f80bc79cbaa540a90556e4d152c3a70cf6be3"
         }
       ]
     },
@@ -2107,8 +2107,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:03.103Z",
-        "lastAttemptAt": "2026-08-17T02:35:03.103Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:14.974Z",
+        "lastAttemptAt": "2026-08-19T05:53:14.974Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2122,6 +2122,42 @@
         "openai": "https://open.bigmodel.cn/api/paas/v4"
       },
       "models": [
+        {
+          "id": "glm-5.3",
+          "name": "GLM-5.3",
+          "createdAt": "2026-08-19T00:00:00.000+08:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 8,
+                "cacheHit": 2
+              },
+              "output": 28,
+              "sourceUrl": "https://bigmodel.cn/pricing",
+              "validFrom": "2026-08-19T05:53:26.770Z"
+            }
+          ]
+        },
         {
           "id": "glm-5.2",
           "name": "GLM-5.2",
@@ -2572,22 +2608,22 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-07T05:03:57.390Z",
-          "contentHash": "sha256:4746ca20438b4eaf6da279c23270e5fe47161bf19ad0138582e4fee23f2d8238"
+          "retrievedAt": "2026-08-19T05:53:14.974Z",
+          "contentHash": "sha256:034d1a10a73cd892536efd1104cad731f3fb41df0930ad8a9f1d5100356537b7"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-16T02:35:44.357Z",
-          "contentHash": "sha256:ecaf38981b7c068199059b3007b686ac8ff8dc509343cdbc1a6cc43a33da8a41"
+          "retrievedAt": "2026-08-19T05:53:14.974Z",
+          "contentHash": "sha256:ce316cac59cf1b4a71fbc26354db0637de026c28b7e0eb15b30816ec0710dd55"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-07T05:31:44.971Z",
-          "contentHash": "sha256:a78e25c1fe769bc5c02fd318f0b4e3728ea49f57ff55f58d72300fc129509c7f"
+          "retrievedAt": "2026-08-19T05:53:14.974Z",
+          "contentHash": "sha256:aaf70dfac3fe13fa73185d0409c066a6b6d37c40501f7a5a230444cc90a93c83"
         }
       ]
     },
@@ -2595,8 +2631,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:03.116Z",
-        "lastAttemptAt": "2026-08-17T02:35:03.116Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:14.978Z",
+        "lastAttemptAt": "2026-08-19T05:53:14.978Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2610,6 +2646,42 @@
         "openai": "https://api.z.ai/api/paas/v4"
       },
       "models": [
+        {
+          "id": "glm-5.3",
+          "name": "GLM-5.3",
+          "createdAt": "2026-08-19T00:00:00.000+08:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 1.4,
+                "cacheHit": 0.26
+              },
+              "output": 4.4,
+              "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+              "validFrom": "2026-08-19T05:53:18.328Z"
+            }
+          ]
+        },
         {
           "id": "glm-5.2",
           "name": "GLM-5.2",
@@ -2903,22 +2975,22 @@
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-08-07T05:06:28.770Z",
-          "contentHash": "sha256:bdf0f1b02433c96c3522d64ec1f9e808e99ae369feaf908067d64d10aae76967"
+          "retrievedAt": "2026-08-19T05:53:14.978Z",
+          "contentHash": "sha256:00fb8f70e9baf0f7e3dfbecb2838ef6437e2a631ed646ef7533466790bc61b36"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-16T02:35:44.360Z",
-          "contentHash": "sha256:ecaf38981b7c068199059b3007b686ac8ff8dc509343cdbc1a6cc43a33da8a41"
+          "retrievedAt": "2026-08-19T05:53:14.978Z",
+          "contentHash": "sha256:ce316cac59cf1b4a71fbc26354db0637de026c28b7e0eb15b30816ec0710dd55"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-07T05:32:31.512Z",
-          "contentHash": "sha256:a78e25c1fe769bc5c02fd318f0b4e3728ea49f57ff55f58d72300fc129509c7f"
+          "retrievedAt": "2026-08-19T05:53:14.978Z",
+          "contentHash": "sha256:aaf70dfac3fe13fa73185d0409c066a6b6d37c40501f7a5a230444cc90a93c83"
         }
       ]
     }
@@ -2929,8 +3001,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:48.328Z",
-        "lastAttemptAt": "2026-08-17T02:35:48.328Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:59.465Z",
+        "lastAttemptAt": "2026-08-19T05:53:59.465Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2968,8 +3040,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:48.867Z",
-        "lastAttemptAt": "2026-08-17T02:35:48.867Z",
+        "lastSuccessfulAt": "2026-08-19T05:54:00.118Z",
+        "lastAttemptAt": "2026-08-19T05:54:00.118Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3002,8 +3074,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:49.201Z",
-        "lastAttemptAt": "2026-08-17T02:35:49.201Z",
+        "lastSuccessfulAt": "2026-08-19T05:54:00.626Z",
+        "lastAttemptAt": "2026-08-19T05:54:00.626Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3058,8 +3130,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:53.043Z",
-        "lastAttemptAt": "2026-08-17T02:35:53.043Z",
+        "lastSuccessfulAt": "2026-08-19T05:54:08.960Z",
+        "lastAttemptAt": "2026-08-19T05:54:08.960Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3100,8 +3172,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:53.663Z",
-        "lastAttemptAt": "2026-08-17T02:35:53.663Z",
+        "lastSuccessfulAt": "2026-08-19T05:54:09.357Z",
+        "lastAttemptAt": "2026-08-19T05:54:09.357Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3155,13 +3227,13 @@
           "glm-5",
           "glm-5-turbo",
           "glm-5.1",
-          "glm-5.2"
+          "glm-5.2",
+          "glm-5.3"
         ],
         "aliasesAndListed": [],
         "listedWithoutPricing": [
           "glm-4.5",
-          "glm-4.6",
-          "glm-5.3"
+          "glm-4.6"
         ],
         "pricedButNotListed": [
           "glm-4.7-flash",
@@ -3175,8 +3247,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:54.903Z",
-        "lastAttemptAt": "2026-08-17T02:35:54.903Z",
+        "lastSuccessfulAt": "2026-08-19T05:54:10.353Z",
+        "lastAttemptAt": "2026-08-19T05:54:10.353Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3230,13 +3302,13 @@
           "glm-5",
           "glm-5-turbo",
           "glm-5.1",
-          "glm-5.2"
+          "glm-5.2",
+          "glm-5.3"
         ],
         "aliasesAndListed": [],
         "listedWithoutPricing": [
           "glm-4.5",
-          "glm-4.6",
-          "glm-5.3"
+          "glm-4.6"
         ],
         "pricedButNotListed": [
           "glm-4.7-flash",
@@ -3251,14 +3323,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-17T02:35:47.662Z",
-        "lastAttemptAt": "2026-08-17T02:35:47.662Z",
+        "lastSuccessfulAt": "2026-08-19T05:53:58.797Z",
+        "lastAttemptAt": "2026-08-19T05:53:58.797Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-13T03:34:23.984Z",
-        "contentHash": "sha256:49ef917b3787372100222cdee35017048ed2b83282c24d31012679956522b2cd"
+        "retrievedAt": "2026-08-19T05:53:58.797Z",
+        "contentHash": "sha256:8052e31c176f08990f32b83c0f08a999675d90074c439f0d853b655901a82750"
       },
       "models": [
         {
@@ -5027,6 +5099,80 @@
         },
         {
           "provider": "zhipu-intl",
+          "model": "glm-5.3",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-5.3",
+          "referenceUrl": "https://models.dev/models/zai/glm-5.3/",
+          "status": "missing",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-08-19",
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 1.4,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.26,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 4.4,
+              "reference": null,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
           "model": "glm-5.2",
           "referenceProvider": "zai",
           "referenceModel": "glm-5.2",
@@ -5646,6 +5792,80 @@
               "official": 0,
               "reference": 0,
               "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-5.3",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-5.3",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-5.3/",
+          "status": "missing",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-08-19",
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": null,
+              "status": "missing"
             }
           ]
         },
