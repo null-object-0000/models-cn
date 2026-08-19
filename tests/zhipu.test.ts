@@ -10,8 +10,16 @@ import {
 
 const cell = (col: number, text: string): ZhipuDomCell => ({ col, text });
 
-/** 国内定价页「旗舰模型」表格（真实抓取的 15 行）。 */
+/** 国内定价页「旗舰模型」表格（真实抓取的 16 行）。 */
 const FLAGSHIP_ROWS: ZhipuDomCell[][] = [
+  [
+    cell(1, "GLM-5.3 新品"),
+    cell(2, "1M"),
+    cell(3, "8元"),
+    cell(4, "28元"),
+    cell(5, "限时免费"),
+    cell(6, "2元"),
+  ],
   [
     cell(1, "GLM-5.2 新品"),
     cell(2, "1M"),
@@ -130,6 +138,14 @@ const FLAGSHIP_ROWS: ZhipuDomCell[][] = [
 describe("Zhipu pricing DOM parser", () => {
   it("parses flagship models with no token ranges", () => {
     const parsed = parseZhipuPricingDom(FLAGSHIP_ROWS);
+    const glm53 = parsed.find((model) => model.id === "glm-5.3");
+    expect(glm53?.prices).toEqual([
+      {
+        input: 8,
+        cacheHit: 2,
+        output: 28,
+      },
+    ]);
     const glm52 = parsed.find((model) => model.id === "glm-5.2");
     expect(glm52?.prices).toEqual([
       {
@@ -218,6 +234,7 @@ Prices per 1M tokens.
 
 | Model | Input | Cached Input | Cached Input Storage | Output |
 | :-- | :-- | :-- | :-- | :-- |
+| GLM-5.3 | $1.4 | $0.26 | Limited-time Free | $4.4 |
 | GLM-5.2 | $1.4 | $0.26 | Limited-time Free | $4.4 |
 | GLM-5.1 | $1.4 | $0.26 | Limited-time Free | $4.4 |
 | GLM-5 | $1 | $0.2 | Limited-time Free | $3.2 |
@@ -235,6 +252,12 @@ Prices per 1M tokens.
 
   it("parses single-tier USD prices with cache-hit", () => {
     const prices = parseZhipuInternationalPricing(PRICING);
+    expect(prices.get("glm-5.3")).toMatchObject({
+      market: "international",
+      currency: "USD",
+      input: { standard: 1.4, cacheHit: 0.26 },
+      output: 4.4,
+    });
     expect(prices.get("glm-5.2")).toMatchObject({
       market: "international",
       currency: "USD",
@@ -267,6 +290,7 @@ describe("Zhipu model overview parser", () => {
 
 | 模型 | 特点 | 上下文 | 最大输出 |
 | :-- | :-- | :-- | :-- |
+| [GLM-5.3](/cn/guide/models/text/glm-5.3) | 最新旗舰 | 1M | 128K |
 | [GLM-5.2](/cn/guide/models/text/glm-5.2) | 1M 上下文 | 1M | 128K |
 | [GLM-5-Turbo](/cn/guide/models/text/glm-5-turbo) | 龙虾优化 | 200K | 128K |
 | [GLM-4.5-Air](/cn/guide/models/text/glm-4.5) | 高性价比 | 128K | 96K |
@@ -278,6 +302,13 @@ describe("Zhipu model overview parser", () => {
   it("parses context and output token limits", () => {
     const models = parseZhipuOverview(OVERVIEW);
     expect(models).toEqual([
+      {
+        id: "glm-5.3",
+        name: "GLM-5.3",
+        url: "/cn/guide/models/text/glm-5.3",
+        contextTokens: 1_000_000,
+        maxOutputTokens: 131_072,
+      },
       {
         id: "glm-5.2",
         name: "GLM-5.2",
@@ -343,10 +374,32 @@ describe("Zhipu capability parser", () => {
       jsonOutput: false,
     });
   });
+
+  it("parses the bullet-list template used by GLM-5.3", () => {
+    const markdown = `## 能力支持
+
+* [思考模式](/cn/guide/capabilities/thinking-mode)：提供多种思考模式
+* [流式输出](/cn/guide/capabilities/streaming)：支持实时流式响应
+* [Function Calling](/cn/guide/capabilities/function-calling)：强大的工具调用能力
+* [上下文缓存](/cn/guide/capabilities/cache)：智能缓存机制
+* [结构化输出](/cn/guide/capabilities/struct-output)：支持 JSON 输出
+
+## 详细介绍
+`;
+    expect(parseZhipuCapabilities(markdown)).toEqual({
+      thinking: true,
+      toolCalls: true,
+      jsonOutput: true,
+    });
+  });
 });
 
 describe("Zhipu release notes parser", () => {
   const RELEASES = `# 新品发布
+
+<Update label="2026-8-19" description="GLM-5.3 新一代旗舰模型上线">
+  💬 [**GLM-5.3**](/cn/guide/models/text/glm-5.3)
+</Update>
 
 <Update label="2026-06-16" description="GLM-5.2 新一代旗舰模型上线">
   💬 [**GLM-5.2**](/cn/guide/models/text/glm-5.2)
@@ -375,6 +428,8 @@ describe("Zhipu release notes parser", () => {
 
   it("maps each model to its earliest release date", () => {
     const dates = parseZhipuReleaseNotes(RELEASES);
+    // 官方公告日期不带前导零（`2026-8-19`），应归一化为 ISO 日期。
+    expect(dates.get("glm-5.3")).toBe("2026-08-19T00:00:00.000+08:00");
     expect(dates.get("glm-5.2")).toBe("2026-06-16T00:00:00.000+08:00");
     expect(dates.get("glm-5-turbo")).toBe("2026-03-15T00:00:00.000+08:00");
     expect(dates.get("glm-4.7-flash")).toBe("2026-01-19T00:00:00.000+08:00");

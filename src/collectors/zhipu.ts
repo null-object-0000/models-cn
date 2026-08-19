@@ -20,13 +20,14 @@ import { healthyHealth } from "../health.js";
  * - 元数据（上下文 / 最大输出）：`docs.bigmodel.cn/cn/guide/start/model-overview.md`。
  * - 能力字段：各模型详情页「能力支持」Card。
  *
- * 模型范围：以国内定价页「旗舰模型」区块的 8 个文本模型为准（含免费模型
+ * 模型范围：以国内定价页「旗舰模型」区块的 9 个文本模型为准（含免费模型
  * `glm-4.7-flash`）。`/models` 清单返回的 `glm-4.5` / `glm-4.6` 在国内定价页只有
  * Batch / 私有化计价、没有标准按量价，因此不收录；它们会通过 Inventory 的
  * `listedWithoutPricing` 如实反映「API 可用但官方定价页无按量价」。
  */
 
 export const ZHIPU_MODEL_IDS = [
+  "glm-5.3",
   "glm-5.2",
   "glm-5.1",
   "glm-5-turbo",
@@ -318,12 +319,16 @@ export function parseZhipuReleaseNotes(markdown: string): Map<string, string> {
     /<Update label="([^"]+)"[^>]*>([\s\S]*?)<\/Update>/g,
   );
   for (const [, label, body] of blocks) {
-    if (!label || !body || !/^\d{4}-\d{2}-\d{2}$/.test(label)) continue;
+    // 官方公告日期可能不带前导零（如 `2026-8-19`），允许 1-2 位月/日。
+    const dateMatch = label?.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (!label || !body || !dateMatch) continue;
+    // 统一补齐为 `YYYY-MM-DD`，保证 ISO 字符串可比较。
+    const isoDate = `${dateMatch[1]}-${dateMatch[2]!.padStart(2, "0")}-${dateMatch[3]!.padStart(2, "0")}`;
     const names = body.matchAll(/\*\*([^*\]]+)\*\*/g);
     for (const match of names) {
       const id = match[1]?.toLowerCase().match(/(glm[-a-z0-9.]+)/)?.[1];
       if (!id || !isZhipuModelId(id)) continue;
-      const iso = `${label}T00:00:00.000+08:00`;
+      const iso = `${isoDate}T00:00:00.000+08:00`;
       const existing = result.get(id);
       // 取最早日期（首次发布）；ISO 字符串可直接按字典序比较。
       if (!existing || iso < existing) result.set(id, iso);
@@ -341,12 +346,20 @@ export interface ZhipuCapabilities {
 /**
  * 从模型详情页「能力支持」区块解析能力。
  * `思考模式` → thinking，`Function Calling` → toolCalls，`结构化输出` → jsonOutput。
+ *
+ * 官方页面存在两种模板：旧模板用 `<Card title="...">` 卡片，新模板（如 GLM-5.3）
+ * 用 `* [能力名](链接)` 列表，两种都解析。
  */
 export function parseZhipuCapabilities(markdown: string): ZhipuCapabilities {
   const section = markdown.split("## 能力支持")[1]?.split("##")[0] ?? "";
   const titles = Array.from(section.matchAll(/<Card title="([^"]+)"/g))
     .map((match) => match[1])
     .filter((title): title is string => title !== undefined);
+  // 新版文档模板：`* [思考模式](/cn/guide/capabilities/thinking-mode)：…`
+  for (const match of section.matchAll(/^\s*\*\s+\[([^\]]+)\]\(/gm)) {
+    const title = match[1]?.trim();
+    if (title) titles.push(title);
+  }
   return {
     // 官方能力卡标题有「思考模式」与「深度思考」两种写法。
     thinking: titles.some((title) => /思考/.test(title)),

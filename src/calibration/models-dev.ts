@@ -35,6 +35,7 @@ const moonshotModelIds = [
 ] as const;
 
 const zhipuModelIds = [
+  "glm-5.3",
   "glm-5.2",
   "glm-5.1",
   "glm-5-turbo",
