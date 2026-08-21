@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:14.929Z",
-        "lastAttemptAt": "2026-08-19T05:53:14.929Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:11.111Z",
+        "lastAttemptAt": "2026-08-21T14:00:11.111Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -611,6 +611,141 @@
               "validTo": "2026-08-17T07:45:18.777Z"
             }
           ]
+        },
+        {
+          "id": "deepseek-v4-flash-vision-exp",
+          "name": "DeepSeek-V4-Flash-Vision-Exp",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "chatPrefixCompletion": true,
+            "fimCompletion": "supported"
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 384000,
+            "concurrency": 2500
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "dailyTimeRange": {
+                "label": "空闲时段",
+                "timeZone": "Asia/Shanghai",
+                "intervals": [
+                  {
+                    "start": "00:00",
+                    "end": "09:00"
+                  },
+                  {
+                    "start": "12:00",
+                    "end": "14:00"
+                  },
+                  {
+                    "start": "18:00",
+                    "end": "00:00"
+                  }
+                ]
+              },
+              "input": {
+                "cacheHit": 0.05,
+                "standard": 1.5
+              },
+              "output": 4.5,
+              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+              "validFrom": "2026-08-21T14:00:12.115Z"
+            },
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "dailyTimeRange": {
+                "label": "高峰时段",
+                "timeZone": "Asia/Shanghai",
+                "intervals": [
+                  {
+                    "start": "09:00",
+                    "end": "12:00"
+                  },
+                  {
+                    "start": "14:00",
+                    "end": "18:00"
+                  }
+                ]
+              },
+              "input": {
+                "cacheHit": 0.1,
+                "standard": 3
+              },
+              "output": 9,
+              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+              "validFrom": "2026-08-21T14:00:12.115Z"
+            },
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "dailyTimeRange": {
+                "label": "Off-peak",
+                "timeZone": "UTC",
+                "intervals": [
+                  {
+                    "start": "00:00",
+                    "end": "01:00"
+                  },
+                  {
+                    "start": "04:00",
+                    "end": "06:00"
+                  },
+                  {
+                    "start": "10:00",
+                    "end": "00:00"
+                  }
+                ]
+              },
+              "input": {
+                "cacheHit": 0.007,
+                "standard": 0.22
+              },
+              "output": 0.66,
+              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+              "validFrom": "2026-08-21T14:00:12.115Z"
+            },
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "dailyTimeRange": {
+                "label": "Peak",
+                "timeZone": "UTC",
+                "intervals": [
+                  {
+                    "start": "01:00",
+                    "end": "04:00"
+                  },
+                  {
+                    "start": "06:00",
+                    "end": "10:00"
+                  }
+                ]
+              },
+              "input": {
+                "cacheHit": 0.014,
+                "standard": 0.44
+              },
+              "output": 1.32,
+              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+              "validFrom": "2026-08-21T14:00:12.115Z"
+            }
+          ]
         }
       ],
       "sources": [
@@ -619,16 +754,16 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-17T07:45:18.777Z",
-          "contentHash": "sha256:56cf57c1141dd4ee0a7b1e400ca5f5560fd2b4d89460c13609f7b1b1b4eff8b3"
+          "retrievedAt": "2026-08-21T14:00:11.111Z",
+          "contentHash": "sha256:70149740d9551cb0fb372f5d191330f2bc8e6a636eee1eea943ee2332f6e3385"
         },
         {
           "url": "https://api-docs.deepseek.com/quick_start/pricing/",
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-08-19T05:53:14.929Z",
-          "contentHash": "sha256:eae39d726ef9e82a8af1a92489df63b4ec06bf845c1536f66ac313b07f40d4e5"
+          "retrievedAt": "2026-08-21T14:00:11.111Z",
+          "contentHash": "sha256:b7a762b9a47fab753360c33959d8d70b318c5a3401ca141e5258543915756eb6"
         }
       ]
     },
@@ -636,8 +771,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:14.947Z",
-        "lastAttemptAt": "2026-08-19T05:53:14.947Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:11.131Z",
+        "lastAttemptAt": "2026-08-21T14:00:11.131Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -788,8 +923,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:14.951Z",
-        "lastAttemptAt": "2026-08-19T05:53:14.951Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:11.136Z",
+        "lastAttemptAt": "2026-08-21T14:00:11.136Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1103,8 +1238,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:14.958Z",
-        "lastAttemptAt": "2026-08-19T05:53:14.958Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:11.143Z",
+        "lastAttemptAt": "2026-08-21T14:00:11.143Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1418,8 +1553,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:14.962Z",
-        "lastAttemptAt": "2026-08-19T05:53:14.962Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:11.147Z",
+        "lastAttemptAt": "2026-08-21T14:00:11.147Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2090,16 +2225,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-19T05:53:14.962Z",
-          "contentHash": "sha256:add1c866aca0b5b6c9481bc7c82db9bfd1f4d21a0b4727e4111278d674c72394"
+          "retrievedAt": "2026-08-21T14:00:11.147Z",
+          "contentHash": "sha256:e6bd856bf975fd64f69613033ecf2ebe394c7dde38ec810fb35390266937c2f1"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-19T05:53:14.962Z",
-          "contentHash": "sha256:9bde9b264d69921127f2c8f1f92f80bc79cbaa540a90556e4d152c3a70cf6be3"
+          "retrievedAt": "2026-08-21T14:00:11.147Z",
+          "contentHash": "sha256:0b06fa53f61396114677f3ed4da58e1dd05960a51073b988c3142f794014371e"
         }
       ]
     },
@@ -2107,8 +2242,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:14.974Z",
-        "lastAttemptAt": "2026-08-19T05:53:14.974Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:11.160Z",
+        "lastAttemptAt": "2026-08-21T14:00:11.160Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2631,8 +2766,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:14.978Z",
-        "lastAttemptAt": "2026-08-19T05:53:14.978Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:11.173Z",
+        "lastAttemptAt": "2026-08-21T14:00:11.173Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -3001,18 +3136,22 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:59.465Z",
-        "lastAttemptAt": "2026-08-19T05:53:59.465Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:54.569Z",
+        "lastAttemptAt": "2026-08-21T14:00:54.569Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://api.deepseek.com/models",
-        "retrievedAt": "2026-07-22T03:54:30.941Z",
-        "contentHash": "sha256:e15d3716480a21e2b713a22101c631246403499f4f42c77f35cdb0f5e325f870"
+        "retrievedAt": "2026-08-21T14:00:54.569Z",
+        "contentHash": "sha256:6b523d32ee08d4c945e0829660620e4d5cd58d97d32b60d7468a8da4b5f00e04"
       },
       "models": [
         {
           "id": "deepseek-v4-flash",
+          "ownedBy": "deepseek"
+        },
+        {
+          "id": "deepseek-v4-flash-vision-exp",
           "ownedBy": "deepseek"
         },
         {
@@ -3024,6 +3163,7 @@
         "status": "mismatch",
         "pricedAndListed": [
           "deepseek-v4-flash",
+          "deepseek-v4-flash-vision-exp",
           "deepseek-v4-pro"
         ],
         "aliasesAndListed": [],
@@ -3040,8 +3180,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:54:00.118Z",
-        "lastAttemptAt": "2026-08-19T05:54:00.118Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:55.215Z",
+        "lastAttemptAt": "2026-08-21T14:00:55.215Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3074,8 +3214,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:54:00.626Z",
-        "lastAttemptAt": "2026-08-19T05:54:00.626Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:55.531Z",
+        "lastAttemptAt": "2026-08-21T14:00:55.531Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3130,8 +3270,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:54:08.960Z",
-        "lastAttemptAt": "2026-08-19T05:54:08.960Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:56.986Z",
+        "lastAttemptAt": "2026-08-21T14:00:56.986Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3172,8 +3312,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:54:09.357Z",
-        "lastAttemptAt": "2026-08-19T05:54:09.357Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:57.403Z",
+        "lastAttemptAt": "2026-08-21T14:00:57.403Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3247,8 +3387,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:54:10.353Z",
-        "lastAttemptAt": "2026-08-19T05:54:10.353Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:58.349Z",
+        "lastAttemptAt": "2026-08-21T14:00:58.349Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3323,8 +3463,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-19T05:53:58.797Z",
-        "lastAttemptAt": "2026-08-19T05:53:58.797Z",
+        "lastSuccessfulAt": "2026-08-21T14:00:53.825Z",
+        "lastAttemptAt": "2026-08-21T14:00:53.825Z",
         "consecutiveFailures": 0
       },
       "source": {
