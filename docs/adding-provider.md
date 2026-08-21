@@ -97,6 +97,7 @@ return {
 - API 别名放入 `aliases`，不要伪装成独立模型。
 - 同名模型不能因为外显名称相同而丢失真实 ID。
 - 稳定版与 `-preview` 同时存在且外显名称相同时，保留稳定版。
+- `capabilities.inputModalities` / `capabilities.outputModalities` 记录模型输入、输出分别支持的模态（`text`、`image`、`video`、`audio` 等，统一小写）。优先从官方结构化字段采集（例如千问的 `InferenceMetadata.RequestModality/ResponseModality`、长猫的 `architecture.input_modalities`）。官方源解析不到的能力字段统一维护在 `data/manual/capabilities.json`（按 `provider + model` 键控，`collect` 时自动合并；合并语义是官方字段优先、缺失才补充），不要在采集器代码里写死。新模型上线时若官方无模态字段，记得补一条手工条目，否则 `collect` 会因模型 capabilities 为空而明确失败。
 
 模型范围过滤应优先使用官方字段。例如千问使用官方外显名称中的“开源模型”分类。只有官网没有结构化标识时，才使用经过测试的 ID 规则。
 

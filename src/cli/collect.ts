@@ -25,8 +25,10 @@ import type { ModelsDevCalibration } from "../types.js";
 import { validateCalibration, validateProvider } from "../validation.js";
 import { failedHealth } from "../health.js";
 import { applyPriceHistory } from "../history.js";
+import { applyManualCapabilities, loadManualCapabilities } from "../manual.js";
 
 await mkdir(providersDir, { recursive: true });
+const manual = await loadManualCapabilities();
 const collectors = [
   { id: "deepseek", collect: collectDeepSeek },
   { id: "longcat", collect: collectLongCat },
@@ -55,9 +57,17 @@ await Promise.all(
     const output = path.join(providersDir, `${id}.json`);
     const previous = await readProvider(output);
     try {
+      const merged = applyManualCapabilities(await collect(), manual);
+      for (const model of merged.models) {
+        if (!Object.keys(model.capabilities).length) {
+          throw new Error(
+            `${merged.id}/${model.id} has no capabilities — add curated fields to data/manual/capabilities.json or collect them from official sources`,
+          );
+        }
+      }
       const data = applyPriceHistory(
         previous,
-        preserveUnchangedSourceTimestamps(await collect(), previous),
+        preserveUnchangedSourceTimestamps(merged, previous),
       );
       await validateProvider(data);
       await writeJson(output, data);

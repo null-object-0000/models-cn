@@ -6,6 +6,7 @@ import {
   formatPrice,
   formatPriceRange,
   isPriceRange,
+  modalityLabel,
   modelDomId,
   modelKey,
   modelReleaseDate,
@@ -112,6 +113,10 @@ function ModelRows({
   const summaryPrices = hasPromotional ? promotionalPrices : standardPrices;
   const referencePrices = hasPromotional ? standardPrices : [];
   const capabilities = capabilityLabels(model.capabilities);
+  const inputModalities =
+    (model.capabilities.inputModalities as string[] | undefined) ?? [];
+  const outputModalities =
+    (model.capabilities.outputModalities as string[] | undefined) ?? [];
   const source =
     summaryPrices[0]?.sourceUrl ??
     selected[0]?.sourceUrl ??
@@ -285,6 +290,18 @@ function ModelRows({
                   <dd>{compactTokens(model.limits.contextTokens)}</dd>
                   <dt>最大输出</dt>
                   <dd>{compactTokens(model.limits.maxOutputTokens)}</dd>
+                  <dt>输入模态</dt>
+                  <dd>
+                    {inputModalities.length
+                      ? inputModalities.map(modalityLabel).join("、")
+                      : "—"}
+                  </dd>
+                  <dt>输出模态</dt>
+                  <dd>
+                    {outputModalities.length
+                      ? outputModalities.map(modalityLabel).join("、")
+                      : "—"}
+                  </dd>
                   <dt>并发</dt>
                   <dd>
                     {model.limits.concurrency

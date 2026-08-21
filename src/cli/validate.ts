@@ -13,6 +13,10 @@ import {
   validateInventory,
   validateProvider,
 } from "../validation.js";
+import { loadManualCapabilities } from "../manual.js";
+
+await loadManualCapabilities();
+console.log("Validated manual capabilities file");
 
 const files = (await readdir(providersDir)).filter((file) =>
   file.endsWith(".json"),

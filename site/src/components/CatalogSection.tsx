@@ -2,9 +2,12 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import {
   buildMergedGroups,
   compareModelsByReleaseDate,
+  inputModalityOptions,
   modelDomId,
   modelHash,
+  modelHasInputModality,
   modelKey,
+  modalityLabel,
   providerName,
   type MergedGroup,
   type VersionViewMode,
@@ -17,6 +20,7 @@ export type SortMode = "newest" | "cheapest";
 export function CatalogSection({ catalog }: { catalog: Catalog }) {
   const [currency, setCurrency] = useState<Currency>("CNY");
   const [search, setSearch] = useState("");
+  const [inputModality, setInputModality] = useState("");
   const [sortMode, setSortMode] = useState<SortMode>("newest");
   const [versionView, setVersionView] = useState<VersionViewMode>("merged");
   const [expanded, setExpanded] = useState<string | null>(
@@ -41,6 +45,10 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
       ),
     [catalog],
   );
+  const modalityOptions = useMemo(
+    () => inputModalityOptions(models.map(({ model }) => model)),
+    [models],
+  );
   const matchesSearch = useMemo(() => {
     return (
       provider: (typeof models)[0]["provider"],
@@ -54,10 +62,18 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
     };
   }, [deferredSearch]);
 
+  const matches = useMemo(() => {
+    return (
+      provider: (typeof models)[0]["provider"],
+      model: (typeof models)[0]["model"],
+    ) =>
+      (!inputModality || modelHasInputModality(model, inputModality)) &&
+      matchesSearch(provider, model);
+  }, [inputModality, matchesSearch]);
+
   const filtered = useMemo(
-    () =>
-      models.filter(({ provider, model }) => matchesSearch(provider, model)),
-    [models, matchesSearch],
+    () => models.filter(({ provider, model }) => matches(provider, model)),
+    [models, matches],
   );
 
   const groups: MergedGroup[] = useMemo(
@@ -65,7 +81,7 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
       buildMergedGroups(
         catalog.providers,
         calibrationMap,
-        (provider, model) => matchesSearch(provider, model),
+        matches,
         versionView,
         sortMode,
         currency,
@@ -73,7 +89,7 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
     [
       catalog.providers,
       calibrationMap,
-      matchesSearch,
+      matches,
       versionView,
       sortMode,
       currency,
@@ -174,20 +190,31 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
               <option value="merged">合并区域版本</option>
               <option value="separate">分开显示版本</option>
             </select>
-            <div className="segment" aria-label="货币">
-              <button
-                aria-pressed={currency === "CNY"}
-                onClick={() => setCurrency("CNY")}
-              >
-                CNY 人民币
-              </button>
-              <button
-                aria-pressed={currency === "USD"}
-                onClick={() => setCurrency("USD")}
-              >
-                USD 美元
-              </button>
-            </div>
+            <select
+              className="provider-select"
+              value={currency}
+              onChange={(event) => setCurrency(event.target.value as Currency)}
+              aria-label="货币"
+            >
+              <option value="CNY">CNY</option>
+              <option value="USD">USD</option>
+            </select>
+            <select
+              className="provider-select"
+              value={inputModality}
+              onChange={(event) => {
+                setInputModality(event.target.value);
+                setExpanded(null);
+              }}
+              aria-label="输入模态"
+            >
+              <option value="">输入模态：不限</option>
+              {modalityOptions.map((value) => (
+                <option key={value} value={value}>
+                  输入模态：{modalityLabel(value)}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="result-meta">
             <span>

@@ -19,12 +19,7 @@ describe("Kimi collector parser", () => {
     );
     expect(parsed.models[0]).toMatchObject({
       id: "kimi-k3",
-      capabilities: {
-        thinking: true,
-        jsonOutput: true,
-        toolCalls: true,
-        inputModalities: ["text", "image", "video"],
-      },
+      name: "Kimi K3",
       limits: { contextTokens: 1_048_576 },
       prices: [
         {

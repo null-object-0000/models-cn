@@ -468,8 +468,6 @@ export async function collectZhipuChina(
         thinking: meta.capabilities.thinking,
         jsonOutput: meta.capabilities.jsonOutput,
         toolCalls: meta.capabilities.toolCalls,
-        inputModalities: ["text"],
-        outputModalities: ["text"],
       },
       limits: {
         contextTokens: meta.contextTokens,
@@ -591,8 +589,6 @@ export async function collectZhipuInternational(
         thinking: meta.capabilities.thinking,
         jsonOutput: meta.capabilities.jsonOutput,
         toolCalls: meta.capabilities.toolCalls,
-        inputModalities: ["text"],
-        outputModalities: ["text"],
       },
       limits: {
         contextTokens: meta.contextTokens,

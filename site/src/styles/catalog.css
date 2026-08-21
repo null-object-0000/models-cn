@@ -6,7 +6,7 @@
   top: 70px;
   z-index: 35;
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) 170px auto auto;
+  grid-template-columns: minmax(260px, 1fr) 170px auto auto auto;
   gap: 10px;
   padding: 12px;
   border: 1px solid var(--line);
@@ -49,26 +49,6 @@
 .provider-select:focus {
   border-color: var(--accent);
   box-shadow: inset 0 0 0 1px var(--accent);
-}
-.segment {
-  display: inline-flex;
-  padding: 3px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  white-space: nowrap;
-}
-.segment button {
-  min-height: 36px;
-  padding: 0 12px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-}
-.segment button[aria-pressed="true"] {
-  color: var(--accent);
-  background: var(--accent-soft);
-  font-weight: 750;
 }
 .result-meta {
   display: flex;

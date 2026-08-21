@@ -147,92 +147,20 @@ export function parseMoonshotOutputLimits(
   return limits;
 }
 
-function modelMetadata(id: string): Pick<ModelData, "name" | "capabilities"> {
-  const multimodal = ["text", "image", "video"];
-  if (id === "kimi-k3") {
-    return {
-      name: "Kimi K3",
-      capabilities: {
-        thinking: true,
-        thinkingModes: ["thinking"],
-        reasoningEfforts: ["low", "high", "max"],
-        dynamicTools: true,
-        jsonOutput: true,
-        toolCalls: true,
-        inputModalities: ["text", "image", "video"],
-        outputModalities: ["text"],
-        supportedParameters: [
-          "reasoning_effort",
-          "tool_choice",
-          "temperature",
-          "top_p",
-          "n",
-          "presence_penalty",
-          "frequency_penalty",
-        ],
-      },
-    };
-  }
+/** 仅保留外显名称与范围守卫；能力字段统一由 data/manual/capabilities.json 维护。 */
+function modelName(id: string): string {
+  if (id === "kimi-k3") return "Kimi K3";
   if (id.startsWith("kimi-k2.7-code")) {
-    return {
-      name:
-        id === "kimi-k2.7-code-highspeed"
-          ? "Kimi K2.7 Code HighSpeed"
-          : "Kimi K2.7 Code",
-      capabilities: {
-        thinking: true,
-        thinkingModes: ["thinking"],
-        jsonOutput: true,
-        toolCalls: true,
-        inputModalities: multimodal,
-        outputModalities: ["text"],
-        supportedParameters: [
-          "thinking",
-          "tool_choice",
-          "temperature",
-          "top_p",
-          "n",
-          "presence_penalty",
-          "frequency_penalty",
-        ],
-      },
-    };
+    return id === "kimi-k2.7-code-highspeed"
+      ? "Kimi K2.7 Code HighSpeed"
+      : "Kimi K2.7 Code";
   }
-  if (id === "kimi-k2.6" || id === "kimi-k2.5") {
-    return {
-      name: id === "kimi-k2.6" ? "Kimi K2.6" : "Kimi K2.5",
-      capabilities: {
-        thinking: true,
-        thinkingModes: ["thinking", "non-thinking"],
-        jsonOutput: true,
-        toolCalls: true,
-        inputModalities: multimodal,
-        outputModalities: ["text"],
-        supportedParameters:
-          id === "kimi-k2.6"
-            ? [
-                "thinking",
-                "tool_choice",
-                "temperature",
-                "top_p",
-                "n",
-                "presence_penalty",
-                "frequency_penalty",
-              ]
-            : ["thinking", "temperature"],
-      },
-    };
-  }
+  if (id === "kimi-k2.6") return "Kimi K2.6";
+  if (id === "kimi-k2.5") return "Kimi K2.5";
   if (!id.startsWith("kimi-")) {
     throw new Error(`Unsupported non-Kimi model in Kimi collector: ${id}`);
   }
-  return {
-    name: id,
-    capabilities: {
-      inputModalities: ["text"],
-      outputModalities: ["text"],
-    },
-  };
+  return id;
 }
 
 export function parseMoonshotPricingPage(
@@ -252,7 +180,6 @@ export function parseMoonshotPricingPage(
     const standard = parseMoney(row[3]!);
     const output = parseMoney(row[4]!);
     const contextTokens = parseTokenCount(row[5]!);
-    const metadata = modelMetadata(id);
     const price: ModelPrice = {
       market,
       currency,
@@ -267,8 +194,9 @@ export function parseMoonshotPricingPage(
     };
     return {
       id,
-      ...metadata,
+      name: modelName(id),
       aliases: [],
+      capabilities: {},
       limits: { contextTokens },
       prices: [price],
     } satisfies ModelData;

@@ -139,6 +139,55 @@ export function compactTokens(value?: number): string {
   return numberFormatter.format(value);
 }
 
+const MODALITY_LABELS: Record<string, string> = {
+  text: "文本",
+  image: "图片",
+  video: "视频",
+  audio: "音频",
+  pdf: "PDF",
+  document: "文档",
+  file: "文件",
+};
+
+export function modalityLabel(value: string): string {
+  return MODALITY_LABELS[value.toLowerCase()] ?? value;
+}
+
+const MODALITY_FILTER_ORDER = [
+  "text",
+  "image",
+  "video",
+  "audio",
+  "pdf",
+  "document",
+  "file",
+];
+
+/** 数据中实际出现的输入模态，按常用顺序排序，用于筛选下拉选项。 */
+export function inputModalityOptions(
+  models: Array<Pick<Model, "capabilities">>,
+): string[] {
+  const values = new Set<string>();
+  for (const model of models) {
+    const inputs = model.capabilities.inputModalities as string[] | undefined;
+    for (const value of inputs ?? []) values.add(value);
+  }
+  return [...values].sort((left, right) => {
+    const li = MODALITY_FILTER_ORDER.indexOf(left);
+    const ri = MODALITY_FILTER_ORDER.indexOf(right);
+    return (
+      (li === -1 ? MODALITY_FILTER_ORDER.length : li) -
+        (ri === -1 ? MODALITY_FILTER_ORDER.length : ri) ||
+      left.localeCompare(right)
+    );
+  });
+}
+
+export function modelHasInputModality(model: Model, modality: string): boolean {
+  const inputs = model.capabilities.inputModalities as string[] | undefined;
+  return (inputs ?? []).includes(modality);
+}
+
 export function capabilityLabels(
   capabilities: Record<string, unknown>,
 ): string[] {
@@ -148,8 +197,8 @@ export function capabilityLabels(
   if (capabilities.toolCalls) labels.push("工具调用");
   if (capabilities.jsonOutput) labels.push("JSON");
   if (capabilities.chatPrefixCompletion) labels.push("前缀续写");
-  const inputs = capabilities.inputModalities as string[] | undefined;
-  if (inputs?.length) labels.push(inputs.join(" / "));
+  // 输入/输出模态不在这里重复展示，统一由 Model information 的
+  // 「输入模态 / 输出模态」字段表达。
   const efforts = capabilities.reasoningEfforts as string[] | undefined;
   if (efforts?.length) labels.push(`effort: ${efforts.join(" / ")}`);
   return labels;

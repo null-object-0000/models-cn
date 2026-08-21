@@ -7,13 +7,7 @@
     max-width: 620px;
   }
   .toolbar {
-    grid-template-columns: 1fr 160px;
-  }
-  .segment {
-    width: 100%;
-  }
-  .segment button {
-    flex: 1;
+    grid-template-columns: 1fr 1fr;
   }
   .section-heading {
     grid-template-columns: 1fr;

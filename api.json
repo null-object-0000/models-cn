@@ -39,7 +39,13 @@
             "jsonOutput": true,
             "toolCalls": true,
             "chatPrefixCompletion": true,
-            "fimCompletion": "non-thinking-only"
+            "fimCompletion": "non-thinking-only",
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
           },
           "limits": {
             "contextTokens": 1000000,
@@ -330,7 +336,13 @@
             "jsonOutput": true,
             "toolCalls": true,
             "chatPrefixCompletion": true,
-            "fimCompletion": "non-thinking-only"
+            "fimCompletion": "non-thinking-only",
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
           },
           "limits": {
             "contextTokens": 1000000,
@@ -621,7 +633,14 @@
             "jsonOutput": true,
             "toolCalls": true,
             "chatPrefixCompletion": true,
-            "fimCompletion": "supported"
+            "fimCompletion": "supported",
+            "inputModalities": [
+              "text",
+              "image"
+            ],
+            "outputModalities": [
+              "text"
+            ]
           },
           "limits": {
             "contextTokens": 1000000,

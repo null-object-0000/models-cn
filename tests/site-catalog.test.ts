@@ -1,10 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
   activePricesAt,
+  capabilityLabels,
   compareModelsByReleaseDate,
   formatPriceRange,
+  inputModalityOptions,
+  modalityLabel,
   modelDomId,
   modelHash,
+  modelHasInputModality,
   modelKey,
   modelReleaseDate,
   nextPricesAt,
@@ -20,6 +24,13 @@ function model(id: string, createdAt?: string): Model {
     capabilities: {},
     limits: { contextTokens: 1 },
     prices: [],
+  };
+}
+
+function withInputModalities(model: Model, values: string[]): Model {
+  return {
+    ...model,
+    capabilities: { ...model.capabilities, inputModalities: values },
   };
 }
 
@@ -107,5 +118,57 @@ describe("site catalog price summaries", () => {
       "¥0.32 - 0.96",
     );
     expect(formatPriceRange([undefined], "USD")).toBeUndefined();
+  });
+});
+
+describe("site capability modality labels", () => {
+  it("translates common modality values to Chinese labels", () => {
+    expect(modalityLabel("text")).toBe("文本");
+    expect(modalityLabel("IMAGE")).toBe("图片");
+    expect(modalityLabel("Video")).toBe("视频");
+    expect(modalityLabel("audio")).toBe("音频");
+    expect(modalityLabel("unknown-modality")).toBe("unknown-modality");
+  });
+
+  it("keeps modalities out of capability tags (single source in Model information)", () => {
+    expect(
+      capabilityLabels({
+        thinking: true,
+        inputModalities: ["image", "text", "video"],
+        outputModalities: ["text"],
+      }),
+    ).toEqual(["思考"]);
+  });
+
+  it("omits modality tags when no modalities are collected", () => {
+    expect(capabilityLabels({ jsonOutput: true })).toEqual(["JSON"]);
+  });
+});
+
+describe("site input modality filter", () => {
+  it("lists distinct input modalities in preferred order", () => {
+    const models = [
+      withInputModalities(model("a"), ["video", "text"]),
+      withInputModalities(model("b"), ["image", "text", "video"]),
+      withInputModalities(model("c"), ["audio"]),
+      withInputModalities(model("d"), ["hologram"]),
+      model("e"),
+    ];
+    expect(inputModalityOptions(models)).toEqual([
+      "text",
+      "image",
+      "video",
+      "audio",
+      "hologram",
+    ]);
+    expect(inputModalityOptions([])).toEqual([]);
+  });
+
+  it("matches models whose input modalities include the filter value", () => {
+    const textImage = withInputModalities(model("ti"), ["text", "image"]);
+    const textOnly = withInputModalities(model("t"), ["text"]);
+    expect(modelHasInputModality(textImage, "image")).toBe(true);
+    expect(modelHasInputModality(textOnly, "image")).toBe(false);
+    expect(modelHasInputModality(model("none"), "image")).toBe(false);
   });
 });
