@@ -79,6 +79,13 @@ const mappings = [
   ),
   {
     provider: "qwen-cn",
+    model: "qwen3.8-max",
+    referenceProvider: "alibaba",
+    referenceModel: "qwen3.8-max",
+    referenceUrl: "https://models.dev/models/alibaba/qwen3.8-max/",
+  },
+  {
+    provider: "qwen-cn",
     model: "qwen3.7-plus",
     referenceProvider: "alibaba",
     referenceModel: "qwen3.7-plus",
@@ -139,6 +146,21 @@ const mappings = [
     referenceProvider: "alibaba",
     referenceModel: "qwen3-coder-flash",
     referenceUrl: "https://models.dev/models/alibaba/qwen3-coder-flash/",
+  },
+  // 这两个模型 models.dev 未收录在 alibaba 主命名空间，参考其国内命名空间。
+  {
+    provider: "qwen-cn",
+    model: "qwen3.7-flash",
+    referenceProvider: "alibaba-cn",
+    referenceModel: "qwen3.7-flash",
+    referenceUrl: "https://models.dev/models/alibaba-cn/qwen3.7-flash/",
+  },
+  {
+    provider: "qwen-cn",
+    model: "qwen3.5-flash",
+    referenceProvider: "alibaba-cn",
+    referenceModel: "qwen3.5-flash",
+    referenceUrl: "https://models.dev/models/alibaba-cn/qwen3.5-flash/",
   },
   ...zhipuModelIds.map((model) => ({
     provider: "zhipu-intl",

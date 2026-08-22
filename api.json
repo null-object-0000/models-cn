@@ -3482,14 +3482,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:53.825Z",
-        "lastAttemptAt": "2026-08-21T14:00:53.825Z",
+        "lastSuccessfulAt": "2026-08-22T01:57:57.775Z",
+        "lastAttemptAt": "2026-08-22T01:57:57.775Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-19T05:53:58.797Z",
-        "contentHash": "sha256:8052e31c176f08990f32b83c0f08a999675d90074c439f0d853b655901a82750"
+        "retrievedAt": "2026-08-22T01:57:57.775Z",
+        "contentHash": "sha256:680e1611dc5e9108171df650125131225ca42b68d3cd1f9ce538bcd18a2fdabe"
       },
       "models": [
         {
@@ -3532,19 +3532,23 @@
             },
             {
               "field": "capabilities.inputModalities",
-              "official": null,
+              "official": [
+                "text"
+              ],
               "reference": [
                 "text"
               ],
-              "status": "missing"
+              "status": "match"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": null,
+              "official": [
+                "text"
+              ],
               "reference": [
                 "text"
               ],
-              "status": "missing"
+              "status": "match"
             },
             {
               "field": "prices.USD.input.standard",
@@ -3606,19 +3610,23 @@
             },
             {
               "field": "capabilities.inputModalities",
-              "official": null,
+              "official": [
+                "text"
+              ],
               "reference": [
                 "text"
               ],
-              "status": "missing"
+              "status": "match"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": null,
+              "official": [
+                "text"
+              ],
               "reference": [
                 "text"
               ],
-              "status": "missing"
+              "status": "match"
             },
             {
               "field": "prices.USD.input.standard",
@@ -4540,6 +4548,89 @@
         },
         {
           "provider": "qwen-cn",
+          "model": "qwen3.8-max",
+          "referenceProvider": "alibaba",
+          "referenceModel": "qwen3.8-max",
+          "referenceUrl": "https://models.dev/models/alibaba/qwen3.8-max/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-08-02",
+              "reference": "2026-08-03",
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "image",
+                "text",
+                "video"
+              ],
+              "reference": [
+                "text",
+                "image",
+                "video",
+                "pdf"
+              ],
+              "status": "mismatch"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 2,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.25,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 6,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "qwen-cn",
           "model": "qwen3.7-plus",
           "referenceProvider": "alibaba",
           "referenceModel": "qwen3.7-plus",
@@ -5252,6 +5343,170 @@
               "field": "prices.USD.output",
               "official": null,
               "reference": 1.5,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "qwen-cn",
+          "model": "qwen3.7-flash",
+          "referenceProvider": "alibaba-cn",
+          "referenceModel": "qwen3.7-flash",
+          "referenceUrl": "https://models.dev/models/alibaba-cn/qwen3.7-flash/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-07-20",
+              "reference": "2026-07-15",
+              "status": "mismatch"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 65536,
+              "status": "mismatch"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "image",
+                "text",
+                "video"
+              ],
+              "reference": [
+                "text",
+                "image",
+                "video"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.02962,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.002962,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 0.1185,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "qwen-cn",
+          "model": "qwen3.5-flash",
+          "referenceProvider": "alibaba-cn",
+          "referenceModel": "qwen3.5-flash",
+          "referenceUrl": "https://models.dev/models/alibaba-cn/qwen3.5-flash/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-02-23",
+              "reference": "2026-02-23",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 65536,
+              "reference": 65536,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text",
+                "image",
+                "video"
+              ],
+              "reference": [
+                "text",
+                "image",
+                "video"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.172,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": null,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 1.72,
               "status": "missing"
             }
           ]
