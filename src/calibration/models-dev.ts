@@ -46,21 +46,50 @@ const zhipuModelIds = [
   "glm-4.7-flash",
 ] as const;
 
-const mappings = [
-  {
-    provider: "deepseek",
-    model: "deepseek-v4-flash",
-    referenceProvider: "deepseek",
-    referenceModel: "deepseek-v4-flash",
-    referenceUrl: "https://models.dev/models/deepseek/deepseek-v4-flash/",
-  },
-  {
-    provider: "deepseek",
-    model: "deepseek-v4-pro",
-    referenceProvider: "deepseek",
-    referenceModel: "deepseek-v4-pro",
-    referenceUrl: "https://models.dev/models/deepseek/deepseek-v4-pro/",
-  },
+/**
+ * 我方渠道 → models.dev 默认命名空间。同名同 ID 的模型无需手工映射，
+ * 校准时按默认命名空间自动匹配（且要求 models.dev 确实收录了该 ID）。
+ * 新增渠道时在这里补一行默认命名空间即可。
+ */
+const DEFAULT_REFERENCE_PROVIDER: Record<string, string> = {
+  deepseek: "deepseek",
+  longcat: "longcat",
+  "moonshot-cn": "moonshotai",
+  "moonshot-intl": "moonshotai",
+  "qwen-cn": "alibaba",
+  "zhipu-cn": "zhipuai",
+  "zhipu-intl": "zai",
+};
+
+interface CalibrationMapping {
+  provider: string;
+  model: string;
+  referenceProvider: string;
+  referenceModel: string;
+  referenceUrl: string;
+}
+
+/** 例外映射的简写：命名空间不同、模型 ID 一致。 */
+function mirror(
+  provider: string,
+  model: string,
+  options: { referenceProvider: string },
+): CalibrationMapping {
+  return {
+    provider,
+    model,
+    referenceProvider: options.referenceProvider,
+    referenceModel: model,
+    referenceUrl: `https://models.dev/models/${options.referenceProvider}/${model}/`,
+  };
+}
+
+/**
+ * 手工例外清单：仅维护 models.dev 与我方「命名空间或模型 ID 不一致」的模型。
+ * 同名模型不再逐个登记，由 resolveMappings 按默认命名空间自动匹配。
+ */
+const mappings: CalibrationMapping[] = [
+  // LongCat：API 命名空间是 longcat，页面 slug 却是 meituan，URL 需手写。
   {
     provider: "longcat",
     model: "LongCat-2.0",
@@ -69,123 +98,49 @@ const mappings = [
     referenceUrl: "https://models.dev/models/meituan/longcat-2.0/",
   },
   ...(["moonshot-cn", "moonshot-intl"] as const).flatMap((provider) =>
-    moonshotModelIds.map((model) => ({
-      provider,
-      model,
-      referenceProvider: "moonshotai",
-      referenceModel: model,
-      referenceUrl: `https://models.dev/models/moonshotai/${model}/`,
-    })),
+    moonshotModelIds.map((model) =>
+      mirror(provider, model, { referenceProvider: "moonshotai" }),
+    ),
   ),
-  {
-    provider: "qwen-cn",
-    model: "qwen3.8-max",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3.8-max",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3.8-max/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3.7-plus",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3.7-plus",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3.7-plus/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3.7-max",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3.7-max",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3.7-max/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3.6-plus",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3.6-plus",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3.6-plus/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3.5-plus",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3.5-plus",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3.5-plus/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3-max",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3-max",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3-max/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3.6-max-preview",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3.6-max-preview",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3.6-max-preview/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3.6-flash",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3.6-flash",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3.6-flash/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3-coder-plus",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3-coder-plus",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3-coder-plus/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3-coder-flash",
-    referenceProvider: "alibaba",
-    referenceModel: "qwen3-coder-flash",
-    referenceUrl: "https://models.dev/models/alibaba/qwen3-coder-flash/",
-  },
-  // 这两个模型 models.dev 未收录在 alibaba 主命名空间，参考其国内命名空间。
-  {
-    provider: "qwen-cn",
-    model: "qwen3.7-flash",
-    referenceProvider: "alibaba-cn",
-    referenceModel: "qwen3.7-flash",
-    referenceUrl: "https://models.dev/models/alibaba-cn/qwen3.7-flash/",
-  },
-  {
-    provider: "qwen-cn",
-    model: "qwen3.5-flash",
-    referenceProvider: "alibaba-cn",
-    referenceModel: "qwen3.5-flash",
-    referenceUrl: "https://models.dev/models/alibaba-cn/qwen3.5-flash/",
-  },
-  ...zhipuModelIds.map((model) => ({
-    provider: "zhipu-intl",
-    model,
-    referenceProvider: "zai",
-    referenceModel: model,
-    referenceUrl: `https://models.dev/models/zai/${model}/`,
-  })),
+  ...zhipuModelIds.map((model) =>
+    mirror("zhipu-intl", model, { referenceProvider: "zai" }),
+  ),
   ...zhipuModelIds
     .filter((model) => model !== "glm-5-turbo")
-    .map((model) => ({
-      provider: "zhipu-cn",
-      model,
-      referenceProvider: "zhipuai",
-      referenceModel: model,
-      referenceUrl: `https://models.dev/models/zhipuai/${model}/`,
-    })),
-  {
-    provider: "zhipu-cn",
-    model: "glm-5-turbo",
-    referenceProvider: "zai",
-    referenceModel: "glm-5-turbo",
-    referenceUrl: "https://models.dev/models/zai/glm-5-turbo/",
-  },
-] as const;
+    .map((model) =>
+      mirror("zhipu-cn", model, { referenceProvider: "zhipuai" }),
+    ),
+  mirror("zhipu-cn", "glm-5-turbo", { referenceProvider: "zai" }),
+  // 这两个 flash 未收录进 alibaba 主命名空间，参考其国内命名空间。
+  mirror("qwen-cn", "qwen3.7-flash", { referenceProvider: "alibaba-cn" }),
+  mirror("qwen-cn", "qwen3.5-flash", { referenceProvider: "alibaba-cn" }),
+];
+
+/**
+ * 手工例外 + 自动回退：未被手工清单覆盖的模型，若存在于渠道默认命名空间，
+ * 则按同名规则生成映射。手工条目优先。
+ */
+function resolveMappings(
+  providers: ProviderData[],
+  api: ModelsDevApi,
+): CalibrationMapping[] {
+  const resolved = [...mappings];
+  const covered = new Set(resolved.map((m) => `${m.provider}/${m.model}`));
+  for (const provider of providers) {
+    const namespace = DEFAULT_REFERENCE_PROVIDER[provider.id];
+    if (!namespace) continue;
+    for (const model of provider.models) {
+      const key = `${provider.id}/${model.id}`;
+      if (covered.has(key)) continue;
+      if (!api[namespace]?.models[model.id]) continue;
+      covered.add(key);
+      resolved.push(
+        mirror(provider.id, model.id, { referenceProvider: namespace }),
+      );
+    }
+  }
+  return resolved;
+}
 
 function sameValue(left: CalibrationValue, right: CalibrationValue): boolean {
   if (Array.isArray(left) && Array.isArray(right)) {
@@ -278,7 +233,7 @@ function check(
 
 function compareModel(
   provider: ProviderData | undefined,
-  mapping: (typeof mappings)[number],
+  mapping: CalibrationMapping,
   reference: ModelsDevModel | undefined,
 ): ModelCalibration {
   const model = provider?.models.find(
@@ -367,7 +322,8 @@ export async function collectModelsDevCalibration(
   fetcher: () => Promise<ModelsDevApi> = fetchModelsDev,
 ): Promise<ModelsDevCalibration> {
   const api = await fetcher();
-  const selectedReferences = mappings.map((mapping) => ({
+  const effectiveMappings = resolveMappings(providers, api);
+  const selectedReferences = effectiveMappings.map((mapping) => ({
     provider: mapping.referenceProvider,
     model: mapping.referenceModel,
     data:
@@ -378,7 +334,7 @@ export async function collectModelsDevCalibration(
     previous?.source.contentHash === contentHash
       ? previous.source.retrievedAt
       : now.toISOString();
-  const models = mappings.map((mapping) =>
+  const models = effectiveMappings.map((mapping) =>
     compareModel(
       providers.find((provider) => provider.id === mapping.provider),
       mapping,

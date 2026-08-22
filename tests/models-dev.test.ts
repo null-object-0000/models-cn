@@ -409,3 +409,89 @@ describe("models.dev calibration tolerances", () => {
     expect(realGap.context.status).toBe("mismatch");
   });
 });
+
+describe("models.dev calibration auto-fallback", () => {
+  function providerWith(id: string, modelId: string): ProviderData {
+    return {
+      schemaVersion: "1.0",
+      health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
+      id,
+      name: id,
+      ownedBy: id,
+      baseUrls: { openai: "https://example.com/v1" },
+      models: [
+        {
+          id: modelId,
+          name: modelId,
+          aliases: [],
+          capabilities: {},
+          limits: { contextTokens: 1 },
+          prices: [],
+        },
+      ],
+      sources: [],
+    };
+  }
+
+  it("auto-calibrates same-id models under the default namespace", async () => {
+    const api: ModelsDevApi = {
+      alibaba: {
+        models: {
+          "qwen3.9-ultra": {
+            id: "qwen3.9-ultra",
+            release_date: "2026-09-01",
+            limit: { context: 1_000_000 },
+          },
+        },
+      },
+    };
+    const report = await collectModelsDevCalibration(
+      [providerWith("qwen-cn", "qwen3.9-ultra")],
+      undefined,
+      new Date("2026-07-22T00:00:00Z"),
+      async () => api,
+    );
+    const entry = report.models.find(
+      (model) => model.model === "qwen3.9-ultra",
+    );
+    expect(entry).toMatchObject({
+      provider: "qwen-cn",
+      model: "qwen3.9-ultra",
+      referenceProvider: "alibaba",
+      referenceModel: "qwen3.9-ultra",
+      referenceUrl: "https://models.dev/models/alibaba/qwen3.9-ultra/",
+    });
+  });
+
+  it("skips models that models.dev does not list", async () => {
+    const report = await collectModelsDevCalibration(
+      [providerWith("qwen-cn", "qwen-not-on-modelsdev")],
+      undefined,
+      new Date("2026-07-22T00:00:00Z"),
+      async () => ({}),
+    );
+    expect(
+      report.models.find((model) => model.model === "qwen-not-on-modelsdev"),
+    ).toBeUndefined();
+  });
+
+  it("lets manual mappings win over the auto fallback", async () => {
+    // LongCat 手工条目指向 /models/meituan/；即使默认命名空间也能匹配同名
+    // ID，也必须沿用手工条目的 URL。
+    const api: ModelsDevApi = {
+      longcat: {
+        models: { "LongCat-2.0": { id: "LongCat-2.0" } },
+      },
+    };
+    const report = await collectModelsDevCalibration(
+      [longcat],
+      undefined,
+      new Date("2026-07-22T00:00:00Z"),
+      async () => api,
+    );
+    const entry = report.models.find((model) => model.provider === "longcat");
+    expect(entry?.referenceUrl).toBe(
+      "https://models.dev/models/meituan/longcat-2.0/",
+    );
+  });
+});
