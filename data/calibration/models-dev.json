@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-22T01:57:57.775Z",
-    "lastAttemptAt": "2026-08-22T01:57:57.775Z",
+    "lastSuccessfulAt": "2026-08-22T02:13:29.957Z",
+    "lastAttemptAt": "2026-08-22T02:13:29.957Z",
     "consecutiveFailures": 0
   },
   "source": {
@@ -186,7 +186,7 @@
           "field": "limits.contextTokens",
           "official": 1048576,
           "reference": 1000000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -1078,7 +1078,7 @@
           "field": "createdAt",
           "official": "2026-08-02",
           "reference": "2026-08-03",
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.contextTokens",
@@ -1161,7 +1161,7 @@
           "field": "createdAt",
           "official": "2026-06-01",
           "reference": "2026-06-02",
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.contextTokens",
@@ -1315,13 +1315,13 @@
       "referenceProvider": "alibaba",
       "referenceModel": "qwen3.6-plus",
       "referenceUrl": "https://models.dev/models/alibaba/qwen3.6-plus/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
           "official": "2026-04-01",
           "reference": "2026-04-02",
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.contextTokens",
@@ -1397,13 +1397,13 @@
       "referenceProvider": "alibaba",
       "referenceModel": "qwen3.5-plus",
       "referenceUrl": "https://models.dev/models/alibaba/qwen3.5-plus/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
           "official": "2026-02-15",
           "reference": "2026-02-16",
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.contextTokens",
@@ -1717,19 +1717,19 @@
       "referenceProvider": "alibaba",
       "referenceModel": "qwen3-coder-plus",
       "referenceUrl": "https://models.dev/models/alibaba/qwen3-coder-plus/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
           "official": "2025-07-22",
           "reference": "2025-07-23",
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.contextTokens",
           "official": 1000000,
           "reference": 1048576,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -2189,7 +2189,7 @@
       "referenceProvider": "zai",
       "referenceModel": "glm-5.1",
       "referenceUrl": "https://models.dev/models/zai/glm-5.1/",
-      "status": "mismatch",
+      "status": "match",
       "checks": [
         {
           "field": "createdAt",
@@ -2201,7 +2201,7 @@
           "field": "limits.contextTokens",
           "official": 204800,
           "reference": 200000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -2267,19 +2267,19 @@
       "referenceProvider": "zai",
       "referenceModel": "glm-5-turbo",
       "referenceUrl": "https://models.dev/models/zai/glm-5-turbo/",
-      "status": "mismatch",
+      "status": "match",
       "checks": [
         {
           "field": "createdAt",
           "official": "2026-03-15",
           "reference": "2026-03-16",
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.contextTokens",
           "official": 204800,
           "reference": 200000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -2579,7 +2579,7 @@
       "referenceProvider": "zai",
       "referenceModel": "glm-4.7-flashx",
       "referenceUrl": "https://models.dev/models/zai/glm-4.7-flashx/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
@@ -2591,7 +2591,7 @@
           "field": "limits.contextTokens",
           "official": 204800,
           "reference": 200000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -2657,7 +2657,7 @@
       "referenceProvider": "zai",
       "referenceModel": "glm-4.7-flash",
       "referenceUrl": "https://models.dev/models/zai/glm-4.7-flash/",
-      "status": "mismatch",
+      "status": "match",
       "checks": [
         {
           "field": "createdAt",
@@ -2669,7 +2669,7 @@
           "field": "limits.contextTokens",
           "official": 204800,
           "reference": 200000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -2899,7 +2899,7 @@
           "field": "limits.contextTokens",
           "official": 204800,
           "reference": 200000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -2965,13 +2965,13 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-5",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-5/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
           "official": "2026-02-12",
           "reference": "2026-02-11",
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.contextTokens",
@@ -3199,7 +3199,7 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-4.7-flashx",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flashx/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
@@ -3211,7 +3211,7 @@
           "field": "limits.contextTokens",
           "official": 204800,
           "reference": 200000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -3277,7 +3277,7 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-4.7-flash",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flash/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
@@ -3289,7 +3289,7 @@
           "field": "limits.contextTokens",
           "official": 204800,
           "reference": 200000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
@@ -3355,19 +3355,19 @@
       "referenceProvider": "zai",
       "referenceModel": "glm-5-turbo",
       "referenceUrl": "https://models.dev/models/zai/glm-5-turbo/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
           "official": "2026-03-15",
           "reference": "2026-03-16",
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.contextTokens",
           "official": 204800,
           "reference": 200000,
-          "status": "mismatch"
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",

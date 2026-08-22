@@ -196,6 +196,68 @@ function sameValue(left: CalibrationValue, right: CalibrationValue): boolean {
   return left === right;
 }
 
+/**
+ * 发布日期容差：±1 天内的差异视为同一发布事件。厂商页与 models.dev 对
+ * 「发布时刻」的时区与取整口径不同，跨零点就会产生 ±1 天的假性分歧。
+ */
+const CREATED_AT_TOLERANCE_DAYS = 1;
+
+/**
+ * 上下文长度相对容差：吸收 1024 进制与 1000 进制两种单位约定
+ * （例如官方 204800 = 200×1024，models.dev 记 200000）。
+ */
+const CONTEXT_RELATIVE_TOLERANCE = 0.05;
+
+function createdAtCheck(
+  official: string | undefined,
+  reference: string | undefined,
+): CalibrationCheck {
+  const base = {
+    field: "createdAt",
+    official: official ?? null,
+    reference: reference ?? null,
+  };
+  if (official === undefined || reference === undefined) {
+    return { ...base, status: "missing" };
+  }
+  const officialTime = Date.parse(official);
+  const referenceTime = Date.parse(reference);
+  if (Number.isNaN(officialTime) || Number.isNaN(referenceTime)) {
+    return { ...base, status: official === reference ? "match" : "mismatch" };
+  }
+  return {
+    ...base,
+    status:
+      Math.abs(officialTime - referenceTime) <=
+      CREATED_AT_TOLERANCE_DAYS * 86_400_000
+        ? "match"
+        : "mismatch",
+  };
+}
+
+function contextTokensCheck(
+  official: number | undefined,
+  reference: number | undefined,
+): CalibrationCheck {
+  const base = {
+    field: "limits.contextTokens",
+    official: official ?? null,
+    reference: reference ?? null,
+  };
+  if (official === undefined || reference === undefined) {
+    return { ...base, status: "missing" };
+  }
+  const scale = Math.max(Math.abs(official), Math.abs(reference));
+  return {
+    ...base,
+    status:
+      scale > 0 &&
+      Math.abs(official - reference) / scale <= CONTEXT_RELATIVE_TOLERANCE
+        ? "match"
+        : "mismatch",
+  };
+}
+
 function check(
   field: string,
   official: CalibrationValue | undefined,
@@ -229,16 +291,11 @@ function compareModel(
       price.rateType === "standard",
   );
   const checks = [
-    check(
-      "createdAt",
+    createdAtCheck(
       model?.createdAt ? model.createdAt.slice(0, 10) : undefined,
       reference?.release_date,
     ),
-    check(
-      "limits.contextTokens",
-      model?.limits.contextTokens,
-      reference?.limit?.context,
-    ),
+    contextTokensCheck(model?.limits.contextTokens, reference?.limit?.context),
     check(
       "limits.maxOutputTokens",
       model?.limits.maxOutputTokens,

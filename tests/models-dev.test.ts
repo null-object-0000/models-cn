@@ -17,6 +17,7 @@ const longcat: ProviderData = {
     {
       id: "LongCat-2.0",
       name: "LongCat-2.0",
+      createdAt: "2026-03-12T16:00:00.000Z",
       aliases: [],
       capabilities: {
         thinking: true,
@@ -96,10 +97,12 @@ describe("models.dev calibration", () => {
         models: {
           "LongCat-2.0": {
             id: "LongCat-2.0",
+            release_date: "2026-03-12",
             reasoning: true,
             tool_call: true,
             modalities: { input: ["text"], output: ["text"] },
-            limit: { context: 1_000_000, output: 131_072 },
+            // 500000 与 1048576 的差距远超单位约定容差，构成真实差异
+            limit: { context: 500_000, output: 131_072 },
             cost: { input: 0.75, cache_read: 0.015, output: 2.95 },
           },
         },
@@ -118,7 +121,7 @@ describe("models.dev calibration", () => {
     ).toEqual({
       field: "limits.contextTokens",
       official: 1_048_576,
-      reference: 1_000_000,
+      reference: 500_000,
       status: "mismatch",
     });
     expect(
@@ -300,5 +303,109 @@ describe("models.dev calibration", () => {
       referenceModel: "glm-5-turbo",
     });
     expect(glm47?.referenceProvider).toBe("zhipuai");
+  });
+});
+
+describe("models.dev calibration tolerances", () => {
+  function longcatWith(
+    createdAt: string | undefined,
+    contextTokens: number,
+  ): ProviderData {
+    return {
+      schemaVersion: "1.0",
+      health: healthyHealth(new Date("2026-07-22T00:00:00Z")),
+      id: "longcat",
+      name: "LongCat",
+      ownedBy: "longcat",
+      baseUrls: { openai: "https://api.longcat.chat/openai" },
+      models: [
+        {
+          id: "LongCat-2.0",
+          name: "LongCat-2.0",
+          ...(createdAt ? { createdAt } : {}),
+          aliases: [],
+          capabilities: {},
+          limits: { contextTokens },
+          prices: [],
+        },
+      ],
+      sources: [],
+    };
+  }
+
+  async function calibrateLongcat(
+    createdAt: string | undefined,
+    contextTokens: number,
+    releaseDate: string,
+    referenceContext: number,
+  ) {
+    const api: ModelsDevApi = {
+      longcat: {
+        models: {
+          "LongCat-2.0": {
+            id: "LongCat-2.0",
+            release_date: releaseDate,
+            limit: { context: referenceContext },
+          },
+        },
+      },
+    };
+    const report = await collectModelsDevCalibration(
+      [longcatWith(createdAt, contextTokens)],
+      undefined,
+      new Date("2026-07-22T00:00:00Z"),
+      async () => api,
+    );
+    const result = report.models.find((model) => model.provider === "longcat");
+    if (!result) throw new Error("missing longcat calibration entry");
+    const byField = (field: string) =>
+      result.checks.find((check) => check.field === field)!;
+    return {
+      createdAt: byField("createdAt"),
+      context: byField("limits.contextTokens"),
+    };
+  }
+
+  it("treats one-day createdAt drift as match", async () => {
+    const nextDay = await calibrateLongcat(
+      "2026-08-02",
+      1_000_000,
+      "2026-08-03",
+      1_000_000,
+    );
+    expect(nextDay.createdAt.status).toBe("match");
+    expect(nextDay.createdAt).toMatchObject({
+      official: "2026-08-02",
+      reference: "2026-08-03",
+    });
+    const sameDay = await calibrateLongcat(
+      "2026-08-02",
+      1_000_000,
+      "2026-08-02",
+      1_000_000,
+    );
+    expect(sameDay.createdAt.status).toBe("match");
+  });
+
+  it("keeps larger createdAt gaps as mismatch", async () => {
+    const drift = await calibrateLongcat(
+      "2026-03-12",
+      1_000_000,
+      "2026-06-30",
+      1_000_000,
+    );
+    expect(drift.createdAt.status).toBe("mismatch");
+  });
+
+  it("absorbs binary-vs-decimal context conventions but keeps real gaps", async () => {
+    // 官方 204800 = 200×1024，models.dev 记 200000（十进制取整）
+    const kib = await calibrateLongcat(undefined, 204_800, "", 200_000);
+    expect(kib.context.status).toBe("match");
+    // 1048576 = 1M×1024 vs 1000000
+    const mega = await calibrateLongcat(undefined, 1_048_576, "", 1_000_000);
+    expect(mega.context.status).toBe("match");
+    // 超出相对容差的真实差异仍然暴露
+    const realGap = await calibrateLongcat(undefined, 1_000_000, "", 500_000);
+    expect(realGap.context.status).toBe("mismatch");
   });
 });
