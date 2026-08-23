@@ -118,9 +118,22 @@ describe("parseDeepSeekPage", () => {
           label: "空闲时段",
           timeZone: "Asia/Shanghai",
           intervals: [
-            { start: "00:00", end: "09:00" },
-            { start: "12:00", end: "14:00" },
-            { start: "18:00", end: "00:00" },
+            {
+              start: "00:00",
+              end: "09:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "12:00",
+              end: "14:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "18:00",
+              end: "00:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            { start: "00:00", end: "00:00", days: ["sat", "sun"] },
           ],
         },
         input: { cacheHit: 0.05, standard: 1.5 },
@@ -128,7 +141,21 @@ describe("parseDeepSeekPage", () => {
         effectiveFrom: "2026-08-17T00:00:00+08:00",
       },
       expect.objectContaining({
-        dailyTimeRange: expect.objectContaining({ label: "高峰时段" }),
+        dailyTimeRange: expect.objectContaining({
+          label: "高峰时段",
+          intervals: [
+            {
+              start: "09:00",
+              end: "12:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "14:00",
+              end: "18:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+          ],
+        }),
         input: { cacheHit: 0.1, standard: 3 },
         output: 9,
       }),
@@ -184,9 +211,22 @@ describe("parseDeepSeekPage", () => {
           label: "空闲时段",
           timeZone: "Asia/Shanghai",
           intervals: [
-            { start: "00:00", end: "09:00" },
-            { start: "12:00", end: "14:00" },
-            { start: "18:00", end: "00:00" },
+            {
+              start: "00:00",
+              end: "09:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "12:00",
+              end: "14:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "18:00",
+              end: "00:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            { start: "00:00", end: "00:00", days: ["sat", "sun"] },
           ],
         },
         input: { cacheHit: 0.05, standard: 1.5 },
@@ -201,8 +241,16 @@ describe("parseDeepSeekPage", () => {
           label: "高峰时段",
           timeZone: "Asia/Shanghai",
           intervals: [
-            { start: "09:00", end: "12:00" },
-            { start: "14:00", end: "18:00" },
+            {
+              start: "09:00",
+              end: "12:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "14:00",
+              end: "18:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
           ],
         },
         input: { cacheHit: 0.1, standard: 3 },
@@ -244,9 +292,22 @@ describe("parseDeepSeekPage", () => {
           label: "Off-peak",
           timeZone: "UTC",
           intervals: [
-            { start: "00:00", end: "01:00" },
-            { start: "04:00", end: "06:00" },
-            { start: "10:00", end: "00:00" },
+            {
+              start: "00:00",
+              end: "01:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "04:00",
+              end: "06:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "10:00",
+              end: "00:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            { start: "00:00", end: "00:00", days: ["sat", "sun"] },
           ],
         },
         input: { cacheHit: 0.007, standard: 0.22 },
@@ -261,8 +322,16 @@ describe("parseDeepSeekPage", () => {
           label: "Peak",
           timeZone: "UTC",
           intervals: [
-            { start: "01:00", end: "04:00" },
-            { start: "06:00", end: "10:00" },
+            {
+              start: "01:00",
+              end: "04:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
+            {
+              start: "06:00",
+              end: "10:00",
+              days: ["mon", "tue", "wed", "thu", "fri"],
+            },
           ],
         },
         input: { cacheHit: 0.014, standard: 0.44 },

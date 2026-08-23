@@ -124,7 +124,11 @@ type CostEstimate = {
   dailyTimeRange?: {
     label: string;
     timeZone: string;
-    intervals: Array<{ start: string; end: string }>;
+    intervals: Array<{
+      start: string;
+      end: string;
+      days?: Array<"mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun">;
+    }>;
   };
   effectiveFrom?: string;
   effectiveTo?: string;

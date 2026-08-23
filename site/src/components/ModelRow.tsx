@@ -417,14 +417,71 @@ function PriceScheduleHeading({
   );
 }
 
+const DAY_ORDER = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
+type DayOfWeek = (typeof DAY_ORDER)[number];
+const DAY_LABELS: Record<DayOfWeek, string> = {
+  mon: "周一",
+  tue: "周二",
+  wed: "周三",
+  thu: "周四",
+  fri: "周五",
+  sat: "周六",
+  sun: "周日",
+};
+
+function weekdaysLabel(days: readonly DayOfWeek[]): string {
+  if (!days.length || days.length === DAY_ORDER.length) return "";
+  const sorted = [...days].sort(
+    (a, b) => DAY_ORDER.indexOf(a) - DAY_ORDER.indexOf(b),
+  );
+  const runs: DayOfWeek[][] = [];
+  for (const day of sorted) {
+    const last = runs.at(-1);
+    if (
+      last &&
+      DAY_ORDER.indexOf(last.at(-1)!) + 1 === DAY_ORDER.indexOf(day)
+    ) {
+      last.push(day);
+    } else {
+      runs.push([day]);
+    }
+  }
+  return runs
+    .map((run) =>
+      run.length === 1
+        ? DAY_LABELS[run[0]!]
+        : `${DAY_LABELS[run[0]!]}至${DAY_LABELS[run.at(-1)!]}`,
+    )
+    .join("、");
+}
+
+function formatTimeInterval(interval: { start: string; end: string }): string {
+  if (interval.start === "00:00" && interval.end === "00:00") return "全天";
+  return `${interval.start}–${interval.end === "00:00" ? "24:00" : interval.end}`;
+}
+
 function formatDailyTimeRange(
   range: NonNullable<Model["prices"][number]["dailyTimeRange"]>,
 ): string {
   const zone = range.timeZone === "Asia/Shanghai" ? "北京时间" : range.timeZone;
-  const intervals = range.intervals
-    .map(({ start, end }) => `${start}–${end === "00:00" ? "24:00" : end}`)
-    .join("、");
-  return `${range.label} · ${zone} ${intervals}`;
+  const groups = new Map<
+    string,
+    NonNullable<Model["prices"][number]["dailyTimeRange"]>["intervals"]
+  >();
+  for (const interval of range.intervals) {
+    const days = (interval.days ?? [])
+      .slice()
+      .sort((a, b) => DAY_ORDER.indexOf(a) - DAY_ORDER.indexOf(b));
+    const key = days.join(",");
+    const group = groups.get(key) ?? [];
+    group.push(interval);
+    groups.set(key, group);
+  }
+  const parts = Array.from(groups.entries()).map(([key, intervals]) => {
+    const label = key ? `${weekdaysLabel(key.split(",") as DayOfWeek[])} ` : "";
+    return `${label}${intervals.map(formatTimeInterval).join("、")}`;
+  });
+  return `${range.label} · ${zone} ${parts.join("；")}`;
 }
 
 function PriceCell({

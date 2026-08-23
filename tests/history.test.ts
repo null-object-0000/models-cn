@@ -103,6 +103,33 @@ describe("priceKey", () => {
       ),
     ).not.toBe(priceKey(price(1, 2)));
     expect(
+      priceKey(
+        price(1, 2, {
+          dailyTimeRange: {
+            label: "高峰时段",
+            timeZone: "Asia/Shanghai",
+            intervals: [
+              {
+                start: "09:00",
+                end: "12:00",
+                days: ["mon", "tue", "wed", "thu", "fri"],
+              },
+            ],
+          },
+        }),
+      ),
+    ).not.toBe(
+      priceKey(
+        price(1, 2, {
+          dailyTimeRange: {
+            label: "高峰时段",
+            timeZone: "Asia/Shanghai",
+            intervals: [{ start: "09:00", end: "12:00" }],
+          },
+        }),
+      ),
+    );
+    expect(
       priceKey(price(1, 2, { effectiveFrom: "2026-08-17T00:00:00+08:00" })),
     ).not.toBe(priceKey(price(1, 2)));
     expect(

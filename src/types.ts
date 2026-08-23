@@ -1,5 +1,6 @@
 export type Currency = "CNY" | "USD";
 export type Market = "china" | "international";
+export type DayOfWeek = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
 export const SCHEMA_VERSION = "1.0" as const;
 
 export interface ProviderHealth {
@@ -47,6 +48,8 @@ export interface ModelPrice {
     intervals: Array<{
       start: string;
       end: string;
+      /** Weekdays this interval applies to (ISO order); absent means every day. */
+      days?: DayOfWeek[];
     }>;
   };
   input: {

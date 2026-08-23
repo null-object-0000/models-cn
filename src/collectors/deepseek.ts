@@ -61,6 +61,25 @@ function announcedEffectiveFrom(
   return `${match[5]}-${String(month).padStart(2, "0")}-${match[4]!.padStart(2, "0")}T${match[1]}:${match[2]}:00Z`;
 }
 
+/**
+ * Weekdays on which the peak windows apply. Peak hours are defined as
+ * 周一至周五 (Monday through Friday) in the local timezone, so the peak
+ * intervals below repeat only on weekdays while off-peak additionally
+ * covers the whole weekend (expressed as a full-day `00:00–00:00` interval).
+ */
+const WEEKDAYS = ["mon", "tue", "wed", "thu", "fri"] as const;
+const WEEKEND = ["sat", "sun"] as const;
+
+type TimeInterval = NonNullable<
+  ModelPrice["dailyTimeRange"]
+>["intervals"][number];
+
+function weekdayWindows(
+  windows: Array<[start: string, end: string]>,
+): TimeInterval[] {
+  return windows.map(([start, end]) => ({ start, end, days: [...WEEKDAYS] }));
+}
+
 function timeRange(
   config: SourceConfig,
   peak: boolean,
@@ -70,18 +89,21 @@ function timeRange(
       ? {
           label: "高峰时段",
           timeZone: "Asia/Shanghai",
-          intervals: [
-            { start: "09:00", end: "12:00" },
-            { start: "14:00", end: "18:00" },
-          ],
+          intervals: weekdayWindows([
+            ["09:00", "12:00"],
+            ["14:00", "18:00"],
+          ]),
         }
       : {
           label: "空闲时段",
           timeZone: "Asia/Shanghai",
           intervals: [
-            { start: "00:00", end: "09:00" },
-            { start: "12:00", end: "14:00" },
-            { start: "18:00", end: "00:00" },
+            ...weekdayWindows([
+              ["00:00", "09:00"],
+              ["12:00", "14:00"],
+              ["18:00", "00:00"],
+            ]),
+            { start: "00:00", end: "00:00", days: [...WEEKEND] },
           ],
         };
   }
@@ -89,18 +111,21 @@ function timeRange(
     ? {
         label: "Peak",
         timeZone: "UTC",
-        intervals: [
-          { start: "01:00", end: "04:00" },
-          { start: "06:00", end: "10:00" },
-        ],
+        intervals: weekdayWindows([
+          ["01:00", "04:00"],
+          ["06:00", "10:00"],
+        ]),
       }
     : {
         label: "Off-peak",
         timeZone: "UTC",
         intervals: [
-          { start: "00:00", end: "01:00" },
-          { start: "04:00", end: "06:00" },
-          { start: "10:00", end: "00:00" },
+          ...weekdayWindows([
+            ["00:00", "01:00"],
+            ["04:00", "06:00"],
+            ["10:00", "00:00"],
+          ]),
+          { start: "00:00", end: "00:00", days: [...WEEKEND] },
         ],
       };
 }

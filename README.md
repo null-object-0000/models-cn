@@ -120,8 +120,16 @@ const outputLimit =
     "label": "高峰时段",
     "timeZone": "Asia/Shanghai",
     "intervals": [
-      { "start": "09:00", "end": "12:00" },
-      { "start": "14:00", "end": "18:00" }
+      {
+        "start": "09:00",
+        "end": "12:00",
+        "days": ["mon", "tue", "wed", "thu", "fri"]
+      },
+      {
+        "start": "14:00",
+        "end": "18:00",
+        "days": ["mon", "tue", "wed", "thu", "fri"]
+      }
     ]
   },
   "input": {
@@ -142,7 +150,7 @@ const outputLimit =
 - `standard` 是标准价；`promotional` 是厂商明确标注的优惠价。
 - `inputTokenRange` 表示按输入 Token 数分档的价格；缺失时表示该价格不分输入长度档位。
 - `outputTokenRange` 表示按输出 Token 数分档的价格；与 `inputTokenRange` 可同时存在，表达「输入长度 + 输出长度」组合分档（如智谱 GLM-4.7 / GLM-4.5-Air 的短输出与长输出分档）。缺失时表示该价格不分输出长度档位。
-- `dailyTimeRange` 表示每日重复的本地计费时段；`timeZone` 使用 IANA 时区，区间采用 `[start, end)`，`end: "00:00"` 表示跨至次日午夜。
+- `dailyTimeRange` 表示每日重复的本地计费时段；`timeZone` 使用 IANA 时区，区间采用 `[start, end)`，`end: "00:00"` 表示跨至次日午夜。区间可选 `days` 限定适用星期（`mon`–`sun`，缺失表示每天均适用）；整日区间（例如周末全部计为空闲时段）用 `{ "start": "00:00", "end": "00:00" }` 表示。
 - `effectiveFrom` / `effectiveTo` 是厂商公告的价格适用起止时间，选择价格时使用 `[effectiveFrom, effectiveTo)`；它们与 models-cn 自动维护的观察时间 `validFrom` / `validTo` 含义不同。
 - `input.standard` 是普通输入价格；没有独立缓存计费规则时，它适用于全部输入 Token。
 - `input.cacheHit` 仅在厂商明确设置缓存命中计费规则时提供。字段缺失表示“不存在该计费维度”，不是价格未公开。

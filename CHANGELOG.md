@@ -10,6 +10,7 @@
 - 价格新增可选 `outputTokenRange` 字段，支持「输入长度 + 输出长度」组合分档（如 GLM-4.7 / GLM-4.5-Air 的短输出与长输出分档）。
 - Kimi 国际版美元定价、模型元数据和官方 Models API 清单。
 - 历史价格记录：价格变动时旧价自动归档到模型下的 `priceHistory`（含 `validFrom`/`validTo`），当前价格带可选 `validFrom`，均由共享流水线维护。
+- `dailyTimeRange` 区间新增可选 `days` 字段（`mon`–`sun`），支持仅部分星期适用的分时计价；DeepSeek 高峰/空闲时段已按官方说明限定为周一至周五 9:00–12:00、14:00–18:00（北京时间），周六日全天计为空闲时段。
 
 ### Changed
 

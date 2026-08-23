@@ -149,6 +149,15 @@
                   "end": {
                     "type": "string",
                     "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$"
+                  },
+                  "days": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+                    },
+                    "description": "Optional weekdays (ISO order, mon=Monday) this interval applies to; absent means every day."
                   }
                 }
               }
