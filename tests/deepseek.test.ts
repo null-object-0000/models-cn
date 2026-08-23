@@ -231,6 +231,7 @@ describe("parseDeepSeekPage", () => {
         },
         input: { cacheHit: 0.05, standard: 1.5 },
         output: 4.5,
+        effectiveFrom: "2026-08-23T00:00:00+08:00",
       },
       {
         market: "china",
@@ -255,6 +256,7 @@ describe("parseDeepSeekPage", () => {
         },
         input: { cacheHit: 0.1, standard: 3 },
         output: 9,
+        effectiveFrom: "2026-08-23T00:00:00+08:00",
       },
     ]);
     expect(data.models[1]?.prices).toMatchObject([
@@ -269,8 +271,10 @@ describe("parseDeepSeekPage", () => {
         output: 27,
       },
     ]);
-    // 定型页面不再携带“即将生效”的公告窗口
-    expect(data.models[0]?.prices[0]).not.toHaveProperty("effectiveFrom");
+    // 公告的周末低谷生效时间随分时价格一并标注；无“即将生效”的旧价窗口
+    expect(data.models[0]?.prices[0]?.effectiveFrom).toBe(
+      "2026-08-23T00:00:00+08:00",
+    );
     expect(data.models[0]?.prices[0]).not.toHaveProperty("effectiveTo");
   });
 
@@ -312,6 +316,7 @@ describe("parseDeepSeekPage", () => {
         },
         input: { cacheHit: 0.007, standard: 0.22 },
         output: 0.66,
+        effectiveFrom: "2026-08-23T00:00:00+08:00",
       },
       {
         market: "international",
@@ -336,6 +341,7 @@ describe("parseDeepSeekPage", () => {
         },
         input: { cacheHit: 0.014, standard: 0.44 },
         output: 1.32,
+        effectiveFrom: "2026-08-23T00:00:00+08:00",
       },
     ]);
     expect(data.models[1]?.prices).toMatchObject([

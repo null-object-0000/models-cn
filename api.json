@@ -105,6 +105,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.05,
                 "standard": 1.5
@@ -146,6 +147,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.1,
                 "standard": 3
@@ -206,6 +208,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.007,
                 "standard": 0.22
@@ -247,6 +250,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.014,
                 "standard": 0.44
@@ -608,6 +612,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.15,
                 "standard": 4.5
@@ -649,6 +654,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.3,
                 "standard": 9
@@ -709,6 +715,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.022,
                 "standard": 0.66
@@ -750,6 +757,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.044,
                 "standard": 1.32
@@ -1112,6 +1120,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.05,
                 "standard": 1.5
@@ -1153,6 +1162,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.1,
                 "standard": 3
@@ -1213,6 +1223,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.007,
                 "standard": 0.22
@@ -1254,6 +1265,7 @@
                   }
                 ]
               },
+              "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
                 "cacheHit": 0.014,
                 "standard": 0.44

@@ -30,6 +30,17 @@ export const DEEPSEEK_SOURCES = [
 
 type SourceConfig = (typeof DEEPSEEK_SOURCES)[number];
 
+/**
+ * Start of the announced peak/off-peak rule adjustment: from 2026-08-23
+ * 00:00 Beijing time onwards, weekends (Saturday and Sunday) are billed at
+ * the off-peak price all day. Announced in DeepSeek's official pricing
+ * announcement (北京时间2026年8月23日（周日）00:00 起，周末全天不区分峰谷时段，
+ * 统一按低谷时段价格收取调用费用). The pricing page itself does not carry an
+ * effective-date sentence, so this date is a manually verified factual
+ * annotation on the finalized period prices.
+ */
+const WEEKEND_OFFPEAK_EFFECTIVE_FROM = "2026-08-23T00:00:00+08:00";
+
 interface ParsedPage {
   models: Array<
     Omit<ModelData, "prices" | "aliases"> & {
@@ -260,6 +271,7 @@ function parseFinalizedPrices(
         unit: "1M_tokens" as const,
         rateType: "standard" as const,
         dailyTimeRange: timeRange(config, period === "peak"),
+        effectiveFrom: WEEKEND_OFFPEAK_EFFECTIVE_FROM,
         input: {
           cacheHit: slot.cacheHit[index]!,
           standard: slot.standard[index]!,
