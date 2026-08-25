@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-23T02:01:02.188Z",
-        "lastAttemptAt": "2026-08-23T02:01:02.188Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:19.014Z",
+        "lastAttemptAt": "2026-08-25T08:00:19.014Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -1422,8 +1422,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:11.131Z",
-        "lastAttemptAt": "2026-08-21T14:00:11.131Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:19.029Z",
+        "lastAttemptAt": "2026-08-25T08:00:19.029Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1574,8 +1574,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:11.136Z",
-        "lastAttemptAt": "2026-08-21T14:00:11.136Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:19.033Z",
+        "lastAttemptAt": "2026-08-25T08:00:19.033Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1592,6 +1592,7 @@
         {
           "id": "kimi-k3",
           "name": "Kimi K3",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -1623,7 +1624,6 @@
               "frequency_penalty"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 1048576,
             "maxOutputTokens": 1048576
@@ -1647,6 +1647,7 @@
         {
           "id": "kimi-k2.7-code",
           "name": "Kimi K2.7 Code",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -1672,7 +1673,6 @@
               "frequency_penalty"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 262144
           },
@@ -1695,6 +1695,7 @@
         {
           "id": "kimi-k2.7-code-highspeed",
           "name": "Kimi K2.7 Code HighSpeed",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -1720,7 +1721,6 @@
               "frequency_penalty"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 262144
           },
@@ -1743,6 +1743,7 @@
         {
           "id": "kimi-k2.6",
           "name": "Kimi K2.6",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -1769,7 +1770,6 @@
               "frequency_penalty"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 262144,
             "maxOutputTokens": 262144
@@ -1793,6 +1793,7 @@
         {
           "id": "kimi-k2.5",
           "name": "Kimi K2.5",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -1814,7 +1815,6 @@
               "temperature"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 262144,
             "maxOutputTokens": 262144
@@ -1889,8 +1889,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:11.143Z",
-        "lastAttemptAt": "2026-08-21T14:00:11.143Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:19.058Z",
+        "lastAttemptAt": "2026-08-25T08:00:19.058Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1907,6 +1907,7 @@
         {
           "id": "kimi-k3",
           "name": "Kimi K3",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -1938,7 +1939,6 @@
               "frequency_penalty"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 1048576,
             "maxOutputTokens": 1048576
@@ -1962,6 +1962,7 @@
         {
           "id": "kimi-k2.7-code",
           "name": "Kimi K2.7 Code",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -1987,7 +1988,6 @@
               "frequency_penalty"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 262144
           },
@@ -2010,6 +2010,7 @@
         {
           "id": "kimi-k2.7-code-highspeed",
           "name": "Kimi K2.7 Code HighSpeed",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -2035,7 +2036,6 @@
               "frequency_penalty"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 262144
           },
@@ -2058,6 +2058,7 @@
         {
           "id": "kimi-k2.6",
           "name": "Kimi K2.6",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -2084,7 +2085,6 @@
               "frequency_penalty"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 262144,
             "maxOutputTokens": 262144
@@ -2108,6 +2108,7 @@
         {
           "id": "kimi-k2.5",
           "name": "Kimi K2.5",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "thinkingModes": [
@@ -2129,7 +2130,6 @@
               "temperature"
             ]
           },
-          "aliases": [],
           "limits": {
             "contextTokens": 262144,
             "maxOutputTokens": 262144
@@ -2204,8 +2204,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:11.147Z",
-        "lastAttemptAt": "2026-08-21T14:00:11.147Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:19.040Z",
+        "lastAttemptAt": "2026-08-25T08:00:19.040Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2876,16 +2876,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-21T14:00:11.147Z",
-          "contentHash": "sha256:e6bd856bf975fd64f69613033ecf2ebe394c7dde38ec810fb35390266937c2f1"
+          "retrievedAt": "2026-08-25T08:00:19.040Z",
+          "contentHash": "sha256:527bc55aa740ad85734775f15bc35155886ade601b25b93ecc6c833650ed6133"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-21T14:00:11.147Z",
-          "contentHash": "sha256:0b06fa53f61396114677f3ed4da58e1dd05960a51073b988c3142f794014371e"
+          "retrievedAt": "2026-08-25T08:00:19.040Z",
+          "contentHash": "sha256:6661ebd0eacf72da3a67de3267cbf5b15035fcf97af862620cc0172b7d04f32c"
         }
       ]
     },
@@ -2893,8 +2893,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:11.160Z",
-        "lastAttemptAt": "2026-08-21T14:00:11.160Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:19.051Z",
+        "lastAttemptAt": "2026-08-25T08:00:19.051Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -3417,8 +3417,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:11.173Z",
-        "lastAttemptAt": "2026-08-21T14:00:11.173Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:19.056Z",
+        "lastAttemptAt": "2026-08-25T08:00:19.056Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -3787,8 +3787,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:54.569Z",
-        "lastAttemptAt": "2026-08-21T14:00:54.569Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:49.630Z",
+        "lastAttemptAt": "2026-08-25T08:00:49.630Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3831,8 +3831,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:55.215Z",
-        "lastAttemptAt": "2026-08-21T14:00:55.215Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:50.055Z",
+        "lastAttemptAt": "2026-08-25T08:00:50.055Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3865,8 +3865,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:55.531Z",
-        "lastAttemptAt": "2026-08-21T14:00:55.531Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:50.354Z",
+        "lastAttemptAt": "2026-08-25T08:00:50.354Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3921,8 +3921,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:56.986Z",
-        "lastAttemptAt": "2026-08-21T14:00:56.986Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:56.690Z",
+        "lastAttemptAt": "2026-08-25T08:00:56.690Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3963,8 +3963,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:57.403Z",
-        "lastAttemptAt": "2026-08-21T14:00:57.403Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:57.128Z",
+        "lastAttemptAt": "2026-08-25T08:00:57.128Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4038,8 +4038,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-21T14:00:58.349Z",
-        "lastAttemptAt": "2026-08-21T14:00:58.349Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:57.481Z",
+        "lastAttemptAt": "2026-08-25T08:00:57.481Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4114,14 +4114,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-22T02:44:54.640Z",
-        "lastAttemptAt": "2026-08-22T02:44:54.640Z",
+        "lastSuccessfulAt": "2026-08-25T08:00:48.914Z",
+        "lastAttemptAt": "2026-08-25T08:00:48.914Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-22T02:44:54.640Z",
-        "contentHash": "sha256:411527998722426fe3acdd2bceb6068a72aefe29ecceba96fca5592e562690f5"
+        "retrievedAt": "2026-08-25T08:00:48.914Z",
+        "contentHash": "sha256:2cda9b2a4712ba22eb37441d6c44aa4e20c2453cb4e64aede45f881740873b1d"
       },
       "models": [
         {
@@ -5028,71 +5028,75 @@
           "referenceProvider": "zai",
           "referenceModel": "glm-5.3",
           "referenceUrl": "https://models.dev/models/zai/glm-5.3/",
-          "status": "missing",
+          "status": "mismatch",
           "checks": [
             {
               "field": "createdAt",
               "official": "2026-08-19",
-              "reference": null,
-              "status": "missing"
+              "reference": "2026-08-14",
+              "status": "mismatch"
             },
             {
               "field": "limits.contextTokens",
               "official": 1000000,
-              "reference": null,
-              "status": "missing"
+              "reference": 1000000,
+              "status": "match"
             },
             {
               "field": "limits.maxOutputTokens",
               "official": 131072,
-              "reference": null,
-              "status": "missing"
+              "reference": 131072,
+              "status": "match"
             },
             {
               "field": "capabilities.thinking",
               "official": true,
-              "reference": null,
-              "status": "missing"
+              "reference": true,
+              "status": "match"
             },
             {
               "field": "capabilities.toolCalls",
               "official": true,
-              "reference": null,
-              "status": "missing"
+              "reference": true,
+              "status": "match"
             },
             {
               "field": "capabilities.inputModalities",
               "official": [
                 "text"
               ],
-              "reference": null,
-              "status": "missing"
+              "reference": [
+                "text"
+              ],
+              "status": "match"
             },
             {
               "field": "capabilities.outputModalities",
               "official": [
                 "text"
               ],
-              "reference": null,
-              "status": "missing"
+              "reference": [
+                "text"
+              ],
+              "status": "match"
             },
             {
               "field": "prices.USD.input.standard",
               "official": 1.4,
-              "reference": null,
-              "status": "missing"
+              "reference": 1.4,
+              "status": "match"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": 0.26,
-              "reference": null,
-              "status": "missing"
+              "reference": 0.26,
+              "status": "match"
             },
             {
               "field": "prices.USD.output",
               "official": 4.4,
-              "reference": null,
-              "status": "missing"
+              "reference": 4.4,
+              "status": "match"
             }
           ]
         },

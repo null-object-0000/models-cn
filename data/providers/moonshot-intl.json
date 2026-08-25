@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-21T14:00:11.143Z",
-    "lastAttemptAt": "2026-08-21T14:00:11.143Z",
+    "lastSuccessfulAt": "2026-08-25T08:00:19.058Z",
+    "lastAttemptAt": "2026-08-25T08:00:19.058Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-intl",
@@ -20,6 +20,7 @@
     {
       "id": "kimi-k3",
       "name": "Kimi K3",
+      "aliases": [],
       "capabilities": {
         "thinking": true,
         "thinkingModes": [
@@ -51,7 +52,6 @@
           "frequency_penalty"
         ]
       },
-      "aliases": [],
       "limits": {
         "contextTokens": 1048576,
         "maxOutputTokens": 1048576
@@ -75,6 +75,7 @@
     {
       "id": "kimi-k2.7-code",
       "name": "Kimi K2.7 Code",
+      "aliases": [],
       "capabilities": {
         "thinking": true,
         "thinkingModes": [
@@ -100,7 +101,6 @@
           "frequency_penalty"
         ]
       },
-      "aliases": [],
       "limits": {
         "contextTokens": 262144
       },
@@ -123,6 +123,7 @@
     {
       "id": "kimi-k2.7-code-highspeed",
       "name": "Kimi K2.7 Code HighSpeed",
+      "aliases": [],
       "capabilities": {
         "thinking": true,
         "thinkingModes": [
@@ -148,7 +149,6 @@
           "frequency_penalty"
         ]
       },
-      "aliases": [],
       "limits": {
         "contextTokens": 262144
       },
@@ -171,6 +171,7 @@
     {
       "id": "kimi-k2.6",
       "name": "Kimi K2.6",
+      "aliases": [],
       "capabilities": {
         "thinking": true,
         "thinkingModes": [
@@ -197,7 +198,6 @@
           "frequency_penalty"
         ]
       },
-      "aliases": [],
       "limits": {
         "contextTokens": 262144,
         "maxOutputTokens": 262144
@@ -221,6 +221,7 @@
     {
       "id": "kimi-k2.5",
       "name": "Kimi K2.5",
+      "aliases": [],
       "capabilities": {
         "thinking": true,
         "thinkingModes": [
@@ -242,7 +243,6 @@
           "temperature"
         ]
       },
-      "aliases": [],
       "limits": {
         "contextTokens": 262144,
         "maxOutputTokens": 262144
