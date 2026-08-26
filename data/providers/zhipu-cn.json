@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-08-25T08:00:19.051Z",
-    "lastAttemptAt": "2026-08-25T08:00:19.051Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-08-26T14:05:26.811Z",
+    "consecutiveFailures": 1,
+    "message": "fetch failed"
   },
   "id": "zhipu-cn",
   "name": "Zhipu China",
