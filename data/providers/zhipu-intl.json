@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-25T08:00:19.056Z",
-    "lastAttemptAt": "2026-08-25T08:00:19.056Z",
+    "lastSuccessfulAt": "2026-08-27T03:39:29.962Z",
+    "lastAttemptAt": "2026-08-27T03:39:29.962Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -346,15 +346,15 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-08-19T05:53:14.978Z",
-      "contentHash": "sha256:00fb8f70e9baf0f7e3dfbecb2838ef6437e2a631ed646ef7533466790bc61b36"
+      "retrievedAt": "2026-08-27T03:39:29.962Z",
+      "contentHash": "sha256:cf1ea5dbdb8a5011085821c73ceb7b4e4ec34f097cd8c47ea3d866188ecca26d"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-19T05:53:14.978Z",
-      "contentHash": "sha256:ce316cac59cf1b4a71fbc26354db0637de026c28b7e0eb15b30816ec0710dd55"
+      "retrievedAt": "2026-08-27T03:39:29.962Z",
+      "contentHash": "sha256:8546390e9dc97e756151a55999013c4c3f0426ac6b9cb71793e191218487d90f"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
