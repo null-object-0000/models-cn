@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:39:29.919Z",
-        "lastAttemptAt": "2026-08-27T03:39:29.919Z",
+        "lastSuccessfulAt": "2026-08-27T04:09:46.435Z",
+        "lastAttemptAt": "2026-08-27T04:09:46.435Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -1422,8 +1422,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:39:29.934Z",
-        "lastAttemptAt": "2026-08-27T03:39:29.934Z",
+        "lastSuccessfulAt": "2026-08-27T04:09:46.451Z",
+        "lastAttemptAt": "2026-08-27T04:09:46.451Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1574,8 +1574,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:39:29.938Z",
-        "lastAttemptAt": "2026-08-27T03:39:29.938Z",
+        "lastSuccessfulAt": "2026-08-27T04:09:46.455Z",
+        "lastAttemptAt": "2026-08-27T04:09:46.455Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1889,8 +1889,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:39:29.944Z",
-        "lastAttemptAt": "2026-08-27T03:39:29.944Z",
+        "lastSuccessfulAt": "2026-08-27T04:09:46.461Z",
+        "lastAttemptAt": "2026-08-27T04:09:46.461Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -2204,8 +2204,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:39:29.947Z",
-        "lastAttemptAt": "2026-08-27T03:39:29.947Z",
+        "lastSuccessfulAt": "2026-08-27T04:09:46.465Z",
+        "lastAttemptAt": "2026-08-27T04:09:46.465Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2926,7 +2926,7 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-27T03:39:29.947Z",
+          "retrievedAt": "2026-08-27T04:09:46.465Z",
           "contentHash": "sha256:ac86c9426dd26949def0e2f4a7df2d17bb9d11ee68786324c690b4ee1991afb0"
         }
       ]
@@ -2935,8 +2935,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:39:29.958Z",
-        "lastAttemptAt": "2026-08-27T03:39:29.958Z",
+        "lastSuccessfulAt": "2026-08-27T04:09:46.476Z",
+        "lastAttemptAt": "2026-08-27T04:09:46.476Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2983,6 +2983,44 @@
               "output": 28,
               "sourceUrl": "https://bigmodel.cn/pricing",
               "validFrom": "2026-08-19T05:53:26.770Z"
+            }
+          ]
+        },
+        {
+          "id": "glm-5.3-flash",
+          "name": "GLM-5.3-Flash",
+          "createdAt": "2026-08-25T00:00:00.000+08:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text",
+              "image",
+              "video"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 0.4,
+                "cacheHit": 0.115
+              },
+              "output": 1.4,
+              "sourceUrl": "https://bigmodel.cn/pricing",
+              "validFrom": "2026-08-27T04:09:56.648Z"
             }
           ]
         },
@@ -3080,63 +3118,6 @@
           ]
         },
         {
-          "id": "glm-5-turbo",
-          "name": "GLM-5-Turbo",
-          "createdAt": "2026-03-15T00:00:00.000+08:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [0, 32)",
-                "maxInclusive": 32000
-              },
-              "input": {
-                "standard": 5,
-                "cacheHit": 1.2
-              },
-              "output": 22,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [32+)",
-                "minExclusive": 32000
-              },
-              "input": {
-                "standard": 7,
-                "cacheHit": 1.8
-              },
-              "output": 26,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
-        },
-        {
           "id": "glm-5",
           "name": "GLM-5",
           "createdAt": "2026-02-12T00:00:00.000+08:00",
@@ -3188,6 +3169,63 @@
                 "cacheHit": 1.5
               },
               "output": 22,
+              "sourceUrl": "https://bigmodel.cn/pricing",
+              "validFrom": "2026-08-07T05:04:14.214Z"
+            }
+          ]
+        },
+        {
+          "id": "glm-5-turbo",
+          "name": "GLM-5-Turbo",
+          "createdAt": "2026-03-15T00:00:00.000+08:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 204800,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "inputTokenRange": {
+                "label": "输入长度 [0, 32)",
+                "maxInclusive": 32000
+              },
+              "input": {
+                "standard": 5,
+                "cacheHit": 1.2
+              },
+              "output": 22,
+              "sourceUrl": "https://bigmodel.cn/pricing",
+              "validFrom": "2026-08-07T05:04:14.214Z"
+            },
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "inputTokenRange": {
+                "label": "输入长度 [32+)",
+                "minExclusive": 32000
+              },
+              "input": {
+                "standard": 7,
+                "cacheHit": 1.8
+              },
+              "output": 26,
               "sourceUrl": "https://bigmodel.cn/pricing",
               "validFrom": "2026-08-07T05:04:14.214Z"
             }
@@ -3277,6 +3315,41 @@
           ]
         },
         {
+          "id": "glm-4.7-flashx",
+          "name": "GLM-4.7-FlashX",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 204800,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 0.5,
+                "cacheHit": 0.1
+              },
+              "output": 3,
+              "sourceUrl": "https://bigmodel.cn/pricing",
+              "validFrom": "2026-08-07T05:04:14.214Z"
+            }
+          ]
+        },
+        {
           "id": "glm-4.5-air",
           "name": "GLM-4.5-Air",
           "aliases": [],
@@ -3359,41 +3432,6 @@
           ]
         },
         {
-          "id": "glm-4.7-flashx",
-          "name": "GLM-4.7-FlashX",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "standard": 0.5,
-                "cacheHit": 0.1
-              },
-              "output": 3,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
-        },
-        {
           "id": "glm-4.7-flash",
           "name": "GLM-4.7-Flash",
           "createdAt": "2026-01-19T00:00:00.000+08:00",
@@ -3443,15 +3481,15 @@
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-27T03:39:29.958Z",
-          "contentHash": "sha256:8546390e9dc97e756151a55999013c4c3f0426ac6b9cb71793e191218487d90f"
+          "retrievedAt": "2026-08-27T04:09:46.476Z",
+          "contentHash": "sha256:ee5c0333b6f2826d3f7667e0f894489260e31365a99a76fff344ae1e3fc77ceb"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-19T05:53:14.974Z",
-          "contentHash": "sha256:aaf70dfac3fe13fa73185d0409c066a6b6d37c40501f7a5a230444cc90a93c83"
+          "retrievedAt": "2026-08-27T04:09:46.476Z",
+          "contentHash": "sha256:48ac881641db5cdf84de7b906f73fd85f10941514fd0e24c6ea2064e77e55339"
         }
       ]
     },
@@ -3459,8 +3497,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:39:29.962Z",
-        "lastAttemptAt": "2026-08-27T03:39:29.962Z",
+        "lastSuccessfulAt": "2026-08-27T04:09:46.482Z",
+        "lastAttemptAt": "2026-08-27T04:09:46.482Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -3507,6 +3545,44 @@
               "output": 4.4,
               "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
               "validFrom": "2026-08-19T05:53:18.328Z"
+            }
+          ]
+        },
+        {
+          "id": "glm-5.3-flash",
+          "name": "GLM-5.3-Flash",
+          "createdAt": "2026-08-25T00:00:00.000+08:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text",
+              "image",
+              "video"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 0.075,
+                "cacheHit": 0.015
+              },
+              "output": 0.25,
+              "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+              "validFrom": "2026-08-27T04:09:55.724Z"
             }
           ]
         },
@@ -3583,42 +3659,6 @@
           ]
         },
         {
-          "id": "glm-5-turbo",
-          "name": "GLM-5-Turbo",
-          "createdAt": "2026-03-15T00:00:00.000+08:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "standard": 1.2,
-                "cacheHit": 0.24
-              },
-              "output": 4,
-              "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-              "validFrom": "2026-08-07T05:06:29.857Z"
-            }
-          ]
-        },
-        {
           "id": "glm-5",
           "name": "GLM-5",
           "createdAt": "2026-02-12T00:00:00.000+08:00",
@@ -3649,6 +3689,42 @@
                 "cacheHit": 0.2
               },
               "output": 3.2,
+              "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+              "validFrom": "2026-08-07T05:06:29.857Z"
+            }
+          ]
+        },
+        {
+          "id": "glm-5-turbo",
+          "name": "GLM-5-Turbo",
+          "createdAt": "2026-03-15T00:00:00.000+08:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 204800,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 1.2,
+                "cacheHit": 0.24
+              },
+              "output": 4,
               "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
               "validFrom": "2026-08-07T05:06:29.857Z"
             }
@@ -3691,6 +3767,77 @@
           ]
         },
         {
+          "id": "glm-4.7-flashx",
+          "name": "GLM-4.7-FlashX",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 204800,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 0.07,
+                "cacheHit": 0.01
+              },
+              "output": 0.4,
+              "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+              "validFrom": "2026-08-07T05:06:29.857Z"
+            }
+          ]
+        },
+        {
+          "id": "glm-4.6",
+          "name": "GLM-4.6",
+          "createdAt": "2025-09-30T00:00:00.000+08:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 204800,
+            "maxOutputTokens": 131072
+          },
+          "prices": [
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 0.6,
+                "cacheHit": 0.11
+              },
+              "output": 2.2,
+              "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+              "validFrom": "2026-08-27T04:09:55.724Z"
+            }
+          ]
+        },
+        {
           "id": "glm-4.5-air",
           "name": "GLM-4.5-Air",
           "aliases": [],
@@ -3726,8 +3873,8 @@
           ]
         },
         {
-          "id": "glm-4.7-flashx",
-          "name": "GLM-4.7-FlashX",
+          "id": "glm-4.5-airx",
+          "name": "GLM-4.5-AirX",
           "aliases": [],
           "capabilities": {
             "thinking": true,
@@ -3741,8 +3888,8 @@
             ]
           },
           "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
+            "contextTokens": 131072,
+            "maxOutputTokens": 98304
           },
           "prices": [
             {
@@ -3751,12 +3898,12 @@
               "unit": "1M_tokens",
               "rateType": "standard",
               "input": {
-                "standard": 0.07,
-                "cacheHit": 0.01
+                "standard": 1.1,
+                "cacheHit": 0.22
               },
-              "output": 0.4,
+              "output": 4.5,
               "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-              "validFrom": "2026-08-07T05:06:29.857Z"
+              "validFrom": "2026-08-27T04:09:55.724Z"
             }
           ]
         },
@@ -3795,6 +3942,41 @@
               "validFrom": "2026-08-07T05:06:29.857Z"
             }
           ]
+        },
+        {
+          "id": "glm-4.5-flash",
+          "name": "GLM-4.5-Flash",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 131072,
+            "maxOutputTokens": 98304
+          },
+          "prices": [
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 0,
+                "cacheHit": 0
+              },
+              "output": 0,
+              "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+              "validFrom": "2026-08-27T04:09:55.724Z"
+            }
+          ]
         }
       ],
       "sources": [
@@ -3810,15 +3992,15 @@
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-27T03:39:29.962Z",
-          "contentHash": "sha256:8546390e9dc97e756151a55999013c4c3f0426ac6b9cb71793e191218487d90f"
+          "retrievedAt": "2026-08-27T04:09:46.482Z",
+          "contentHash": "sha256:ee5c0333b6f2826d3f7667e0f894489260e31365a99a76fff344ae1e3fc77ceb"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-19T05:53:14.978Z",
-          "contentHash": "sha256:aaf70dfac3fe13fa73185d0409c066a6b6d37c40501f7a5a230444cc90a93c83"
+          "retrievedAt": "2026-08-27T04:09:46.482Z",
+          "contentHash": "sha256:48ac881641db5cdf84de7b906f73fd85f10941514fd0e24c6ea2064e77e55339"
         }
       ]
     }
@@ -3829,8 +4011,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:40:10.574Z",
-        "lastAttemptAt": "2026-08-27T03:40:10.574Z",
+        "lastSuccessfulAt": "2026-08-27T04:10:23.289Z",
+        "lastAttemptAt": "2026-08-27T04:10:23.289Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3873,8 +4055,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:40:11.172Z",
-        "lastAttemptAt": "2026-08-27T03:40:11.172Z",
+        "lastSuccessfulAt": "2026-08-27T04:10:23.710Z",
+        "lastAttemptAt": "2026-08-27T04:10:23.710Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3907,8 +4089,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:40:11.511Z",
-        "lastAttemptAt": "2026-08-27T03:40:11.511Z",
+        "lastSuccessfulAt": "2026-08-27T04:10:23.995Z",
+        "lastAttemptAt": "2026-08-27T04:10:23.995Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3963,8 +4145,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:40:13.061Z",
-        "lastAttemptAt": "2026-08-27T03:40:13.061Z",
+        "lastSuccessfulAt": "2026-08-27T04:10:30.112Z",
+        "lastAttemptAt": "2026-08-27T04:10:30.112Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4005,8 +4187,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:40:13.463Z",
-        "lastAttemptAt": "2026-08-27T03:40:13.463Z",
+        "lastSuccessfulAt": "2026-08-27T04:10:30.846Z",
+        "lastAttemptAt": "2026-08-27T04:10:30.846Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4065,13 +4247,13 @@
           "glm-5-turbo",
           "glm-5.1",
           "glm-5.2",
-          "glm-5.3"
+          "glm-5.3",
+          "glm-5.3-flash"
         ],
         "aliasesAndListed": [],
         "listedWithoutPricing": [
           "glm-4.5",
-          "glm-4.6",
-          "glm-5.3-flash"
+          "glm-4.6"
         ],
         "pricedButNotListed": [
           "glm-4.7-flash",
@@ -4085,8 +4267,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:40:14.062Z",
-        "lastAttemptAt": "2026-08-27T03:40:14.062Z",
+        "lastSuccessfulAt": "2026-08-27T04:10:31.111Z",
+        "lastAttemptAt": "2026-08-27T04:10:31.111Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4140,20 +4322,22 @@
         "status": "mismatch",
         "pricedAndListed": [
           "glm-4.5-air",
+          "glm-4.6",
           "glm-4.7",
           "glm-5",
           "glm-5-turbo",
           "glm-5.1",
           "glm-5.2",
-          "glm-5.3"
+          "glm-5.3",
+          "glm-5.3-flash"
         ],
         "aliasesAndListed": [],
         "listedWithoutPricing": [
-          "glm-4.5",
-          "glm-4.6",
-          "glm-5.3-flash"
+          "glm-4.5"
         ],
         "pricedButNotListed": [
+          "glm-4.5-airx",
+          "glm-4.5-flash",
           "glm-4.7-flash",
           "glm-4.7-flashx"
         ],
@@ -4166,14 +4350,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-27T03:40:09.825Z",
-        "lastAttemptAt": "2026-08-27T03:40:09.825Z",
+        "lastSuccessfulAt": "2026-08-27T04:10:22.466Z",
+        "lastAttemptAt": "2026-08-27T04:10:22.466Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-27T03:40:09.825Z",
-        "contentHash": "sha256:506b64ffa0e623bb932b888601a2393478441c9579c3a177f5fd9b8c7b227f64"
+        "retrievedAt": "2026-08-27T04:10:22.466Z",
+        "contentHash": "sha256:15bb2b8059edf9df4c825ab294f018f709fb8edfbfedaa4472c856317e16469a"
       },
       "models": [
         {
@@ -7676,6 +7860,328 @@
               "official": null,
               "reference": 1.5,
               "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-cn",
+          "model": "glm-5.3-flash",
+          "referenceProvider": "zhipuai",
+          "referenceModel": "glm-5.3-flash",
+          "referenceUrl": "https://models.dev/models/zhipuai/glm-5.3-flash/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-08-25",
+              "reference": "2026-08-26",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text",
+                "image",
+                "video"
+              ],
+              "reference": [
+                "text",
+                "image",
+                "video",
+                "pdf"
+              ],
+              "status": "mismatch"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.075,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.015,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 0.25,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-5.3-flash",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-5.3-flash",
+          "referenceUrl": "https://models.dev/models/zai/glm-5.3-flash/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-08-25",
+              "reference": "2026-08-26",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text",
+                "image",
+                "video"
+              ],
+              "reference": [
+                "text",
+                "image",
+                "video",
+                "pdf"
+              ],
+              "status": "mismatch"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 0.075,
+              "reference": 0.075,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.015,
+              "reference": 0.015,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 0.25,
+              "reference": 0.25,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-4.6",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-4.6",
+          "referenceUrl": "https://models.dev/models/zai/glm-4.6/",
+          "status": "match",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2025-09-30",
+              "reference": "2025-09-30",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 204800,
+              "reference": 204800,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 0.6,
+              "reference": 0.6,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0.11,
+              "reference": 0.11,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 2.2,
+              "reference": 2.2,
+              "status": "match"
+            }
+          ]
+        },
+        {
+          "provider": "zhipu-intl",
+          "model": "glm-4.5-flash",
+          "referenceProvider": "zai",
+          "referenceModel": "glm-4.5-flash",
+          "referenceUrl": "https://models.dev/models/zai/glm-4.5-flash/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": null,
+              "reference": "2025-07-28",
+              "status": "missing"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 98304,
+              "reference": 98304,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": 0,
+              "reference": 0,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": 0,
+              "reference": 0,
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": 0,
+              "reference": 0,
+              "status": "match"
             }
           ]
         }

@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-27T03:39:29.962Z",
-    "lastAttemptAt": "2026-08-27T03:39:29.962Z",
+    "lastSuccessfulAt": "2026-08-27T04:09:46.482Z",
+    "lastAttemptAt": "2026-08-27T04:09:46.482Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -50,6 +50,44 @@
           "output": 4.4,
           "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
           "validFrom": "2026-08-19T05:53:18.328Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "createdAt": "2026-08-25T00:00:00.000+08:00",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.075,
+            "cacheHit": 0.015
+          },
+          "output": 0.25,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-08-27T04:09:55.724Z"
         }
       ]
     },
@@ -126,42 +164,6 @@
       ]
     },
     {
-      "id": "glm-5-turbo",
-      "name": "GLM-5-Turbo",
-      "createdAt": "2026-03-15T00:00:00.000+08:00",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 204800,
-        "maxOutputTokens": 131072
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 1.2,
-            "cacheHit": 0.24
-          },
-          "output": 4,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-07T05:06:29.857Z"
-        }
-      ]
-    },
-    {
       "id": "glm-5",
       "name": "GLM-5",
       "createdAt": "2026-02-12T00:00:00.000+08:00",
@@ -192,6 +194,42 @@
             "cacheHit": 0.2
           },
           "output": 3.2,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-08-07T05:06:29.857Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-5-turbo",
+      "name": "GLM-5-Turbo",
+      "createdAt": "2026-03-15T00:00:00.000+08:00",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 1.2,
+            "cacheHit": 0.24
+          },
+          "output": 4,
           "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
           "validFrom": "2026-08-07T05:06:29.857Z"
         }
@@ -234,6 +272,77 @@
       ]
     },
     {
+      "id": "glm-4.7-flashx",
+      "name": "GLM-4.7-FlashX",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.07,
+            "cacheHit": 0.01
+          },
+          "output": 0.4,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-08-07T05:06:29.857Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-4.6",
+      "name": "GLM-4.6",
+      "createdAt": "2025-09-30T00:00:00.000+08:00",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.6,
+            "cacheHit": 0.11
+          },
+          "output": 2.2,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-08-27T04:09:55.724Z"
+        }
+      ]
+    },
+    {
       "id": "glm-4.5-air",
       "name": "GLM-4.5-Air",
       "aliases": [],
@@ -269,8 +378,8 @@
       ]
     },
     {
-      "id": "glm-4.7-flashx",
-      "name": "GLM-4.7-FlashX",
+      "id": "glm-4.5-airx",
+      "name": "GLM-4.5-AirX",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -284,8 +393,8 @@
         ]
       },
       "limits": {
-        "contextTokens": 204800,
-        "maxOutputTokens": 131072
+        "contextTokens": 131072,
+        "maxOutputTokens": 98304
       },
       "prices": [
         {
@@ -294,12 +403,12 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "standard": 0.07,
-            "cacheHit": 0.01
+            "standard": 1.1,
+            "cacheHit": 0.22
           },
-          "output": 0.4,
+          "output": 4.5,
           "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-07T05:06:29.857Z"
+          "validFrom": "2026-08-27T04:09:55.724Z"
         }
       ]
     },
@@ -338,6 +447,41 @@
           "validFrom": "2026-08-07T05:06:29.857Z"
         }
       ]
+    },
+    {
+      "id": "glm-4.5-flash",
+      "name": "GLM-4.5-Flash",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 131072,
+        "maxOutputTokens": 98304
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0,
+            "cacheHit": 0
+          },
+          "output": 0,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-08-27T04:09:55.724Z"
+        }
+      ]
     }
   ],
   "sources": [
@@ -353,15 +497,15 @@
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-27T03:39:29.962Z",
-      "contentHash": "sha256:8546390e9dc97e756151a55999013c4c3f0426ac6b9cb71793e191218487d90f"
+      "retrievedAt": "2026-08-27T04:09:46.482Z",
+      "contentHash": "sha256:ee5c0333b6f2826d3f7667e0f894489260e31365a99a76fff344ae1e3fc77ceb"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-19T05:53:14.978Z",
-      "contentHash": "sha256:aaf70dfac3fe13fa73185d0409c066a6b6d37c40501f7a5a230444cc90a93c83"
+      "retrievedAt": "2026-08-27T04:09:46.482Z",
+      "contentHash": "sha256:48ac881641db5cdf84de7b906f73fd85f10941514fd0e24c6ea2064e77e55339"
     }
   ]
 }
