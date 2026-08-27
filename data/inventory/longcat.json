@@ -2,10 +2,11 @@
   "schemaVersion": "1.0",
   "provider": "longcat",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-08-27T04:10:23.710Z",
-    "lastAttemptAt": "2026-08-27T04:10:23.710Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-08-27T22:59:29.405Z",
+    "consecutiveFailures": 1,
+    "message": "fetch failed"
   },
   "source": {
     "url": "https://api.longcat.chat/openai/v1/models",

@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-27T04:09:46.465Z",
-    "lastAttemptAt": "2026-08-27T04:09:46.465Z",
+    "lastSuccessfulAt": "2026-08-27T22:58:50.503Z",
+    "lastAttemptAt": "2026-08-27T22:58:50.503Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
@@ -48,6 +48,23 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
+            "standard": 0.8,
+            "cacheHit": 0.1,
+            "explicitCacheCreation": 1.25,
+            "explicitCacheHit": 0.1
+          },
+          "output": 2.7,
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-flash",
+          "validFrom": "2026-08-27T22:59:27.618Z"
+        }
+      ],
+      "priceHistory": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
             "standard": 1,
             "cacheHit": 0.1,
             "explicitCacheCreation": 1.25,
@@ -55,7 +72,8 @@
           },
           "output": 3,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-flash",
-          "validFrom": "2026-08-27T03:40:09.723Z"
+          "validFrom": "2026-08-27T03:40:09.723Z",
+          "validTo": "2026-08-27T22:59:27.618Z"
         }
       ]
     },
@@ -1005,16 +1023,16 @@
       "url": "https://www.qianwenai.com/models",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-27T03:39:29.947Z",
-      "contentHash": "sha256:3d1687da8299c6629e8d8eb4bca5e17ed45c9fd417c347f85ec3a8c1fd3ce914"
+      "retrievedAt": "2026-08-27T22:58:50.503Z",
+      "contentHash": "sha256:813e520237734aaa56af17527bb00c2734e7e535721ecac2ef949f44923c5b05"
     },
     {
       "url": "https://www.qianwenai.com/models",
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-08-27T04:09:46.465Z",
-      "contentHash": "sha256:ac86c9426dd26949def0e2f4a7df2d17bb9d11ee68786324c690b4ee1991afb0"
+      "retrievedAt": "2026-08-27T22:58:50.503Z",
+      "contentHash": "sha256:29fa9033d668491646fa49290147e7151a4eeb96ec8b130d9d0f3f37ec36f3e3"
     }
   ]
 }
