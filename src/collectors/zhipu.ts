@@ -268,9 +268,10 @@ export interface ZhipuOverviewModel {
   maxOutputTokens: number;
 }
 
-function tokenCount(value: string): number {
-  const match = value.match(/^([\d.]+)\s*([KM]?)$/i);
-  if (!match) throw new Error(`Cannot parse Zhipu token count: ${value}`);
+/** 解析 token 数量单元格（如 `128K`、`1M`）；无法识别时返回 `undefined` 以便跳过。 */
+function parseTokenCount(value: string): number | undefined {
+  const match = value.trim().match(/^([\d.]+)\s*([KM]?)$/i);
+  if (!match) return undefined;
   const amount = Number(match[1]);
   const suffix = match[2]?.toUpperCase();
   if (suffix === "M") return amount * 1_000_000;
@@ -278,27 +279,63 @@ function tokenCount(value: string): number {
   return Math.round(amount);
 }
 
+/** 将 markdown 表格行拆成去除首尾空单元格后的单元格数组。 */
+function splitTableRow(line: string): string[] {
+  return line
+    .split("|")
+    .map((cell) => cell.trim())
+    .filter((_, index, array) => index > 0 && index < array.length - 1);
+}
+
+/** 取出两个标记之间的内容；缺少标记时返回空串。 */
+function markdownBetween(markdown: string, start: string, end: string): string {
+  const from = markdown.indexOf(start);
+  if (from < 0) return "";
+  const inner = markdown.slice(from + start.length);
+  const to = inner.indexOf(end);
+  return to >= 0 ? inner.slice(0, to) : inner;
+}
+
+/** 取出从标记到下一个 `###` 标题之间的内容（标题可能缩进在折叠容器内）。 */
+function markdownSectionTilHeading(markdown: string, start: string): string {
+  const from = markdown.indexOf(start);
+  if (from < 0) return "";
+  const inner = markdown.slice(from + start.length);
+  const to = inner.search(/\n\s*###\s/);
+  return to >= 0 ? inner.slice(0, to) : inner;
+}
+
 /**
- * 解析模型概览文档「文本模型」表格。每行：
- * `| [GLM-5.2](/cn/guide/models/text/glm-5.2) | 特点 | 1M | 128K |`。
+ * 解析模型概览文档中的文本模型表格。官方文档多次改版：旗舰模型
+ * `glm-5.3` / `glm-5.2` 已从「### 文本模型」表移到顶部「## 推荐模型」表，
+ * 而「### 文本模型」表则被收进 `<Accordion>` 折叠面板。因此同时解析
+ * `## 推荐模型`…`<Accordion>` 和 `### 文本模型`…下一个 `###` 标题之间的
+ * `| [模型](链接) | 特点 | 上下文 | 最大输出 |` 行。
  */
 export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
-  const section =
-    markdown.split("### 文本模型")[1]?.split("### 视觉模型")[0] ?? "";
+  const recommended = markdownBetween(markdown, "## 推荐模型", "<Accordion");
+  const text = markdownSectionTilHeading(markdown, "### 文本模型");
   const models: ZhipuOverviewModel[] = [];
-  for (const line of section.split("\n")) {
-    const match = line.match(
-      /^\s*\|\s*\[([^\]]+)\]\((\/cn\/guide\/models\/[^)]+)\)\s*\|.*\|\s*(\S+)\s*\|\s*(\S+)\s*\|/,
+  const seen = new Set<string>();
+  for (const line of `${recommended}\n${text}`.split("\n")) {
+    const cells = splitTableRow(line);
+    if (cells.length < 4) continue;
+    const nameMatch = cells[0]!.match(
+      /\[([^\]]+)\]\((\/cn\/guide\/models\/[^)]+)\)/,
     );
-    if (!match) continue;
-    const idMatch = match[1]!.toLowerCase().match(/(glm[-a-z0-9.]+)/);
-    if (!idMatch) continue;
+    if (!nameMatch) continue;
+    const idMatch = nameMatch[1]!.toLowerCase().match(/(glm[-a-z0-9.]+)/);
+    if (!idMatch || seen.has(idMatch[1]!)) continue;
+    const contextTokens = parseTokenCount(cells[2]!);
+    const maxOutputTokens = parseTokenCount(cells[3]!);
+    if (contextTokens === undefined || maxOutputTokens === undefined) continue;
+    seen.add(idMatch[1]!);
     models.push({
       id: idMatch[1]!,
-      name: match[1]!,
-      url: match[2]!,
-      contextTokens: tokenCount(match[3]!),
-      maxOutputTokens: tokenCount(match[4]!),
+      name: nameMatch[1]!,
+      url: nameMatch[2]!,
+      contextTokens,
+      maxOutputTokens,
     });
   }
   if (!models.length) {
@@ -520,14 +557,18 @@ export async function collectZhipuChina(
 }
 
 /**
- * 解析国际站定价 markdown「Text Models」表格。每行：
+ * 解析国际站定价 markdown 的「Latest Models」与「Text Models」两张表。每行：
  * `| GLM-5.2 | $1.4 | $0.26 | Limited-time Free | $4.4 |`。单档价格，无分档。
+ * 官方将 `glm-5.3` / `glm-5.2` 上移到新增的「### Latest Models」表，因此两段合并解析。
  */
 export function parseZhipuInternationalPricing(
   markdown: string,
 ): Map<string, ModelPrice> {
-  const section =
+  const latest =
+    markdown.split("### Latest Models")[1]?.split("### Text Models")[0] ?? "";
+  const text =
     markdown.split("### Text Models")[1]?.split("### Vision Models")[0] ?? "";
+  const section = `${latest}\n${text}`;
   const result = new Map<string, ModelPrice>();
   for (const line of section.split("\n")) {
     const idMatch = line.toLowerCase().match(/(glm[-a-z0-9.]+)/);

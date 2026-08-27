@@ -281,25 +281,74 @@ Prices per 1M tokens.
       "contains no target GLM models",
     );
   });
+
+  it("reads flagship models moved into the Latest Models section", () => {
+    const PRICING_LATEST = `# Pricing
+
+## Models
+
+### Latest Models
+
+Prices per 1M tokens.
+
+| Model | Input | Cached Input | Cached Input Storage | Output |
+| :-- | :-- | :-- | :-- | :-- |
+| GLM-5.3 | $1.4 | $0.26 | Limited-time Free | $4.4 |
+| GLM-5.2 | $1.4 | $0.26 | Limited-time Free | $4.4 |
+
+### Text Models
+
+| Model | Input | Cached Input | Cached Input Storage | Output |
+| :-- | :-- | :-- | :-- | :-- |
+| GLM-5.1 | $1.4 | $0.26 | Limited-time Free | $4.4 |
+| GLM-4.7-Flash | Free | Free | Free | Free |
+
+### Vision Models
+`;
+    const prices = parseZhipuInternationalPricing(PRICING_LATEST);
+    expect(prices.get("glm-5.3")).toMatchObject({
+      input: { standard: 1.4, cacheHit: 0.26 },
+      output: 4.4,
+    });
+    expect(prices.get("glm-5.2")).toMatchObject({
+      input: { standard: 1.4, cacheHit: 0.26 },
+      output: 4.4,
+    });
+    expect(prices.get("glm-5.1")).toMatchObject({ output: 4.4 });
+    expect(prices.get("glm-4.7-flash")).toMatchObject({
+      input: { standard: 0, cacheHit: 0 },
+      output: 0,
+    });
+  });
 });
 
 describe("Zhipu model overview parser", () => {
-  const OVERVIEW = `## 模型一览
+  const OVERVIEW = `# 模型概览
 
-### 文本模型
+## 推荐模型
 
 | 模型 | 特点 | 上下文 | 最大输出 |
 | :-- | :-- | :-- | :-- |
 | [GLM-5.3](/cn/guide/models/text/glm-5.3) | 最新旗舰 | 1M | 128K |
+| [GLM-5.3-Flash](/cn/guide/models/vlm/glm-5.3-flash) | 原生多模态 | 1M | 128K |
 | [GLM-5.2](/cn/guide/models/text/glm-5.2) | 1M 上下文 | 1M | 128K |
-| [GLM-5-Turbo](/cn/guide/models/text/glm-5-turbo) | 龙虾优化 | 200K | 128K |
-| [GLM-4.5-Air](/cn/guide/models/text/glm-4.5) | 高性价比 | 128K | 96K |
-| [GLM-4.7-Flash](/cn/guide/models/free/glm-4.7-flash) | 免费模型 | 200K | 128K |
+| [GLM-Image](/cn/guide/models/image-generation/glm-image) | 图像生成 |  |  |
+| [Embedding-3](/cn/guide/models/embedding/embedding-3) | 向量化模型 | 8K | - |
 
-### 视觉模型
+<Accordion title="全部模型">
+  ### 文本模型
+
+  | 模型 | 特点 | 上下文 | 最大输出 |
+  | :-- | :-- | :-- | :-- |
+  | [GLM-5.1](/cn/guide/models/text/glm-5.1) | 长程任务 | 200K | 128K |
+  | [GLM-5-Turbo](/cn/guide/models/text/glm-5-turbo) | 龙虾优化 | 200K | 128K |
+  | [GLM-4.5-Air](/cn/guide/models/text/glm-4.5) | 高性价比 | 128K | 96K |
+  | [GLM-4.7-Flash](/cn/guide/models/free/glm-4.7-flash) | 免费模型 | 200K | 128K |
+
+  ### 视觉理解模型
 `;
 
-  it("parses context and output token limits", () => {
+  it("parses context and output token limits across both tables", () => {
     const models = parseZhipuOverview(OVERVIEW);
     expect(models).toEqual([
       {
@@ -310,10 +359,24 @@ describe("Zhipu model overview parser", () => {
         maxOutputTokens: 131_072,
       },
       {
+        id: "glm-5.3-flash",
+        name: "GLM-5.3-Flash",
+        url: "/cn/guide/models/vlm/glm-5.3-flash",
+        contextTokens: 1_000_000,
+        maxOutputTokens: 131_072,
+      },
+      {
         id: "glm-5.2",
         name: "GLM-5.2",
         url: "/cn/guide/models/text/glm-5.2",
         contextTokens: 1_000_000,
+        maxOutputTokens: 131_072,
+      },
+      {
+        id: "glm-5.1",
+        name: "GLM-5.1",
+        url: "/cn/guide/models/text/glm-5.1",
+        contextTokens: 204_800,
         maxOutputTokens: 131_072,
       },
       {
