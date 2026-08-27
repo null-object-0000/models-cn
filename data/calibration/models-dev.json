@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-25T08:00:48.914Z",
-    "lastAttemptAt": "2026-08-25T08:00:48.914Z",
+    "lastSuccessfulAt": "2026-08-27T02:26:25.321Z",
+    "lastAttemptAt": "2026-08-27T02:26:25.321Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-08-25T08:00:48.914Z",
-    "contentHash": "sha256:2cda9b2a4712ba22eb37441d6c44aa4e20c2453cb4e64aede45f881740873b1d"
+    "retrievedAt": "2026-08-27T02:26:25.321Z",
+    "contentHash": "sha256:506b64ffa0e623bb932b888601a2393478441c9579c3a177f5fd9b8c7b227f64"
   },
   "models": [
     {
@@ -1618,70 +1618,74 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-5.3",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-5.3/",
-      "status": "missing",
+      "status": "mismatch",
       "checks": [
         {
           "field": "createdAt",
           "official": "2026-08-19",
-          "reference": null,
-          "status": "missing"
+          "reference": "2026-08-14",
+          "status": "mismatch"
         },
         {
           "field": "limits.contextTokens",
           "official": 1000000,
-          "reference": null,
-          "status": "missing"
+          "reference": 1000000,
+          "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
           "official": 131072,
-          "reference": null,
-          "status": "missing"
+          "reference": 131072,
+          "status": "match"
         },
         {
           "field": "capabilities.thinking",
           "official": true,
-          "reference": null,
-          "status": "missing"
+          "reference": true,
+          "status": "match"
         },
         {
           "field": "capabilities.toolCalls",
           "official": true,
-          "reference": null,
-          "status": "missing"
+          "reference": true,
+          "status": "match"
         },
         {
           "field": "capabilities.inputModalities",
           "official": [
             "text"
           ],
-          "reference": null,
-          "status": "missing"
+          "reference": [
+            "text"
+          ],
+          "status": "match"
         },
         {
           "field": "capabilities.outputModalities",
           "official": [
             "text"
           ],
-          "reference": null,
-          "status": "missing"
+          "reference": [
+            "text"
+          ],
+          "status": "match"
         },
         {
           "field": "prices.USD.input.standard",
           "official": null,
-          "reference": null,
+          "reference": 1.4,
           "status": "missing"
         },
         {
           "field": "prices.USD.input.cacheHit",
           "official": null,
-          "reference": null,
+          "reference": 0.26,
           "status": "missing"
         },
         {
           "field": "prices.USD.output",
           "official": null,
-          "reference": null,
+          "reference": 4.4,
           "status": "missing"
         }
       ]

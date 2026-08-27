@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-08-25T08:00:19.056Z",
-    "lastAttemptAt": "2026-08-25T08:00:19.056Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-08-27T02:25:59.125Z",
+    "consecutiveFailures": 1,
+    "message": "Zhipu international model glm-5.3 is missing price or metadata"
   },
   "id": "zhipu-intl",
   "name": "Zhipu International",

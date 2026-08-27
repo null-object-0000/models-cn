@@ -3,8 +3,8 @@
   "provider": "deepseek",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-25T08:00:49.630Z",
-    "lastAttemptAt": "2026-08-25T08:00:49.630Z",
+    "lastSuccessfulAt": "2026-08-27T02:26:25.965Z",
+    "lastAttemptAt": "2026-08-27T02:26:25.965Z",
     "consecutiveFailures": 0
   },
   "source": {

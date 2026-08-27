@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-25T08:00:19.040Z",
-    "lastAttemptAt": "2026-08-25T08:00:19.040Z",
+    "lastSuccessfulAt": "2026-08-27T02:25:46.949Z",
+    "lastAttemptAt": "2026-08-27T02:25:46.949Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
@@ -17,6 +17,48 @@
     "openai": "https://dashscope.aliyuncs.com/compatible-mode/v1"
   },
   "models": [
+    {
+      "id": "qwen3.8-flash",
+      "name": "Qwen3.8-Flash",
+      "createdAt": "2026-08-25T12:16:04.000+00:00",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "chatPrefixCompletion": true,
+        "inputModalities": [
+          "image",
+          "text",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072,
+        "tokensPerMinute": 5000000
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 1,
+            "cacheHit": 0.1,
+            "explicitCacheCreation": 1.25,
+            "explicitCacheHit": 0.1
+          },
+          "output": 3,
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-flash",
+          "validFrom": "2026-08-27T02:26:25.241Z"
+        }
+      ]
+    },
     {
       "id": "qwen3.8-max",
       "name": "Qwen3.8-Max",
@@ -963,16 +1005,16 @@
       "url": "https://www.qianwenai.com/models",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-25T08:00:19.040Z",
-      "contentHash": "sha256:527bc55aa740ad85734775f15bc35155886ade601b25b93ecc6c833650ed6133"
+      "retrievedAt": "2026-08-27T02:25:46.949Z",
+      "contentHash": "sha256:aa608368247cd538edec33bf66a00efd34c65b1be47d0cb7d8d04d0e938a7e05"
     },
     {
       "url": "https://www.qianwenai.com/models",
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-08-25T08:00:19.040Z",
-      "contentHash": "sha256:6661ebd0eacf72da3a67de3267cbf5b15035fcf97af862620cc0172b7d04f32c"
+      "retrievedAt": "2026-08-27T02:25:46.949Z",
+      "contentHash": "sha256:86254767f782dde38f0724af5a8f22d75c8322f1dc19f2ab53ad99065fea5777"
     }
   ]
 }
