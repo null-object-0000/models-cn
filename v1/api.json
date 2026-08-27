@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:19.014Z",
-        "lastAttemptAt": "2026-08-25T08:00:19.014Z",
+        "lastSuccessfulAt": "2026-08-27T03:39:29.919Z",
+        "lastAttemptAt": "2026-08-27T03:39:29.919Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -1422,8 +1422,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:19.029Z",
-        "lastAttemptAt": "2026-08-25T08:00:19.029Z",
+        "lastSuccessfulAt": "2026-08-27T03:39:29.934Z",
+        "lastAttemptAt": "2026-08-27T03:39:29.934Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1574,8 +1574,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:19.033Z",
-        "lastAttemptAt": "2026-08-25T08:00:19.033Z",
+        "lastSuccessfulAt": "2026-08-27T03:39:29.938Z",
+        "lastAttemptAt": "2026-08-27T03:39:29.938Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1889,8 +1889,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:19.058Z",
-        "lastAttemptAt": "2026-08-25T08:00:19.058Z",
+        "lastSuccessfulAt": "2026-08-27T03:39:29.944Z",
+        "lastAttemptAt": "2026-08-27T03:39:29.944Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -2204,8 +2204,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:19.040Z",
-        "lastAttemptAt": "2026-08-25T08:00:19.040Z",
+        "lastSuccessfulAt": "2026-08-27T03:39:29.947Z",
+        "lastAttemptAt": "2026-08-27T03:39:29.947Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2219,6 +2219,48 @@
         "openai": "https://dashscope.aliyuncs.com/compatible-mode/v1"
       },
       "models": [
+        {
+          "id": "qwen3.8-flash",
+          "name": "Qwen3.8-Flash",
+          "createdAt": "2026-08-25T12:16:04.000+00:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "chatPrefixCompletion": true,
+            "inputModalities": [
+              "image",
+              "text",
+              "video"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 131072,
+            "tokensPerMinute": 5000000
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 1,
+                "cacheHit": 0.1,
+                "explicitCacheCreation": 1.25,
+                "explicitCacheHit": 0.1
+              },
+              "output": 3,
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-flash",
+              "validFrom": "2026-08-27T03:40:09.723Z"
+            }
+          ]
+        },
         {
           "id": "qwen3.8-max",
           "name": "Qwen3.8-Max",
@@ -2876,16 +2918,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-25T08:00:19.040Z",
-          "contentHash": "sha256:527bc55aa740ad85734775f15bc35155886ade601b25b93ecc6c833650ed6133"
+          "retrievedAt": "2026-08-27T03:39:29.947Z",
+          "contentHash": "sha256:3d1687da8299c6629e8d8eb4bca5e17ed45c9fd417c347f85ec3a8c1fd3ce914"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-25T08:00:19.040Z",
-          "contentHash": "sha256:6661ebd0eacf72da3a67de3267cbf5b15035fcf97af862620cc0172b7d04f32c"
+          "retrievedAt": "2026-08-27T03:39:29.947Z",
+          "contentHash": "sha256:ac86c9426dd26949def0e2f4a7df2d17bb9d11ee68786324c690b4ee1991afb0"
         }
       ]
     },
@@ -2893,8 +2935,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:19.051Z",
-        "lastAttemptAt": "2026-08-25T08:00:19.051Z",
+        "lastSuccessfulAt": "2026-08-27T03:39:29.958Z",
+        "lastAttemptAt": "2026-08-27T03:39:29.958Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -3394,15 +3436,15 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-19T05:53:14.974Z",
-          "contentHash": "sha256:034d1a10a73cd892536efd1104cad731f3fb41df0930ad8a9f1d5100356537b7"
+          "retrievedAt": "2026-08-27T03:39:29.958Z",
+          "contentHash": "sha256:d4958eee0f0930adda3e315b5a22ddca1db921b18b0bcbf3a4dba2231419b42f"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-19T05:53:14.974Z",
-          "contentHash": "sha256:ce316cac59cf1b4a71fbc26354db0637de026c28b7e0eb15b30816ec0710dd55"
+          "retrievedAt": "2026-08-27T03:39:29.958Z",
+          "contentHash": "sha256:8546390e9dc97e756151a55999013c4c3f0426ac6b9cb71793e191218487d90f"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
@@ -3417,8 +3459,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:19.056Z",
-        "lastAttemptAt": "2026-08-25T08:00:19.056Z",
+        "lastSuccessfulAt": "2026-08-27T03:39:29.962Z",
+        "lastAttemptAt": "2026-08-27T03:39:29.962Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -3761,15 +3803,15 @@
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-08-19T05:53:14.978Z",
-          "contentHash": "sha256:00fb8f70e9baf0f7e3dfbecb2838ef6437e2a631ed646ef7533466790bc61b36"
+          "retrievedAt": "2026-08-27T03:39:29.962Z",
+          "contentHash": "sha256:cf1ea5dbdb8a5011085821c73ceb7b4e4ec34f097cd8c47ea3d866188ecca26d"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-19T05:53:14.978Z",
-          "contentHash": "sha256:ce316cac59cf1b4a71fbc26354db0637de026c28b7e0eb15b30816ec0710dd55"
+          "retrievedAt": "2026-08-27T03:39:29.962Z",
+          "contentHash": "sha256:8546390e9dc97e756151a55999013c4c3f0426ac6b9cb71793e191218487d90f"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
@@ -3787,8 +3829,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:49.630Z",
-        "lastAttemptAt": "2026-08-25T08:00:49.630Z",
+        "lastSuccessfulAt": "2026-08-27T03:40:10.574Z",
+        "lastAttemptAt": "2026-08-27T03:40:10.574Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3831,8 +3873,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:50.055Z",
-        "lastAttemptAt": "2026-08-25T08:00:50.055Z",
+        "lastSuccessfulAt": "2026-08-27T03:40:11.172Z",
+        "lastAttemptAt": "2026-08-27T03:40:11.172Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3865,8 +3907,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:50.354Z",
-        "lastAttemptAt": "2026-08-25T08:00:50.354Z",
+        "lastSuccessfulAt": "2026-08-27T03:40:11.511Z",
+        "lastAttemptAt": "2026-08-27T03:40:11.511Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3921,8 +3963,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:56.690Z",
-        "lastAttemptAt": "2026-08-25T08:00:56.690Z",
+        "lastSuccessfulAt": "2026-08-27T03:40:13.061Z",
+        "lastAttemptAt": "2026-08-27T03:40:13.061Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3963,14 +4005,14 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:57.128Z",
-        "lastAttemptAt": "2026-08-25T08:00:57.128Z",
+        "lastSuccessfulAt": "2026-08-27T03:40:13.463Z",
+        "lastAttemptAt": "2026-08-27T03:40:13.463Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://open.bigmodel.cn/api/paas/v4/models",
-        "retrievedAt": "2026-08-16T02:36:22.749Z",
-        "contentHash": "sha256:97737e5e8370fb8d1233b2f7062fc31dfa757541260ae193f93fd75f1c83cf5b"
+        "retrievedAt": "2026-08-27T03:40:13.463Z",
+        "contentHash": "sha256:5fe7b82231b9429364b12c3567c64d4a6a5b3ae86dc8c65f691791a3b58d5fe2"
       },
       "models": [
         {
@@ -4008,6 +4050,10 @@
         {
           "id": "glm-5.3",
           "ownedBy": "z-ai"
+        },
+        {
+          "id": "glm-5.3-flash",
+          "ownedBy": "z-ai"
         }
       ],
       "comparison": {
@@ -4024,7 +4070,8 @@
         "aliasesAndListed": [],
         "listedWithoutPricing": [
           "glm-4.5",
-          "glm-4.6"
+          "glm-4.6",
+          "glm-5.3-flash"
         ],
         "pricedButNotListed": [
           "glm-4.7-flash",
@@ -4038,14 +4085,14 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:57.481Z",
-        "lastAttemptAt": "2026-08-25T08:00:57.481Z",
+        "lastSuccessfulAt": "2026-08-27T03:40:14.062Z",
+        "lastAttemptAt": "2026-08-27T03:40:14.062Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://api.z.ai/api/paas/v4/models",
-        "retrievedAt": "2026-08-16T02:36:23.559Z",
-        "contentHash": "sha256:97737e5e8370fb8d1233b2f7062fc31dfa757541260ae193f93fd75f1c83cf5b"
+        "retrievedAt": "2026-08-27T03:40:14.062Z",
+        "contentHash": "sha256:5fe7b82231b9429364b12c3567c64d4a6a5b3ae86dc8c65f691791a3b58d5fe2"
       },
       "models": [
         {
@@ -4083,6 +4130,10 @@
         {
           "id": "glm-5.3",
           "ownedBy": "z-ai"
+        },
+        {
+          "id": "glm-5.3-flash",
+          "ownedBy": "z-ai"
         }
       ],
       "comparison": {
@@ -4099,7 +4150,8 @@
         "aliasesAndListed": [],
         "listedWithoutPricing": [
           "glm-4.5",
-          "glm-4.6"
+          "glm-4.6",
+          "glm-5.3-flash"
         ],
         "pricedButNotListed": [
           "glm-4.7-flash",
@@ -4114,14 +4166,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-25T08:00:48.914Z",
-        "lastAttemptAt": "2026-08-25T08:00:48.914Z",
+        "lastSuccessfulAt": "2026-08-27T03:40:09.825Z",
+        "lastAttemptAt": "2026-08-27T03:40:09.825Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-25T08:00:48.914Z",
-        "contentHash": "sha256:2cda9b2a4712ba22eb37441d6c44aa4e20c2453cb4e64aede45f881740873b1d"
+        "retrievedAt": "2026-08-27T03:40:09.825Z",
+        "contentHash": "sha256:506b64ffa0e623bb932b888601a2393478441c9579c3a177f5fd9b8c7b227f64"
       },
       "models": [
         {
@@ -5730,70 +5782,74 @@
           "referenceProvider": "zhipuai",
           "referenceModel": "glm-5.3",
           "referenceUrl": "https://models.dev/models/zhipuai/glm-5.3/",
-          "status": "missing",
+          "status": "mismatch",
           "checks": [
             {
               "field": "createdAt",
               "official": "2026-08-19",
-              "reference": null,
-              "status": "missing"
+              "reference": "2026-08-14",
+              "status": "mismatch"
             },
             {
               "field": "limits.contextTokens",
               "official": 1000000,
-              "reference": null,
-              "status": "missing"
+              "reference": 1000000,
+              "status": "match"
             },
             {
               "field": "limits.maxOutputTokens",
               "official": 131072,
-              "reference": null,
-              "status": "missing"
+              "reference": 131072,
+              "status": "match"
             },
             {
               "field": "capabilities.thinking",
               "official": true,
-              "reference": null,
-              "status": "missing"
+              "reference": true,
+              "status": "match"
             },
             {
               "field": "capabilities.toolCalls",
               "official": true,
-              "reference": null,
-              "status": "missing"
+              "reference": true,
+              "status": "match"
             },
             {
               "field": "capabilities.inputModalities",
               "official": [
                 "text"
               ],
-              "reference": null,
-              "status": "missing"
+              "reference": [
+                "text"
+              ],
+              "status": "match"
             },
             {
               "field": "capabilities.outputModalities",
               "official": [
                 "text"
               ],
-              "reference": null,
-              "status": "missing"
+              "reference": [
+                "text"
+              ],
+              "status": "match"
             },
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": null,
+              "reference": 1.4,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": null,
+              "reference": 0.26,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": null,
+              "reference": 4.4,
               "status": "missing"
             }
           ]
