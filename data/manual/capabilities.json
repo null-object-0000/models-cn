@@ -39,6 +39,15 @@
     },
     {
       "provider": "zhipu-cn",
+      "model": "glm-5.3-flash",
+      "capabilities": {
+        "inputModalities": ["text", "image", "video"],
+        "outputModalities": ["text"]
+      },
+      "note": "原生多模态模型，官方定价页标注图片、视频、文件、文本输入"
+    },
+    {
+      "provider": "zhipu-cn",
       "model": "glm-5.2",
       "capabilities": {
         "inputModalities": ["text"],
@@ -117,6 +126,42 @@
         "outputModalities": ["text"]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-5.3-flash",
+      "capabilities": {
+        "inputModalities": ["text", "image", "video"],
+        "outputModalities": ["text"]
+      },
+      "note": "原生多模态模型，国际站定价页为 Latest Models"
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-4.6",
+      "capabilities": {
+        "inputModalities": ["text"],
+        "outputModalities": ["text"]
+      },
+      "note": "国际站有标准按量价的文本模型，国内站仅有 Batch/私有化计价"
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-4.5-airx",
+      "capabilities": {
+        "inputModalities": ["text"],
+        "outputModalities": ["text"]
+      },
+      "note": "国际站有标准按量价的文本模型，国内站仅有 Batch/私有化计价"
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-4.5-flash",
+      "capabilities": {
+        "inputModalities": ["text"],
+        "outputModalities": ["text"]
+      },
+      "note": "国际站免费文本模型，国内站仅有 Batch/私有化计价"
     },
     {
       "provider": "zhipu-intl",

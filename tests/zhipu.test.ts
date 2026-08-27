@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
+  collectZhipuChina,
+  collectZhipuInternational,
   parseZhipuCapabilities,
   parseZhipuInternationalPricing,
   parseZhipuOverview,
@@ -218,6 +220,23 @@ describe("Zhipu pricing DOM parser", () => {
     expect(flash?.prices).toEqual([{ input: 0, cacheHit: 0, output: 0 }]);
   });
 
+  it("uses the effective price from dual-value promo cells", () => {
+    const rows: ZhipuDomCell[][] = [
+      [
+        cell(1, "GLM-5.3-Flash 5折限时两周"),
+        cell(2, "1M"),
+        cell(3, "0.4元 0.8元"),
+        cell(4, "1.4元 2.8元"),
+        cell(5, "限时免费"),
+        cell(6, "0.115元 0.23元"),
+      ],
+    ];
+    const parsed = parseZhipuPricingDom(rows);
+    expect(
+      parsed.find((model) => model.id === "glm-5.3-flash")?.prices,
+    ).toEqual([{ input: 0.4, cacheHit: 0.115, output: 1.4 }]);
+  });
+
   it("rejects an empty table", () => {
     expect(() => parseZhipuPricingDom([])).toThrow("contains no models");
   });
@@ -318,6 +337,22 @@ Prices per 1M tokens.
     expect(prices.get("glm-4.7-flash")).toMatchObject({
       input: { standard: 0, cacheHit: 0 },
       output: 0,
+    });
+  });
+
+  it("uses the non-strikethrough effective price for discounted models", () => {
+    const markdown = `# Pricing
+
+### Latest Models
+
+| Model | Input | Cached Input | Cached Input Storage | Output |
+| :-- | :-- | :-- | :-- | :-- |
+| GLM-5.3-Flash | ~~$0.15~~ $0.075 | ~~$0.03~~ $0.015 | Limited-time Free | ~~$0.50~~ $0.25 |
+`;
+    const prices = parseZhipuInternationalPricing(markdown);
+    expect(prices.get("glm-5.3-flash")).toMatchObject({
+      input: { standard: 0.075, cacheHit: 0.015 },
+      output: 0.25,
     });
   });
 });
@@ -499,12 +534,119 @@ describe("Zhipu release notes parser", () => {
     expect(dates.get("glm-4.7")).toBe("2025-12-22T00:00:00.000+08:00");
     // GLM-Image 公告链接指向 glm-4.7，但按显示名提取，不污染 glm-4.7 日期。
     expect(dates.get("glm-4.7")).toBe("2025-12-22T00:00:00.000+08:00");
-    // 不在目标清单内的模型（glm-4.5、glm-image）不返回。
-    expect(dates.has("glm-4.5")).toBe(false);
-    expect(dates.has("glm-image")).toBe(false);
+    // 解析器不再依赖硬编码清单，凡公告中出现的 GLM 模型都会提取日期。
+    expect(dates.get("glm-4.5")).toBe("2025-07-28T00:00:00.000+08:00");
+    expect(dates.get("glm-image")).toBe("2026-01-14T00:00:00.000+08:00");
   });
 
   it("returns an empty map for markdown without updates", () => {
     expect(parseZhipuReleaseNotes("# no updates").size).toBe(0);
+  });
+});
+
+describe("Zhipu collectors derive the model set from official sources", () => {
+  const now = new Date("2026-08-27T00:00:00.000Z");
+  const metadata = new Map<string, any>([
+    [
+      "glm-5.3",
+      {
+        id: "glm-5.3",
+        name: "GLM-5.3",
+        url: "/cn/guide/models/text/glm-5.3",
+        contextTokens: 1_000_000,
+        maxOutputTokens: 131_072,
+        capabilities: { thinking: true, toolCalls: true, jsonOutput: true },
+        createdAt: "2026-08-19T00:00:00.000+08:00",
+      },
+    ],
+    [
+      "glm-5.3-flash",
+      {
+        id: "glm-5.3-flash",
+        name: "GLM-5.3-Flash",
+        url: "/cn/guide/models/vlm/glm-5.3-flash",
+        contextTokens: 1_000_000,
+        maxOutputTokens: 131_072,
+        capabilities: { thinking: true, toolCalls: true, jsonOutput: true },
+      },
+    ],
+    [
+      "glm-4.6",
+      {
+        id: "glm-4.6",
+        name: "GLM-4.6",
+        url: "/cn/guide/models/text/glm-4.6",
+        contextTokens: 204_800,
+        maxOutputTokens: 131_072,
+        capabilities: { thinking: true, toolCalls: true, jsonOutput: true },
+      },
+    ],
+  ]);
+
+  it("includes new models present in both metadata and CN pricing", async () => {
+    const rows: ZhipuDomCell[][] = [
+      [
+        cell(1, "GLM-5.3 新品"),
+        cell(2, "1M"),
+        cell(3, "8元"),
+        cell(4, "28元"),
+        cell(5, "限时免费"),
+        cell(6, "2元"),
+      ],
+      [
+        cell(1, "GLM-5.3-Flash 5折限时两周"),
+        cell(2, "1M"),
+        cell(3, "0.4元 0.8元"),
+        cell(4, "1.4元 2.8元"),
+        cell(5, "限时免费"),
+        cell(6, "0.115元 0.23元"),
+      ],
+    ];
+    const provider = await collectZhipuChina(
+      now,
+      () => Promise.resolve(rows),
+      () => Promise.resolve(metadata),
+    );
+    // glm-4.6 元数据中存在但没有国内按量价，应被跳过而非报错。
+    expect(provider.models.map((model) => model.id)).toEqual([
+      "glm-5.3",
+      "glm-5.3-flash",
+    ]);
+    expect(
+      provider.models.find((model) => model.id === "glm-5.3-flash")!.prices[0],
+    ).toMatchObject({
+      market: "china",
+      currency: "CNY",
+      input: { standard: 0.4, cacheHit: 0.115 },
+      output: 1.4,
+    });
+  });
+
+  it("includes new models with effective international pricing", async () => {
+    const markdown = `# Pricing
+### Latest Models
+
+| Model | Input | Cached Input | Cached Input Storage | Output |
+| :-- | :-- | :-- | :-- | :-- |
+| GLM-5.3 | $1.4 | $0.26 | Limited-time Free | $4.4 |
+| GLM-5.3-Flash | ~~$0.15~~ $0.075 | ~~$0.03~~ $0.015 | Limited-time Free | ~~$0.50~~ $0.25 |
+`;
+    const provider = await collectZhipuInternational(
+      now,
+      () => Promise.resolve(markdown),
+      () => Promise.resolve(metadata),
+    );
+    expect(provider.models.map((model) => model.id)).toEqual([
+      "glm-5.3",
+      "glm-5.3-flash",
+    ]);
+    expect(
+      provider.models.find((model) => model.id === "glm-5.3-flash")!.prices[0],
+    ).toMatchObject({
+      market: "international",
+      currency: "USD",
+      input: { standard: 0.075, cacheHit: 0.015 },
+      output: 0.25,
+    });
   });
 });

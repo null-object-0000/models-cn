@@ -20,27 +20,13 @@ import { healthyHealth } from "../health.js";
  * - 元数据（上下文 / 最大输出）：`docs.bigmodel.cn/cn/guide/start/model-overview.md`。
  * - 能力字段：各模型详情页「能力支持」Card。
  *
- * 模型范围：以国内定价页「旗舰模型」区块的 9 个文本模型为准（含免费模型
- * `glm-4.7-flash`）。`/models` 清单返回的 `glm-4.5` / `glm-4.6` 在国内定价页只有
- * Batch / 私有化计价、没有标准按量价，因此不收录；它们会通过 Inventory 的
- * `listedWithoutPricing` 如实反映「API 可用但官方定价页无按量价」。
+ * 模型范围：不再维护硬编码模型清单，而是由两条官方来源动态决定：
+ * 1. `model-overview.md` 的「推荐模型」+「文本模型」表给出候选模型及上下文/最大输出；
+ * 2. 国内/国际定价页给出按量价。取两者交集，缺价的模型跳过并告警，不再硬失败。
+ * 因此官方新增核心模型（且同时给出定价）时会自动收录，无需改代码。
+ * 模态（inputModalities / outputModalities）等官方来源拿不到的字段统一维护在
+ * `data/manual/capabilities.json`，同样按模型逐条登记。
  */
-
-export const ZHIPU_MODEL_IDS = [
-  "glm-5.3",
-  "glm-5.2",
-  "glm-5.1",
-  "glm-5-turbo",
-  "glm-5",
-  "glm-4.7",
-  "glm-4.5-air",
-  "glm-4.7-flashx",
-  "glm-4.7-flash",
-] as const;
-
-function isZhipuModelId(id: string): boolean {
-  return (ZHIPU_MODEL_IDS as readonly string[]).includes(id);
-}
 
 export const ZHIPU_PRICING_URL = "https://bigmodel.cn/pricing" as const;
 export const ZHIPU_INTL_PRICING_URL =
@@ -121,6 +107,20 @@ function parseUsd(value: string): number {
   const match = value.match(/[\d.]+/);
   if (!match) throw new Error(`Cannot parse Zhipu USD price: ${value}`);
   return Number(match[0]);
+}
+
+/** 去掉 markdown 删除线（`~~原价~~`），保留当前有效价。 */
+function stripStrikethrough(value: string): string {
+  return value.replace(/~~[^~]*~~/g, "");
+}
+
+/** 解析 USD 当前有效价（促销价优先于被删除线的原价）。 */
+function parseUsdEffective(value: string): number {
+  return parseUsd(stripStrikethrough(value));
+}
+
+function parseUsdEffectiveOrDash(value: string): number | undefined {
+  return parseUsdOrDash(stripStrikethrough(value));
 }
 
 function parseUsdOrDash(value: string): number | undefined {
@@ -348,7 +348,8 @@ export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
  * 解析智谱「新品发布」页，返回每个模型首次发布的 ISO 日期。
  * 公告块形如 `<Update label="2026-06-16" description="GLM-5.2 新一代旗舰模型上线">`，
  * 正文里用 `[**GLM-5.2**](/cn/guide/models/text/glm-5.2)` 指向模型。
- * 取每个目标模型**最早**出现的公告日期作为发布时间；未出现在公告中的模型不设日期。
+ * 取每个模型**最早**出现的公告日期作为发布时间；未出现在公告中的模型不设日期。
+ * 解析所有 GLM 开头的模型名，不再依赖硬编码清单，新模型自动获得发布日期。
  */
 export function parseZhipuReleaseNotes(markdown: string): Map<string, string> {
   const result = new Map<string, string>();
@@ -364,7 +365,7 @@ export function parseZhipuReleaseNotes(markdown: string): Map<string, string> {
     const names = body.matchAll(/\*\*([^*\]]+)\*\*/g);
     for (const match of names) {
       const id = match[1]?.toLowerCase().match(/(glm[-a-z0-9.]+)/)?.[1];
-      if (!id || !isZhipuModelId(id)) continue;
+      if (!id) continue;
       const iso = `${isoDate}T00:00:00.000+08:00`;
       const existing = result.get(id);
       // 取最早日期（首次发布）；ISO 字符串可直接按字典序比较。
@@ -488,16 +489,15 @@ export async function collectZhipuChina(
   const parsed = parseZhipuPricingDom(rows);
   const byId = new Map(parsed.map((model) => [model.id, model]));
   const models: ModelData[] = [];
-  for (const id of ZHIPU_MODEL_IDS) {
-    const meta = metadata.get(id);
-    const priceModel = byId.get(id);
-    if (!meta || !priceModel) {
-      throw new Error(
-        `Zhipu flagship model ${id} is missing price or metadata`,
-      );
+  const skipped: string[] = [];
+  for (const meta of metadata.values()) {
+    const priceModel = byId.get(meta.id);
+    if (!priceModel) {
+      skipped.push(meta.id);
+      continue;
     }
     models.push({
-      id,
+      id: meta.id,
       name: meta.name,
       ...(meta.createdAt ? { createdAt: meta.createdAt } : {}),
       aliases: [],
@@ -526,6 +526,16 @@ export async function collectZhipuChina(
         sourceUrl: ZHIPU_PRICING_URL,
       })),
     });
+  }
+  if (!models.length) {
+    throw new Error(
+      "Zhipu pricing page contains no model with both price and metadata",
+    );
+  }
+  if (skipped.length) {
+    console.warn(
+      `zhipu-cn skipped models without CN pricing: ${skipped.join(", ")}`,
+    );
   }
   const retrievedAt = now.toISOString();
   const pricingHash = createHash("sha256")
@@ -572,16 +582,16 @@ export function parseZhipuInternationalPricing(
   const result = new Map<string, ModelPrice>();
   for (const line of section.split("\n")) {
     const idMatch = line.toLowerCase().match(/(glm[-a-z0-9.]+)/);
-    if (!idMatch || !idMatch[1] || !isZhipuModelId(idMatch[1])) continue;
+    if (!idMatch || !idMatch[1]) continue;
     const cells = line
       .split("|")
       .map((cell) => cell.trim())
       .filter((cell, index, array) => index > 0 && index < array.length - 1);
     // cells: [Model, Input, Cached Input, Cached Input Storage, Output]
     if (cells.length < 5) continue;
-    const input = parseUsd(cells[1]!);
-    const cacheHit = parseUsdOrDash(cells[2]!);
-    const output = parseUsd(cells[4]!);
+    const input = parseUsdEffective(cells[1]!);
+    const cacheHit = parseUsdEffectiveOrDash(cells[2]!);
+    const output = parseUsdEffective(cells[4]!);
     result.set(idMatch[1]!, {
       market: "international",
       currency: "USD",
@@ -613,16 +623,15 @@ export async function collectZhipuInternational(
   ]);
   const prices = parseZhipuInternationalPricing(markdown);
   const models: ModelData[] = [];
-  for (const id of ZHIPU_MODEL_IDS) {
-    const meta = metadata.get(id);
-    const price = prices.get(id);
-    if (!meta || !price) {
-      throw new Error(
-        `Zhipu international model ${id} is missing price or metadata`,
-      );
+  const skipped: string[] = [];
+  for (const meta of metadata.values()) {
+    const price = prices.get(meta.id);
+    if (!price) {
+      skipped.push(meta.id);
+      continue;
     }
     models.push({
-      id,
+      id: meta.id,
       name: meta.name,
       ...(meta.createdAt ? { createdAt: meta.createdAt } : {}),
       aliases: [],
@@ -637,6 +646,16 @@ export async function collectZhipuInternational(
       },
       prices: [price],
     });
+  }
+  if (!models.length) {
+    throw new Error(
+      "Z.AI pricing markdown contains no model with both price and metadata",
+    );
+  }
+  if (skipped.length) {
+    console.warn(
+      `zhipu-intl skipped models without international pricing: ${skipped.join(", ")}`,
+    );
   }
   const retrievedAt = now.toISOString();
   const pricingHash = createHash("sha256")
