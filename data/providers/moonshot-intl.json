@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-08-30T17:32:13.606Z",
-    "lastAttemptAt": "2026-08-30T17:32:13.606Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-08-31T15:08:35.599Z",
+    "consecutiveFailures": 1,
+    "message": "Kimi pricing page is missing its rows table"
   },
   "id": "moonshot-intl",
   "name": "Kimi International",
