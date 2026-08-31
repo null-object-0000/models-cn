@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-27T04:09:46.476Z",
-    "lastAttemptAt": "2026-08-27T04:09:46.476Z",
+    "lastSuccessfulAt": "2026-08-30T17:32:13.630Z",
+    "lastAttemptAt": "2026-08-30T17:32:13.630Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-cn",
@@ -56,7 +56,7 @@
     {
       "id": "glm-5.3-flash",
       "name": "GLM-5.3-Flash",
-      "createdAt": "2026-08-25T00:00:00.000+08:00",
+      "createdAt": "2026-08-26T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -548,15 +548,15 @@
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-27T04:09:46.476Z",
-      "contentHash": "sha256:ee5c0333b6f2826d3f7667e0f894489260e31365a99a76fff344ae1e3fc77ceb"
+      "retrievedAt": "2026-08-30T17:32:13.630Z",
+      "contentHash": "sha256:6a02a20fb816d3a836d84f09494130b9584407a155241005f066ef23b95dd7f4"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-27T04:09:46.476Z",
-      "contentHash": "sha256:48ac881641db5cdf84de7b906f73fd85f10941514fd0e24c6ea2064e77e55339"
+      "retrievedAt": "2026-08-30T17:32:13.630Z",
+      "contentHash": "sha256:0f8d03e40e0658c6bbce474fbfde30a3bac21f8d23fd5457870be8446b402e9a"
     }
   ]
 }
