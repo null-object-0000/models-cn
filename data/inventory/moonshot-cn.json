@@ -3,21 +3,16 @@
   "provider": "moonshot-cn",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-30T17:32:53.341Z",
-    "lastAttemptAt": "2026-08-30T17:32:53.341Z",
+    "lastSuccessfulAt": "2026-09-04T05:58:17.703Z",
+    "lastAttemptAt": "2026-09-04T05:58:17.703Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://api.moonshot.cn/v1/models",
-    "retrievedAt": "2026-07-23T09:12:43.934Z",
-    "contentHash": "sha256:3f659883640ea7f7bdd4f2c370984fe76ceba22f9855fecc779f57e20a332bfc"
+    "retrievedAt": "2026-09-04T05:58:17.703Z",
+    "contentHash": "sha256:bbfafe44aecd30773b02ccd4ddbedb0905979c9188aefbba027f60909cd991a9"
   },
   "models": [
-    {
-      "id": "kimi-k2.5",
-      "ownedBy": "moonshot",
-      "contextTokens": 262144
-    },
     {
       "id": "kimi-k2.6",
       "ownedBy": "moonshot",
@@ -40,9 +35,8 @@
     }
   ],
   "comparison": {
-    "status": "match",
+    "status": "mismatch",
     "pricedAndListed": [
-      "kimi-k2.5",
       "kimi-k2.6",
       "kimi-k2.7-code",
       "kimi-k2.7-code-highspeed",
@@ -50,7 +44,9 @@
     ],
     "aliasesAndListed": [],
     "listedWithoutPricing": [],
-    "pricedButNotListed": [],
+    "pricedButNotListed": [
+      "kimi-k2.5"
+    ],
     "activeAliasesNotListed": []
   }
 }
