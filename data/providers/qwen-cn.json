@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-30T17:32:13.618Z",
-    "lastAttemptAt": "2026-08-30T17:32:13.618Z",
+    "lastSuccessfulAt": "2026-09-05T16:06:27.906Z",
+    "lastAttemptAt": "2026-09-05T16:06:27.906Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
@@ -17,6 +17,48 @@
     "openai": "https://dashscope.aliyuncs.com/compatible-mode/v1"
   },
   "models": [
+    {
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8-Max",
+      "createdAt": "2026-08-02T04:14:32.000+00:00",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "chatPrefixCompletion": true,
+        "inputModalities": [
+          "image",
+          "text",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072,
+        "tokensPerMinute": 5000000
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 12,
+            "cacheHit": 1.5,
+            "explicitCacheCreation": 15,
+            "explicitCacheHit": 1
+          },
+          "output": 36,
+          "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max",
+          "validFrom": "2026-08-03T05:19:40.310Z"
+        }
+      ]
+    },
     {
       "id": "qwen3.8-flash",
       "name": "Qwen3.8-Flash",
@@ -74,48 +116,6 @@
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-flash",
           "validFrom": "2026-08-27T03:40:09.723Z",
           "validTo": "2026-08-30T17:32:51.393Z"
-        }
-      ]
-    },
-    {
-      "id": "qwen3.8-max",
-      "name": "Qwen3.8-Max",
-      "createdAt": "2026-08-02T04:14:32.000+00:00",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "chatPrefixCompletion": true,
-        "inputModalities": [
-          "image",
-          "text",
-          "video"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 1000000,
-        "maxOutputTokens": 131072,
-        "tokensPerMinute": 5000000
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 12,
-            "cacheHit": 1.5,
-            "explicitCacheCreation": 15,
-            "explicitCacheHit": 1
-          },
-          "output": 36,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max",
-          "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
     },
@@ -263,7 +263,9 @@
           "output": 36,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
           "validFrom": "2026-08-03T05:19:40.310Z"
-        },
+        }
+      ],
+      "priceHistory": [
         {
           "market": "china",
           "currency": "CNY",
@@ -277,7 +279,8 @@
           },
           "output": 18,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
-          "validFrom": "2026-08-03T05:19:40.310Z"
+          "validFrom": "2026-08-03T05:19:40.310Z",
+          "validTo": "2026-09-05T16:06:59.378Z"
         }
       ]
     },
@@ -1023,16 +1026,16 @@
       "url": "https://www.qianwenai.com/models",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-30T17:32:13.618Z",
-      "contentHash": "sha256:12b17534fbd6d096083608882774b00af84c98118337b378ee91717456a98720"
+      "retrievedAt": "2026-09-05T16:06:27.906Z",
+      "contentHash": "sha256:5de01ac8bb3d25e83a8844aaed00a7fff8969492d45defcfd34563ab24d3625a"
     },
     {
       "url": "https://www.qianwenai.com/models",
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-08-30T17:32:13.618Z",
-      "contentHash": "sha256:237fed2144c8deda3358f7c5c5e016bfcaa7b6f5eddcccbebf6f11b1425426bd"
+      "retrievedAt": "2026-09-05T16:06:27.906Z",
+      "contentHash": "sha256:3e35177e040145e6a4aab8838ac3d11ec8ba35490f13bfdf1552278a12c6d8ae"
     }
   ]
 }
