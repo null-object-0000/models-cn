@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-30T17:32:13.635Z",
-    "lastAttemptAt": "2026-08-30T17:32:13.635Z",
+    "lastSuccessfulAt": "2026-09-09T17:10:31.758Z",
+    "lastAttemptAt": "2026-09-09T17:10:31.758Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -82,12 +82,28 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
+            "standard": 0.15,
+            "cacheHit": 0.03
+          },
+          "output": 0.5,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-09-09T17:10:38.157Z"
+        }
+      ],
+      "priceHistory": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
             "standard": 0.075,
             "cacheHit": 0.015
           },
           "output": 0.25,
           "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-27T04:09:55.724Z"
+          "validFrom": "2026-08-27T04:09:55.724Z",
+          "validTo": "2026-09-09T17:10:38.157Z"
         }
       ]
     },
@@ -454,8 +470,8 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-08-30T17:32:13.635Z",
-      "contentHash": "sha256:3a444c9e57a4a050df7bf98348424aa2328abcda27c71968114894d84b1c4010"
+      "retrievedAt": "2026-09-09T17:10:31.758Z",
+      "contentHash": "sha256:7397f69615157fd4b6379f5b73ece37d41ed6e29cf2b453ea6146293ecb67cd3"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",

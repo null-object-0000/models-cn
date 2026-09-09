@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-08-30T17:32:13.630Z",
-    "lastAttemptAt": "2026-08-30T17:32:13.630Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-09-09T17:10:52.371Z",
+    "consecutiveFailures": 1,
+    "message": "Zhipu pricing page contains no flagship model table"
   },
   "id": "zhipu-cn",
   "name": "Zhipu China",
