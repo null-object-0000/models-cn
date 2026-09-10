@@ -3,22 +3,18 @@
   "provider": "deepseek",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-30T17:32:52.351Z",
-    "lastAttemptAt": "2026-08-30T17:32:52.351Z",
+    "lastSuccessfulAt": "2026-09-10T06:04:43.529Z",
+    "lastAttemptAt": "2026-09-10T06:04:43.529Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://api.deepseek.com/models",
-    "retrievedAt": "2026-08-21T14:00:54.569Z",
-    "contentHash": "sha256:6b523d32ee08d4c945e0829660620e4d5cd58d97d32b60d7468a8da4b5f00e04"
+    "retrievedAt": "2026-09-10T06:04:43.529Z",
+    "contentHash": "sha256:fadc1bcddcd7ab4acedc726b354c91b4f5df66cca7612f6fad9be13c139c64bc"
   },
   "models": [
     {
-      "id": "deepseek-v4-flash",
-      "ownedBy": "deepseek"
-    },
-    {
-      "id": "deepseek-v4-flash-vision-exp",
+      "id": "deepseek-flash",
       "ownedBy": "deepseek"
     },
     {
@@ -27,18 +23,14 @@
     }
   ],
   "comparison": {
-    "status": "mismatch",
+    "status": "match",
     "pricedAndListed": [
-      "deepseek-v4-flash",
-      "deepseek-v4-flash-vision-exp",
+      "deepseek-flash",
       "deepseek-v4-pro"
     ],
     "aliasesAndListed": [],
     "listedWithoutPricing": [],
     "pricedButNotListed": [],
-    "activeAliasesNotListed": [
-      "deepseek-chat",
-      "deepseek-reasoner"
-    ]
+    "activeAliasesNotListed": []
   }
 }

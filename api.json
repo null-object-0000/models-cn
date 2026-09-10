@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:13.598Z",
-        "lastAttemptAt": "2026-08-30T17:32:13.598Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:01.145Z",
+        "lastAttemptAt": "2026-09-10T06:04:01.145Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -22,30 +22,15 @@
       },
       "models": [
         {
-          "id": "deepseek-v4-flash",
-          "name": "DeepSeek-V4-Flash-0731",
-          "aliases": [
-            {
-              "id": "deepseek-chat",
-              "mode": "non-thinking"
-            },
-            {
-              "id": "deepseek-reasoner",
-              "mode": "thinking"
-            }
-          ],
+          "id": "deepseek-flash",
+          "name": "DeepSeek-V4.1-Flash",
+          "aliases": [],
           "capabilities": {
             "thinking": true,
             "jsonOutput": true,
             "toolCalls": true,
             "chatPrefixCompletion": true,
-            "fimCompletion": "non-thinking-only",
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
+            "fimCompletion": "non-thinking-only"
           },
           "limits": {
             "contextTokens": 1000000,
@@ -107,12 +92,12 @@
               },
               "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
-                "cacheHit": 0.05,
-                "standard": 1.5
+                "cacheHit": 0.02,
+                "standard": 1
               },
-              "output": 4.5,
+              "output": 4,
               "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-23T02:01:02.268Z"
+              "validFrom": "2026-09-10T06:04:03.930Z"
             },
             {
               "market": "china",
@@ -149,12 +134,12 @@
               },
               "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
-                "cacheHit": 0.1,
-                "standard": 3
+                "cacheHit": 0.04,
+                "standard": 2
               },
-              "output": 9,
+              "output": 8,
               "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-23T02:01:02.268Z"
+              "validFrom": "2026-09-10T06:04:03.930Z"
             },
             {
               "market": "international",
@@ -210,12 +195,12 @@
               },
               "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
-                "cacheHit": 0.007,
-                "standard": 0.22
+                "cacheHit": 0.003,
+                "standard": 0.15
               },
-              "output": 0.66,
+              "output": 0.6,
               "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-23T02:01:02.268Z"
+              "validFrom": "2026-09-10T06:04:03.930Z"
             },
             {
               "market": "international",
@@ -252,288 +237,12 @@
               },
               "effectiveFrom": "2026-08-23T00:00:00+08:00",
               "input": {
-                "cacheHit": 0.014,
-                "standard": 0.44
+                "cacheHit": 0.006,
+                "standard": 0.3
               },
-              "output": 1.32,
+              "output": 1.2,
               "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-23T02:01:02.268Z"
-            }
-          ],
-          "priceHistory": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "空闲时段",
-                "timeZone": "Asia/Shanghai",
-                "intervals": [
-                  {
-                    "start": "00:00",
-                    "end": "09:00"
-                  },
-                  {
-                    "start": "12:00",
-                    "end": "14:00"
-                  },
-                  {
-                    "start": "18:00",
-                    "end": "00:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.05,
-                "standard": 1.5
-              },
-              "output": 4.5,
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-17T07:45:18.777Z",
-              "validTo": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "高峰时段",
-                "timeZone": "Asia/Shanghai",
-                "intervals": [
-                  {
-                    "start": "09:00",
-                    "end": "12:00"
-                  },
-                  {
-                    "start": "14:00",
-                    "end": "18:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.1,
-                "standard": 3
-              },
-              "output": 9,
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-17T07:45:18.777Z",
-              "validTo": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "Off-peak",
-                "timeZone": "UTC",
-                "intervals": [
-                  {
-                    "start": "00:00",
-                    "end": "01:00"
-                  },
-                  {
-                    "start": "04:00",
-                    "end": "06:00"
-                  },
-                  {
-                    "start": "10:00",
-                    "end": "00:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.007,
-                "standard": 0.22
-              },
-              "output": 0.66,
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-17T07:45:18.777Z",
-              "validTo": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "Peak",
-                "timeZone": "UTC",
-                "intervals": [
-                  {
-                    "start": "01:00",
-                    "end": "04:00"
-                  },
-                  {
-                    "start": "06:00",
-                    "end": "10:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.014,
-                "standard": 0.44
-              },
-              "output": 1.32,
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-17T07:45:18.777Z",
-              "validTo": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "cacheHit": 0.02,
-                "standard": 1
-              },
-              "output": 2,
-              "effectiveTo": "2026-08-17T00:00:00+08:00",
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-01T09:23:24.396Z",
-              "validTo": "2026-08-17T07:45:18.777Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "空闲时段",
-                "timeZone": "Asia/Shanghai",
-                "intervals": [
-                  {
-                    "start": "00:00",
-                    "end": "09:00"
-                  },
-                  {
-                    "start": "12:00",
-                    "end": "14:00"
-                  },
-                  {
-                    "start": "18:00",
-                    "end": "00:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.05,
-                "standard": 1.5
-              },
-              "output": 4.5,
-              "effectiveFrom": "2026-08-17T00:00:00+08:00",
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-13T12:09:04.166Z",
-              "validTo": "2026-08-17T07:45:18.777Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "高峰时段",
-                "timeZone": "Asia/Shanghai",
-                "intervals": [
-                  {
-                    "start": "09:00",
-                    "end": "12:00"
-                  },
-                  {
-                    "start": "14:00",
-                    "end": "18:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.1,
-                "standard": 3
-              },
-              "output": 9,
-              "effectiveFrom": "2026-08-17T00:00:00+08:00",
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-13T12:09:04.166Z",
-              "validTo": "2026-08-17T07:45:18.777Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "cacheHit": 0.0028,
-                "standard": 0.14
-              },
-              "output": 0.28,
-              "effectiveTo": "2026-08-16T16:00:00Z",
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-01T09:23:24.396Z",
-              "validTo": "2026-08-17T07:45:18.777Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "Off-peak",
-                "timeZone": "UTC",
-                "intervals": [
-                  {
-                    "start": "00:00",
-                    "end": "01:00"
-                  },
-                  {
-                    "start": "04:00",
-                    "end": "06:00"
-                  },
-                  {
-                    "start": "10:00",
-                    "end": "00:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.007,
-                "standard": 0.22
-              },
-              "output": 0.66,
-              "effectiveFrom": "2026-08-16T16:00:00Z",
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-13T12:09:04.166Z",
-              "validTo": "2026-08-17T07:45:18.777Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "Peak",
-                "timeZone": "UTC",
-                "intervals": [
-                  {
-                    "start": "01:00",
-                    "end": "04:00"
-                  },
-                  {
-                    "start": "06:00",
-                    "end": "10:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.014,
-                "standard": 0.44
-              },
-              "output": 1.32,
-              "effectiveFrom": "2026-08-16T16:00:00Z",
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-13T12:09:04.166Z",
-              "validTo": "2026-08-17T07:45:18.777Z"
+              "validFrom": "2026-09-10T06:04:03.930Z"
             }
           ]
         },
@@ -1043,360 +752,6 @@
               "validTo": "2026-08-17T07:45:18.777Z"
             }
           ]
-        },
-        {
-          "id": "deepseek-v4-flash-vision-exp",
-          "name": "DeepSeek-V4-Flash-Vision-Exp",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "chatPrefixCompletion": true,
-            "fimCompletion": "supported",
-            "inputModalities": [
-              "text",
-              "image"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 1000000,
-            "maxOutputTokens": 384000,
-            "concurrency": 2500
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "空闲时段",
-                "timeZone": "Asia/Shanghai",
-                "intervals": [
-                  {
-                    "start": "00:00",
-                    "end": "09:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  },
-                  {
-                    "start": "12:00",
-                    "end": "14:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  },
-                  {
-                    "start": "18:00",
-                    "end": "00:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  },
-                  {
-                    "start": "00:00",
-                    "end": "00:00",
-                    "days": [
-                      "sat",
-                      "sun"
-                    ]
-                  }
-                ]
-              },
-              "effectiveFrom": "2026-08-23T00:00:00+08:00",
-              "input": {
-                "cacheHit": 0.05,
-                "standard": 1.5
-              },
-              "output": 4.5,
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "高峰时段",
-                "timeZone": "Asia/Shanghai",
-                "intervals": [
-                  {
-                    "start": "09:00",
-                    "end": "12:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  },
-                  {
-                    "start": "14:00",
-                    "end": "18:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  }
-                ]
-              },
-              "effectiveFrom": "2026-08-23T00:00:00+08:00",
-              "input": {
-                "cacheHit": 0.1,
-                "standard": 3
-              },
-              "output": 9,
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "Off-peak",
-                "timeZone": "UTC",
-                "intervals": [
-                  {
-                    "start": "00:00",
-                    "end": "01:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  },
-                  {
-                    "start": "04:00",
-                    "end": "06:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  },
-                  {
-                    "start": "10:00",
-                    "end": "00:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  },
-                  {
-                    "start": "00:00",
-                    "end": "00:00",
-                    "days": [
-                      "sat",
-                      "sun"
-                    ]
-                  }
-                ]
-              },
-              "effectiveFrom": "2026-08-23T00:00:00+08:00",
-              "input": {
-                "cacheHit": 0.007,
-                "standard": 0.22
-              },
-              "output": 0.66,
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "Peak",
-                "timeZone": "UTC",
-                "intervals": [
-                  {
-                    "start": "01:00",
-                    "end": "04:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  },
-                  {
-                    "start": "06:00",
-                    "end": "10:00",
-                    "days": [
-                      "mon",
-                      "tue",
-                      "wed",
-                      "thu",
-                      "fri"
-                    ]
-                  }
-                ]
-              },
-              "effectiveFrom": "2026-08-23T00:00:00+08:00",
-              "input": {
-                "cacheHit": 0.014,
-                "standard": 0.44
-              },
-              "output": 1.32,
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-23T02:01:02.268Z"
-            }
-          ],
-          "priceHistory": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "空闲时段",
-                "timeZone": "Asia/Shanghai",
-                "intervals": [
-                  {
-                    "start": "00:00",
-                    "end": "09:00"
-                  },
-                  {
-                    "start": "12:00",
-                    "end": "14:00"
-                  },
-                  {
-                    "start": "18:00",
-                    "end": "00:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.05,
-                "standard": 1.5
-              },
-              "output": 4.5,
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-21T14:00:12.115Z",
-              "validTo": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "高峰时段",
-                "timeZone": "Asia/Shanghai",
-                "intervals": [
-                  {
-                    "start": "09:00",
-                    "end": "12:00"
-                  },
-                  {
-                    "start": "14:00",
-                    "end": "18:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.1,
-                "standard": 3
-              },
-              "output": 9,
-              "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
-              "validFrom": "2026-08-21T14:00:12.115Z",
-              "validTo": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "Off-peak",
-                "timeZone": "UTC",
-                "intervals": [
-                  {
-                    "start": "00:00",
-                    "end": "01:00"
-                  },
-                  {
-                    "start": "04:00",
-                    "end": "06:00"
-                  },
-                  {
-                    "start": "10:00",
-                    "end": "00:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.007,
-                "standard": 0.22
-              },
-              "output": 0.66,
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-21T14:00:12.115Z",
-              "validTo": "2026-08-23T02:01:02.268Z"
-            },
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "dailyTimeRange": {
-                "label": "Peak",
-                "timeZone": "UTC",
-                "intervals": [
-                  {
-                    "start": "01:00",
-                    "end": "04:00"
-                  },
-                  {
-                    "start": "06:00",
-                    "end": "10:00"
-                  }
-                ]
-              },
-              "input": {
-                "cacheHit": 0.014,
-                "standard": 0.44
-              },
-              "output": 1.32,
-              "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
-              "validFrom": "2026-08-21T14:00:12.115Z",
-              "validTo": "2026-08-23T02:01:02.268Z"
-            }
-          ]
         }
       ],
       "sources": [
@@ -1405,16 +760,16 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-21T14:00:11.111Z",
-          "contentHash": "sha256:70149740d9551cb0fb372f5d191330f2bc8e6a636eee1eea943ee2332f6e3385"
+          "retrievedAt": "2026-09-10T06:04:01.145Z",
+          "contentHash": "sha256:b887ef25a1df7519aa4cf484a4b59596b411df1af06b90bce8392d57f682fbe8"
         },
         {
           "url": "https://api-docs.deepseek.com/quick_start/pricing/",
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-08-21T14:00:11.111Z",
-          "contentHash": "sha256:b7a762b9a47fab753360c33959d8d70b318c5a3401ca141e5258543915756eb6"
+          "retrievedAt": "2026-09-10T06:04:01.145Z",
+          "contentHash": "sha256:92110171264961c64683f906ee6ccb64aef5bedf52797ca225bc7689551ec221"
         }
       ]
     },
@@ -1422,8 +777,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:13.601Z",
-        "lastAttemptAt": "2026-08-30T17:32:13.601Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:01.124Z",
+        "lastAttemptAt": "2026-09-10T06:04:01.124Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1574,8 +929,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:13.560Z",
-        "lastAttemptAt": "2026-08-30T17:32:13.560Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:01.148Z",
+        "lastAttemptAt": "2026-09-10T06:04:01.148Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1789,51 +1144,6 @@
               "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
-        },
-        {
-          "id": "kimi-k2.5",
-          "name": "Kimi K2.5",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "thinkingModes": [
-              "thinking",
-              "non-thinking"
-            ],
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text",
-              "image",
-              "video"
-            ],
-            "outputModalities": [
-              "text"
-            ],
-            "supportedParameters": [
-              "thinking",
-              "temperature"
-            ]
-          },
-          "limits": {
-            "contextTokens": 262144,
-            "maxOutputTokens": 262144
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "cacheHit": 0.7,
-                "standard": 4
-              },
-              "output": 21,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k25",
-              "validFrom": "2026-07-22T05:31:27.415Z"
-            }
-          ]
         }
       ],
       "sources": [
@@ -1862,26 +1172,18 @@
           "contentHash": "sha256:14dab7e484e3641a5fc7e3d2181e773ff08432406446ecc80808b0324bb1d9c9"
         },
         {
-          "url": "https://platform.kimi.com/docs/pricing/chat-k25",
-          "kind": "pricing",
-          "locale": "zh-CN",
-          "currency": "CNY",
-          "retrievedAt": "2026-07-22T05:31:27.415Z",
-          "contentHash": "sha256:b1d3c6a83977c1b340e306e13f61a3dde0f7785618683d884a6e716c5820f2a8"
-        },
-        {
           "url": "https://platform.kimi.com/docs/api/models-overview",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-17T02:35:03.080Z",
-          "contentHash": "sha256:f95142d8ac74eeab65b1c34a6bfb1cdf548d6dfa7f5ec889549e6c4444848dcd"
+          "retrievedAt": "2026-09-10T06:04:01.148Z",
+          "contentHash": "sha256:ace2726b95bd27bc7469bce24923ffdf9c5060f12aba11126cc9465f90395c75"
         },
         {
           "url": "https://platform.kimi.com/docs/guide/troubleshooting#kimi",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-17T02:35:03.080Z",
-          "contentHash": "sha256:b62f18a971dd3b2ab339e6850ac422b65f33faf18fc512950376d9367012b365"
+          "retrievedAt": "2026-09-10T06:04:01.148Z",
+          "contentHash": "sha256:aef94a7fb3b7b956966648bc67c1b55864d8483d547506c4e4de19b993bcb4d8"
         }
       ]
     },
@@ -1889,8 +1191,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:13.606Z",
-        "lastAttemptAt": "2026-08-30T17:32:13.606Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:01.154Z",
+        "lastAttemptAt": "2026-09-10T06:04:01.154Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -2104,51 +1406,6 @@
               "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
-        },
-        {
-          "id": "kimi-k2.5",
-          "name": "Kimi K2.5",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "thinkingModes": [
-              "thinking",
-              "non-thinking"
-            ],
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text",
-              "image",
-              "video"
-            ],
-            "outputModalities": [
-              "text"
-            ],
-            "supportedParameters": [
-              "thinking",
-              "temperature"
-            ]
-          },
-          "limits": {
-            "contextTokens": 262144,
-            "maxOutputTokens": 262144
-          },
-          "prices": [
-            {
-              "market": "international",
-              "currency": "USD",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "cacheHit": 0.1,
-                "standard": 0.6
-              },
-              "output": 3,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k25",
-              "validFrom": "2026-07-23T09:12:31.262Z"
-            }
-          ]
         }
       ],
       "sources": [
@@ -2177,26 +1434,18 @@
           "contentHash": "sha256:0117b5bacedecd716ded845938a84abd60193984bf1e211eac7135c6559f0bb4"
         },
         {
-          "url": "https://platform.kimi.ai/docs/pricing/chat-k25",
-          "kind": "pricing",
-          "locale": "en",
-          "currency": "USD",
-          "retrievedAt": "2026-07-23T09:12:31.262Z",
-          "contentHash": "sha256:4057729c1e319745050485749ac3921be302e1c3e565de7ecc90438fd66e37d5"
-        },
-        {
           "url": "https://platform.kimi.ai/docs/api/models-overview",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-08-17T02:35:03.087Z",
-          "contentHash": "sha256:ceee8673432d882032637b1f9a30d748bdf4e8e79c42ce03da40fa72cb28cff6"
+          "retrievedAt": "2026-09-10T06:04:01.154Z",
+          "contentHash": "sha256:d94c3c0c08e0c0dc55ea5741d3e5845851eb015d3421c60e214ea0e030b95d5d"
         },
         {
           "url": "https://platform.kimi.ai/docs/guide/troubleshooting#kimi",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-08-17T02:35:03.087Z",
-          "contentHash": "sha256:9e867a4ec4e2d90f8420ff1819c0e62ca579a7c53de4a0ad8be8bbc5fa96d158"
+          "retrievedAt": "2026-09-10T06:04:01.154Z",
+          "contentHash": "sha256:979e2d2bffdc63d9f47a5d9d95ece684ea655f10fef10b48426a010839c60b74"
         }
       ]
     },
@@ -2204,8 +1453,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:13.618Z",
-        "lastAttemptAt": "2026-08-30T17:32:13.618Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:01.158Z",
+        "lastAttemptAt": "2026-09-10T06:04:01.158Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2219,6 +1468,48 @@
         "openai": "https://dashscope.aliyuncs.com/compatible-mode/v1"
       },
       "models": [
+        {
+          "id": "qwen3.8-max",
+          "name": "Qwen3.8-Max",
+          "createdAt": "2026-08-02T04:14:32.000+00:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "chatPrefixCompletion": true,
+            "inputModalities": [
+              "image",
+              "text",
+              "video"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 131072,
+            "tokensPerMinute": 5000000
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 12,
+                "cacheHit": 1.5,
+                "explicitCacheCreation": 15,
+                "explicitCacheHit": 1
+              },
+              "output": 36,
+              "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max",
+              "validFrom": "2026-08-03T05:19:40.310Z"
+            }
+          ]
+        },
         {
           "id": "qwen3.8-flash",
           "name": "Qwen3.8-Flash",
@@ -2276,48 +1567,6 @@
               "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-flash",
               "validFrom": "2026-08-27T03:40:09.723Z",
               "validTo": "2026-08-30T17:32:51.393Z"
-            }
-          ]
-        },
-        {
-          "id": "qwen3.8-max",
-          "name": "Qwen3.8-Max",
-          "createdAt": "2026-08-02T04:14:32.000+00:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "chatPrefixCompletion": true,
-            "inputModalities": [
-              "image",
-              "text",
-              "video"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 1000000,
-            "maxOutputTokens": 131072,
-            "tokensPerMinute": 5000000
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "standard": 12,
-                "cacheHit": 1.5,
-                "explicitCacheCreation": 15,
-                "explicitCacheHit": 1
-              },
-              "output": 36,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.8-max",
-              "validFrom": "2026-08-03T05:19:40.310Z"
             }
           ]
         },
@@ -2465,7 +1714,9 @@
               "output": 36,
               "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
               "validFrom": "2026-08-03T05:19:40.310Z"
-            },
+            }
+          ],
+          "priceHistory": [
             {
               "market": "china",
               "currency": "CNY",
@@ -2479,7 +1730,8 @@
               },
               "output": 18,
               "sourceUrl": "https://www.qianwenai.com/models/qwen3.7-max",
-              "validFrom": "2026-08-03T05:19:40.310Z"
+              "validFrom": "2026-08-03T05:19:40.310Z",
+              "validTo": "2026-09-10T06:04:42.777Z"
             }
           ]
         },
@@ -2936,16 +2188,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-08-30T17:32:13.618Z",
-          "contentHash": "sha256:12b17534fbd6d096083608882774b00af84c98118337b378ee91717456a98720"
+          "retrievedAt": "2026-09-10T06:04:01.158Z",
+          "contentHash": "sha256:1b90cbf8295af4ec8f83989042fac2d8350522d5e96ce3db5cf8353995e2b6fb"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-30T17:32:13.618Z",
-          "contentHash": "sha256:237fed2144c8deda3358f7c5c5e016bfcaa7b6f5eddcccbebf6f11b1425426bd"
+          "retrievedAt": "2026-09-10T06:04:01.158Z",
+          "contentHash": "sha256:58231ebefc8549d48b84404f7e3eb4a51e7b31e7ac3132aaa8d9693eecc30938"
         }
       ]
     },
@@ -2953,8 +2205,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:13.630Z",
-        "lastAttemptAt": "2026-08-30T17:32:13.630Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:01.172Z",
+        "lastAttemptAt": "2026-09-10T06:04:01.172Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -3033,12 +2285,28 @@
               "unit": "1M_tokens",
               "rateType": "standard",
               "input": {
+                "standard": 0.8,
+                "cacheHit": 0.23
+              },
+              "output": 2.8,
+              "sourceUrl": "https://bigmodel.cn/pricing",
+              "validFrom": "2026-09-10T06:04:03.370Z"
+            }
+          ],
+          "priceHistory": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
                 "standard": 0.4,
                 "cacheHit": 0.115
               },
               "output": 1.4,
               "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-27T04:09:56.648Z"
+              "validFrom": "2026-08-27T04:09:56.648Z",
+              "validTo": "2026-09-10T06:04:03.370Z"
             }
           ]
         },
@@ -3077,413 +2345,6 @@
               "validFrom": "2026-08-07T05:04:14.214Z"
             }
           ]
-        },
-        {
-          "id": "glm-5.1",
-          "name": "GLM-5.1",
-          "createdAt": "2026-04-07T00:00:00.000+08:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [0, 32)",
-                "maxInclusive": 32000
-              },
-              "input": {
-                "standard": 6,
-                "cacheHit": 1.3
-              },
-              "output": 24,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [32+)",
-                "minExclusive": 32000
-              },
-              "input": {
-                "standard": 8,
-                "cacheHit": 2
-              },
-              "output": 28,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
-        },
-        {
-          "id": "glm-5",
-          "name": "GLM-5",
-          "createdAt": "2026-02-12T00:00:00.000+08:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [0, 32)",
-                "maxInclusive": 32000
-              },
-              "input": {
-                "standard": 4,
-                "cacheHit": 1
-              },
-              "output": 18,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [32+)",
-                "minExclusive": 32000
-              },
-              "input": {
-                "standard": 6,
-                "cacheHit": 1.5
-              },
-              "output": 22,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
-        },
-        {
-          "id": "glm-5-turbo",
-          "name": "GLM-5-Turbo",
-          "createdAt": "2026-03-15T00:00:00.000+08:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [0, 32)",
-                "maxInclusive": 32000
-              },
-              "input": {
-                "standard": 5,
-                "cacheHit": 1.2
-              },
-              "output": 22,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [32+)",
-                "minExclusive": 32000
-              },
-              "input": {
-                "standard": 7,
-                "cacheHit": 1.8
-              },
-              "output": 26,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
-        },
-        {
-          "id": "glm-4.7",
-          "name": "GLM-4.7",
-          "createdAt": "2025-12-22T00:00:00.000+08:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [0, 32)",
-                "maxInclusive": 32000
-              },
-              "outputTokenRange": {
-                "label": "输出长度 [0, 0.2)",
-                "maxInclusive": 200
-              },
-              "input": {
-                "standard": 2,
-                "cacheHit": 0.4
-              },
-              "output": 8,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [0, 32)",
-                "maxInclusive": 32000
-              },
-              "outputTokenRange": {
-                "label": "输出长度 [0.2+)",
-                "minExclusive": 200
-              },
-              "input": {
-                "standard": 3,
-                "cacheHit": 0.6
-              },
-              "output": 14,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [32, 200)",
-                "minExclusive": 32000,
-                "maxInclusive": 200000
-              },
-              "input": {
-                "standard": 4,
-                "cacheHit": 0.8
-              },
-              "output": 16,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
-        },
-        {
-          "id": "glm-4.7-flashx",
-          "name": "GLM-4.7-FlashX",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "standard": 0.5,
-                "cacheHit": 0.1
-              },
-              "output": 3,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
-        },
-        {
-          "id": "glm-4.5-air",
-          "name": "GLM-4.5-Air",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 131072,
-            "maxOutputTokens": 98304
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [0, 32)",
-                "maxInclusive": 32000
-              },
-              "outputTokenRange": {
-                "label": "输出长度 [0, 0.2)",
-                "maxInclusive": 200
-              },
-              "input": {
-                "standard": 0.8,
-                "cacheHit": 0.16
-              },
-              "output": 2,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [0, 32)",
-                "maxInclusive": 32000
-              },
-              "outputTokenRange": {
-                "label": "输出长度 [0.2+)",
-                "minExclusive": 200
-              },
-              "input": {
-                "standard": 0.8,
-                "cacheHit": 0.16
-              },
-              "output": 6,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入长度 [32, 128)",
-                "minExclusive": 32000,
-                "maxInclusive": 128000
-              },
-              "input": {
-                "standard": 1.2,
-                "cacheHit": 0.24
-              },
-              "output": 8,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
-        },
-        {
-          "id": "glm-4.7-flash",
-          "name": "GLM-4.7-Flash",
-          "createdAt": "2026-01-19T00:00:00.000+08:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 204800,
-            "maxOutputTokens": 131072
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "input": {
-                "standard": 0,
-                "cacheHit": 0
-              },
-              "output": 0,
-              "sourceUrl": "https://bigmodel.cn/pricing",
-              "validFrom": "2026-08-07T05:04:14.214Z"
-            }
-          ]
         }
       ],
       "sources": [
@@ -3492,8 +2353,8 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-08-27T03:39:29.958Z",
-          "contentHash": "sha256:d4958eee0f0930adda3e315b5a22ddca1db921b18b0bcbf3a4dba2231419b42f"
+          "retrievedAt": "2026-09-10T06:04:01.172Z",
+          "contentHash": "sha256:39d257eaf00ddb33da5dd7752d735de7a3fe069d7f58be35bf69c1855509162c"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
@@ -3515,8 +2376,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:13.635Z",
-        "lastAttemptAt": "2026-08-30T17:32:13.635Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:01.175Z",
+        "lastAttemptAt": "2026-09-10T06:04:01.175Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -3595,12 +2456,28 @@
               "unit": "1M_tokens",
               "rateType": "standard",
               "input": {
+                "standard": 0.15,
+                "cacheHit": 0.03
+              },
+              "output": 0.5,
+              "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+              "validFrom": "2026-09-10T06:04:03.252Z"
+            }
+          ],
+          "priceHistory": [
+            {
+              "market": "international",
+              "currency": "USD",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
                 "standard": 0.075,
                 "cacheHit": 0.015
               },
               "output": 0.25,
               "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-              "validFrom": "2026-08-27T04:09:55.724Z"
+              "validFrom": "2026-08-27T04:09:55.724Z",
+              "validTo": "2026-09-10T06:04:03.252Z"
             }
           ]
         },
@@ -3967,8 +2844,8 @@
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-08-30T17:32:13.635Z",
-          "contentHash": "sha256:3a444c9e57a4a050df7bf98348424aa2328abcda27c71968114894d84b1c4010"
+          "retrievedAt": "2026-09-10T06:04:01.175Z",
+          "contentHash": "sha256:7397f69615157fd4b6379f5b73ece37d41ed6e29cf2b453ea6146293ecb67cd3"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
@@ -3993,22 +2870,18 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:52.351Z",
-        "lastAttemptAt": "2026-08-30T17:32:52.351Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:43.529Z",
+        "lastAttemptAt": "2026-09-10T06:04:43.529Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://api.deepseek.com/models",
-        "retrievedAt": "2026-08-21T14:00:54.569Z",
-        "contentHash": "sha256:6b523d32ee08d4c945e0829660620e4d5cd58d97d32b60d7468a8da4b5f00e04"
+        "retrievedAt": "2026-09-10T06:04:43.529Z",
+        "contentHash": "sha256:fadc1bcddcd7ab4acedc726b354c91b4f5df66cca7612f6fad9be13c139c64bc"
       },
       "models": [
         {
-          "id": "deepseek-v4-flash",
-          "ownedBy": "deepseek"
-        },
-        {
-          "id": "deepseek-v4-flash-vision-exp",
+          "id": "deepseek-flash",
           "ownedBy": "deepseek"
         },
         {
@@ -4017,19 +2890,15 @@
         }
       ],
       "comparison": {
-        "status": "mismatch",
+        "status": "match",
         "pricedAndListed": [
-          "deepseek-v4-flash",
-          "deepseek-v4-flash-vision-exp",
+          "deepseek-flash",
           "deepseek-v4-pro"
         ],
         "aliasesAndListed": [],
         "listedWithoutPricing": [],
         "pricedButNotListed": [],
-        "activeAliasesNotListed": [
-          "deepseek-chat",
-          "deepseek-reasoner"
-        ]
+        "activeAliasesNotListed": []
       }
     },
     {
@@ -4037,8 +2906,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:52.908Z",
-        "lastAttemptAt": "2026-08-30T17:32:52.908Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:44.030Z",
+        "lastAttemptAt": "2026-09-10T06:04:44.030Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4071,21 +2940,16 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:53.341Z",
-        "lastAttemptAt": "2026-08-30T17:32:53.341Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:44.356Z",
+        "lastAttemptAt": "2026-09-10T06:04:44.356Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://api.moonshot.cn/v1/models",
-        "retrievedAt": "2026-07-23T09:12:43.934Z",
-        "contentHash": "sha256:3f659883640ea7f7bdd4f2c370984fe76ceba22f9855fecc779f57e20a332bfc"
+        "retrievedAt": "2026-09-10T06:04:44.356Z",
+        "contentHash": "sha256:bbfafe44aecd30773b02ccd4ddbedb0905979c9188aefbba027f60909cd991a9"
       },
       "models": [
-        {
-          "id": "kimi-k2.5",
-          "ownedBy": "moonshot",
-          "contextTokens": 262144
-        },
         {
           "id": "kimi-k2.6",
           "ownedBy": "moonshot",
@@ -4110,7 +2974,6 @@
       "comparison": {
         "status": "match",
         "pricedAndListed": [
-          "kimi-k2.5",
           "kimi-k2.6",
           "kimi-k2.7-code",
           "kimi-k2.7-code-highspeed",
@@ -4127,8 +2990,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:57.153Z",
-        "lastAttemptAt": "2026-08-30T17:32:57.153Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:47.799Z",
+        "lastAttemptAt": "2026-09-10T06:04:47.799Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4157,7 +3020,6 @@
         "aliasesAndListed": [],
         "listedWithoutPricing": [],
         "pricedButNotListed": [
-          "kimi-k2.5",
           "kimi-k2.7-code-highspeed",
           "kimi-k3"
         ],
@@ -4169,8 +3031,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:58.050Z",
-        "lastAttemptAt": "2026-08-30T17:32:58.050Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:48.141Z",
+        "lastAttemptAt": "2026-09-10T06:04:48.141Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4223,11 +3085,6 @@
       "comparison": {
         "status": "mismatch",
         "pricedAndListed": [
-          "glm-4.5-air",
-          "glm-4.7",
-          "glm-5",
-          "glm-5-turbo",
-          "glm-5.1",
           "glm-5.2",
           "glm-5.3",
           "glm-5.3-flash"
@@ -4235,12 +3092,14 @@
         "aliasesAndListed": [],
         "listedWithoutPricing": [
           "glm-4.5",
-          "glm-4.6"
+          "glm-4.5-air",
+          "glm-4.6",
+          "glm-4.7",
+          "glm-5",
+          "glm-5-turbo",
+          "glm-5.1"
         ],
-        "pricedButNotListed": [
-          "glm-4.7-flash",
-          "glm-4.7-flashx"
-        ],
+        "pricedButNotListed": [],
         "activeAliasesNotListed": []
       }
     },
@@ -4249,8 +3108,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:58.759Z",
-        "lastAttemptAt": "2026-08-30T17:32:58.759Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:48.771Z",
+        "lastAttemptAt": "2026-09-10T06:04:48.771Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4332,14 +3191,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-08-30T17:32:51.489Z",
-        "lastAttemptAt": "2026-08-30T17:32:51.489Z",
+        "lastSuccessfulAt": "2026-09-10T06:04:42.842Z",
+        "lastAttemptAt": "2026-09-10T06:04:42.842Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-08-30T17:32:51.489Z",
-        "contentHash": "sha256:57e6fc0071ab8e8b53e7b61a33b6cb9983248aa23bb2b5b521450b674032dec8"
+        "retrievedAt": "2026-09-10T06:04:42.842Z",
+        "contentHash": "sha256:a7b681541084a43568b04f4d914ab62aa421e1f30796d615f0c27257bf9c7ea5"
       },
       "models": [
         {
@@ -4754,78 +3613,66 @@
           "referenceProvider": "moonshotai",
           "referenceModel": "kimi-k2.5",
           "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.5/",
-          "status": "partial",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-01",
+              "reference": null,
               "status": "missing"
             },
             {
               "field": "limits.contextTokens",
-              "official": 262144,
-              "reference": 262144,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 262144,
-              "reference": 262144,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
-              "reference": true,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
-              "reference": true,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text",
-                "image",
-                "video"
-              ],
-              "reference": [
-                "text",
-                "image",
-                "video"
-              ],
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 0.6,
+              "reference": null,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.1,
+              "reference": null,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 3,
+              "reference": null,
               "status": "missing"
             }
           ]
@@ -5164,79 +4011,67 @@
           "referenceProvider": "moonshotai",
           "referenceModel": "kimi-k2.5",
           "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.5/",
-          "status": "partial",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-01",
+              "reference": null,
               "status": "missing"
             },
             {
               "field": "limits.contextTokens",
-              "official": 262144,
-              "reference": 262144,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 262144,
-              "reference": 262144,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
-              "reference": true,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
-              "reference": true,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text",
-                "image",
-                "video"
-              ],
-              "reference": [
-                "text",
-                "image",
-                "video"
-              ],
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
-              "official": 0.6,
-              "reference": 0.6,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
-              "official": 0.1,
-              "reference": 0.1,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             },
             {
               "field": "prices.USD.output",
-              "official": 3,
-              "reference": 3,
-              "status": "match"
+              "official": null,
+              "reference": null,
+              "status": "missing"
             }
           ]
         },
@@ -6100,57 +4935,53 @@
           "referenceProvider": "zhipuai",
           "referenceModel": "glm-5.1",
           "referenceUrl": "https://models.dev/models/zhipuai/glm-5.1/",
-          "status": "mismatch",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
-              "official": "2026-04-07",
+              "official": null,
               "reference": "2026-03-27",
-              "status": "mismatch"
+              "status": "missing"
             },
             {
               "field": "limits.contextTokens",
-              "official": 204800,
+              "official": null,
               "reference": 200000,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 131072,
+              "official": null,
               "reference": 131072,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
@@ -6178,57 +5009,53 @@
           "referenceProvider": "zhipuai",
           "referenceModel": "glm-5",
           "referenceUrl": "https://models.dev/models/zhipuai/glm-5/",
-          "status": "partial",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
-              "official": "2026-02-12",
+              "official": null,
               "reference": "2026-02-11",
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.contextTokens",
-              "official": 204800,
+              "official": null,
               "reference": 204800,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 131072,
+              "official": null,
               "reference": 131072,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
@@ -6256,57 +5083,53 @@
           "referenceProvider": "zhipuai",
           "referenceModel": "glm-4.7",
           "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7/",
-          "status": "partial",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
-              "official": "2025-12-22",
+              "official": null,
               "reference": "2025-12-22",
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.contextTokens",
-              "official": 204800,
+              "official": null,
               "reference": 204800,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 131072,
+              "official": null,
               "reference": 131072,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
@@ -6334,7 +5157,7 @@
           "referenceProvider": "zhipuai",
           "referenceModel": "glm-4.5-air",
           "referenceUrl": "https://models.dev/models/zhipuai/glm-4.5-air/",
-          "status": "partial",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
@@ -6344,47 +5167,43 @@
             },
             {
               "field": "limits.contextTokens",
-              "official": 131072,
+              "official": null,
               "reference": 131072,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 98304,
+              "official": null,
               "reference": 98304,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
@@ -6412,7 +5231,7 @@
           "referenceProvider": "zhipuai",
           "referenceModel": "glm-4.7-flashx",
           "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flashx/",
-          "status": "partial",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
@@ -6422,47 +5241,43 @@
             },
             {
               "field": "limits.contextTokens",
-              "official": 204800,
+              "official": null,
               "reference": 200000,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 131072,
+              "official": null,
               "reference": 131072,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
@@ -6490,57 +5305,53 @@
           "referenceProvider": "zhipuai",
           "referenceModel": "glm-4.7-flash",
           "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flash/",
-          "status": "partial",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
-              "official": "2026-01-19",
+              "official": null,
               "reference": "2026-01-19",
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.contextTokens",
-              "official": 204800,
+              "official": null,
               "reference": 200000,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 131072,
+              "official": null,
               "reference": 131072,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
@@ -6568,57 +5379,53 @@
           "referenceProvider": "zai",
           "referenceModel": "glm-5-turbo",
           "referenceUrl": "https://models.dev/models/zai/glm-5-turbo/",
-          "status": "partial",
+          "status": "missing",
           "checks": [
             {
               "field": "createdAt",
-              "official": "2026-03-15",
+              "official": null,
               "reference": "2026-03-16",
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.contextTokens",
-              "official": 204800,
+              "official": null,
               "reference": 200000,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "limits.maxOutputTokens",
-              "official": 131072,
+              "official": null,
               "reference": 131072,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.thinking",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.toolCalls",
-              "official": true,
+              "official": null,
               "reference": true,
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
+              "official": null,
               "reference": [
                 "text"
               ],
-              "status": "match"
+              "status": "missing"
             },
             {
               "field": "prices.USD.input.standard",
@@ -6806,84 +5613,6 @@
         },
         {
           "provider": "deepseek",
-          "model": "deepseek-v4-flash",
-          "referenceProvider": "deepseek",
-          "referenceModel": "deepseek-v4-flash",
-          "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-flash/",
-          "status": "mismatch",
-          "checks": [
-            {
-              "field": "createdAt",
-              "official": null,
-              "reference": "2026-07-31",
-              "status": "missing"
-            },
-            {
-              "field": "limits.contextTokens",
-              "official": 1000000,
-              "reference": 1000000,
-              "status": "match"
-            },
-            {
-              "field": "limits.maxOutputTokens",
-              "official": 384000,
-              "reference": 384000,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.thinking",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.toolCalls",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "prices.USD.input.standard",
-              "official": 0.22,
-              "reference": 0.14,
-              "status": "mismatch"
-            },
-            {
-              "field": "prices.USD.input.cacheHit",
-              "official": 0.007,
-              "reference": 0.0028,
-              "status": "mismatch"
-            },
-            {
-              "field": "prices.USD.output",
-              "official": 0.66,
-              "reference": 0.28,
-              "status": "mismatch"
-            }
-          ]
-        },
-        {
-          "provider": "deepseek",
           "model": "deepseek-v4-pro",
           "referenceProvider": "deepseek",
           "referenceModel": "deepseek-v4-pro",
@@ -6957,168 +5686,6 @@
               "official": 1.98,
               "reference": 0.87,
               "status": "mismatch"
-            }
-          ]
-        },
-        {
-          "provider": "deepseek",
-          "model": "deepseek-v4-flash-vision-exp",
-          "referenceProvider": "deepseek",
-          "referenceModel": "deepseek-v4-flash-vision-exp",
-          "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-flash-vision-exp/",
-          "status": "mismatch",
-          "checks": [
-            {
-              "field": "createdAt",
-              "official": null,
-              "reference": "2026-08-21",
-              "status": "missing"
-            },
-            {
-              "field": "limits.contextTokens",
-              "official": 1000000,
-              "reference": 1000000,
-              "status": "match"
-            },
-            {
-              "field": "limits.maxOutputTokens",
-              "official": 384000,
-              "reference": 384000,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.thinking",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.toolCalls",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.inputModalities",
-              "official": [
-                "text",
-                "image"
-              ],
-              "reference": [
-                "text",
-                "image"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "prices.USD.input.standard",
-              "official": 0.22,
-              "reference": 0.14,
-              "status": "mismatch"
-            },
-            {
-              "field": "prices.USD.input.cacheHit",
-              "official": 0.007,
-              "reference": 0.0028,
-              "status": "mismatch"
-            },
-            {
-              "field": "prices.USD.output",
-              "official": 0.66,
-              "reference": 0.28,
-              "status": "mismatch"
-            }
-          ]
-        },
-        {
-          "provider": "qwen-cn",
-          "model": "qwen3.8-flash",
-          "referenceProvider": "alibaba",
-          "referenceModel": "qwen3.8-flash",
-          "referenceUrl": "https://models.dev/models/alibaba/qwen3.8-flash/",
-          "status": "partial",
-          "checks": [
-            {
-              "field": "createdAt",
-              "official": "2026-08-25",
-              "reference": "2026-08-26",
-              "status": "match"
-            },
-            {
-              "field": "limits.contextTokens",
-              "official": 1000000,
-              "reference": 1000000,
-              "status": "match"
-            },
-            {
-              "field": "limits.maxOutputTokens",
-              "official": 131072,
-              "reference": 131072,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.thinking",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.toolCalls",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.inputModalities",
-              "official": [
-                "image",
-                "text",
-                "video"
-              ],
-              "reference": [
-                "text",
-                "image",
-                "video"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "prices.USD.input.standard",
-              "official": null,
-              "reference": 0.15,
-              "status": "missing"
-            },
-            {
-              "field": "prices.USD.input.cacheHit",
-              "official": null,
-              "reference": 0.016,
-              "status": "missing"
-            },
-            {
-              "field": "prices.USD.output",
-              "official": null,
-              "reference": 0.47,
-              "status": "missing"
             }
           ]
         },
@@ -7201,6 +5768,88 @@
               "field": "prices.USD.output",
               "official": null,
               "reference": 6,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "qwen-cn",
+          "model": "qwen3.8-flash",
+          "referenceProvider": "alibaba",
+          "referenceModel": "qwen3.8-flash",
+          "referenceUrl": "https://models.dev/models/alibaba/qwen3.8-flash/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-08-25",
+              "reference": "2026-08-26",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1000000,
+              "reference": 1000000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 131072,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "image",
+                "text",
+                "video"
+              ],
+              "reference": [
+                "text",
+                "image",
+                "video"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.15,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.016,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 0.47,
               "status": "missing"
             }
           ]
@@ -8071,21 +6720,21 @@
             },
             {
               "field": "prices.USD.input.standard",
-              "official": 0.075,
+              "official": 0.15,
               "reference": 0.075,
-              "status": "match"
+              "status": "mismatch"
             },
             {
               "field": "prices.USD.input.cacheHit",
-              "official": 0.015,
+              "official": 0.03,
               "reference": 0.015,
-              "status": "match"
+              "status": "mismatch"
             },
             {
               "field": "prices.USD.output",
-              "official": 0.25,
+              "official": 0.5,
               "reference": 0.25,
-              "status": "match"
+              "status": "mismatch"
             }
           ]
         },

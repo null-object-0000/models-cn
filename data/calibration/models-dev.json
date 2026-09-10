@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-30T17:32:51.489Z",
-    "lastAttemptAt": "2026-08-30T17:32:51.489Z",
+    "lastSuccessfulAt": "2026-09-10T06:04:42.842Z",
+    "lastAttemptAt": "2026-09-10T06:04:42.842Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-08-30T17:32:51.489Z",
-    "contentHash": "sha256:57e6fc0071ab8e8b53e7b61a33b6cb9983248aa23bb2b5b521450b674032dec8"
+    "retrievedAt": "2026-09-10T06:04:42.842Z",
+    "contentHash": "sha256:a7b681541084a43568b04f4d914ab62aa421e1f30796d615f0c27257bf9c7ea5"
   },
   "models": [
     {
@@ -424,78 +424,66 @@
       "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k2.5",
       "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.5/",
-      "status": "partial",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
           "official": null,
-          "reference": "2026-01",
+          "reference": null,
           "status": "missing"
         },
         {
           "field": "limits.contextTokens",
-          "official": 262144,
-          "reference": 262144,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 262144,
-          "reference": 262144,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
-          "reference": true,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
-          "reference": true,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text",
-            "image",
-            "video"
-          ],
-          "reference": [
-            "text",
-            "image",
-            "video"
-          ],
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
-          "reference": [
-            "text"
-          ],
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
           "official": null,
-          "reference": 0.6,
+          "reference": null,
           "status": "missing"
         },
         {
           "field": "prices.USD.input.cacheHit",
           "official": null,
-          "reference": 0.1,
+          "reference": null,
           "status": "missing"
         },
         {
           "field": "prices.USD.output",
           "official": null,
-          "reference": 3,
+          "reference": null,
           "status": "missing"
         }
       ]
@@ -834,79 +822,67 @@
       "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k2.5",
       "referenceUrl": "https://models.dev/models/moonshotai/kimi-k2.5/",
-      "status": "partial",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
           "official": null,
-          "reference": "2026-01",
+          "reference": null,
           "status": "missing"
         },
         {
           "field": "limits.contextTokens",
-          "official": 262144,
-          "reference": 262144,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 262144,
-          "reference": 262144,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
-          "reference": true,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
-          "reference": true,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text",
-            "image",
-            "video"
-          ],
-          "reference": [
-            "text",
-            "image",
-            "video"
-          ],
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
-          "reference": [
-            "text"
-          ],
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
-          "official": 0.6,
-          "reference": 0.6,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.cacheHit",
-          "official": 0.1,
-          "reference": 0.1,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         },
         {
           "field": "prices.USD.output",
-          "official": 3,
-          "reference": 3,
-          "status": "match"
+          "official": null,
+          "reference": null,
+          "status": "missing"
         }
       ]
     },
@@ -1770,57 +1746,53 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-5.1",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-5.1/",
-      "status": "mismatch",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
-          "official": "2026-04-07",
+          "official": null,
           "reference": "2026-03-27",
-          "status": "mismatch"
+          "status": "missing"
         },
         {
           "field": "limits.contextTokens",
-          "official": 204800,
+          "official": null,
           "reference": 200000,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 131072,
+          "official": null,
           "reference": 131072,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
@@ -1848,57 +1820,53 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-5",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-5/",
-      "status": "partial",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
-          "official": "2026-02-12",
+          "official": null,
           "reference": "2026-02-11",
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.contextTokens",
-          "official": 204800,
+          "official": null,
           "reference": 204800,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 131072,
+          "official": null,
           "reference": 131072,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
@@ -1926,57 +1894,53 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-4.7",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7/",
-      "status": "partial",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
-          "official": "2025-12-22",
+          "official": null,
           "reference": "2025-12-22",
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.contextTokens",
-          "official": 204800,
+          "official": null,
           "reference": 204800,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 131072,
+          "official": null,
           "reference": 131072,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
@@ -2004,7 +1968,7 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-4.5-air",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-4.5-air/",
-      "status": "partial",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
@@ -2014,47 +1978,43 @@
         },
         {
           "field": "limits.contextTokens",
-          "official": 131072,
+          "official": null,
           "reference": 131072,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 98304,
+          "official": null,
           "reference": 98304,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
@@ -2082,7 +2042,7 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-4.7-flashx",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flashx/",
-      "status": "partial",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
@@ -2092,47 +2052,43 @@
         },
         {
           "field": "limits.contextTokens",
-          "official": 204800,
+          "official": null,
           "reference": 200000,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 131072,
+          "official": null,
           "reference": 131072,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
@@ -2160,57 +2116,53 @@
       "referenceProvider": "zhipuai",
       "referenceModel": "glm-4.7-flash",
       "referenceUrl": "https://models.dev/models/zhipuai/glm-4.7-flash/",
-      "status": "partial",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
-          "official": "2026-01-19",
+          "official": null,
           "reference": "2026-01-19",
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.contextTokens",
-          "official": 204800,
+          "official": null,
           "reference": 200000,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 131072,
+          "official": null,
           "reference": 131072,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
@@ -2238,57 +2190,53 @@
       "referenceProvider": "zai",
       "referenceModel": "glm-5-turbo",
       "referenceUrl": "https://models.dev/models/zai/glm-5-turbo/",
-      "status": "partial",
+      "status": "missing",
       "checks": [
         {
           "field": "createdAt",
-          "official": "2026-03-15",
+          "official": null,
           "reference": "2026-03-16",
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.contextTokens",
-          "official": 204800,
+          "official": null,
           "reference": 200000,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 131072,
+          "official": null,
           "reference": 131072,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.toolCalls",
-          "official": true,
+          "official": null,
           "reference": true,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.inputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
+          "official": null,
           "reference": [
             "text"
           ],
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
@@ -2476,84 +2424,6 @@
     },
     {
       "provider": "deepseek",
-      "model": "deepseek-v4-flash",
-      "referenceProvider": "deepseek",
-      "referenceModel": "deepseek-v4-flash",
-      "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-flash/",
-      "status": "mismatch",
-      "checks": [
-        {
-          "field": "createdAt",
-          "official": null,
-          "reference": "2026-07-31",
-          "status": "missing"
-        },
-        {
-          "field": "limits.contextTokens",
-          "official": 1000000,
-          "reference": 1000000,
-          "status": "match"
-        },
-        {
-          "field": "limits.maxOutputTokens",
-          "official": 384000,
-          "reference": 384000,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.thinking",
-          "official": true,
-          "reference": true,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.toolCalls",
-          "official": true,
-          "reference": true,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.inputModalities",
-          "official": [
-            "text"
-          ],
-          "reference": [
-            "text"
-          ],
-          "status": "match"
-        },
-        {
-          "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
-          "reference": [
-            "text"
-          ],
-          "status": "match"
-        },
-        {
-          "field": "prices.USD.input.standard",
-          "official": 0.22,
-          "reference": 0.14,
-          "status": "mismatch"
-        },
-        {
-          "field": "prices.USD.input.cacheHit",
-          "official": 0.007,
-          "reference": 0.0028,
-          "status": "mismatch"
-        },
-        {
-          "field": "prices.USD.output",
-          "official": 0.66,
-          "reference": 0.28,
-          "status": "mismatch"
-        }
-      ]
-    },
-    {
-      "provider": "deepseek",
       "model": "deepseek-v4-pro",
       "referenceProvider": "deepseek",
       "referenceModel": "deepseek-v4-pro",
@@ -2627,168 +2497,6 @@
           "official": 1.98,
           "reference": 0.87,
           "status": "mismatch"
-        }
-      ]
-    },
-    {
-      "provider": "deepseek",
-      "model": "deepseek-v4-flash-vision-exp",
-      "referenceProvider": "deepseek",
-      "referenceModel": "deepseek-v4-flash-vision-exp",
-      "referenceUrl": "https://models.dev/models/deepseek/deepseek-v4-flash-vision-exp/",
-      "status": "mismatch",
-      "checks": [
-        {
-          "field": "createdAt",
-          "official": null,
-          "reference": "2026-08-21",
-          "status": "missing"
-        },
-        {
-          "field": "limits.contextTokens",
-          "official": 1000000,
-          "reference": 1000000,
-          "status": "match"
-        },
-        {
-          "field": "limits.maxOutputTokens",
-          "official": 384000,
-          "reference": 384000,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.thinking",
-          "official": true,
-          "reference": true,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.toolCalls",
-          "official": true,
-          "reference": true,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.inputModalities",
-          "official": [
-            "text",
-            "image"
-          ],
-          "reference": [
-            "text",
-            "image"
-          ],
-          "status": "match"
-        },
-        {
-          "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
-          "reference": [
-            "text"
-          ],
-          "status": "match"
-        },
-        {
-          "field": "prices.USD.input.standard",
-          "official": 0.22,
-          "reference": 0.14,
-          "status": "mismatch"
-        },
-        {
-          "field": "prices.USD.input.cacheHit",
-          "official": 0.007,
-          "reference": 0.0028,
-          "status": "mismatch"
-        },
-        {
-          "field": "prices.USD.output",
-          "official": 0.66,
-          "reference": 0.28,
-          "status": "mismatch"
-        }
-      ]
-    },
-    {
-      "provider": "qwen-cn",
-      "model": "qwen3.8-flash",
-      "referenceProvider": "alibaba",
-      "referenceModel": "qwen3.8-flash",
-      "referenceUrl": "https://models.dev/models/alibaba/qwen3.8-flash/",
-      "status": "partial",
-      "checks": [
-        {
-          "field": "createdAt",
-          "official": "2026-08-25",
-          "reference": "2026-08-26",
-          "status": "match"
-        },
-        {
-          "field": "limits.contextTokens",
-          "official": 1000000,
-          "reference": 1000000,
-          "status": "match"
-        },
-        {
-          "field": "limits.maxOutputTokens",
-          "official": 131072,
-          "reference": 131072,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.thinking",
-          "official": true,
-          "reference": true,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.toolCalls",
-          "official": true,
-          "reference": true,
-          "status": "match"
-        },
-        {
-          "field": "capabilities.inputModalities",
-          "official": [
-            "image",
-            "text",
-            "video"
-          ],
-          "reference": [
-            "text",
-            "image",
-            "video"
-          ],
-          "status": "match"
-        },
-        {
-          "field": "capabilities.outputModalities",
-          "official": [
-            "text"
-          ],
-          "reference": [
-            "text"
-          ],
-          "status": "match"
-        },
-        {
-          "field": "prices.USD.input.standard",
-          "official": null,
-          "reference": 0.15,
-          "status": "missing"
-        },
-        {
-          "field": "prices.USD.input.cacheHit",
-          "official": null,
-          "reference": 0.016,
-          "status": "missing"
-        },
-        {
-          "field": "prices.USD.output",
-          "official": null,
-          "reference": 0.47,
-          "status": "missing"
         }
       ]
     },
@@ -2871,6 +2579,88 @@
           "field": "prices.USD.output",
           "official": null,
           "reference": 6,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "qwen-cn",
+      "model": "qwen3.8-flash",
+      "referenceProvider": "alibaba",
+      "referenceModel": "qwen3.8-flash",
+      "referenceUrl": "https://models.dev/models/alibaba/qwen3.8-flash/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": "2026-08-25",
+          "reference": "2026-08-26",
+          "status": "match"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "image",
+            "text",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.15,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.016,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 0.47,
           "status": "missing"
         }
       ]
@@ -3741,21 +3531,21 @@
         },
         {
           "field": "prices.USD.input.standard",
-          "official": 0.075,
+          "official": 0.15,
           "reference": 0.075,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "prices.USD.input.cacheHit",
-          "official": 0.015,
+          "official": 0.03,
           "reference": 0.015,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "prices.USD.output",
-          "official": 0.25,
+          "official": 0.5,
           "reference": 0.25,
-          "status": "match"
+          "status": "mismatch"
         }
       ]
     },

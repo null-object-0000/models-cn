@@ -3,8 +3,8 @@
   "provider": "moonshot-intl",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-30T17:32:57.153Z",
-    "lastAttemptAt": "2026-08-30T17:32:57.153Z",
+    "lastSuccessfulAt": "2026-09-10T06:04:47.799Z",
+    "lastAttemptAt": "2026-09-10T06:04:47.799Z",
     "consecutiveFailures": 0
   },
   "source": {
@@ -33,7 +33,6 @@
     "aliasesAndListed": [],
     "listedWithoutPricing": [],
     "pricedButNotListed": [
-      "kimi-k2.5",
       "kimi-k2.7-code-highspeed",
       "kimi-k3"
     ],
