@@ -1,5 +1,4 @@
 import { createHash } from "node:crypto";
-import { chromium } from "playwright";
 import type {
   Currency,
   Market,
@@ -15,7 +14,7 @@ import { healthyHealth } from "../health.js";
  * 智谱 GLM 采集器。渠道范围：国内版 `zhipu-cn`（人民币）+ 国际版 `zhipu-intl`（美元）。
  *
  * 数据来源：
- * - 国内价格：`bigmodel.cn/pricing`（Vue SPA，用 Playwright 读渲染后的 DOM 表格）。
+ * - 国内价格：`bigmodel.cn/pricing`（解析页面使用的结构化配置接口）。
  * - 国际价格：`docs.z.ai/guides/overview/pricing.md`（可直接 fetch 的 markdown）。
  * - 元数据（上下文 / 最大输出）：`docs.bigmodel.cn/cn/guide/start/model-overview.md`。
  * - 能力字段：各模型详情页「能力支持」Card。
@@ -29,6 +28,8 @@ import { healthyHealth } from "../health.js";
  */
 
 export const ZHIPU_PRICING_URL = "https://bigmodel.cn/pricing" as const;
+export const ZHIPU_PRICING_CONFIG_URL =
+  "https://bigmodel.cn/api/biz/operation/query?ids=1160,1161" as const;
 export const ZHIPU_INTL_PRICING_URL =
   "https://docs.z.ai/guides/overview/pricing" as const;
 export const ZHIPU_OVERVIEW_URL =
@@ -205,45 +206,120 @@ export function parseZhipuPricingDom(
   return models;
 }
 
-async function loadZhipuPricingDom(): Promise<ZhipuDomCell[][]> {
-  const browser = await chromium.launch({ headless: true });
-  try {
-    const context = await browser.newContext({ locale: "zh-CN" });
-    const page = await context.newPage();
-    await page.goto(ZHIPU_PRICING_URL, {
-      waitUntil: "networkidle",
-      timeout: 30_000,
-    });
-    await page.waitForFunction(
-      () => document.body.innerText.includes("GLM-4.7"),
-      { timeout: 15_000 },
-    );
-    const tables = await page.evaluate(() =>
-      Array.from(document.querySelectorAll("table"))
-        .filter((table) => (table.textContent ?? "").includes("GLM-4.7"))
-        .map((table) =>
-          Array.from(table.querySelectorAll("tr")).map((tr) =>
-            Array.from(tr.querySelectorAll("td"))
-              .map((td) => {
-                const cls = (td.className || "").toString();
-                const match = cls.match(/el-table_\d+_column_(\d+)/);
-                return {
-                  col: match ? Number(match[1]) : null,
-                  text: (td.textContent ?? "").replace(/\s+/g, " ").trim(),
-                };
-              })
-              .filter((cell): cell is ZhipuDomCell => cell.col !== null),
-          ),
-        ),
-    );
-    const rows = tables[0] ?? [];
-    if (!rows.length) {
-      throw new Error("Zhipu pricing page contains no flagship model table");
+interface ZhipuPricingField {
+  label?: unknown;
+  values?: unknown;
+}
+
+interface ZhipuPricingCard {
+  title?: unknown;
+  fieldList?: unknown;
+  table?: {
+    fieldList?: unknown;
+    modelList?: unknown;
+  };
+}
+
+function pricingCardFields(card: ZhipuPricingCard): Map<string, string> {
+  const fields = new Map<string, string>();
+  if (Array.isArray(card.fieldList)) {
+    for (const field of card.fieldList as ZhipuPricingField[]) {
+      const value = Array.isArray(field.values) ? field.values[0] : undefined;
+      if (typeof field.label === "string" && typeof value === "string") {
+        fields.set(field.label, value);
+      }
     }
-    return rows;
-  } finally {
-    await browser.close();
   }
+  const columnCodes = Array.isArray(card.table?.fieldList)
+    ? (card.table.fieldList as Array<{ code?: unknown }>).flatMap((field) =>
+        typeof field.code === "string" ? [field.code] : [],
+      )
+    : [];
+  if (columnCodes.length >= 2 && Array.isArray(card.table?.modelList)) {
+    for (const row of card.table.modelList as Array<Record<string, unknown>>) {
+      const labelCell = row[columnCodes[0]!];
+      const valueCell = row[columnCodes[1]!];
+      const label =
+        labelCell && typeof labelCell === "object"
+          ? (labelCell as { value?: unknown }).value
+          : undefined;
+      const value =
+        valueCell && typeof valueCell === "object"
+          ? (valueCell as { value?: unknown }).value
+          : undefined;
+      if (typeof label === "string" && typeof value === "string") {
+        fields.set(label, value);
+      }
+    }
+  }
+  return fields;
+}
+
+/** Parse the structured configuration used to render the current pricing page. */
+export function parseZhipuPricingConfig(payload: unknown): ZhipuDomCell[][] {
+  if (!payload || typeof payload !== "object") {
+    throw new Error("Zhipu pricing config is not an object");
+  }
+  const data = (payload as { data?: unknown }).data;
+  if (!Array.isArray(data)) {
+    throw new Error("Zhipu pricing config is missing data");
+  }
+  const cards: ZhipuPricingCard[] = [];
+  for (const item of data as Array<{ content?: unknown }>) {
+    if (typeof item.content !== "string") continue;
+    const content = JSON.parse(item.content) as {
+      list?: unknown;
+      tabs?: unknown;
+    };
+    if (Array.isArray(content.list)) {
+      cards.push(...(content.list as ZhipuPricingCard[]));
+    }
+    if (Array.isArray(content.tabs)) {
+      for (const tab of content.tabs as Array<{ cards?: unknown }>) {
+        if (Array.isArray(tab.cards)) {
+          cards.push(...(tab.cards as ZhipuPricingCard[]));
+        }
+      }
+    }
+  }
+  const rows = cards.flatMap((card): ZhipuDomCell[][] => {
+    if (typeof card.title !== "string" || !/^glm-/i.test(card.title)) return [];
+    const fields = pricingCardFields(card);
+    const input = fields.get("输入单价") ?? fields.get("输入价格");
+    const output = fields.get("输出单价") ?? fields.get("输出价格");
+    const cacheHit = fields.get("缓存命中");
+    if (!input || !output || !cacheHit) return [];
+    return [
+      [
+        { col: 1, text: card.title },
+        { col: 2, text: fields.get("上下文") ?? "" },
+        { col: 3, text: input },
+        { col: 4, text: output },
+        { col: 6, text: cacheHit },
+      ],
+    ];
+  });
+  if (!rows.length) {
+    throw new Error("Zhipu pricing config contains no token-priced models");
+  }
+  return rows;
+}
+
+async function loadZhipuPricingRows(): Promise<ZhipuDomCell[][]> {
+  const response = await fetch(ZHIPU_PRICING_CONFIG_URL, {
+    headers: {
+      accept: "application/json",
+      "user-agent":
+        "models-cn/0.1 (+https://github.com/null-object-0000/models-cn)",
+    },
+    signal: AbortSignal.timeout(30_000),
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch ${ZHIPU_PRICING_CONFIG_URL}: HTTP ${response.status}`,
+    );
+  }
+  return parseZhipuPricingConfig(await response.json());
 }
 
 async function fetchMarkdown(url: string): Promise<string> {
@@ -479,7 +555,7 @@ function releasesSource(
 
 export async function collectZhipuChina(
   now = new Date(),
-  pricingLoader: () => Promise<ZhipuDomCell[][]> = loadZhipuPricingDom,
+  pricingLoader: () => Promise<ZhipuDomCell[][]> = loadZhipuPricingRows,
   metadataLoader: () => Promise<Map<string, ZhipuMetadata>> = loadZhipuMetadata,
 ): Promise<ProviderData> {
   const [rows, metadata] = await Promise.all([

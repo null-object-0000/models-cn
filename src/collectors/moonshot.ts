@@ -54,7 +54,6 @@ const pricingPaths = [
   "/docs/pricing/chat-k3",
   "/docs/pricing/chat-k27-code",
   "/docs/pricing/chat-k26",
-  "/docs/pricing/chat-k25",
 ] as const;
 
 function pricingSources(channel: MoonshotChannel): string[] {
@@ -131,7 +130,7 @@ export function parseMoonshotOutputLimits(
   }
 
   const limits = new Map<string, number>();
-  for (const id of ["kimi-k3", "kimi-k2.6", "kimi-k2.5"]) {
+  for (const id of ["kimi-k3", "kimi-k2.6"]) {
     const escapedId = id.replaceAll(".", "\\.");
     const expression = section.match(
       new RegExp(
@@ -241,7 +240,7 @@ async function collectMoonshotChannel(
     fetcher(overviewUrl),
     fetcher(limitsUrl),
   ]);
-  for (const id of ["kimi-k3", "kimi-k2.7-code", "kimi-k2.6", "kimi-k2.5"]) {
+  for (const id of ["kimi-k3", "kimi-k2.7-code", "kimi-k2.6"]) {
     if (!overview.includes(id)) {
       throw new Error(`Kimi model overview is missing ${id}`);
     }

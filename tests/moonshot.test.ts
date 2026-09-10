@@ -66,7 +66,7 @@ describe("Kimi collector parser", () => {
     const limits = parseMoonshotOutputLimits(markdown);
     expect(limits.get("kimi-k3")).toBe(1_048_576);
     expect(limits.get("kimi-k2.6")).toBe(262_144);
-    expect(limits.get("kimi-k2.5")).toBe(262_144);
+    expect(limits.get("kimi-k2.5")).toBeUndefined();
     expect(limits.get("kimi-k2.7-code")).toBeUndefined();
   });
 
@@ -82,7 +82,7 @@ describe("Kimi collector parser", () => {
     const limits = parseMoonshotOutputLimits(markdown);
     expect(limits.get("kimi-k3")).toBe(1_048_576);
     expect(limits.get("kimi-k2.6")).toBe(262_144);
-    expect(limits.get("kimi-k2.5")).toBe(262_144);
+    expect(limits.get("kimi-k2.5")).toBeUndefined();
   });
 
   it("collects the international channel with USD metadata", async () => {
@@ -92,7 +92,7 @@ describe("Kimi collector parser", () => {
 ["${id}", "1M tokens", "$0.30", "$3.00", "$15.00", "${id === "kimi-k3" ? "1,048,576" : "262,144"} tokens"],
 ]}
 />`;
-    const overview = "kimi-k3 kimi-k2.7-code kimi-k2.6 kimi-k2.5";
+    const overview = "kimi-k3 kimi-k2.7-code kimi-k2.6";
     const troubleshooting = `
 ## What is the output length of the Kimi model?
 * For \`kimi-k3\`, the maximum output length is \`1024*1024 - prompt_tokens\`.
@@ -113,7 +113,9 @@ describe("Kimi collector parser", () => {
 />`;
         }
         if (url.endsWith("chat-k26")) return pricing("kimi-k2.6");
-        if (url.endsWith("chat-k25")) return pricing("kimi-k2.5");
+        if (url.endsWith("chat-k25")) {
+          throw new Error("retired K2.5 pricing page must not be requested");
+        }
         if (url.includes("models-overview")) return overview;
         return troubleshooting;
       },

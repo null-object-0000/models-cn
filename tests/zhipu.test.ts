@@ -5,6 +5,7 @@ import {
   parseZhipuCapabilities,
   parseZhipuInternationalPricing,
   parseZhipuOverview,
+  parseZhipuPricingConfig,
   parseZhipuPricingDom,
   parseZhipuReleaseNotes,
   type ZhipuDomCell,
@@ -239,6 +240,85 @@ describe("Zhipu pricing DOM parser", () => {
 
   it("rejects an empty table", () => {
     expect(() => parseZhipuPricingDom([])).toThrow("contains no models");
+  });
+});
+
+describe("Zhipu pricing config parser", () => {
+  it("converts flagship and other-model cards into normalized rows", () => {
+    const payload = {
+      data: [
+        {
+          content: JSON.stringify({
+            list: [
+              {
+                title: "GLM-5.3",
+                table: {
+                  fieldList: [{ code: "label" }, { code: "value" }],
+                  modelList: [
+                    { label: { value: "上下文" }, value: { value: "1M" } },
+                    {
+                      label: { value: "输入单价" },
+                      value: { value: "8元 / M" },
+                    },
+                    {
+                      label: { value: "输出单价" },
+                      value: { value: "28元 / M" },
+                    },
+                    {
+                      label: { value: "缓存命中" },
+                      value: { value: "2元 / M" },
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+        },
+        {
+          content: JSON.stringify({
+            tabs: [
+              {
+                cards: [
+                  {
+                    title: "GLM-5.2",
+                    fieldList: [
+                      { label: "上下文", values: ["1M"] },
+                      { label: "输入单价", values: ["8元"] },
+                      { label: "输出单价", values: ["28元"] },
+                      { label: "缓存命中", values: ["2元"] },
+                    ],
+                  },
+                  {
+                    title: "GLM-OCR",
+                    fieldList: [
+                      { label: "输入价格", values: ["0.2元/百万Tokens"] },
+                      { label: "输出价格", values: ["0.2元/百万Tokens"] },
+                    ],
+                  },
+                ],
+              },
+            ],
+          }),
+        },
+      ],
+    };
+
+    expect(parseZhipuPricingDom(parseZhipuPricingConfig(payload))).toEqual([
+      {
+        id: "glm-5.3",
+        prices: [{ input: 8, cacheHit: 2, output: 28 }],
+      },
+      {
+        id: "glm-5.2",
+        prices: [{ input: 8, cacheHit: 2, output: 28 }],
+      },
+    ]);
+  });
+
+  it("rejects a config with no supported token pricing", () => {
+    expect(() => parseZhipuPricingConfig({ data: [] })).toThrow(
+      "contains no token-priced models",
+    );
   });
 });
 
