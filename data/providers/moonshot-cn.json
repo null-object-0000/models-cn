@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-08-30T17:32:13.560Z",
-    "lastAttemptAt": "2026-08-30T17:32:13.560Z",
+    "lastSuccessfulAt": "2026-09-10T06:04:01.148Z",
+    "lastAttemptAt": "2026-09-10T06:04:01.148Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-cn",
@@ -217,51 +217,6 @@
           "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
-    },
-    {
-      "id": "kimi-k2.5",
-      "name": "Kimi K2.5",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "thinkingModes": [
-          "thinking",
-          "non-thinking"
-        ],
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "outputModalities": [
-          "text"
-        ],
-        "supportedParameters": [
-          "thinking",
-          "temperature"
-        ]
-      },
-      "limits": {
-        "contextTokens": 262144,
-        "maxOutputTokens": 262144
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "cacheHit": 0.7,
-            "standard": 4
-          },
-          "output": 21,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k25",
-          "validFrom": "2026-07-22T05:31:27.415Z"
-        }
-      ]
     }
   ],
   "sources": [
@@ -290,26 +245,18 @@
       "contentHash": "sha256:14dab7e484e3641a5fc7e3d2181e773ff08432406446ecc80808b0324bb1d9c9"
     },
     {
-      "url": "https://platform.kimi.com/docs/pricing/chat-k25",
-      "kind": "pricing",
-      "locale": "zh-CN",
-      "currency": "CNY",
-      "retrievedAt": "2026-07-22T05:31:27.415Z",
-      "contentHash": "sha256:b1d3c6a83977c1b340e306e13f61a3dde0f7785618683d884a6e716c5820f2a8"
-    },
-    {
       "url": "https://platform.kimi.com/docs/api/models-overview",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-17T02:35:03.080Z",
-      "contentHash": "sha256:f95142d8ac74eeab65b1c34a6bfb1cdf548d6dfa7f5ec889549e6c4444848dcd"
+      "retrievedAt": "2026-09-10T06:04:01.148Z",
+      "contentHash": "sha256:ace2726b95bd27bc7469bce24923ffdf9c5060f12aba11126cc9465f90395c75"
     },
     {
       "url": "https://platform.kimi.com/docs/guide/troubleshooting#kimi",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-17T02:35:03.080Z",
-      "contentHash": "sha256:b62f18a971dd3b2ab339e6850ac422b65f33faf18fc512950376d9367012b365"
+      "retrievedAt": "2026-09-10T06:04:01.148Z",
+      "contentHash": "sha256:aef94a7fb3b7b956966648bc67c1b55864d8483d547506c4e4de19b993bcb4d8"
     }
   ]
 }
