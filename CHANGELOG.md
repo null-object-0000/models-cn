@@ -11,11 +11,13 @@
 - Kimi 国际版美元定价、模型元数据和官方 Models API 清单。
 - 历史价格记录：价格变动时旧价自动归档到模型下的 `priceHistory`（含 `validFrom`/`validTo`），当前价格带可选 `validFrom`，均由共享流水线维护。
 - `dailyTimeRange` 区间新增可选 `days` 字段（`mon`–`sun`），支持仅部分星期适用的分时计价；DeepSeek 高峰/空闲时段已按官方说明限定为周一至周五 9:00–12:00、14:00–18:00（北京时间），周六日全天计为空闲时段，并标注官方公告生效时间 `effectiveFrom: "2026-08-23T00:00:00+08:00"`（北京时间 8-23 00:00 起周末统一按低谷价计费）。
+- DeepSeek 定价页的「图像理解 / Vision」功能行由 `deepseek` 采集器解析为 `capabilities.inputModalities` / `outputModalities`：支持时为 `["text", "image"]`，不支持时为 `["text"]`，因此 DeepSeek-V4.1-Flash（`deepseek-flash`）现已带上图片输入能力。该功能行在旧版页面中不存在，采集器按可选行处理并回落到手工能力表。
 
 ### Changed
 
 - 国内版密钥改用 `MOONSHOT_CHINA_API_KEY`，并暂时兼容旧的 `MOONSHOT_API_KEY`。
 - Kimi Models API 清单支持官方 `context_length` 字段。
+- DeepSeek 模态能力改由官方功能行采集，`data/manual/capabilities.json` 中 DeepSeek 的临时模态条目（含已退役的 `deepseek-v4-flash`、`deepseek-v4-flash-vision-exp`）已移除；同时修正 `不支持` / `Not supported` 被当作「支持」解析的问题。
 
 ## [0.1.0] - 2026-07-22
 

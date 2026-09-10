@@ -393,10 +393,23 @@ export function parseDeepSeekPage(
     if (!row.length) throw new Error(`Feature row ${hrefSuffix} is missing`);
     return valuesForModels(rowTexts($, row.get(0)!), modelIds.length);
   };
+  /**
+   * The Vision (图像理解) feature row is the pricing page's only structured
+   * source for input modalities, and it only exists on layouts that document
+   * a vision model. Older layouts have no such row, so its absence is not an
+   * error: the model then carries no modality fields and curated values from
+   * data/manual/capabilities.json apply instead.
+   */
+  const optionalFeatureValues = (hrefSuffix: string): string[] | undefined => {
+    const row = table.find(`a[href$="${hrefSuffix}"]`).first().closest("tr");
+    if (!row.length) return undefined;
+    return valuesForModels(rowTexts($, row.get(0)!), modelIds.length);
+  };
   const jsonOutput = featureValues("json_mode");
   const toolCalls = featureValues("tool_calls");
   const prefixCompletion = featureValues("chat_prefix_completion");
   const fimCompletion = featureValues("fim_completion");
+  const vision = optionalFeatureValues("guides/vision");
 
   const links = table
     .find('a[href^="https://api.deepseek.com"]')
@@ -442,12 +455,15 @@ export function parseDeepSeekPage(
     );
   }
 
-  const supported = (value: string) => /支持|✓|Supported|Yes/i.test(value);
+  // 支持值同时存在肯定（支持 / Supported）与否定（不支持 / Not supported）写法，
+  // 否定必须先判定，否则 "不支持" 会因子串 "支持" 被误判为支持。
+  const unsupported = (value: string) =>
+    /不支持|not\s+supported|✗|✕|×/i.test(value);
+  const supported = (value: string) =>
+    !unsupported(value) && /支持|✓|Supported|Yes/i.test(value);
   const finalized = finalizedPrices.size > 0;
-  const models = modelIds.map((id, index) => ({
-    id,
-    name: versions[index] ?? id,
-    capabilities: {
+  const models = modelIds.map((id, index) => {
+    const capabilities: ModelData["capabilities"] = {
       thinking: true,
       jsonOutput: supported(jsonOutput[index] ?? ""),
       toolCalls: supported(toolCalls[index] ?? ""),
@@ -455,34 +471,45 @@ export function parseDeepSeekPage(
       fimCompletion: /仅非思考|Non-thinking mode only/i.test(
         fimCompletion[index] ?? "",
       )
-        ? ("non-thinking-only" as const)
+        ? "non-thinking-only"
         : supported(fimCompletion[index] ?? "")
-          ? ("supported" as const)
-          : ("unsupported" as const),
-    },
-    limits: {
-      contextTokens,
-      maxOutputTokens,
-      concurrency: Number(concurrencies[index]),
-    },
-    prices: finalized
-      ? (finalizedPrices.get(id) ?? [])
-      : [
-          {
-            market: config.market as Market,
-            currency: config.currency as Currency,
-            unit: "1M_tokens" as const,
-            rateType: "standard" as const,
-            input: {
-              cacheHit: parseMoney(cacheHits[index] ?? ""),
-              standard: parseMoney(standardPrices[index] ?? ""),
+          ? "supported"
+          : "unsupported",
+    };
+    if (vision) {
+      capabilities.inputModalities = supported(vision[index] ?? "")
+        ? ["text", "image"]
+        : ["text"];
+      capabilities.outputModalities = ["text"];
+    }
+    return {
+      id,
+      name: versions[index] ?? id,
+      capabilities,
+      limits: {
+        contextTokens,
+        maxOutputTokens,
+        concurrency: Number(concurrencies[index]),
+      },
+      prices: finalized
+        ? (finalizedPrices.get(id) ?? [])
+        : [
+            {
+              market: config.market as Market,
+              currency: config.currency as Currency,
+              unit: "1M_tokens" as const,
+              rateType: "standard" as const,
+              input: {
+                cacheHit: parseMoney(cacheHits[index] ?? ""),
+                standard: parseMoney(standardPrices[index] ?? ""),
+              },
+              output: parseMoney(outputPrices[index] ?? ""),
+              ...(effectiveFrom ? { effectiveTo: effectiveFrom } : {}),
             },
-            output: parseMoney(outputPrices[index] ?? ""),
-            ...(effectiveFrom ? { effectiveTo: effectiveFrom } : {}),
-          },
-          ...(scheduledPrices.get(id) ?? []),
-        ],
-  }));
+            ...(scheduledPrices.get(id) ?? []),
+          ],
+    };
+  });
 
   return {
     models,

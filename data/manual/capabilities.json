@@ -2,33 +2,6 @@
   "schemaVersion": "1.0",
   "entries": [
     {
-      "provider": "deepseek",
-      "model": "deepseek-v4-flash",
-      "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
-      },
-      "note": "官方定价页无模态字段；models.dev 参考值为 text/text"
-    },
-    {
-      "provider": "deepseek",
-      "model": "deepseek-v4-pro",
-      "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
-      },
-      "note": "官方定价页无模态字段；models.dev 参考值为 text/text"
-    },
-    {
-      "provider": "deepseek",
-      "model": "deepseek-v4-flash-vision-exp",
-      "capabilities": {
-        "inputModalities": ["text", "image"],
-        "outputModalities": ["text"]
-      },
-      "note": "视觉实验模型，输入支持文本与图片"
-    },
-    {
       "provider": "zhipu-cn",
       "model": "glm-5.3",
       "capabilities": {

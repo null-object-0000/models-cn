@@ -19,6 +19,14 @@ const finalEnHtml = readFileSync(
   path.join(fixtureDir, "deepseek-final-en.html"),
   "utf8",
 );
+const v41ZhHtml = readFileSync(
+  path.join(fixtureDir, "deepseek-v41-zh.html"),
+  "utf8",
+);
+const v41EnHtml = readFileSync(
+  path.join(fixtureDir, "deepseek-v41-en.html"),
+  "utf8",
+);
 
 const html = `
 <html><body><div><table>
@@ -356,5 +364,53 @@ describe("parseDeepSeekPage", () => {
         output: 3.96,
       },
     ]);
+  });
+
+  it("collects input modalities from the V4.1 Vision feature row", () => {
+    const zh = parseDeepSeekPage(v41ZhHtml, DEEPSEEK_SOURCES[0]);
+    expect(zh.models.map((model) => model.id)).toEqual([
+      "deepseek-flash",
+      "deepseek-v4-pro",
+    ]);
+    expect(zh.models[0]).toMatchObject({
+      id: "deepseek-flash",
+      name: "DeepSeek-V4.1-Flash",
+      capabilities: {
+        thinking: true,
+        jsonOutput: true,
+        toolCalls: true,
+        chatPrefixCompletion: true,
+        fimCompletion: "non-thinking-only",
+        inputModalities: ["text", "image"],
+        outputModalities: ["text"],
+      },
+    });
+    // "不支持" 含子串“支持”，必须判为纯文本输入
+    expect(zh.models[1]?.capabilities).toMatchObject({
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+    });
+    expect(zh.models[0]?.prices[0]).toMatchObject({
+      dailyTimeRange: { label: "空闲时段" },
+      input: { cacheHit: 0.02, standard: 1 },
+      output: 4,
+    });
+
+    // 英文页的 "Not supported" 同样按否定处理
+    const en = parseDeepSeekPage(v41EnHtml, DEEPSEEK_SOURCES[1]);
+    expect(en.models[0]?.capabilities).toMatchObject({
+      inputModalities: ["text", "image"],
+      outputModalities: ["text"],
+    });
+    expect(en.models[1]?.capabilities).toMatchObject({
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+    });
+  });
+
+  it("leaves modalities to curated values when the Vision row is absent", () => {
+    const data = parseDeepSeekPage(finalZhHtml, DEEPSEEK_SOURCES[0]);
+    expect(data.models[0]?.capabilities).not.toHaveProperty("inputModalities");
+    expect(data.models[0]?.capabilities).not.toHaveProperty("outputModalities");
   });
 });

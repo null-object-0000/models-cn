@@ -164,8 +164,37 @@ describe("manual capabilities end-to-end", () => {
     expect(loaded.entries.length).toBeGreaterThan(0);
   });
 
-  it("gives DeepSeek models their curated modalities after merge", async () => {
-    const manualData = await loadManualCapabilities();
+  it("keeps officially collected DeepSeek modalities over curated values", async () => {
+    const html = readFileSync(
+      path.join(fixtureDir, "deepseek-v41-zh.html"),
+      "utf8",
+    );
+    const parsed = parseDeepSeekPage(html, DEEPSEEK_SOURCES[0]);
+    const models: ModelData[] = parsed.models.map((m) => ({
+      id: m.id,
+      name: m.name,
+      aliases: [],
+      capabilities: m.capabilities,
+      limits: m.limits,
+      prices: [],
+    }));
+    const merged = applyManualCapabilities(
+      provider(models, "deepseek"),
+      manual([
+        entry("deepseek", "deepseek-flash", {
+          inputModalities: ["text"],
+          outputModalities: ["text"],
+        }),
+      ]),
+    );
+    const byId = new Map(merged.models.map((m) => [m.id, m]));
+    expect(byId.get("deepseek-flash")?.capabilities).toMatchObject({
+      inputModalities: ["text", "image"],
+      outputModalities: ["text"],
+    });
+  });
+
+  it("falls back to curated DeepSeek modalities when the Vision row is absent", async () => {
     const html = readFileSync(
       path.join(fixtureDir, "deepseek-final-zh.html"),
       "utf8",
@@ -181,14 +210,15 @@ describe("manual capabilities end-to-end", () => {
     }));
     const merged = applyManualCapabilities(
       provider(models, "deepseek"),
-      manualData,
+      manual([
+        entry("deepseek", "deepseek-v4-flash", {
+          inputModalities: ["text"],
+          outputModalities: ["text"],
+        }),
+      ]),
     );
     const byId = new Map(merged.models.map((m) => [m.id, m]));
     expect(byId.get("deepseek-v4-flash")?.capabilities).toMatchObject({
-      inputModalities: ["text"],
-      outputModalities: ["text"],
-    });
-    expect(byId.get("deepseek-v4-pro")?.capabilities).toMatchObject({
       inputModalities: ["text"],
       outputModalities: ["text"],
     });

@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T06:04:01.145Z",
-        "lastAttemptAt": "2026-09-10T06:04:01.145Z",
+        "lastSuccessfulAt": "2026-09-10T09:46:41.392Z",
+        "lastAttemptAt": "2026-09-10T09:46:41.392Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -30,7 +30,14 @@
             "jsonOutput": true,
             "toolCalls": true,
             "chatPrefixCompletion": true,
-            "fimCompletion": "non-thinking-only"
+            "fimCompletion": "non-thinking-only",
+            "inputModalities": [
+              "text",
+              "image"
+            ],
+            "outputModalities": [
+              "text"
+            ]
           },
           "limits": {
             "contextTokens": 1000000,
@@ -3191,8 +3198,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T06:04:42.842Z",
-        "lastAttemptAt": "2026-09-10T06:04:42.842Z",
+        "lastSuccessfulAt": "2026-09-10T09:46:41.603Z",
+        "lastAttemptAt": "2026-09-10T09:46:41.603Z",
         "consecutiveFailures": 0
       },
       "source": {
