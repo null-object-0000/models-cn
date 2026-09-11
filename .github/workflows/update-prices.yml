@@ -17,6 +17,8 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs:
+      pr_url: ${{ steps.pr.outputs.pr_url }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -83,20 +85,20 @@ jobs:
       - name: Assert collection health
         if: always() && steps.report.conclusion == 'success'
         run: npm run health:check
-      - name: Notify Feishu about PR to review
-        if: success() && github.event_name == 'schedule' && steps.pr.outputs.pr_url != ''
+
+  # Runs after `update` has finished, so the Jobs API has final step results
+  # (a step cannot see its own job's outcome while that job is in progress).
+  notify:
+    needs: update
+    if: always() && github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Notify Feishu
         uses: ./.github/actions/notify-feishu
         with:
-          mode: pr
-          pr-url: ${{ steps.pr.outputs.pr_url }}
-          app-id: ${{ secrets.FEISHU_APP_ID }}
-          app-secret: ${{ secrets.FEISHU_APP_SECRET }}
-          chat-id: ${{ secrets.FEISHU_CHAT_ID }}
-      - name: Notify Feishu on failure
-        if: failure() && github.event_name == 'schedule'
-        uses: ./.github/actions/notify-feishu
-        with:
-          mode: failure
+          mode: ${{ needs.update.result == 'success' && 'pr' || 'failure' }}
+          pr-url: ${{ needs.update.outputs.pr_url }}
           app-id: ${{ secrets.FEISHU_APP_ID }}
           app-secret: ${{ secrets.FEISHU_APP_SECRET }}
           chat-id: ${{ secrets.FEISHU_CHAT_ID }}
