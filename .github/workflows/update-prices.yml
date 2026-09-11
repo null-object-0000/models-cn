@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: read # notify job reads job/step results to name the failing step
 
 concurrency:
   group: update-model-prices
@@ -17,6 +18,8 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs:
+      pr_url: ${{ steps.pr.outputs.pr_url }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -53,6 +56,7 @@ jobs:
             echo "> 本次仅刷新成功时间戳，不创建或更新 PR。" >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Create or update price PR
+        id: pr
         if: steps.report.outputs.material_changes == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -72,11 +76,31 @@ jobs:
           git push --force-with-lease origin "$branch"
           open_pr_count=$(gh pr list --head "$branch" --state open --json number --jq 'length')
           if [ "$open_pr_count" -eq 0 ]; then
-            gh pr create --head "$branch" --title "chore: update model prices" --body-file update-report.md
+            pr_url=$(gh pr create --head "$branch" --title "chore: update model prices" --body-file update-report.md)
           else
             pr_number=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number')
+            pr_url=$(gh pr view "$pr_number" --json url --jq .url)
             gh pr edit "$pr_number" --body-file update-report.md
           fi
+          echo "pr_url=$pr_url" >> "$GITHUB_OUTPUT"
       - name: Assert collection health
         if: always() && steps.report.conclusion == 'success'
         run: npm run health:check
+
+  # Runs after `update` has finished, so the Jobs API has final step results
+  # (a step cannot see its own job's outcome while that job is in progress).
+  notify:
+    needs: update
+    if: always() && github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Notify Feishu
+        uses: ./.github/actions/notify-feishu
+        with:
+          mode: ${{ needs.update.result == 'success' && 'pr' || 'failure' }}
+          pr-url: ${{ needs.update.outputs.pr_url }}
+          app-id: ${{ secrets.FEISHU_APP_ID }}
+          app-secret: ${{ secrets.FEISHU_APP_SECRET }}
+          chat-id: ${{ secrets.FEISHU_CHAT_ID }}
+          github-token: ${{ github.token }}

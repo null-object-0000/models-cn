@@ -1,0 +1,39 @@
+name: Notify Feishu
+description: Report a workflow run outcome to a Feishu chat.
+
+inputs:
+  mode:
+    description: '"failure" for a failed run, "pr" for a PR awaiting review'
+    required: false
+    default: failure
+  pr-url:
+    description: PR that needs merging, when one was created or updated
+    required: false
+    default: ""
+  app-id:
+    description: Feishu custom app id
+    required: true
+  app-secret:
+    description: Feishu custom app secret
+    required: true
+  chat-id:
+    description: Feishu chat whose members should be notified
+    required: true
+  github-token:
+    description: Token for the Jobs API, so the notice can name the failing steps
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Send Feishu message
+      shell: bash
+      env:
+        MODE: ${{ inputs.mode }}
+        PR_URL: ${{ inputs.pr-url }}
+        FEISHU_APP_ID: ${{ inputs.app-id }}
+        FEISHU_APP_SECRET: ${{ inputs.app-secret }}
+        FEISHU_CHAT_ID: ${{ inputs.chat-id }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: node "${{ github.action_path }}/notify.mjs"
