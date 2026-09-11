@@ -1,11 +1,14 @@
-// Send a failure notice to Feishu. Never fails the build.
+// Report a run outcome to Feishu. Never fails the build.
 //
-// Noisy-by-design would be 3 messages a day for as long as a source stays
-// broken (the Sep incident ran 10 days). So notify on the *transition* into
-// failure, plus a periodic reminder while it stays broken.
+// The scheduled run is 3x/day, so raw notification would be noise:
+//   - failure  : a broken source stays broken for days (Sep incident: 28 in a row),
+//                so notify on the transition into failure, then ~daily.
+//   - opened/updated PR : that is the actionable "review me" signal, notify every time.
 import process from "node:process";
 
 const {
+  MODE = "failure",
+  PR_URL,
   FEISHU_APP_ID,
   FEISHU_APP_SECRET,
   FEISHU_CHAT_ID,
@@ -20,8 +23,8 @@ const {
   GITHUB_API_URL = "https://api.github.com",
 } = process.env;
 
-// Roughly one reminder a day at the 3x/day schedule.
-const REMIND_EVERY = 8; // ~1 reminder/day at the 3x/day schedule
+// Failure reminder cadence: ~1/day at the 3x/day schedule.
+const REMIND_EVERY = 8;
 
 const runUrl = `${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}`;
 const log = (msg) => console.log(`[notify-feishu] ${msg}`);
@@ -105,21 +108,54 @@ async function consecutiveFailures() {
   return count;
 }
 
-function buildText(steps, streak) {
-  const lines = [
-    "🔴 models-cn 工作流失败",
-    "",
-    `工作流: ${GITHUB_WORKFLOW}`,
-    `触发: ${GITHUB_EVENT_NAME}${GITHUB_REF_NAME ? ` (${GITHUB_REF_NAME})` : ""}`,
-  ];
+function context() {
+  return `${GITHUB_WORKFLOW} · ${GITHUB_EVENT_NAME}${
+    GITHUB_REF_NAME ? ` (${GITHUB_REF_NAME})` : ""
+  }`;
+}
+
+function failureText(steps, streak) {
+  const lines = ["🔴 models-cn 工作流失败", "", context()];
   if (steps.length) {
     lines.push("", "失败步骤:", ...steps.map((s) => `- ${s}`));
   }
   if (streak && streak > 1) {
     lines.push("", `⚠️ 已连续失败 ${streak} 次，仍未恢复。`);
   }
+  if (PR_URL) lines.push("", `已生成的 PR: ${PR_URL}`);
   lines.push("", runUrl);
   return lines.join("\n");
+}
+
+function prText() {
+  return [
+    "🟡 models-cn 有定价更新待合并",
+    "",
+    context(),
+    "",
+    PR_URL,
+    "",
+    "Actions 已通过，合并后才会发布到站点与 API。",
+  ].join("\n");
+}
+
+// Returns the message to send, or null to stay quiet.
+async function compose() {
+  if (MODE === "pr") {
+    if (!PR_URL) {
+      log("skipped: pr mode without a PR url");
+      return null;
+    }
+    return prText();
+  }
+
+  const streak = await consecutiveFailures();
+  const due = streak === null || streak === 1 || streak % REMIND_EVERY === 0;
+  if (!due) {
+    log(`suppressed: ${streak} consecutive failures (already notified)`);
+    return null;
+  }
+  return failureText(await failedSteps(), streak);
 }
 
 async function main() {
@@ -133,15 +169,8 @@ async function main() {
     return;
   }
 
-  const streak = await consecutiveFailures();
-  const shouldNotify =
-    streak === null ||
-    streak === 1 ||
-    (streak > 1 && streak % REMIND_EVERY === 0);
-  if (!shouldNotify) {
-    log(`suppressed: ${streak} consecutive failures (already notified)`);
-    return;
-  }
+  const text = await compose();
+  if (!text) return;
 
   const tokenRes = await post(
     "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal",
@@ -152,7 +181,6 @@ async function main() {
     return;
   }
 
-  const text = buildText(await failedSteps(), streak);
   const sendRes = await post(
     "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id",
     {
@@ -166,7 +194,7 @@ async function main() {
     log(`send error: ${sendRes.code} ${sendRes.msg}`);
     return;
   }
-  log(`sent (streak=${streak}) ${sendRes.data?.message_id ?? ""}`);
+  log(`sent (mode=${MODE}) ${sendRes.data?.message_id ?? ""}`);
 }
 
 try {

@@ -1,7 +1,15 @@
 name: Notify Feishu
-description: Send a plain-text failure notice to a Feishu chat.
+description: Report a workflow run outcome to a Feishu chat.
 
 inputs:
+  mode:
+    description: '"failure" for a failed run, "pr" for a PR awaiting review'
+    required: false
+    default: failure
+  pr-url:
+    description: PR that needs merging, when one was created or updated
+    required: false
+    default: ""
   app-id:
     description: Feishu custom app id
     required: true
@@ -18,6 +26,8 @@ runs:
     - name: Send Feishu message
       shell: bash
       env:
+        MODE: ${{ inputs.mode }}
+        PR_URL: ${{ inputs.pr-url }}
         FEISHU_APP_ID: ${{ inputs.app-id }}
         FEISHU_APP_SECRET: ${{ inputs.app-secret }}
         FEISHU_CHAT_ID: ${{ inputs.chat-id }}
