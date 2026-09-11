@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-10T09:46:41.603Z",
-    "lastAttemptAt": "2026-09-10T09:46:41.603Z",
+    "lastSuccessfulAt": "2026-09-10T17:02:16.911Z",
+    "lastAttemptAt": "2026-09-10T17:02:16.911Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-09-10T06:04:42.842Z",
-    "contentHash": "sha256:a7b681541084a43568b04f4d914ab62aa421e1f30796d615f0c27257bf9c7ea5"
+    "retrievedAt": "2026-09-10T17:02:16.911Z",
+    "contentHash": "sha256:67928c1113ff14e94a2dac2611bd8a7e239c5a2dca58992597bfff7e74e793ef"
   },
   "models": [
     {
@@ -2419,6 +2419,86 @@
           "official": null,
           "reference": 1.72,
           "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "referenceProvider": "deepseek",
+      "referenceModel": "deepseek-flash",
+      "referenceUrl": "https://models.dev/models/deepseek/deepseek-flash/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-09-10",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 384000,
+          "reference": 384000,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image"
+          ],
+          "reference": [
+            "text",
+            "image"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 0.15,
+          "reference": 0.15,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.003,
+          "reference": 0.003,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 0.6,
+          "reference": 0.6,
+          "status": "match"
         }
       ]
     },
