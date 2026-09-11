@@ -1,0 +1,24 @@
+name: Notify Feishu
+description: Send a plain-text failure notice to a Feishu chat.
+
+inputs:
+  app-id:
+    description: Feishu custom app id
+    required: true
+  app-secret:
+    description: Feishu custom app secret
+    required: true
+  chat-id:
+    description: Feishu chat whose members should be notified
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Send Feishu message
+      shell: bash
+      env:
+        FEISHU_APP_ID: ${{ inputs.app-id }}
+        FEISHU_APP_SECRET: ${{ inputs.app-secret }}
+        FEISHU_CHAT_ID: ${{ inputs.chat-id }}
+      run: node "${{ github.action_path }}/notify.mjs"
