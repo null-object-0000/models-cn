@@ -19,6 +19,10 @@ inputs:
   chat-id:
     description: Feishu chat whose members should be notified
     required: true
+  github-token:
+    description: Token for the Jobs API, so the notice can name the failing steps
+    required: false
+    default: ""
 
 runs:
   using: composite
@@ -31,4 +35,5 @@ runs:
         FEISHU_APP_ID: ${{ inputs.app-id }}
         FEISHU_APP_SECRET: ${{ inputs.app-secret }}
         FEISHU_CHAT_ID: ${{ inputs.chat-id }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
       run: node "${{ github.action_path }}/notify.mjs"

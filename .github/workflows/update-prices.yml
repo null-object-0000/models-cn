@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: read # notify job reads job/step results to name the failing step
 
 concurrency:
   group: update-model-prices
@@ -102,3 +103,4 @@ jobs:
           app-id: ${{ secrets.FEISHU_APP_ID }}
           app-secret: ${{ secrets.FEISHU_APP_SECRET }}
           chat-id: ${{ secrets.FEISHU_CHAT_ID }}
+          github-token: ${{ github.token }}
