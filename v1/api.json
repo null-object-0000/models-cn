@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:01:35.463Z",
-        "lastAttemptAt": "2026-09-10T17:01:35.463Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:13.835Z",
+        "lastAttemptAt": "2026-09-12T15:23:13.835Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -784,8 +784,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:01:35.484Z",
-        "lastAttemptAt": "2026-09-10T17:01:35.484Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:13.848Z",
+        "lastAttemptAt": "2026-09-12T15:23:13.848Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -936,8 +936,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:01:35.490Z",
-        "lastAttemptAt": "2026-09-10T17:01:35.490Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:13.855Z",
+        "lastAttemptAt": "2026-09-12T15:23:13.855Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1001,7 +1001,7 @@
                 "standard": 20
               },
               "output": 100,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k3",
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
               "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
@@ -1049,7 +1049,7 @@
                 "standard": 6.5
               },
               "output": 27,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
               "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
@@ -1097,7 +1097,7 @@
                 "standard": 13
               },
               "output": 54,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
               "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
@@ -1147,7 +1147,7 @@
                 "standard": 6.5
               },
               "output": 27,
-              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k26",
+              "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
               "validFrom": "2026-07-22T05:31:27.415Z"
             }
           ]
@@ -1155,28 +1155,12 @@
       ],
       "sources": [
         {
-          "url": "https://platform.kimi.com/docs/pricing/chat-k3",
+          "url": "https://platform.kimi.com/docs/pricing/chat",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-07-22T05:31:27.415Z",
-          "contentHash": "sha256:f1a8edf8fc920053c3687815b370f517a3701bbc8b7a7c4042cadd099eb703c0"
-        },
-        {
-          "url": "https://platform.kimi.com/docs/pricing/chat-k27-code",
-          "kind": "pricing",
-          "locale": "zh-CN",
-          "currency": "CNY",
-          "retrievedAt": "2026-07-22T05:31:27.415Z",
-          "contentHash": "sha256:2cab6e43a4b9c7d17d6eec7cac683fefaa23200bc216cef8dc36da8401b38655"
-        },
-        {
-          "url": "https://platform.kimi.com/docs/pricing/chat-k26",
-          "kind": "pricing",
-          "locale": "zh-CN",
-          "currency": "CNY",
-          "retrievedAt": "2026-07-22T05:31:27.415Z",
-          "contentHash": "sha256:14dab7e484e3641a5fc7e3d2181e773ff08432406446ecc80808b0324bb1d9c9"
+          "retrievedAt": "2026-09-12T15:23:13.855Z",
+          "contentHash": "sha256:fd5d680dc9115e6cc1e282c0ef860f599a87fd35c67b11c9b31b15a627f59b9e"
         },
         {
           "url": "https://platform.kimi.com/docs/api/models-overview",
@@ -1198,8 +1182,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:01:35.496Z",
-        "lastAttemptAt": "2026-09-10T17:01:35.496Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:13.851Z",
+        "lastAttemptAt": "2026-09-12T15:23:13.851Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1263,7 +1247,7 @@
                 "standard": 3
               },
               "output": 15,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k3",
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat",
               "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
@@ -1311,7 +1295,7 @@
                 "standard": 0.95
               },
               "output": 4,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat",
               "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
@@ -1359,7 +1343,7 @@
                 "standard": 1.9
               },
               "output": 8,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat",
               "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
@@ -1409,7 +1393,7 @@
                 "standard": 0.95
               },
               "output": 4,
-              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k26",
+              "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat",
               "validFrom": "2026-07-23T09:12:31.262Z"
             }
           ]
@@ -1417,28 +1401,12 @@
       ],
       "sources": [
         {
-          "url": "https://platform.kimi.ai/docs/pricing/chat-k3",
+          "url": "https://platform.kimi.ai/docs/pricing/chat",
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-07-23T09:12:31.262Z",
-          "contentHash": "sha256:df6b4de65d4135072941381d0e627c1eb17efdd659f0b052181e7206beeac00e"
-        },
-        {
-          "url": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
-          "kind": "pricing",
-          "locale": "en",
-          "currency": "USD",
-          "retrievedAt": "2026-07-23T09:12:31.262Z",
-          "contentHash": "sha256:5213733dc22098ecbfd47a9e349e4fd49e903371bc0122314fe30fed9aacdb4d"
-        },
-        {
-          "url": "https://platform.kimi.ai/docs/pricing/chat-k26",
-          "kind": "pricing",
-          "locale": "en",
-          "currency": "USD",
-          "retrievedAt": "2026-07-23T09:12:31.262Z",
-          "contentHash": "sha256:0117b5bacedecd716ded845938a84abd60193984bf1e211eac7135c6559f0bb4"
+          "retrievedAt": "2026-09-12T15:23:13.851Z",
+          "contentHash": "sha256:643422813e8cf0d75f774abf9def7720893f6582f9da920fe346bc85d67e6f80"
         },
         {
           "url": "https://platform.kimi.ai/docs/api/models-overview",
@@ -1460,8 +1428,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:01:35.499Z",
-        "lastAttemptAt": "2026-09-10T17:01:35.499Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:13.858Z",
+        "lastAttemptAt": "2026-09-12T15:23:13.858Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2195,16 +2163,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-09-10T17:01:35.499Z",
-          "contentHash": "sha256:4dacb5e417d6e1499a6073bfacfde3f75dfe28cc10c30a5faf90ea389efbcb22"
+          "retrievedAt": "2026-09-12T15:23:13.858Z",
+          "contentHash": "sha256:5a21d68c27dfd3862e7e934be4c2d5fb5c9272db1640afdcfb0b6ad17aaffe56"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-09-10T17:01:35.499Z",
-          "contentHash": "sha256:b19aad64e21783e6d526ac60bfd69b633ccc5f874933bb923f375456220b47f9"
+          "retrievedAt": "2026-09-12T15:23:13.858Z",
+          "contentHash": "sha256:d087df7bcd68e177c426036e6f34c2b7af28397e7f928373b1389649dc9364ac"
         }
       ]
     },
@@ -2212,8 +2180,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:01:35.511Z",
-        "lastAttemptAt": "2026-09-10T17:01:35.511Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:13.873Z",
+        "lastAttemptAt": "2026-09-12T15:23:13.873Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2383,8 +2351,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:01:35.522Z",
-        "lastAttemptAt": "2026-09-10T17:01:35.522Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:13.869Z",
+        "lastAttemptAt": "2026-09-12T15:23:13.869Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2877,8 +2845,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:02:17.712Z",
-        "lastAttemptAt": "2026-09-10T17:02:17.712Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:49.931Z",
+        "lastAttemptAt": "2026-09-12T15:23:49.931Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2913,8 +2881,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:02:18.214Z",
-        "lastAttemptAt": "2026-09-10T17:02:18.214Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:50.395Z",
+        "lastAttemptAt": "2026-09-12T15:23:50.395Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2947,8 +2915,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:02:18.535Z",
-        "lastAttemptAt": "2026-09-10T17:02:18.535Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:50.713Z",
+        "lastAttemptAt": "2026-09-12T15:23:50.713Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2997,8 +2965,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:02:20.121Z",
-        "lastAttemptAt": "2026-09-10T17:02:20.121Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:52.217Z",
+        "lastAttemptAt": "2026-09-12T15:23:52.217Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3038,8 +3006,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:02:20.507Z",
-        "lastAttemptAt": "2026-09-10T17:02:20.507Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:52.645Z",
+        "lastAttemptAt": "2026-09-12T15:23:52.645Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3115,8 +3083,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:02:21.206Z",
-        "lastAttemptAt": "2026-09-10T17:02:21.206Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:53.392Z",
+        "lastAttemptAt": "2026-09-12T15:23:53.392Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3198,8 +3166,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-10T17:02:16.911Z",
-        "lastAttemptAt": "2026-09-10T17:02:16.911Z",
+        "lastSuccessfulAt": "2026-09-12T15:23:49.209Z",
+        "lastAttemptAt": "2026-09-12T15:23:49.209Z",
         "consecutiveFailures": 0
       },
       "source": {
