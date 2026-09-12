@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-10T17:01:35.490Z",
-    "lastAttemptAt": "2026-09-10T17:01:35.490Z",
+    "lastSuccessfulAt": "2026-09-12T15:23:13.855Z",
+    "lastAttemptAt": "2026-09-12T15:23:13.855Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-cn",
@@ -67,7 +67,7 @@
             "standard": 20
           },
           "output": 100,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k3",
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
           "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
@@ -115,7 +115,7 @@
             "standard": 6.5
           },
           "output": 27,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
           "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
@@ -163,7 +163,7 @@
             "standard": 13
           },
           "output": 54,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k27-code",
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
           "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
@@ -213,7 +213,7 @@
             "standard": 6.5
           },
           "output": 27,
-          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat-k26",
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
           "validFrom": "2026-07-22T05:31:27.415Z"
         }
       ]
@@ -221,28 +221,12 @@
   ],
   "sources": [
     {
-      "url": "https://platform.kimi.com/docs/pricing/chat-k3",
+      "url": "https://platform.kimi.com/docs/pricing/chat",
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-07-22T05:31:27.415Z",
-      "contentHash": "sha256:f1a8edf8fc920053c3687815b370f517a3701bbc8b7a7c4042cadd099eb703c0"
-    },
-    {
-      "url": "https://platform.kimi.com/docs/pricing/chat-k27-code",
-      "kind": "pricing",
-      "locale": "zh-CN",
-      "currency": "CNY",
-      "retrievedAt": "2026-07-22T05:31:27.415Z",
-      "contentHash": "sha256:2cab6e43a4b9c7d17d6eec7cac683fefaa23200bc216cef8dc36da8401b38655"
-    },
-    {
-      "url": "https://platform.kimi.com/docs/pricing/chat-k26",
-      "kind": "pricing",
-      "locale": "zh-CN",
-      "currency": "CNY",
-      "retrievedAt": "2026-07-22T05:31:27.415Z",
-      "contentHash": "sha256:14dab7e484e3641a5fc7e3d2181e773ff08432406446ecc80808b0324bb1d9c9"
+      "retrievedAt": "2026-09-12T15:23:13.855Z",
+      "contentHash": "sha256:fd5d680dc9115e6cc1e282c0ef860f599a87fd35c67b11c9b31b15a627f59b9e"
     },
     {
       "url": "https://platform.kimi.com/docs/api/models-overview",

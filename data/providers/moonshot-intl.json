@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-10T17:01:35.496Z",
-    "lastAttemptAt": "2026-09-10T17:01:35.496Z",
+    "lastSuccessfulAt": "2026-09-12T15:23:13.851Z",
+    "lastAttemptAt": "2026-09-12T15:23:13.851Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-intl",
@@ -67,7 +67,7 @@
             "standard": 3
           },
           "output": 15,
-          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k3",
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat",
           "validFrom": "2026-07-23T09:12:31.262Z"
         }
       ]
@@ -115,7 +115,7 @@
             "standard": 0.95
           },
           "output": 4,
-          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat",
           "validFrom": "2026-07-23T09:12:31.262Z"
         }
       ]
@@ -163,7 +163,7 @@
             "standard": 1.9
           },
           "output": 8,
-          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat",
           "validFrom": "2026-07-23T09:12:31.262Z"
         }
       ]
@@ -213,7 +213,7 @@
             "standard": 0.95
           },
           "output": 4,
-          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat-k26",
+          "sourceUrl": "https://platform.kimi.ai/docs/pricing/chat",
           "validFrom": "2026-07-23T09:12:31.262Z"
         }
       ]
@@ -221,28 +221,12 @@
   ],
   "sources": [
     {
-      "url": "https://platform.kimi.ai/docs/pricing/chat-k3",
+      "url": "https://platform.kimi.ai/docs/pricing/chat",
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-07-23T09:12:31.262Z",
-      "contentHash": "sha256:df6b4de65d4135072941381d0e627c1eb17efdd659f0b052181e7206beeac00e"
-    },
-    {
-      "url": "https://platform.kimi.ai/docs/pricing/chat-k27-code",
-      "kind": "pricing",
-      "locale": "en",
-      "currency": "USD",
-      "retrievedAt": "2026-07-23T09:12:31.262Z",
-      "contentHash": "sha256:5213733dc22098ecbfd47a9e349e4fd49e903371bc0122314fe30fed9aacdb4d"
-    },
-    {
-      "url": "https://platform.kimi.ai/docs/pricing/chat-k26",
-      "kind": "pricing",
-      "locale": "en",
-      "currency": "USD",
-      "retrievedAt": "2026-07-23T09:12:31.262Z",
-      "contentHash": "sha256:0117b5bacedecd716ded845938a84abd60193984bf1e211eac7135c6559f0bb4"
+      "retrievedAt": "2026-09-12T15:23:13.851Z",
+      "contentHash": "sha256:643422813e8cf0d75f774abf9def7720893f6582f9da920fe346bc85d67e6f80"
     },
     {
       "url": "https://platform.kimi.ai/docs/api/models-overview",
