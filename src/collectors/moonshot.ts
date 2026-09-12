@@ -50,11 +50,8 @@ export const MOONSHOT_CHANNELS = {
   },
 } as const satisfies Record<string, MoonshotChannel>;
 
-const pricingPaths = [
-  "/docs/pricing/chat-k3",
-  "/docs/pricing/chat-k27-code",
-  "/docs/pricing/chat-k26",
-] as const;
+/** Kimi 现在把全部在售模型的定价放在同一张表里（旧的 chat-k3/k27-code/k26 路由 307 到 chat.md）。 */
+const pricingPaths = ["/docs/pricing/chat"] as const;
 
 function pricingSources(channel: MoonshotChannel): string[] {
   return pricingPaths.map((path) => `${channel.docsBaseUrl}${path}`);
