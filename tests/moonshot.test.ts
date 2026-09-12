@@ -86,10 +86,13 @@ describe("Kimi collector parser", () => {
   });
 
   it("collects the international channel with USD metadata", async () => {
-    const pricing = (id: string) => `
+    const pricing = `
 <DocTable
   rows={[
-["${id}", "1M tokens", "$0.30", "$3.00", "$15.00", "${id === "kimi-k3" ? "1,048,576" : "262,144"} tokens"],
+["kimi-k3", "1M tokens", <>{"$"}0.30</>, <>{"$"}3.00</>, <>{"$"}15.00</>, "1,048,576 tokens"],
+["kimi-k2.7-code", "1M tokens", <>{"$"}0.19</>, <>{"$"}0.95</>, <>{"$"}4.00</>, "262,144 tokens"],
+["kimi-k2.7-code-highspeed", "1M tokens", <>{"$"}0.38</>, <>{"$"}1.90</>, <>{"$"}8.00</>, "262,144 tokens"],
+["kimi-k2.6", "1M tokens", <>{"$"}0.16</>, <>{"$"}0.95</>, <>{"$"}4.00</>, "262,144 tokens"],
 ]}
 />`;
     const overview = "kimi-k3 kimi-k2.7-code kimi-k2.6";
@@ -99,27 +102,32 @@ describe("Kimi collector parser", () => {
 * For \`kimi-k2.6\` and \`kimi-k2.5\`, the maximum output length is \`256*1024 - prompt_tokens\`.
 ## How many Chinese characters does the Kimi model support?
 `;
+    const requested: string[] = [];
     const provider = await collectMoonshotInternational(
       new Date("2026-07-23T00:00:00Z"),
       async (url) => {
-        if (url.endsWith("chat-k3")) return pricing("kimi-k3");
-        if (url.endsWith("chat-k27-code")) {
-          return `
-<DocTable
-  rows={[
-["kimi-k2.7-code", "1M tokens", "$0.19", "$0.95", "$4.00", "262,144 tokens"],
-["kimi-k2.7-code-highspeed", "1M tokens", "$0.38", "$1.90", "$8.00", "262,144 tokens"],
-]}
-/>`;
-        }
-        if (url.endsWith("chat-k26")) return pricing("kimi-k2.6");
-        if (url.endsWith("chat-k25")) {
-          throw new Error("retired K2.5 pricing page must not be requested");
+        requested.push(url);
+        // 单页定价：Kimi 已把在售模型合并到 /docs/pricing/chat
+        if (url.endsWith("/docs/pricing/chat")) return pricing;
+        // 旧的 per-model 路由已 307 重定向，不能再请求
+        if (url.includes("/docs/pricing/")) {
+          throw new Error(`retired per-model pricing page requested: ${url}`);
         }
         if (url.includes("models-overview")) return overview;
         return troubleshooting;
       },
     );
+    expect(requested).toEqual([
+      "https://platform.kimi.ai/docs/pricing/chat",
+      "https://platform.kimi.ai/docs/api/models-overview",
+      "https://platform.kimi.ai/docs/guide/troubleshooting#kimi",
+    ]);
+    expect(provider.models.map((model) => model.id)).toEqual([
+      "kimi-k3",
+      "kimi-k2.7-code",
+      "kimi-k2.7-code-highspeed",
+      "kimi-k2.6",
+    ]);
     expect(provider).toMatchObject({
       id: "moonshot-intl",
       name: "Kimi International",
