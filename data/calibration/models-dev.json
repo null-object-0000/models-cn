@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-12T15:23:49.209Z",
-    "lastAttemptAt": "2026-09-12T15:23:49.209Z",
+    "lastSuccessfulAt": "2026-09-16T06:05:47.614Z",
+    "lastAttemptAt": "2026-09-16T06:05:47.614Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-09-10T17:02:16.911Z",
-    "contentHash": "sha256:67928c1113ff14e94a2dac2611bd8a7e239c5a2dca58992597bfff7e74e793ef"
+    "retrievedAt": "2026-09-16T06:05:47.614Z",
+    "contentHash": "sha256:9355f961a0d0bb729326ec60f478b4d7cf94bffc514cebb1f8c9db007b20d99d"
   },
   "models": [
     {
