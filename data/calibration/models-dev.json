@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-12T15:23:49.209Z",
-    "lastAttemptAt": "2026-09-12T15:23:49.209Z",
+    "lastSuccessfulAt": "2026-09-17T06:11:22.195Z",
+    "lastAttemptAt": "2026-09-17T06:11:22.195Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-09-10T17:02:16.911Z",
-    "contentHash": "sha256:67928c1113ff14e94a2dac2611bd8a7e239c5a2dca58992597bfff7e74e793ef"
+    "retrievedAt": "2026-09-17T06:11:22.195Z",
+    "contentHash": "sha256:1ccbea9791649d50e8dea3cb754d87821aa51e89bbf319d50ce4ea887b94f065"
   },
   "models": [
     {
@@ -2417,7 +2417,7 @@
         {
           "field": "prices.USD.output",
           "official": null,
-          "reference": 1.72,
+          "reference": 1.033,
           "status": "missing"
         }
       ]

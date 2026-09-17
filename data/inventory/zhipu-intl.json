@@ -3,8 +3,8 @@
   "provider": "zhipu-intl",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-12T15:23:53.392Z",
-    "lastAttemptAt": "2026-09-12T15:23:53.392Z",
+    "lastSuccessfulAt": "2026-09-17T06:11:28.942Z",
+    "lastAttemptAt": "2026-09-17T06:11:28.942Z",
     "consecutiveFailures": 0
   },
   "source": {
