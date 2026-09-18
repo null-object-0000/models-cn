@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-17T06:10:44.272Z",
-    "lastAttemptAt": "2026-09-17T06:10:44.272Z",
+    "lastSuccessfulAt": "2026-09-18T05:57:52.805Z",
+    "lastAttemptAt": "2026-09-18T05:57:52.805Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-cn",
@@ -157,8 +157,8 @@
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-30T17:32:13.630Z",
-      "contentHash": "sha256:6a02a20fb816d3a836d84f09494130b9584407a155241005f066ef23b95dd7f4"
+      "retrievedAt": "2026-09-18T05:57:52.805Z",
+      "contentHash": "sha256:d8ff2ef289f9954b79960ff2ff14a36496eecc48d49b6302b611af709d24cfb5"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
