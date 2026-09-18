@@ -3,14 +3,14 @@
   "provider": "zhipu-intl",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-17T06:11:28.942Z",
-    "lastAttemptAt": "2026-09-17T06:11:28.942Z",
+    "lastSuccessfulAt": "2026-09-18T05:58:41.745Z",
+    "lastAttemptAt": "2026-09-18T05:58:41.745Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://api.z.ai/api/paas/v4/models",
-    "retrievedAt": "2026-08-27T03:40:14.062Z",
-    "contentHash": "sha256:5fe7b82231b9429364b12c3567c64d4a6a5b3ae86dc8c65f691791a3b58d5fe2"
+    "retrievedAt": "2026-09-18T05:58:41.745Z",
+    "contentHash": "sha256:67a7862f6b9d98e0ac8970d24d53248267ebffc9817f9bc153e1f4037ba19b23"
   },
   "models": [
     {
@@ -52,6 +52,10 @@
     {
       "id": "glm-5.3-flash",
       "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-5.3-flashx",
+      "ownedBy": "z-ai"
     }
   ],
   "comparison": {
@@ -64,7 +68,8 @@
       "glm-5.1",
       "glm-5.2",
       "glm-5.3",
-      "glm-5.3-flash"
+      "glm-5.3-flash",
+      "glm-5.3-flashx"
     ],
     "aliasesAndListed": [],
     "listedWithoutPricing": [

@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-17T06:10:44.275Z",
-    "lastAttemptAt": "2026-09-17T06:10:44.275Z",
+    "lastSuccessfulAt": "2026-09-18T05:57:52.809Z",
+    "lastAttemptAt": "2026-09-18T05:57:52.809Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -104,6 +104,35 @@
           "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
           "validFrom": "2026-08-27T04:09:55.724Z",
           "validTo": "2026-09-10T06:04:03.252Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-5.3-flashx",
+      "name": "GLM-5.3-FlashX",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.37,
+            "cacheHit": 0.075
+          },
+          "output": 1.25,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-09-18T05:57:56.674Z"
         }
       ]
     },
@@ -470,15 +499,15 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-09-10T06:04:01.175Z",
-      "contentHash": "sha256:7397f69615157fd4b6379f5b73ece37d41ed6e29cf2b453ea6146293ecb67cd3"
+      "retrievedAt": "2026-09-18T05:57:52.809Z",
+      "contentHash": "sha256:b3baa81207d297338ffb8f13f815e6dab51abc935fef8a73b002419bf387b4c2"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-30T17:32:13.635Z",
-      "contentHash": "sha256:6a02a20fb816d3a836d84f09494130b9584407a155241005f066ef23b95dd7f4"
+      "retrievedAt": "2026-09-18T05:57:52.809Z",
+      "contentHash": "sha256:d8ff2ef289f9954b79960ff2ff14a36496eecc48d49b6302b611af709d24cfb5"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
