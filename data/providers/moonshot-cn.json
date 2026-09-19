@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-09-18T05:57:52.785Z",
-    "lastAttemptAt": "2026-09-18T05:57:52.785Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-09-19T16:32:02.008Z",
+    "consecutiveFailures": 1,
+    "message": "Unexpected Kimi pricing row: [\"kimi-k3\",\"1M tokens\",\"¥20.00\",\"¥40.00\",\"¥2.00\",\"¥20.00\",\"¥100.00\",\"1,048,576 tokens\"]"
   },
   "id": "moonshot-cn",
   "name": "Kimi China",
