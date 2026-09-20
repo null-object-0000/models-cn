@@ -56,6 +56,13 @@ export interface ModelPrice {
     cacheHit?: number;
     explicitCacheCreation?: number;
     explicitCacheHit?: number;
+    /**
+     * Cache-write price for the longer TTL tier, when a provider bills cache writes per TTL.
+     * `explicitCacheCreation` carries the short/default tier (Kimi 5min, Qwen 5m); this one is
+     * additive and optional, so providers that only publish a single cache-write price are
+     * unaffected.
+     */
+    explicitCacheCreation1h?: number;
     standard: number;
   };
   output: number;

@@ -228,12 +228,23 @@ describe("manual capabilities end-to-end", () => {
     const manualData = await loadManualCapabilities();
     const markdown = `
 <DocTable
+  columns={[
+{ title: "模型", width: "12%" },
+{ title: "计费单位", width: "10%" },
+{ title: "缓存写入（TTL 5min）", width: "13%" },
+{ title: "缓存写入（TTL 1h）", width: "13%" },
+{ title: "输入价格（缓存命中）", width: "13%" },
+{ title: "输入价格（缓存未命中）", width: "13%" },
+{ title: "输出价格", width: "10%" },
+{ title: "上下文窗口", width: "16%" },
+]}
   rows={[
-["kimi-k3", "1M tokens", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
-]}/>`;
+["kimi-k3", "1M tokens", "¥20.00", "¥40.00", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
+]}
+/>`;
     const parsed = parseMoonshotPricingPage(
       markdown,
-      "https://platform.kimi.com/docs/pricing/chat-k3",
+      "https://platform.kimi.com/docs/pricing/chat",
     );
     const merged = applyManualCapabilities(
       provider(parsed.models, "moonshot-cn"),

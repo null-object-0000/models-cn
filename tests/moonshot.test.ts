@@ -6,16 +6,29 @@ import {
 } from "../src/collectors/moonshot.js";
 
 describe("Kimi collector parser", () => {
-  it("parses cached-input pricing independently from output-limit metadata", () => {
+  it("reads the K3 table by column title, including both cache-write TTL tiers", () => {
+    // The merged pricing page carries one table per family and they do not share a column
+    // layout: K3 bills cache writes per TTL tier. Positional parsing broke the collector when
+    // this table grew from 6 to 8 columns.
     const markdown = `
 <DocTable
+  columns={[
+{ title: "模型", width: "12%" },
+{ title: "计费单位", width: "10%" },
+{ title: "缓存写入（TTL 5min）", width: "13%" },
+{ title: "缓存写入（TTL 1h）", width: "13%" },
+{ title: "输入价格（缓存命中）", width: "13%" },
+{ title: "输入价格（缓存未命中）", width: "13%" },
+{ title: "输出价格", width: "10%" },
+{ title: "上下文窗口", width: "16%" },
+]}
   rows={[
-["kimi-k3", "1M tokens", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
+["kimi-k3", "1M tokens", "¥20.00", "¥40.00", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
 ]}
 />`;
     const parsed = parseMoonshotPricingPage(
       markdown,
-      "https://platform.kimi.com/docs/pricing/chat-k3",
+      "https://platform.kimi.com/docs/pricing/chat",
     );
     expect(parsed.models[0]).toMatchObject({
       id: "kimi-k3",
@@ -25,7 +38,12 @@ describe("Kimi collector parser", () => {
         {
           market: "china",
           currency: "CNY",
-          input: { cacheHit: 2, standard: 20 },
+          input: {
+            cacheHit: 2,
+            explicitCacheCreation: 20,
+            explicitCacheCreation1h: 40,
+            standard: 20,
+          },
           output: 100,
         },
       ],
@@ -33,24 +51,105 @@ describe("Kimi collector parser", () => {
     expect(parsed.models[0]?.limits.maxOutputTokens).toBeUndefined();
   });
 
-  it("parses international MDX currency cells", () => {
+  it("parses both tables of the merged page, whose column layouts differ", () => {
     const markdown = `
 <DocTable
+  columns={[
+{ title: "模型", width: "12%" },
+{ title: "计费单位", width: "10%" },
+{ title: "缓存写入（TTL 5min）", width: "13%" },
+{ title: "缓存写入（TTL 1h）", width: "13%" },
+{ title: "输入价格（缓存命中）", width: "13%" },
+{ title: "输入价格（缓存未命中）", width: "13%" },
+{ title: "输出价格", width: "10%" },
+{ title: "上下文窗口", width: "16%" },
+]}
   rows={[
-["kimi-k3", "1M tokens", <>{"$"}0.30</>, <>{"$"}3.00</>, <>{"$"}15.00</>, "1,048,576 tokens"],
+["kimi-k3", "1M tokens", "¥20.00", "¥40.00", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
+]}
+/>
+<DocTable
+  columns={[
+{ title: "模型", width: "24%" },
+{ title: "计费单位", width: "12%" },
+{ title: "输入价格（缓存命中）", width: "16%" },
+{ title: "输入价格（缓存未命中）", width: "16%" },
+{ title: "输出价格", width: "14%" },
+{ title: "上下文窗口", width: "18%" },
+]}
+  rows={[
+["kimi-k2.7-code", "1M tokens", "¥1.30", "¥6.50", "¥27.00", "262,144 tokens"],
+["kimi-k2.6", "1M tokens", "¥1.10", "¥6.50", "¥27.00", "262,144 tokens"],
 ]}
 />`;
     const parsed = parseMoonshotPricingPage(
       markdown,
-      "https://platform.kimi.ai/docs/pricing/chat-k3",
+      "https://platform.kimi.com/docs/pricing/chat",
+    );
+    expect(parsed.models.map((model) => model.id)).toEqual([
+      "kimi-k3",
+      "kimi-k2.7-code",
+      "kimi-k2.6",
+    ]);
+    // The K2 family has no cache-write columns, so those fields stay absent rather than zero.
+    expect(parsed.models[1]?.prices[0]?.input).toEqual({
+      cacheHit: 1.3,
+      standard: 6.5,
+    });
+    expect(parsed.models[1]?.prices[0]?.output).toBe(27);
+  });
+
+  it("parses international MDX currency cells across both tables", () => {
+    const markdown = `
+<DocTable
+  columns={[
+{ title: "Model", width: "12%" },
+{ title: "Unit", width: "10%" },
+{ title: "Cache Write Price (TTL 5min)", width: "13%" },
+{ title: "Cache Write Price (TTL 1h)", width: "13%" },
+{ title: "Cached Input Price", width: "13%" },
+{ title: "Input Price", width: "13%" },
+{ title: "Output Price", width: "10%" },
+{ title: "Context Window", width: "16%" },
+]}
+  rows={[
+["kimi-k3", "1M tokens", <>{"$"}3.00</>, <>{"$"}6.00</>, <>{"$"}0.30</>, <>{"$"}3.00</>, <>{"$"}15.00</>, "1,048,576 tokens"],
+]}
+/>
+<DocTable
+  columns={[
+{ title: "Model", width: "24%" },
+{ title: "Unit", width: "12%" },
+{ title: "Input Price (Cache Hit)", width: "16%" },
+{ title: "Input Price (Cache Miss)", width: "16%" },
+{ title: "Output Price", width: "14%" },
+{ title: "Context Window", width: "18%" },
+]}
+  rows={[
+["kimi-k2.6", "1M tokens", <>{"$"}0.16</>, <>{"$"}0.95</>, <>{"$"}4.00</>, "262,144 tokens"],
+]}
+/>`;
+    const parsed = parseMoonshotPricingPage(
+      markdown,
+      "https://platform.kimi.ai/docs/pricing/chat",
       "international",
       "USD",
     );
     expect(parsed.models[0]?.prices[0]).toMatchObject({
       market: "international",
       currency: "USD",
-      input: { cacheHit: 0.3, standard: 3 },
+      input: {
+        cacheHit: 0.3,
+        explicitCacheCreation: 3,
+        explicitCacheCreation1h: 6,
+        standard: 3,
+      },
       output: 15,
+    });
+    // The K2 table names its input columns differently; both must resolve.
+    expect(parsed.models[1]?.prices[0]).toMatchObject({
+      input: { cacheHit: 0.16, standard: 0.95 },
+      output: 4,
     });
   });
 
@@ -86,10 +185,33 @@ describe("Kimi collector parser", () => {
   });
 
   it("collects the international channel with USD metadata", async () => {
+    // The merged page carries two tables with different layouts, exactly like production.
     const pricing = `
 <DocTable
+  columns={[
+{ title: "Model", width: "12%" },
+{ title: "Unit", width: "10%" },
+{ title: "Cache Write Price (TTL 5min)", width: "13%" },
+{ title: "Cache Write Price (TTL 1h)", width: "13%" },
+{ title: "Cached Input Price", width: "13%" },
+{ title: "Input Price", width: "13%" },
+{ title: "Output Price", width: "10%" },
+{ title: "Context Window", width: "16%" },
+]}
   rows={[
-["kimi-k3", "1M tokens", <>{"$"}0.30</>, <>{"$"}3.00</>, <>{"$"}15.00</>, "1,048,576 tokens"],
+["kimi-k3", "1M tokens", <>{"$"}3.00</>, <>{"$"}6.00</>, <>{"$"}0.30</>, <>{"$"}3.00</>, <>{"$"}15.00</>, "1,048,576 tokens"],
+]}
+/>
+<DocTable
+  columns={[
+{ title: "Model", width: "24%" },
+{ title: "Unit", width: "12%" },
+{ title: "Input Price (Cache Hit)", width: "16%" },
+{ title: "Input Price (Cache Miss)", width: "16%" },
+{ title: "Output Price", width: "14%" },
+{ title: "Context Window", width: "18%" },
+]}
+  rows={[
 ["kimi-k2.7-code", "1M tokens", <>{"$"}0.19</>, <>{"$"}0.95</>, <>{"$"}4.00</>, "262,144 tokens"],
 ["kimi-k2.7-code-highspeed", "1M tokens", <>{"$"}0.38</>, <>{"$"}1.90</>, <>{"$"}8.00</>, "262,144 tokens"],
 ["kimi-k2.6", "1M tokens", <>{"$"}0.16</>, <>{"$"}0.95</>, <>{"$"}4.00</>, "262,144 tokens"],
@@ -149,6 +271,14 @@ describe("Kimi collector parser", () => {
   it("rejects Moonshot V1 rows outside the selected Kimi scope", () => {
     const markdown = `
 <DocTable
+  columns={[
+{ title: "模型", width: "24%" },
+{ title: "计费单位", width: "12%" },
+{ title: "输入价格（缓存命中）", width: "16%" },
+{ title: "输入价格（缓存未命中）", width: "16%" },
+{ title: "输出价格", width: "14%" },
+{ title: "上下文窗口", width: "18%" },
+]}
   rows={[
 ["moonshot-v1-8k", "1M tokens", "¥2.00", "¥2.00", "¥10.00", "8,192 tokens"],
 ]}
