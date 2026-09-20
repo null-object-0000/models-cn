@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-18T05:58:37.117Z",
-    "lastAttemptAt": "2026-09-18T05:58:37.117Z",
+    "lastSuccessfulAt": "2026-09-20T01:49:04.699Z",
+    "lastAttemptAt": "2026-09-20T01:49:04.699Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-09-17T06:11:22.195Z",
-    "contentHash": "sha256:1ccbea9791649d50e8dea3cb754d87821aa51e89bbf319d50ce4ea887b94f065"
+    "retrievedAt": "2026-09-20T01:49:04.699Z",
+    "contentHash": "sha256:b95a77a5adb2f11dc6cf3b99e7d610bb835edfbf07a81fc6acebfc6f8136c4c1"
   },
   "models": [
     {
@@ -3529,19 +3529,19 @@
         {
           "field": "prices.USD.input.standard",
           "official": null,
-          "reference": 0.075,
+          "reference": 0.15,
           "status": "missing"
         },
         {
           "field": "prices.USD.input.cacheHit",
           "official": null,
-          "reference": 0.015,
+          "reference": 0.03,
           "status": "missing"
         },
         {
           "field": "prices.USD.output",
           "official": null,
-          "reference": 0.25,
+          "reference": 0.5,
           "status": "missing"
         }
       ]
@@ -3612,20 +3612,97 @@
         {
           "field": "prices.USD.input.standard",
           "official": 0.15,
-          "reference": 0.075,
-          "status": "mismatch"
+          "reference": 0.15,
+          "status": "match"
         },
         {
           "field": "prices.USD.input.cacheHit",
           "official": 0.03,
-          "reference": 0.015,
-          "status": "mismatch"
+          "reference": 0.03,
+          "status": "match"
         },
         {
           "field": "prices.USD.output",
           "official": 0.5,
-          "reference": 0.25,
-          "status": "mismatch"
+          "reference": 0.5,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-5.3-flashx",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-5.3-flashx",
+      "referenceUrl": "https://models.dev/models/zai/glm-5.3-flashx/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-09-18",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": null,
+          "reference": [
+            "text",
+            "image",
+            "video",
+            "pdf"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 0.37,
+          "reference": 0.37,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.075,
+          "reference": 0.075,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 1.25,
+          "reference": 1.25,
+          "status": "match"
         }
       ]
     },
