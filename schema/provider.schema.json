@@ -188,6 +188,11 @@
               "type": "number",
               "minimum": 0,
               "description": "Optional explicit-cache hit price per 1M input tokens."
+            },
+            "explicitCacheCreation1h": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Optional cache-write price per 1M input tokens for the longer TTL tier. explicitCacheCreation carries the short/default tier."
             }
           }
         },

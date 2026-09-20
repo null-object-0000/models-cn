@@ -91,25 +91,134 @@ function parseTokenCount(value: string): number {
   return Number(match[0]);
 }
 
-function parseRows(markdown: string): string[][] {
-  const rowsBlock = markdown.match(/rows=\{\[([\s\S]*?)\]\}/)?.[1];
-  if (!rowsBlock)
-    throw new Error("Kimi pricing page is missing its rows table");
-  const rows = rowsBlock
-    .split(/\r?\n/)
-    .map((line) => line.trim().replace(/,$/, ""))
-    .filter((line) => line.startsWith("["))
-    .map(
-      (line) =>
-        JSON.parse(
-          line.replace(
-            /<>\s*\{\s*["']\$["']\s*\}\s*([\d.]+)\s*<\/>/g,
-            '"$$$1"',
-          ),
-        ) as string[],
+/** One `<DocTable>` block: its column titles and its row arrays, in document order. */
+interface KimiTable {
+  columns: string[];
+  rows: string[][];
+}
+
+function parseTables(markdown: string): KimiTable[] {
+  const tables: KimiTable[] = [];
+  // The block terminator is a `/>` at the start of a line. A bare `/>` search would stop early on
+  // the MDX currency cells (`<>{"$"}3.00</>` contains `/>`), which only the international page
+  // uses — the Chinese page writes plain `¥` strings and hid the bug.
+  for (const match of markdown.matchAll(/<DocTable\b([\s\S]*?)\n\/>/g)) {
+    const block = match[1]!;
+    const columnsBlock = block.match(/columns=\{\[([\s\S]*?)\]\}/)?.[1];
+    if (!columnsBlock) continue;
+    const columns = [...columnsBlock.matchAll(/title:\s*"([^"]+)"/g)].map(
+      (entry) => entry[1]!,
     );
-  if (!rows.length) throw new Error("Kimi pricing table contains no models");
-  return rows;
+    const rowsBlock = block.match(/rows=\{\[([\s\S]*?)\]\}/)?.[1];
+    if (!columns.length || !rowsBlock) continue;
+    const rows = rowsBlock
+      .split(/\r?\n/)
+      .map((line) => line.trim().replace(/,$/, ""))
+      .filter((line) => line.startsWith("["))
+      .map(
+        (line) =>
+          JSON.parse(
+            line.replace(
+              /<>\s*\{\s*["']\$["']\s*\}\s*([\d.]+)\s*<\/>/g,
+              '"$$$1"',
+            ),
+          ) as string[],
+      );
+    if (rows.length) tables.push({ columns, rows });
+  }
+  if (!tables.length)
+    throw new Error("Kimi pricing page is missing its rows table");
+  return tables;
+}
+
+/**
+ * Kimi's pricing page is bilingual (zh/en) and carries one table per model family, and the
+ * families do not share a column layout: K3 bills cache writes per TTL tier (two extra columns)
+ * while the K2 family does not. Reading by column *title* instead of by position keeps a new
+ * column from breaking the whole collector — which is exactly what happened when the K3 table
+ * grew from 6 to 8 columns.
+ */
+function columnIndex(columns: string[], ...patterns: RegExp[]): number {
+  for (const pattern of patterns) {
+    const index = columns.findIndex((column) => pattern.test(column));
+    if (index >= 0) return index;
+  }
+  return -1;
+}
+
+const COLUMN_PATTERNS = {
+  model: [/模型/, /^Model$/i],
+  unit: [/计费单位/, /^Unit$/i],
+  cacheWriteShort: [/缓存写入（TTL 5min）/, /Cache Write Price \(TTL 5min\)/i],
+  cacheWriteLong: [/缓存写入（TTL 1h）/, /Cache Write Price \(TTL 1h\)/i],
+  // The two English tables name the same columns differently: K3 uses "Cached Input Price" /
+  // "Input Price", the K2 family uses "Input Price (Cache Hit)" / "Input Price (Cache Miss)".
+  // Order matters — "Cache Miss" must be tried before the bare "Input Price".
+  cacheHit: [/缓存命中/, /Cache Hit/i, /Cached Input Price/i],
+  inputStandard: [/缓存未命中/, /Cache Miss/i, /^Input Price$/i],
+  output: [/^输出价格$/, /^Output Price$/i],
+  context: [/上下文窗口/, /Context Window/i],
+} as const;
+
+function tableToModels(
+  table: KimiTable,
+  sourceUrl: string,
+  market: Market,
+  currency: Currency,
+): ModelData[] {
+  const { columns } = table;
+  const index = {
+    model: columnIndex(columns, ...COLUMN_PATTERNS.model),
+    cacheWriteShort: columnIndex(columns, ...COLUMN_PATTERNS.cacheWriteShort),
+    cacheWriteLong: columnIndex(columns, ...COLUMN_PATTERNS.cacheWriteLong),
+    cacheHit: columnIndex(columns, ...COLUMN_PATTERNS.cacheHit),
+    inputStandard: columnIndex(columns, ...COLUMN_PATTERNS.inputStandard),
+    output: columnIndex(columns, ...COLUMN_PATTERNS.output),
+    context: columnIndex(columns, ...COLUMN_PATTERNS.context),
+  };
+  if (index.model < 0 || index.inputStandard < 0 || index.output < 0) {
+    throw new Error(
+      `Unexpected Kimi pricing table columns: ${JSON.stringify(columns)}`,
+    );
+  }
+  return table.rows.map((row) => {
+    const id = row[index.model]!;
+    if (!id) throw new Error("Kimi pricing row is missing a model ID");
+    const cell = (at: number): string | undefined =>
+      at >= 0 ? row[at] : undefined;
+    const cacheHitValue = cell(index.cacheHit);
+    const cacheWriteShort = cell(index.cacheWriteShort);
+    const cacheWriteLong = cell(index.cacheWriteLong);
+    const contextValue = cell(index.context);
+    const price: ModelPrice = {
+      market,
+      currency,
+      unit: "1M_tokens",
+      rateType: "standard",
+      input: {
+        ...(cacheHitValue ? { cacheHit: parseMoney(cacheHitValue) } : {}),
+        ...(cacheWriteShort
+          ? { explicitCacheCreation: parseMoney(cacheWriteShort) }
+          : {}),
+        ...(cacheWriteLong
+          ? { explicitCacheCreation1h: parseMoney(cacheWriteLong) }
+          : {}),
+        standard: parseMoney(row[index.inputStandard]!),
+      },
+      output: parseMoney(row[index.output]!),
+      sourceUrl,
+    };
+    return {
+      id,
+      name: modelName(id),
+      aliases: [],
+      capabilities: {},
+      limits: {
+        contextTokens: contextValue ? parseTokenCount(contextValue) : 0,
+      },
+      prices: [price],
+    } satisfies ModelData;
+  });
 }
 
 export function parseMoonshotOutputLimits(
@@ -165,39 +274,18 @@ export function parseMoonshotPricingPage(
   market: Market = "china",
   currency: Currency = "CNY",
 ): ParsedMoonshotPage {
-  const rows = parseRows(markdown);
-  const models = rows.map((row) => {
-    if (row.length !== 6) {
-      throw new Error(`Unexpected Kimi pricing row: ${JSON.stringify(row)}`);
-    }
-    const [id] = row;
-    if (!id) throw new Error("Kimi pricing row is missing a model ID");
-    const cacheHit = parseMoney(row[2]!);
-    const standard = parseMoney(row[3]!);
-    const output = parseMoney(row[4]!);
-    const contextTokens = parseTokenCount(row[5]!);
-    const price: ModelPrice = {
-      market,
-      currency,
-      unit: "1M_tokens",
-      rateType: "standard",
-      input: {
-        cacheHit,
-        standard,
-      },
-      output,
-      sourceUrl,
-    };
-    return {
-      id,
-      name: modelName(id),
-      aliases: [],
-      capabilities: {},
-      limits: { contextTokens },
-      prices: [price],
-    } satisfies ModelData;
-  });
-  return { models, normalizedTable: JSON.stringify(rows) };
+  const tables = parseTables(markdown);
+  const models = tables.flatMap((table) =>
+    tableToModels(table, sourceUrl, market, currency),
+  );
+  const ids = new Set(models.map((model) => model.id));
+  if (ids.size !== models.length) {
+    throw new Error("Kimi pricing page contains duplicate model IDs");
+  }
+  return {
+    models,
+    normalizedTable: JSON.stringify(tables.map((table) => table.rows)),
+  };
 }
 
 async function fetchMarkdown(url: string): Promise<string> {
