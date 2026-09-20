@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-18T05:57:52.763Z",
-    "lastAttemptAt": "2026-09-18T05:57:52.763Z",
+    "lastSuccessfulAt": "2026-09-20T01:50:43.646Z",
+    "lastAttemptAt": "2026-09-20T01:50:43.646Z",
     "consecutiveFailures": 0
   },
   "id": "deepseek",
@@ -764,16 +764,16 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-09-10T06:04:01.145Z",
-      "contentHash": "sha256:b887ef25a1df7519aa4cf484a4b59596b411df1af06b90bce8392d57f682fbe8"
+      "retrievedAt": "2026-09-20T01:50:43.646Z",
+      "contentHash": "sha256:8fb882ae00b7ee01dd1186f68fca07382e806a17bb190cdaf40bf0249ac4df59"
     },
     {
       "url": "https://api-docs.deepseek.com/quick_start/pricing/",
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-09-10T06:04:01.145Z",
-      "contentHash": "sha256:92110171264961c64683f906ee6ccb64aef5bedf52797ca225bc7689551ec221"
+      "retrievedAt": "2026-09-20T01:50:43.646Z",
+      "contentHash": "sha256:0b620506326749faa031d7ea28e1be78f97d6f6ad28eddbaaa45ab76e71a3f01"
     }
   ]
 }
