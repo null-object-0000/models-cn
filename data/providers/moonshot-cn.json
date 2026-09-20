@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-18T05:57:52.785Z",
-    "lastAttemptAt": "2026-09-18T05:57:52.785Z",
+    "lastSuccessfulAt": "2026-09-20T01:50:43.642Z",
+    "lastAttemptAt": "2026-09-20T01:50:43.642Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-cn",
@@ -64,11 +64,29 @@
           "rateType": "standard",
           "input": {
             "cacheHit": 2,
+            "explicitCacheCreation": 20,
+            "explicitCacheCreation1h": 40,
             "standard": 20
           },
           "output": 100,
           "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
-          "validFrom": "2026-07-22T05:31:27.415Z"
+          "validFrom": "2026-09-20T01:50:47.409Z"
+        }
+      ],
+      "priceHistory": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 2,
+            "standard": 20
+          },
+          "output": 100,
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
+          "validFrom": "2026-07-22T05:31:27.415Z",
+          "validTo": "2026-09-20T01:50:47.409Z"
         }
       ]
     },
@@ -225,8 +243,8 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-09-12T15:23:13.855Z",
-      "contentHash": "sha256:fd5d680dc9115e6cc1e282c0ef860f599a87fd35c67b11c9b31b15a627f59b9e"
+      "retrievedAt": "2026-09-20T01:50:43.642Z",
+      "contentHash": "sha256:333d08d430437054b588001e572ce3eee545d5cec5c3b08db0047df0f51375a3"
     },
     {
       "url": "https://platform.kimi.com/docs/api/models-overview",
