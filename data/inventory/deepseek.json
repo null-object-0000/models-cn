@@ -3,23 +3,27 @@
   "provider": "deepseek",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-22T06:18:42.518Z",
-    "lastAttemptAt": "2026-09-22T06:18:42.518Z",
+    "lastSuccessfulAt": "2026-09-23T06:02:05.042Z",
+    "lastAttemptAt": "2026-09-23T06:02:05.042Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://api.deepseek.com/models",
-    "retrievedAt": "2026-09-10T06:04:43.529Z",
-    "contentHash": "sha256:fadc1bcddcd7ab4acedc726b354c91b4f5df66cca7612f6fad9be13c139c64bc"
+    "retrievedAt": "2026-09-23T06:02:05.042Z",
+    "contentHash": "sha256:2e398df118be0724870973982b3cc72b83b8dd1d99d538507d2a0eb01cb22ebc"
   },
   "models": [
     {
       "id": "deepseek-flash",
-      "ownedBy": "deepseek"
+      "ownedBy": "deepseek",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 393216
     },
     {
       "id": "deepseek-v4-pro",
-      "ownedBy": "deepseek"
+      "ownedBy": "deepseek",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 393216
     }
   ],
   "comparison": {
