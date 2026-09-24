@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-23T06:02:04.252Z",
-    "lastAttemptAt": "2026-09-23T06:02:04.252Z",
+    "lastSuccessfulAt": "2026-09-24T12:45:50.677Z",
+    "lastAttemptAt": "2026-09-24T12:45:50.677Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-09-22T06:18:41.760Z",
-    "contentHash": "sha256:5e920c570682e9ece02b74880b110286351528c300ba5caa7c59fd1c3f796776"
+    "retrievedAt": "2026-09-24T12:45:50.677Z",
+    "contentHash": "sha256:ad141d6f15d9c98eb37edcf9fc5252bc82d6ad4a7e61d05d7ca94681227be721"
   },
   "models": [
     {
@@ -96,7 +96,7 @@
       "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k3",
       "referenceUrl": "https://models.dev/models/moonshotai/kimi-k3/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
@@ -113,8 +113,8 @@
         {
           "field": "limits.maxOutputTokens",
           "official": 1048576,
-          "reference": 131072,
-          "status": "mismatch"
+          "reference": 1048576,
+          "status": "match"
         },
         {
           "field": "capabilities.thinking",
@@ -494,7 +494,7 @@
       "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k3",
       "referenceUrl": "https://models.dev/models/moonshotai/kimi-k3/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
@@ -511,8 +511,8 @@
         {
           "field": "limits.maxOutputTokens",
           "official": 1048576,
-          "reference": 131072,
-          "status": "mismatch"
+          "reference": 1048576,
+          "status": "match"
         },
         {
           "field": "capabilities.thinking",
@@ -2428,7 +2428,7 @@
       "referenceProvider": "deepseek",
       "referenceModel": "deepseek-flash",
       "referenceUrl": "https://models.dev/models/deepseek/deepseek-flash/",
-      "status": "partial",
+      "status": "mismatch",
       "checks": [
         {
           "field": "createdAt",
@@ -2445,8 +2445,8 @@
         {
           "field": "limits.maxOutputTokens",
           "official": 384000,
-          "reference": 384000,
-          "status": "match"
+          "reference": 393216,
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",
@@ -2525,8 +2525,8 @@
         {
           "field": "limits.maxOutputTokens",
           "official": 384000,
-          "reference": 384000,
-          "status": "match"
+          "reference": 393216,
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",
@@ -2751,7 +2751,7 @@
       "referenceProvider": "alibaba",
       "referenceModel": "qwen3.7-plus",
       "referenceUrl": "https://models.dev/models/alibaba/qwen3.7-plus/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
@@ -2768,8 +2768,8 @@
         {
           "field": "limits.maxOutputTokens",
           "official": 131072,
-          "reference": 65536,
-          "status": "mismatch"
+          "reference": 131072,
+          "status": "match"
         },
         {
           "field": "capabilities.thinking",
@@ -2833,7 +2833,7 @@
       "referenceProvider": "alibaba",
       "referenceModel": "qwen3.7-max",
       "referenceUrl": "https://models.dev/models/alibaba/qwen3.7-max/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
@@ -2850,8 +2850,8 @@
         {
           "field": "limits.maxOutputTokens",
           "official": 131072,
-          "reference": 65536,
-          "status": "mismatch"
+          "reference": 131072,
+          "status": "match"
         },
         {
           "field": "capabilities.thinking",
