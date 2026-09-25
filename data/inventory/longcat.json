@@ -3,14 +3,14 @@
   "provider": "longcat",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-24T12:45:52.156Z",
-    "lastAttemptAt": "2026-09-24T12:45:52.156Z",
+    "lastSuccessfulAt": "2026-09-25T17:58:47.234Z",
+    "lastAttemptAt": "2026-09-25T17:58:47.234Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://api.longcat.chat/openai/v1/models",
-    "retrievedAt": "2026-07-22T03:54:31.353Z",
-    "contentHash": "sha256:12443b91064162be4496ca30e75aff54006c5a2a6fe2505ebc28057831d193f4"
+    "retrievedAt": "2026-09-25T17:58:47.234Z",
+    "contentHash": "sha256:22f505ac55bf05fc1978818830525c07bc96c01f48414a584400fbc6edbb4b03"
   },
   "models": [
     {
@@ -19,15 +19,24 @@
       "displayName": "LongCat-2.0",
       "contextTokens": 1048576,
       "maxOutputTokens": 131072
+    },
+    {
+      "id": "LongCat-2.5-Preview",
+      "ownedBy": "LongCat",
+      "displayName": "LongCat-2.5-Preview",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 262144
     }
   ],
   "comparison": {
-    "status": "match",
+    "status": "mismatch",
     "pricedAndListed": [
       "LongCat-2.0"
     ],
     "aliasesAndListed": [],
-    "listedWithoutPricing": [],
+    "listedWithoutPricing": [
+      "LongCat-2.5-Preview"
+    ],
     "pricedButNotListed": [],
     "activeAliasesNotListed": []
   }

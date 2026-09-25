@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:05.040Z",
-        "lastAttemptAt": "2026-09-24T12:45:05.040Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:12.192Z",
+        "lastAttemptAt": "2026-09-25T17:58:12.192Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -783,10 +783,11 @@
     {
       "schemaVersion": "1.0",
       "health": {
-        "status": "healthy",
+        "status": "error",
         "lastSuccessfulAt": "2026-09-24T12:45:05.000Z",
-        "lastAttemptAt": "2026-09-24T12:45:05.000Z",
-        "consecutiveFailures": 0
+        "lastAttemptAt": "2026-09-25T17:58:14.821Z",
+        "consecutiveFailures": 1,
+        "message": "LongCat model documentation returned unexpected metadata"
       },
       "id": "longcat",
       "name": "LongCat",
@@ -935,10 +936,11 @@
     {
       "schemaVersion": "1.0",
       "health": {
-        "status": "healthy",
+        "status": "error",
         "lastSuccessfulAt": "2026-09-24T12:45:05.018Z",
-        "lastAttemptAt": "2026-09-24T12:45:05.018Z",
-        "consecutiveFailures": 0
+        "lastAttemptAt": "2026-09-25T17:58:22.661Z",
+        "consecutiveFailures": 1,
+        "message": "fetch failed"
       },
       "id": "moonshot-cn",
       "name": "Kimi China",
@@ -1200,8 +1202,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:05.032Z",
-        "lastAttemptAt": "2026-09-24T12:45:05.032Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:12.181Z",
+        "lastAttemptAt": "2026-09-25T17:58:12.181Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1464,8 +1466,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:05.021Z",
-        "lastAttemptAt": "2026-09-24T12:45:05.021Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:12.185Z",
+        "lastAttemptAt": "2026-09-25T17:58:12.185Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2199,16 +2201,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-09-24T12:45:05.021Z",
-          "contentHash": "sha256:25ff77d6d6ad9d778f6cfd84aef73c8bc32cd00bb35693134eb5c3577b78cb8a"
+          "retrievedAt": "2026-09-25T17:58:12.185Z",
+          "contentHash": "sha256:6ee8242bedec04c8fc3a7e032ed2a41741f819bdcabb6dafd862d196f65313e7"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-09-24T12:45:05.021Z",
-          "contentHash": "sha256:e27136390a225cb7eb3191e32841ff465a4c5e2e2bc7ee6581d1eb85fec70b6d"
+          "retrievedAt": "2026-09-25T17:58:12.185Z",
+          "contentHash": "sha256:b7f1588b22b72d16f7f0cc6282549c0a8ff37c52f82efb9af0e023e23424e88f"
         }
       ]
     },
@@ -2216,8 +2218,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:05.037Z",
-        "lastAttemptAt": "2026-09-24T12:45:05.037Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:12.183Z",
+        "lastAttemptAt": "2026-09-25T17:58:12.183Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2387,8 +2389,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:05.041Z",
-        "lastAttemptAt": "2026-09-24T12:45:05.041Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:12.194Z",
+        "lastAttemptAt": "2026-09-25T17:58:12.194Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2910,8 +2912,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:51.457Z",
-        "lastAttemptAt": "2026-09-24T12:45:51.457Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:46.450Z",
+        "lastAttemptAt": "2026-09-25T17:58:46.450Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2950,14 +2952,14 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:52.156Z",
-        "lastAttemptAt": "2026-09-24T12:45:52.156Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:47.234Z",
+        "lastAttemptAt": "2026-09-25T17:58:47.234Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://api.longcat.chat/openai/v1/models",
-        "retrievedAt": "2026-07-22T03:54:31.353Z",
-        "contentHash": "sha256:12443b91064162be4496ca30e75aff54006c5a2a6fe2505ebc28057831d193f4"
+        "retrievedAt": "2026-09-25T17:58:47.234Z",
+        "contentHash": "sha256:22f505ac55bf05fc1978818830525c07bc96c01f48414a584400fbc6edbb4b03"
       },
       "models": [
         {
@@ -2966,15 +2968,24 @@
           "displayName": "LongCat-2.0",
           "contextTokens": 1048576,
           "maxOutputTokens": 131072
+        },
+        {
+          "id": "LongCat-2.5-Preview",
+          "ownedBy": "LongCat",
+          "displayName": "LongCat-2.5-Preview",
+          "contextTokens": 1048576,
+          "maxOutputTokens": 262144
         }
       ],
       "comparison": {
-        "status": "match",
+        "status": "mismatch",
         "pricedAndListed": [
           "LongCat-2.0"
         ],
         "aliasesAndListed": [],
-        "listedWithoutPricing": [],
+        "listedWithoutPricing": [
+          "LongCat-2.5-Preview"
+        ],
         "pricedButNotListed": [],
         "activeAliasesNotListed": []
       }
@@ -2984,8 +2995,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:52.516Z",
-        "lastAttemptAt": "2026-09-24T12:45:52.516Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:48.517Z",
+        "lastAttemptAt": "2026-09-25T17:58:48.517Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3034,8 +3045,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:54.036Z",
-        "lastAttemptAt": "2026-09-24T12:45:54.036Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:50.103Z",
+        "lastAttemptAt": "2026-09-25T17:58:50.103Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3075,8 +3086,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:54.465Z",
-        "lastAttemptAt": "2026-09-24T12:45:54.465Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:50.527Z",
+        "lastAttemptAt": "2026-09-25T17:58:50.527Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3157,8 +3168,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:55.052Z",
-        "lastAttemptAt": "2026-09-24T12:45:55.052Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:51.182Z",
+        "lastAttemptAt": "2026-09-25T17:58:51.182Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3245,8 +3256,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-09-24T12:45:50.677Z",
-        "lastAttemptAt": "2026-09-24T12:45:50.677Z",
+        "lastSuccessfulAt": "2026-09-25T17:58:45.654Z",
+        "lastAttemptAt": "2026-09-25T17:58:45.654Z",
         "consecutiveFailures": 0
       },
       "source": {

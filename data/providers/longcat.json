@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-09-24T12:45:05.000Z",
-    "lastAttemptAt": "2026-09-24T12:45:05.000Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-09-25T17:58:14.821Z",
+    "consecutiveFailures": 1,
+    "message": "LongCat model documentation returned unexpected metadata"
   },
   "id": "longcat",
   "name": "LongCat",
