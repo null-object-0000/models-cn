@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-09-24T12:45:05.000Z",
-    "lastAttemptAt": "2026-09-24T12:45:05.000Z",
+    "lastSuccessfulAt": "2026-09-26T12:51:46.753Z",
+    "lastAttemptAt": "2026-09-26T12:51:46.753Z",
     "consecutiveFailures": 0
   },
   "id": "longcat",
@@ -101,6 +101,64 @@
           "validFrom": "2026-07-22T03:33:15.688Z"
         }
       ]
+    },
+    {
+      "id": "LongCat-2.5-Preview",
+      "name": "LongCat-2.5-Preview",
+      "tokenizer": "Other",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "max_tokens",
+          "temperature",
+          "top_p",
+          "stream",
+          "tools",
+          "tool_choice",
+          "thinking"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1048576,
+        "maxOutputTokens": 262144
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "promotional",
+          "input": {
+            "cacheHit": 0.04,
+            "standard": 2
+          },
+          "output": 8,
+          "sourceUrl": "https://longcat.chat/platform/docs/zh/pricing/longcat-2.5",
+          "validFrom": "2026-09-26T12:51:50.936Z"
+        },
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "promotional",
+          "input": {
+            "cacheHit": 0.006,
+            "standard": 0.3
+          },
+          "output": 1.2,
+          "sourceUrl": "https://longcat.chat/platform/docs/pricing/longcat-2.5",
+          "validFrom": "2026-09-26T12:51:50.936Z"
+        }
+      ]
     }
   ],
   "sources": [
@@ -121,18 +179,27 @@
       "contentHash": "sha256:0432f7e7ebe087b0fce0efedcd9c0796c9baf20019487dfd6223b183b4067d95"
     },
     {
+      "url": "https://longcat.chat/platform/docs/zh/pricing/longcat-2.5",
+      "kind": "pricing",
+      "locale": "zh-CN",
+      "currency": "CNY",
+      "retrievedAt": "2026-09-26T12:51:46.753Z",
+      "contentHash": "sha256:fc6c4a7d08d30c0975ad5b6cd288dd95ed348ec01d5d70f57aa954a05a715f24"
+    },
+    {
+      "url": "https://longcat.chat/platform/docs/pricing/longcat-2.5",
+      "kind": "pricing",
+      "locale": "en",
+      "currency": "USD",
+      "retrievedAt": "2026-09-26T12:51:46.753Z",
+      "contentHash": "sha256:f3db043b0445a29ab690deae2b507757940792118c1681669f1e4947b7974033"
+    },
+    {
       "url": "https://longcat.chat/platform/docs/zh/api/model",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-07-22T03:33:15.688Z",
-      "contentHash": "sha256:ebc0917bc2daf3eab9f936dd813e1db4568e97fdb0737e5dd923184d35c8545e"
-    },
-    {
-      "url": "https://longcat.chat/platform/docs/",
-      "kind": "model-metadata",
-      "locale": "en",
-      "retrievedAt": "2026-07-22T03:33:15.688Z",
-      "contentHash": "sha256:f1de634787fe5cc0fe96b0b7f617755847d22b30d06aee392ffb5787d7c9f1c9"
+      "retrievedAt": "2026-09-26T12:51:46.753Z",
+      "contentHash": "sha256:2df092761d046517055b6297ad45add3fe6f13f1d93a9f21ab895b94aebeef05"
     },
     {
       "url": "https://api.longcat.chat/openai/v1/models/LongCat-2.0",
@@ -147,6 +214,27 @@
       "locale": "en",
       "retrievedAt": "2026-07-22T03:54:28.935Z",
       "contentHash": "sha256:7a6f62083d26fb847782a0074648e388a16f6afef83ac0007d75c19b9a9568cc"
+    },
+    {
+      "url": "https://api.longcat.chat/openai/v1/models/LongCat-2.5-Preview",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-09-26T12:51:46.753Z",
+      "contentHash": "sha256:446633738309f6425c7a05adb11043b1322b02b828d71186b88b8c936ed752e8"
+    },
+    {
+      "url": "https://api.longcat.chat/openai/v1/models",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-09-26T12:51:46.753Z",
+      "contentHash": "sha256:016249534c2d3977799666cc228c57726ab2b7ade959569b89b989c5ba0e5147"
+    },
+    {
+      "url": "https://longcat.chat/platform/docs/",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-09-26T12:51:46.753Z",
+      "contentHash": "sha256:0b9610406caf39236ad841c2ee7dea7a919df24343e5d2d4ca35dd87e09f539e"
     }
   ]
 }
