@@ -66,7 +66,8 @@ type PricingSource = (typeof LONGCAT_PRICING_SOURCES)[number];
 interface LongCatModelDetail {
   id: string;
   name: string;
-  created: number;
+  /** 上游并非每个模型的详情都返回该字段（2.5-Preview 就没有）。 */
+  created?: number;
   context_length: number;
   architecture: {
     input_modalities: string[];
@@ -420,11 +421,18 @@ export async function collectLongCat(
       throw new Error(
         `LongCat quick start is missing the maximum output length for ${modelId}`,
       );
+    // created 是可选字段：上游 2.5-Preview 的详情接口不给它。此时**省略**
+    // createdAt，而不是 `new Date(undefined*1000)` → "Invalid time value"
+    // 崩掉整个采集（实测 CI 失败）。
+    const createdAt =
+      typeof detail.created === "number" && Number.isFinite(detail.created)
+        ? new Date(detail.created * 1000).toISOString()
+        : undefined;
     const parameters = detail.supported_parameters;
     return {
       id: detail.id,
       name: detail.name,
-      createdAt: new Date(detail.created * 1000).toISOString(),
+      ...(createdAt ? { createdAt } : {}),
       tokenizer: detail.architecture.tokenizer,
       aliases: [],
       capabilities: {
