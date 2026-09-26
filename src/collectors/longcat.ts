@@ -155,12 +155,15 @@ export function parseLongCatPricingPage(
   const output = findValues(/^输出|Output/i);
   // 同一页面的三行必须列数一致，否则归一化表格与价格会错位。
   if (uncached.length !== cached.length || uncached.length !== output.length) {
-    throw new Error(`LongCat pricing table has inconsistent columns at ${config.url}`);
+    throw new Error(
+      `LongCat pricing table has inconsistent columns at ${config.url}`,
+    );
   }
   const makePrice = (index: number): Omit<ModelPrice, "sourceUrl"> => {
     // 只有一列时，这一列就是折扣价（上游 2.5 页面当前形态），标 promotional；
     // 两列时才区分 standard / promotional。宁可不给 standard，也不要伪造原价。
-    const rateType = uncached.length === 1 || index === 1 ? "promotional" : "standard";
+    const rateType =
+      uncached.length === 1 || index === 1 ? "promotional" : "standard";
     return {
       market: config.market as Market,
       currency: config.currency as Currency,
@@ -175,7 +178,9 @@ export function parseLongCatPricingPage(
   };
 
   return {
-    prices: Array.from({ length: uncached.length }, (_, index) => makePrice(index)),
+    prices: Array.from({ length: uncached.length }, (_, index) =>
+      makePrice(index),
+    ),
     normalizedTable: cleanText(table.html() ?? ""),
   };
 }
@@ -333,7 +338,10 @@ export async function collectLongCat(
 
   const maxOutputByModel = new Map<string, number>();
   for (const modelId of LONGCAT_PRICED_MODEL_IDS) {
-    maxOutputByModel.set(modelId, parseLongCatMaxOutput(quickstartHtml, modelId));
+    maxOutputByModel.set(
+      modelId,
+      parseLongCatMaxOutput(quickstartHtml, modelId),
+    );
   }
 
   const detailByModel = new Map<string, LongCatModelDetail>();
@@ -409,7 +417,9 @@ export async function collectLongCat(
     const detail = detailByModel.get(modelId)!;
     const maxOutputTokens = maxOutputByModel.get(modelId);
     if (!maxOutputTokens)
-      throw new Error(`LongCat quick start is missing the maximum output length for ${modelId}`);
+      throw new Error(
+        `LongCat quick start is missing the maximum output length for ${modelId}`,
+      );
     const parameters = detail.supported_parameters;
     return {
       id: detail.id,

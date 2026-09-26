@@ -95,7 +95,10 @@ describe("LongCat collector parsers", () => {
   // id === "LongCat-2.0"，整个采集因此失败（生产事故）。示例里的任何一个
   // 模型都应当被接受，模型身份由定价页决定。
   it("accepts a renamed model in the documentation example", () => {
-    const renamed = modelDocsHtml.replaceAll("LongCat-2.0", "LongCat-2.5-Preview");
+    const renamed = modelDocsHtml.replaceAll(
+      "LongCat-2.0",
+      "LongCat-2.5-Preview",
+    );
     const detail = parseLongCatModelDocs(renamed);
     expect(detail.id).toBe("LongCat-2.5-Preview");
     expect(detail.context_length).toBe(1_048_576);
