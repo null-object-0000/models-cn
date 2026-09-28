@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-09-28T06:58:45.908Z",
-    "lastAttemptAt": "2026-09-28T06:58:45.908Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-09-28T15:32:52.447Z",
+    "consecutiveFailures": 1,
+    "message": "fetch failed"
   },
   "id": "moonshot-cn",
   "name": "Kimi China",
