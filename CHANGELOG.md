@@ -6,6 +6,7 @@
 
 ### Added
 
+- 采集 HTTP 层加入重试（`src/net.ts`）：默认 3 次尝试、指数退避（1s 起、上限 8s）并带抖动，重试时在日志打一行 `[net] 第 N/M 次尝试失败…`。只重试连接层抖动（`fetch failed` / ECONNRESET / 超时 / 429 / 5xx），**解析失败与 4xx 不重试**——页面改版是确定性失败，重试它会拖长 CI 并掩盖真问题。用 `MODELS_CN_RETRY_ATTEMPTS=1` 可完全关闭。此前上游一次瞬时抖动就会把该源记成 `error` 并开出一个只含时间戳的 PR。
 - 智谱国内版 `zhipu-cn`（人民币）与国际版 `zhipu-intl`（美元）渠道，覆盖 GLM-5.3 / GLM-5.2 / GLM-5.1 / GLM-5-Turbo / GLM-5 / GLM-4.7 / GLM-4.5-Air / GLM-4.7-FlashX / GLM-4.7-Flash 共 9 个文本模型（含免费模型）。
 - 价格新增可选 `outputTokenRange` 字段，支持「输入长度 + 输出长度」组合分档（如 GLM-4.7 / GLM-4.5-Air 的短输出与长输出分档）。
 - Kimi 国际版美元定价、模型元数据和官方 Models API 清单。

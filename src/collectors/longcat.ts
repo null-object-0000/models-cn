@@ -9,6 +9,11 @@ import type {
 } from "../types.js";
 import { SCHEMA_VERSION } from "../types.js";
 import { healthyHealth } from "../health.js";
+import {
+  fetchJsonWithRetry,
+  fetchTextWithRetry,
+  MODELS_CN_USER_AGENT,
+} from "../net.js";
 
 export const LONGCAT_PRICING_SOURCES = [
   {
@@ -234,36 +239,23 @@ export function parseLongCatMaxOutput(
 }
 
 async function fetchText(url: string): Promise<string> {
-  const response = await fetch(url, {
-    headers: {
-      "user-agent":
-        "models-cn/0.1 (+https://github.com/null-object-0000/models-cn)",
-    },
-    signal: AbortSignal.timeout(30_000),
+  return fetchTextWithRetry(url, {
+    headers: { "user-agent": MODELS_CN_USER_AGENT },
   });
-  if (!response.ok)
-    throw new Error(`Failed to fetch ${url}: HTTP ${response.status}`);
-  return response.text();
 }
 
 async function fetchAuthenticatedJson<T>(
   url: string,
   apiKey: string,
 ): Promise<T> {
-  const response = await fetch(url, {
+  return fetchJsonWithRetry<T>(url, {
     headers: {
       authorization: `Bearer ${apiKey}`,
       "content-type": "application/json",
-      "user-agent":
-        "models-cn/0.1 (+https://github.com/null-object-0000/models-cn)",
+      "user-agent": MODELS_CN_USER_AGENT,
     },
-    signal: AbortSignal.timeout(30_000),
+    errorPrefix: "Failed to fetch authenticated LongCat metadata",
   });
-  if (!response.ok)
-    throw new Error(
-      `Failed to fetch authenticated LongCat metadata: HTTP ${response.status}`,
-    );
-  return response.json() as Promise<T>;
 }
 
 function assertApiPricingMatchesDocumentation(

@@ -5,6 +5,7 @@ import type {
   ProviderInventory,
 } from "../types.js";
 import { healthyHealth } from "../health.js";
+import { fetchJsonWithRetry, MODELS_CN_USER_AGENT } from "../net.js";
 
 interface ModelsResponse {
   data: Array<{
@@ -150,24 +151,13 @@ export async function fetchProviderInventory(
   previous?: ProviderInventory,
   now = new Date(),
 ): Promise<ProviderInventory> {
-  const response = await fetch(config.url, {
+  const payload = await fetchJsonWithRetry<ModelsResponse>(config.url, {
     headers: {
       accept: "application/json",
       authorization: `Bearer ${apiKey}`,
-      "user-agent":
-        "models-cn/0.1 (+https://github.com/null-object-0000/models-cn)",
+      "user-agent": MODELS_CN_USER_AGENT,
     },
-    signal: AbortSignal.timeout(30_000),
+    errorPrefix: `Failed to fetch ${config.provider} model inventory`,
   });
-  if (!response.ok)
-    throw new Error(
-      `Failed to fetch ${config.provider} model inventory: HTTP ${response.status}`,
-    );
-  return buildProviderInventory(
-    config,
-    provider,
-    (await response.json()) as ModelsResponse,
-    previous,
-    now,
-  );
+  return buildProviderInventory(config, provider, payload, previous, now);
 }

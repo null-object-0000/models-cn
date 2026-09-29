@@ -3,6 +3,7 @@ import { chromium, type APIRequestContext, type Request } from "playwright";
 import type { ModelData, ModelPrice, ProviderData, Source } from "../types.js";
 import { SCHEMA_VERSION } from "../types.js";
 import { healthyHealth } from "../health.js";
+import { retryAsync } from "../net.js";
 
 export const QWEN_MODELS_URL = "https://www.qianwenai.com/models";
 export const QWEN_DATA_API_URL =
@@ -412,29 +413,33 @@ async function postAction<T>(
   params: unknown,
   region?: string,
 ): Promise<QwenApiEnvelope<T>> {
-  const response = await request.post(
-    `${QWEN_DATA_API_URL}?product=AliyunDeliveryService&action=${action}`,
-    {
-      form: {
-        product: "AliyunDeliveryService",
-        action,
-        ...(token ? { sec_token: token } : {}),
-        ...(region ? { region } : {}),
-        params: JSON.stringify(params),
+  // 重试只包住「发请求 + 断言 2xx」；JSON 解析与信封校验是确定性失败，留在外面。
+  const response = await retryAsync(async () => {
+    const attempt = await request.post(
+      `${QWEN_DATA_API_URL}?product=AliyunDeliveryService&action=${action}`,
+      {
+        form: {
+          product: "AliyunDeliveryService",
+          action,
+          ...(token ? { sec_token: token } : {}),
+          ...(region ? { region } : {}),
+          params: JSON.stringify(params),
+        },
+        headers: {
+          accept: "application/json, text/plain, */*",
+          origin: "https://www.qianwenai.com",
+          referer: `${QWEN_MODELS_URL}/`,
+        },
+        timeout: 30_000,
       },
-      headers: {
-        accept: "application/json, text/plain, */*",
-        origin: "https://www.qianwenai.com",
-        referer: `${QWEN_MODELS_URL}/`,
-      },
-      timeout: 30_000,
-    },
-  );
-  if (!response.ok()) {
-    throw new Error(
-      `Qwen ${action} request returned HTTP ${response.status()}`,
     );
-  }
+    if (!attempt.ok()) {
+      throw new Error(
+        `Qwen ${action} request returned HTTP ${attempt.status()}`,
+      );
+    }
+    return attempt;
+  });
   return assertEnvelope((await response.json()) as QwenApiEnvelope<T>, action);
 }
 

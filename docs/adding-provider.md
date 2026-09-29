@@ -68,6 +68,50 @@ return {
 
 优先读取官方结构化字段，不要依赖页面视觉位置或复制浏览器生成后的 HTML。
 
+### 网络请求一律走 `src/net.ts`
+
+**不要直接写裸 `fetch`。** 上游站点会有偶发的连接层抖动（`fetch failed`、连接被重置、超时），
+裸 `fetch` 会让整条采集当场判成 `error`，进而开出一个只含时间戳与 error 状态的 PR——
+那种 PR 不该合，但它会一直挂在待办里。统一用 `src/net.ts`：
+
+```ts
+import {
+  fetchJsonWithRetry,
+  fetchTextWithRetry,
+  MODELS_CN_USER_AGENT,
+} from "../net.js";
+
+// 文本页
+const markdown = await fetchTextWithRetry(url, {
+  headers: { accept: "text/markdown", "user-agent": MODELS_CN_USER_AGENT },
+});
+
+// JSON 接口（需要带认证时自己加 authorization 头）
+const payload = await fetchJsonWithRetry<ModelsResponse>(config.url, {
+  headers: {
+    accept: "application/json",
+    authorization: `Bearer ${apiKey}`,
+    "user-agent": MODELS_CN_USER_AGENT,
+  },
+  errorPrefix: `Failed to fetch ${config.provider} model inventory`,
+});
+```
+
+若来源走 playwright 的 `request`（参考 `qwen.ts`），用 `retryAsync` 包住「发请求 + 断言 2xx」。
+
+两条硬规矩：
+
+1. **只重试请求，不重试解析。** 表格消失、字段改名、解析失败都是确定性失败，
+   重试它们只会拖长 CI 并掩盖真问题。所以重试必须包在 HTTP 那一层（`fetcher` / `retryAsync`），
+   解析逻辑仍只跑一次。
+2. **每次尝试都要新建 `AbortSignal.timeout(...)`。** 这种 signal 一旦触发就永久 abort，
+   若提到重试外面复用，第一次超时之后的重试会被同一个 signal 立刻拒掉——重试等于失效，且很难发现。
+   `src/net.ts` 已经这么做了，测试里有一条专门守它。
+
+上游改版时的排查：把 `MODELS_CN_RETRY_ATTEMPTS=1` 关掉重试跑一次，
+如果错误变成确定性失败（解析/断言类），那就是改版，去改解析器；
+如果关掉重试才失败、开着重试能过，那就是抖动。
+
 ### 来源与更新时间
 
 每个来源必须包含：
@@ -288,6 +332,7 @@ npm run format:check
 - 过滤规则不会混入范围外模型。
 - 不存在伪造的缓存价、币种或缺失字段。
 - models.dev 和 Inventory 不会覆盖官方数据。
+- 网络请求走 `src/net.ts`（`fetchTextWithRetry` / `fetchJsonWithRetry` / `retryAsync`），没有裸 `fetch`。
 - 类型检查、测试、格式检查和站点构建全部通过。
 
 ## 提交前检查清单
