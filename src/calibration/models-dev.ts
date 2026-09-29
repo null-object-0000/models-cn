@@ -7,6 +7,7 @@ import type {
   ProviderData,
 } from "../types.js";
 import { healthyHealth } from "../health.js";
+import { fetchJsonWithRetry, MODELS_CN_USER_AGENT } from "../net.js";
 
 const MODELS_DEV_API_URL = "https://models.dev/api.json" as const;
 
@@ -301,18 +302,9 @@ function compareModel(
 }
 
 async function fetchModelsDev(): Promise<ModelsDevApi> {
-  const response = await fetch(MODELS_DEV_API_URL, {
-    headers: {
-      "user-agent":
-        "models-cn/0.1 (+https://github.com/null-object-0000/models-cn)",
-    },
-    signal: AbortSignal.timeout(30_000),
+  return fetchJsonWithRetry<ModelsDevApi>(MODELS_DEV_API_URL, {
+    headers: { "user-agent": MODELS_CN_USER_AGENT },
   });
-  if (!response.ok)
-    throw new Error(
-      `Failed to fetch ${MODELS_DEV_API_URL}: HTTP ${response.status}`,
-    );
-  return response.json() as Promise<ModelsDevApi>;
 }
 
 export async function collectModelsDevCalibration(

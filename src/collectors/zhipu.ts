@@ -9,6 +9,11 @@ import type {
 } from "../types.js";
 import { SCHEMA_VERSION } from "../types.js";
 import { healthyHealth } from "../health.js";
+import {
+  fetchJsonWithRetry,
+  fetchTextWithRetry,
+  MODELS_CN_USER_AGENT,
+} from "../net.js";
 
 /**
  * 智谱 GLM 采集器。渠道范围：国内版 `zhipu-cn`（人民币）+ 国际版 `zhipu-intl`（美元）。
@@ -306,34 +311,22 @@ export function parseZhipuPricingConfig(payload: unknown): ZhipuDomCell[][] {
 }
 
 async function loadZhipuPricingRows(): Promise<ZhipuDomCell[][]> {
-  const response = await fetch(ZHIPU_PRICING_CONFIG_URL, {
+  const payload = await fetchJsonWithRetry<unknown>(ZHIPU_PRICING_CONFIG_URL, {
     headers: {
       accept: "application/json",
-      "user-agent":
-        "models-cn/0.1 (+https://github.com/null-object-0000/models-cn)",
+      "user-agent": MODELS_CN_USER_AGENT,
     },
-    signal: AbortSignal.timeout(30_000),
   });
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch ${ZHIPU_PRICING_CONFIG_URL}: HTTP ${response.status}`,
-    );
-  }
-  return parseZhipuPricingConfig(await response.json());
+  return parseZhipuPricingConfig(payload);
 }
 
 async function fetchMarkdown(url: string): Promise<string> {
-  const response = await fetch(url, {
+  return fetchTextWithRetry(url, {
     headers: {
       accept: "text/markdown",
-      "user-agent":
-        "models-cn/0.1 (+https://github.com/null-object-0000/models-cn)",
+      "user-agent": MODELS_CN_USER_AGENT,
     },
-    signal: AbortSignal.timeout(30_000),
   });
-  if (!response.ok)
-    throw new Error(`Failed to fetch ${url}: HTTP ${response.status}`);
-  return response.text();
 }
 
 export interface ZhipuOverviewModel {
