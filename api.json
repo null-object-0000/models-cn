@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:58:54.927Z",
-        "lastAttemptAt": "2026-10-04T06:58:54.927Z",
+        "lastSuccessfulAt": "2026-10-09T18:50:45.093Z",
+        "lastAttemptAt": "2026-10-09T18:50:45.093Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -784,8 +784,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:58:54.948Z",
-        "lastAttemptAt": "2026-10-04T06:58:54.948Z",
+        "lastSuccessfulAt": "2026-10-09T18:50:45.089Z",
+        "lastAttemptAt": "2026-10-09T18:50:45.089Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1008,7 +1008,7 @@
           "url": "https://api.longcat.chat/openai/v1/models",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-10-04T06:58:54.948Z",
+          "retrievedAt": "2026-10-09T18:50:45.089Z",
           "contentHash": "sha256:016249534c2d3977799666cc228c57726ab2b7ade959569b89b989c5ba0e5147"
         },
         {
@@ -1024,8 +1024,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:58:54.956Z",
-        "lastAttemptAt": "2026-10-04T06:58:54.956Z",
+        "lastSuccessfulAt": "2026-10-09T18:50:45.047Z",
+        "lastAttemptAt": "2026-10-09T18:50:45.047Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1288,8 +1288,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:58:54.961Z",
-        "lastAttemptAt": "2026-10-04T06:58:54.961Z",
+        "lastSuccessfulAt": "2026-10-09T18:50:45.064Z",
+        "lastAttemptAt": "2026-10-09T18:50:45.064Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1552,8 +1552,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:58:54.964Z",
-        "lastAttemptAt": "2026-10-04T06:58:54.964Z",
+        "lastSuccessfulAt": "2026-10-09T18:50:45.067Z",
+        "lastAttemptAt": "2026-10-09T18:50:45.067Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1922,68 +1922,6 @@
           ]
         },
         {
-          "id": "qwen3.6-max-preview",
-          "name": "Qwen3.6-Max",
-          "createdAt": "2026-04-20T07:44:55.000+00:00",
-          "aliases": [],
-          "capabilities": {
-            "thinking": true,
-            "jsonOutput": true,
-            "toolCalls": true,
-            "chatPrefixCompletion": true,
-            "inputModalities": [
-              "text"
-            ],
-            "outputModalities": [
-              "text"
-            ]
-          },
-          "limits": {
-            "contextTokens": 262144,
-            "maxOutputTokens": 65536,
-            "requestsPerMinute": 600
-          },
-          "prices": [
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "输入<=128k",
-                "maxInclusive": 128000
-              },
-              "input": {
-                "standard": 9,
-                "explicitCacheCreation": 11.25,
-                "explicitCacheHit": 0.9
-              },
-              "output": 54,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
-              "validFrom": "2026-08-03T05:19:40.310Z"
-            },
-            {
-              "market": "china",
-              "currency": "CNY",
-              "unit": "1M_tokens",
-              "rateType": "standard",
-              "inputTokenRange": {
-                "label": "128k<输入<=256k",
-                "minExclusive": 128000,
-                "maxInclusive": 256000
-              },
-              "input": {
-                "standard": 15,
-                "explicitCacheCreation": 18.75,
-                "explicitCacheHit": 1.5
-              },
-              "output": 90,
-              "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
-              "validFrom": "2026-08-03T05:19:40.310Z"
-            }
-          ]
-        },
-        {
           "id": "qwen3.6-plus",
           "name": "Qwen3.6-Plus",
           "createdAt": "2026-04-01T11:55:34.000+00:00",
@@ -2287,16 +2225,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-10-04T06:58:54.964Z",
-          "contentHash": "sha256:79307d589d3f985ab6ea9b360b1cac8db35d55fa84768d0a7d3a1ff3f7b744fd"
+          "retrievedAt": "2026-10-09T18:50:45.067Z",
+          "contentHash": "sha256:51d2cc16469733b7ccd1723fd8171728d0b5e6b56ab8409c10d43ba9809daa85"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-10-04T06:58:54.964Z",
-          "contentHash": "sha256:bcf17b365e83afba300dd1c129750774c9cf4a05757fa2b7a0173d63640a0e21"
+          "retrievedAt": "2026-10-09T18:50:45.067Z",
+          "contentHash": "sha256:6345908c89b10311c6fb5ffb3d2ff31064358b203db2d583105d42aca21c45cb"
         }
       ]
     },
@@ -2304,8 +2242,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:58:54.981Z",
-        "lastAttemptAt": "2026-10-04T06:58:54.981Z",
+        "lastSuccessfulAt": "2026-10-09T18:50:45.077Z",
+        "lastAttemptAt": "2026-10-09T18:50:45.077Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2475,8 +2413,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:58:54.995Z",
-        "lastAttemptAt": "2026-10-04T06:58:54.995Z",
+        "lastSuccessfulAt": "2026-10-09T18:50:45.083Z",
+        "lastAttemptAt": "2026-10-09T18:50:45.083Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2998,8 +2936,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:59:37.163Z",
-        "lastAttemptAt": "2026-10-04T06:59:37.163Z",
+        "lastSuccessfulAt": "2026-10-09T18:51:12.312Z",
+        "lastAttemptAt": "2026-10-09T18:51:12.312Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3038,8 +2976,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:59:37.775Z",
-        "lastAttemptAt": "2026-10-04T06:59:37.775Z",
+        "lastSuccessfulAt": "2026-10-09T18:51:12.950Z",
+        "lastAttemptAt": "2026-10-09T18:51:12.950Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3080,8 +3018,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:59:38.116Z",
-        "lastAttemptAt": "2026-10-04T06:59:38.116Z",
+        "lastSuccessfulAt": "2026-10-09T18:51:13.302Z",
+        "lastAttemptAt": "2026-10-09T18:51:13.302Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3130,8 +3068,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:59:39.606Z",
-        "lastAttemptAt": "2026-10-04T06:59:39.606Z",
+        "lastSuccessfulAt": "2026-10-09T18:51:14.888Z",
+        "lastAttemptAt": "2026-10-09T18:51:14.888Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3171,8 +3109,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:59:40.391Z",
-        "lastAttemptAt": "2026-10-04T06:59:40.391Z",
+        "lastSuccessfulAt": "2026-10-09T18:51:15.401Z",
+        "lastAttemptAt": "2026-10-09T18:51:15.401Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3253,8 +3191,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:59:40.880Z",
-        "lastAttemptAt": "2026-10-04T06:59:40.880Z",
+        "lastSuccessfulAt": "2026-10-09T18:51:16.182Z",
+        "lastAttemptAt": "2026-10-09T18:51:16.182Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3341,14 +3279,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-04T06:59:36.493Z",
-        "lastAttemptAt": "2026-10-04T06:59:36.493Z",
+        "lastSuccessfulAt": "2026-10-09T18:51:11.503Z",
+        "lastAttemptAt": "2026-10-09T18:51:11.503Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-10-04T06:59:36.493Z",
-        "contentHash": "sha256:e53d49d3804cc10a5baa49dcae476240482be438b59b43582eba8b8949882ec1"
+        "retrievedAt": "2026-10-09T18:51:11.503Z",
+        "contentHash": "sha256:e1bd52be4261a19d94b70c6a2ebff3bf8daeea845d34adf33e2d6c7ba8a431ac"
       },
       "models": [
         {
@@ -6246,84 +6184,6 @@
         },
         {
           "provider": "qwen-cn",
-          "model": "qwen3.6-max-preview",
-          "referenceProvider": "alibaba",
-          "referenceModel": "qwen3.6-max-preview",
-          "referenceUrl": "https://models.dev/models/alibaba/qwen3.6-max-preview/",
-          "status": "partial",
-          "checks": [
-            {
-              "field": "createdAt",
-              "official": "2026-04-20",
-              "reference": "2026-04-20",
-              "status": "match"
-            },
-            {
-              "field": "limits.contextTokens",
-              "official": 262144,
-              "reference": 262144,
-              "status": "match"
-            },
-            {
-              "field": "limits.maxOutputTokens",
-              "official": 65536,
-              "reference": 65536,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.thinking",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.toolCalls",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "prices.USD.input.standard",
-              "official": null,
-              "reference": 1.3,
-              "status": "missing"
-            },
-            {
-              "field": "prices.USD.input.cacheHit",
-              "official": null,
-              "reference": 0.13,
-              "status": "missing"
-            },
-            {
-              "field": "prices.USD.output",
-              "official": null,
-              "reference": 7.8,
-              "status": "missing"
-            }
-          ]
-        },
-        {
-          "provider": "qwen-cn",
           "model": "qwen3.6-plus",
           "referenceProvider": "alibaba",
           "referenceModel": "qwen3.6-plus",
@@ -6488,84 +6348,6 @@
         },
         {
           "provider": "qwen-cn",
-          "model": "qwen3-max",
-          "referenceProvider": "alibaba",
-          "referenceModel": "qwen3-max",
-          "referenceUrl": "https://models.dev/models/alibaba/qwen3-max/",
-          "status": "mismatch",
-          "checks": [
-            {
-              "field": "createdAt",
-              "official": "2025-09-23",
-              "reference": "2025-09-23",
-              "status": "match"
-            },
-            {
-              "field": "limits.contextTokens",
-              "official": 262144,
-              "reference": 262144,
-              "status": "match"
-            },
-            {
-              "field": "limits.maxOutputTokens",
-              "official": 65536,
-              "reference": 65536,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.thinking",
-              "official": true,
-              "reference": false,
-              "status": "mismatch"
-            },
-            {
-              "field": "capabilities.toolCalls",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "prices.USD.input.standard",
-              "official": null,
-              "reference": 1.2,
-              "status": "missing"
-            },
-            {
-              "field": "prices.USD.input.cacheHit",
-              "official": null,
-              "reference": null,
-              "status": "missing"
-            },
-            {
-              "field": "prices.USD.output",
-              "official": null,
-              "reference": 6,
-              "status": "missing"
-            }
-          ]
-        },
-        {
-          "provider": "qwen-cn",
           "model": "qwen3.6-flash",
           "referenceProvider": "alibaba",
           "referenceModel": "qwen3.6-flash",
@@ -6642,84 +6424,6 @@
               "field": "prices.USD.output",
               "official": null,
               "reference": 1.125,
-              "status": "missing"
-            }
-          ]
-        },
-        {
-          "provider": "qwen-cn",
-          "model": "qwen3-coder-plus",
-          "referenceProvider": "alibaba",
-          "referenceModel": "qwen3-coder-plus",
-          "referenceUrl": "https://models.dev/models/alibaba/qwen3-coder-plus/",
-          "status": "partial",
-          "checks": [
-            {
-              "field": "createdAt",
-              "official": "2025-07-22",
-              "reference": "2025-07-23",
-              "status": "match"
-            },
-            {
-              "field": "limits.contextTokens",
-              "official": 1000000,
-              "reference": 1048576,
-              "status": "match"
-            },
-            {
-              "field": "limits.maxOutputTokens",
-              "official": 65536,
-              "reference": 65536,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.thinking",
-              "official": null,
-              "reference": false,
-              "status": "missing"
-            },
-            {
-              "field": "capabilities.toolCalls",
-              "official": true,
-              "reference": true,
-              "status": "match"
-            },
-            {
-              "field": "capabilities.inputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "capabilities.outputModalities",
-              "official": [
-                "text"
-              ],
-              "reference": [
-                "text"
-              ],
-              "status": "match"
-            },
-            {
-              "field": "prices.USD.input.standard",
-              "official": null,
-              "reference": 1,
-              "status": "missing"
-            },
-            {
-              "field": "prices.USD.input.cacheHit",
-              "official": null,
-              "reference": null,
-              "status": "missing"
-            },
-            {
-              "field": "prices.USD.output",
-              "official": null,
-              "reference": 5,
               "status": "missing"
             }
           ]
