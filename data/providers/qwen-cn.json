@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-04T06:58:54.964Z",
-    "lastAttemptAt": "2026-10-04T06:58:54.964Z",
+    "lastSuccessfulAt": "2026-10-09T18:50:45.067Z",
+    "lastAttemptAt": "2026-10-09T18:50:45.067Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
@@ -372,68 +372,6 @@
       ]
     },
     {
-      "id": "qwen3.6-max-preview",
-      "name": "Qwen3.6-Max",
-      "createdAt": "2026-04-20T07:44:55.000+00:00",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "chatPrefixCompletion": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 262144,
-        "maxOutputTokens": 65536,
-        "requestsPerMinute": 600
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "输入<=128k",
-            "maxInclusive": 128000
-          },
-          "input": {
-            "standard": 9,
-            "explicitCacheCreation": 11.25,
-            "explicitCacheHit": 0.9
-          },
-          "output": 54,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        },
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "128k<输入<=256k",
-            "minExclusive": 128000,
-            "maxInclusive": 256000
-          },
-          "input": {
-            "standard": 15,
-            "explicitCacheCreation": 18.75,
-            "explicitCacheHit": 1.5
-          },
-          "output": 90,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-max-preview",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        }
-      ]
-    },
-    {
       "id": "qwen3.6-plus",
       "name": "Qwen3.6-Plus",
       "createdAt": "2026-04-01T11:55:34.000+00:00",
@@ -667,91 +605,6 @@
       ]
     },
     {
-      "id": "qwen3-max",
-      "name": "Qwen3-Max",
-      "createdAt": "2025-09-23T11:23:19.000+00:00",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "chatPrefixCompletion": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 262144,
-        "maxOutputTokens": 65536,
-        "requestsPerMinute": 30000,
-        "tokensPerMinute": 5000000
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "输入<=32k",
-            "maxInclusive": 32000
-          },
-          "input": {
-            "standard": 2.5,
-            "cacheHit": 0.5,
-            "explicitCacheCreation": 3.125,
-            "explicitCacheHit": 0.25
-          },
-          "output": 10,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        },
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "32k<输入<=128k",
-            "minExclusive": 32000,
-            "maxInclusive": 128000
-          },
-          "input": {
-            "standard": 4,
-            "cacheHit": 0.8,
-            "explicitCacheCreation": 5,
-            "explicitCacheHit": 0.4
-          },
-          "output": 16,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        },
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "128k<输入<=256k",
-            "minExclusive": 128000,
-            "maxInclusive": 256000
-          },
-          "input": {
-            "standard": 7,
-            "cacheHit": 1.4,
-            "explicitCacheCreation": 8.75,
-            "explicitCacheHit": 0.7
-          },
-          "output": 28,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-max",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        }
-      ]
-    },
-    {
       "id": "qwen3.6-flash",
       "name": "Qwen3.6-Flash",
       "createdAt": "2026-04-16T14:02:00.000+00:00",
@@ -812,108 +665,6 @@
           },
           "output": 28.8,
           "sourceUrl": "https://www.qianwenai.com/models/qwen3.6-flash",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        }
-      ]
-    },
-    {
-      "id": "qwen3-coder-plus",
-      "name": "Qwen3-Coder-Plus",
-      "createdAt": "2025-07-22T13:29:17.000+00:00",
-      "aliases": [],
-      "capabilities": {
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 1000000,
-        "maxOutputTokens": 65536,
-        "requestsPerMinute": 5000,
-        "tokensPerMinute": 5000000
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "输入<=32k",
-            "maxInclusive": 32000
-          },
-          "input": {
-            "standard": 4,
-            "cacheHit": 0.8,
-            "explicitCacheCreation": 5,
-            "explicitCacheHit": 0.4
-          },
-          "output": 16,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        },
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "32k<输入<=128k",
-            "minExclusive": 32000,
-            "maxInclusive": 128000
-          },
-          "input": {
-            "standard": 6,
-            "cacheHit": 1.2,
-            "explicitCacheCreation": 7.5,
-            "explicitCacheHit": 0.6
-          },
-          "output": 24,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        },
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "128k<输入<=256k",
-            "minExclusive": 128000,
-            "maxInclusive": 256000
-          },
-          "input": {
-            "standard": 10,
-            "cacheHit": 2,
-            "explicitCacheCreation": 12.5,
-            "explicitCacheHit": 1
-          },
-          "output": 40,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus",
-          "validFrom": "2026-08-03T05:19:40.310Z"
-        },
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "inputTokenRange": {
-            "label": "256k<输入<=1m",
-            "minExclusive": 256000,
-            "maxInclusive": 1000000
-          },
-          "input": {
-            "standard": 20,
-            "cacheHit": 4,
-            "explicitCacheCreation": 25,
-            "explicitCacheHit": 2
-          },
-          "output": 200,
-          "sourceUrl": "https://www.qianwenai.com/models/qwen3-coder-plus",
           "validFrom": "2026-08-03T05:19:40.310Z"
         }
       ]
@@ -1026,16 +777,16 @@
       "url": "https://www.qianwenai.com/models",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-10-04T06:58:54.964Z",
-      "contentHash": "sha256:79307d589d3f985ab6ea9b360b1cac8db35d55fa84768d0a7d3a1ff3f7b744fd"
+      "retrievedAt": "2026-10-09T18:50:45.067Z",
+      "contentHash": "sha256:51d2cc16469733b7ccd1723fd8171728d0b5e6b56ab8409c10d43ba9809daa85"
     },
     {
       "url": "https://www.qianwenai.com/models",
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-10-04T06:58:54.964Z",
-      "contentHash": "sha256:bcf17b365e83afba300dd1c129750774c9cf4a05757fa2b7a0173d63640a0e21"
+      "retrievedAt": "2026-10-09T18:50:45.067Z",
+      "contentHash": "sha256:6345908c89b10311c6fb5ffb3d2ff31064358b203db2d583105d42aca21c45cb"
     }
   ]
 }
