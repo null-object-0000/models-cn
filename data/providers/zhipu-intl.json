@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-09T18:50:45.083Z",
-    "lastAttemptAt": "2026-10-09T18:50:45.083Z",
+    "lastSuccessfulAt": "2026-10-10T13:46:27.563Z",
+    "lastAttemptAt": "2026-10-10T13:46:27.563Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -281,41 +281,6 @@
       ]
     },
     {
-      "id": "glm-4.7-flashx",
-      "name": "GLM-4.7-FlashX",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 204800,
-        "maxOutputTokens": 131072
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0.07,
-            "cacheHit": 0.01
-          },
-          "output": 0.4,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-07T05:06:29.857Z"
-        }
-      ]
-    },
-    {
       "id": "glm-4.6",
       "name": "GLM-4.6",
       "createdAt": "2025-09-30T00:00:00.000+08:00",
@@ -350,147 +315,6 @@
           "validFrom": "2026-08-27T04:09:55.724Z"
         }
       ]
-    },
-    {
-      "id": "glm-4.5-air",
-      "name": "GLM-4.5-Air",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 131072,
-        "maxOutputTokens": 98304
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0.2,
-            "cacheHit": 0.03
-          },
-          "output": 1.1,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-07T05:06:29.857Z"
-        }
-      ]
-    },
-    {
-      "id": "glm-4.5-airx",
-      "name": "GLM-4.5-AirX",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 131072,
-        "maxOutputTokens": 98304
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 1.1,
-            "cacheHit": 0.22
-          },
-          "output": 4.5,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-27T04:09:55.724Z"
-        }
-      ]
-    },
-    {
-      "id": "glm-4.7-flash",
-      "name": "GLM-4.7-Flash",
-      "createdAt": "2026-01-19T00:00:00.000+08:00",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 204800,
-        "maxOutputTokens": 131072
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0,
-            "cacheHit": 0
-          },
-          "output": 0,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-07T05:06:29.857Z"
-        }
-      ]
-    },
-    {
-      "id": "glm-4.5-flash",
-      "name": "GLM-4.5-Flash",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 131072,
-        "maxOutputTokens": 98304
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0,
-            "cacheHit": 0
-          },
-          "output": 0,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-27T04:09:55.724Z"
-        }
-      ]
     }
   ],
   "sources": [
@@ -499,8 +323,8 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-10-04T06:58:54.995Z",
-      "contentHash": "sha256:55ec954a550b4b61d23551bfb17184189b0478e88ddbe12b1bdf3f93e7f505dd"
+      "retrievedAt": "2026-10-10T13:46:27.563Z",
+      "contentHash": "sha256:6eaa1b07dbb8c8ae4869a1812c8d5c5018dfbbff051f3b0e2c5d4b203bd16723"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
