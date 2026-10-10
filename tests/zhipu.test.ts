@@ -420,6 +420,85 @@ Prices per 1M tokens.
     });
   });
 
+  it("reads models moved into the nested Other Pricing accordion", () => {
+    // 线上真实结构：旧模型表被整段收进 <Accordion>，标题缩进成 `    ### Text Models`，
+    // 于是同一个标题在文档里出现两次，只取第一次会漏掉折叠里的全部模型。
+    const markdown = `# Pricing
+
+## Models
+
+### Latest Models
+
+Prices per 1M tokens.
+
+| Model | Input | Cached Input | Cached Input Storage | Output |
+| :- | :- | :- | :- | :- |
+| GLM-5.3 | $1.4 | $0.26 | Limited-time Free | $4.4 |
+
+### Text Models
+
+Prices per 1M tokens.
+
+| Model | Input | Cached Input | Cached Input Storage | Output |
+| :- | :- | :- | :- | :- |
+| GLM-5.1 | $1.4 | $0.26 | Limited-time Free | $4.4 |
+| GLM-4.6 | $0.6 | $0.11 | Limited-time Free | $2.2 |
+
+### Built-in Tools
+
+| Tool | Cost |
+| :- | :- |
+| Web Search | $0.01 / use |
+
+<AccordionGroup>
+  <Accordion title="Other Pricing">
+    ### Text Models
+
+    Prices per 1M tokens.
+
+    | Model | Input | Cached Input | Cached Input Storage | Output |
+    | :- | :- | :- | :- | :- |
+    | GLM-4.7-FlashX | $0.07 | $0.01 | Limited-time Free | $0.4 |
+    | GLM-4.5-Air | $0.2 | $0.03 | Limited-time Free | $1.1 |
+    | GLM-4.5-AirX | $1.1 | $0.22 | Limited-time Free | $4.5 |
+    | GLM-4.7-Flash | Free | Free | Free | Free |
+    | GLM-4.5-Flash | Free | Free | Free | Free |
+
+    ### Vision Models
+
+    | Model | Input | Cached Input | Cached Input Storage | Output |
+    | :- | :- | :- | :- | :- |
+    | GLM-5V-Turbo | $1.2 | $0.24 | Limited-time Free | $4 |
+  </Accordion>
+</AccordionGroup>
+`;
+    const prices = parseZhipuInternationalPricing(markdown);
+    expect(prices.get("glm-4.7-flashx")).toMatchObject({
+      input: { standard: 0.07, cacheHit: 0.01 },
+      output: 0.4,
+    });
+    expect(prices.get("glm-4.5-air")).toMatchObject({
+      input: { standard: 0.2, cacheHit: 0.03 },
+      output: 1.1,
+    });
+    expect(prices.get("glm-4.5-airx")).toMatchObject({
+      input: { standard: 1.1, cacheHit: 0.22 },
+      output: 4.5,
+    });
+    expect(prices.get("glm-4.7-flash")).toMatchObject({
+      input: { standard: 0, cacheHit: 0 },
+      output: 0,
+    });
+    expect(prices.get("glm-4.5-flash")).toMatchObject({
+      input: { standard: 0, cacheHit: 0 },
+      output: 0,
+    });
+    // 折叠面板外的表仍要解析到，且视觉模型依旧不收录。
+    expect(prices.get("glm-5.3")).toMatchObject({ output: 4.4 });
+    expect(prices.get("glm-4.6")).toMatchObject({ output: 2.2 });
+    expect(prices.has("glm-5v-turbo")).toBe(false);
+  });
+
   it("uses the non-strikethrough effective price for discounted models", () => {
     const markdown = `# Pricing
 

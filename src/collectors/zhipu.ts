@@ -636,18 +636,38 @@ export async function collectZhipuChina(
 }
 
 /**
- * 解析国际站定价 markdown 的「Latest Models」与「Text Models」两张表。每行：
+ * 按标题名取出 markdown 中**所有**同名小节（含折叠面板内的缩进标题）。
+ * 与 `split` 只取第一次不同：官方把旧模型表整段搬进 `<Accordion>` 后，
+ * 同一个 `### Text Models` 会出现两次，只取第一段会漏掉折叠里的模型。
+ * 每段延伸到下一个任意级别的 `##`/`###` 标题为止。
+ */
+function pricingSections(markdown: string, title: string): string[] {
+  const heading = new RegExp(`^[ \\t]*#{2,}[ \\t]*${title}[ \\t]*$`, "gm");
+  const starts = Array.from(markdown.matchAll(heading)).map(
+    (match) => match.index! + match[0].length,
+  );
+  return starts.map((start) => {
+    const rest = markdown.slice(start);
+    const to = rest.search(/\n\s*#{2,}\s/);
+    return to >= 0 ? rest.slice(0, to) : rest;
+  });
+}
+
+/**
+ * 解析国际站定价 markdown 的「Latest Models」与全部「Text Models」表。每行：
  * `| GLM-5.2 | $1.4 | $0.26 | Limited-time Free | $4.4 |`。单档价格，无分档。
- * 官方将 `glm-5.3` / `glm-5.2` 上移到新增的「### Latest Models」表，因此两段合并解析。
+ * 官方将 `glm-5.3` / `glm-5.2` 上移到新增的「### Latest Models」表；
+ * 又把旧模型整段收进 `<Accordion title="Other Pricing">`（标题缩进成
+ * `    ### Text Models`）。因此 **按标题正则扫描全文**，收全所有同级标题段，
+ * 不能只取第一次出现的 `### Text Models`（那只剩折叠面板外的半张表）。
  */
 export function parseZhipuInternationalPricing(
   markdown: string,
 ): Map<string, ModelPrice> {
-  const latest =
-    markdown.split("### Latest Models")[1]?.split("### Text Models")[0] ?? "";
-  const text =
-    markdown.split("### Text Models")[1]?.split("### Vision Models")[0] ?? "";
-  const section = `${latest}\n${text}`;
+  const section = [
+    ...pricingSections(markdown, "Latest Models"),
+    ...pricingSections(markdown, "Text Models"),
+  ].join("\n");
   const result = new Map<string, ModelPrice>();
   for (const line of section.split("\n")) {
     const idMatch = line.toLowerCase().match(/(glm[-a-z0-9.]+)/);
