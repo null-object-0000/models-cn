@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:50:45.093Z",
-        "lastAttemptAt": "2026-10-09T18:50:45.093Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:15.131Z",
+        "lastAttemptAt": "2026-10-18T05:58:15.131Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -23,7 +23,7 @@
       "models": [
         {
           "id": "deepseek-flash",
-          "name": "DeepSeek-V4.1-Flash",
+          "name": "DeepSeek-V4.1-Flash-1017",
           "aliases": [],
           "capabilities": {
             "thinking": true,
@@ -767,16 +767,16 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-09-20T01:50:43.646Z",
-          "contentHash": "sha256:8fb882ae00b7ee01dd1186f68fca07382e806a17bb190cdaf40bf0249ac4df59"
+          "retrievedAt": "2026-10-18T05:58:15.131Z",
+          "contentHash": "sha256:cc14d4c7a054d54a40195df12b404d51c56e5cabac3b5e3e01c81d3b6e21d829"
         },
         {
           "url": "https://api-docs.deepseek.com/quick_start/pricing/",
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-09-20T01:50:43.646Z",
-          "contentHash": "sha256:0b620506326749faa031d7ea28e1be78f97d6f6ad28eddbaaa45ab76e71a3f01"
+          "retrievedAt": "2026-10-18T05:58:15.131Z",
+          "contentHash": "sha256:819e14f3126e50eeb8324747750c2a0b931a2679adf3fb6d9b256d29c9dd34bb"
         }
       ]
     },
@@ -784,8 +784,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:50:45.089Z",
-        "lastAttemptAt": "2026-10-09T18:50:45.089Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:15.115Z",
+        "lastAttemptAt": "2026-10-18T05:58:15.115Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1008,7 +1008,7 @@
           "url": "https://api.longcat.chat/openai/v1/models",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-10-09T18:50:45.089Z",
+          "retrievedAt": "2026-10-18T05:58:15.115Z",
           "contentHash": "sha256:016249534c2d3977799666cc228c57726ab2b7ade959569b89b989c5ba0e5147"
         },
         {
@@ -1024,8 +1024,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:50:45.047Z",
-        "lastAttemptAt": "2026-10-09T18:50:45.047Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:15.132Z",
+        "lastAttemptAt": "2026-10-18T05:58:15.132Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1272,8 +1272,8 @@
           "url": "https://platform.kimi.com/docs/api/models-overview",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-10-04T06:58:54.956Z",
-          "contentHash": "sha256:688960f91f2e855aa009615727d5e7acce51a89248ae7d3ec99045f4453ba1e5"
+          "retrievedAt": "2026-10-18T05:58:15.132Z",
+          "contentHash": "sha256:38f4e549509da17530793c6383d0114e9bd5fd18d7cb768d398a6b67ce875607"
         },
         {
           "url": "https://platform.kimi.com/docs/guide/troubleshooting#kimi",
@@ -1288,8 +1288,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:50:45.064Z",
-        "lastAttemptAt": "2026-10-09T18:50:45.064Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:15.135Z",
+        "lastAttemptAt": "2026-10-18T05:58:15.135Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1552,8 +1552,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:50:45.067Z",
-        "lastAttemptAt": "2026-10-09T18:50:45.067Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:15.137Z",
+        "lastAttemptAt": "2026-10-18T05:58:15.137Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2225,16 +2225,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-10-09T18:50:45.067Z",
-          "contentHash": "sha256:51d2cc16469733b7ccd1723fd8171728d0b5e6b56ab8409c10d43ba9809daa85"
+          "retrievedAt": "2026-10-18T05:58:15.137Z",
+          "contentHash": "sha256:6e218794fe7d148e299cb23d45e4d4991d7adb7fea97d426989fc4ec168e69a1"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-10-09T18:50:45.067Z",
-          "contentHash": "sha256:6345908c89b10311c6fb5ffb3d2ff31064358b203db2d583105d42aca21c45cb"
+          "retrievedAt": "2026-10-18T05:58:15.137Z",
+          "contentHash": "sha256:0342520ecc223e7d0d51a34adf56ebe5275e4a1d6c2d42413901fc76a32516a3"
         }
       ]
     },
@@ -2242,8 +2242,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:50:45.077Z",
-        "lastAttemptAt": "2026-10-09T18:50:45.077Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:15.146Z",
+        "lastAttemptAt": "2026-10-18T05:58:15.146Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2413,8 +2413,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:50:45.083Z",
-        "lastAttemptAt": "2026-10-09T18:50:45.083Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:15.155Z",
+        "lastAttemptAt": "2026-10-18T05:58:15.155Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2910,8 +2910,8 @@
           "kind": "pricing",
           "locale": "en",
           "currency": "USD",
-          "retrievedAt": "2026-10-04T06:58:54.995Z",
-          "contentHash": "sha256:55ec954a550b4b61d23551bfb17184189b0478e88ddbe12b1bdf3f93e7f505dd"
+          "retrievedAt": "2026-10-18T05:58:15.155Z",
+          "contentHash": "sha256:6eaa1b07dbb8c8ae4869a1812c8d5c5018dfbbff051f3b0e2c5d4b203bd16723"
         },
         {
           "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
@@ -2936,8 +2936,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:51:12.312Z",
-        "lastAttemptAt": "2026-10-09T18:51:12.312Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:38.217Z",
+        "lastAttemptAt": "2026-10-18T05:58:38.217Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2976,8 +2976,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:51:12.950Z",
-        "lastAttemptAt": "2026-10-09T18:51:12.950Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:38.626Z",
+        "lastAttemptAt": "2026-10-18T05:58:38.626Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3018,8 +3018,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:51:13.302Z",
-        "lastAttemptAt": "2026-10-09T18:51:13.302Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:38.891Z",
+        "lastAttemptAt": "2026-10-18T05:58:38.891Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3068,8 +3068,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:51:14.888Z",
-        "lastAttemptAt": "2026-10-09T18:51:14.888Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:40.306Z",
+        "lastAttemptAt": "2026-10-18T05:58:40.306Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3109,8 +3109,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:51:15.401Z",
-        "lastAttemptAt": "2026-10-09T18:51:15.401Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:40.635Z",
+        "lastAttemptAt": "2026-10-18T05:58:40.635Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3191,8 +3191,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:51:16.182Z",
-        "lastAttemptAt": "2026-10-09T18:51:16.182Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:41.475Z",
+        "lastAttemptAt": "2026-10-18T05:58:41.475Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3279,14 +3279,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-09T18:51:11.503Z",
-        "lastAttemptAt": "2026-10-09T18:51:11.503Z",
+        "lastSuccessfulAt": "2026-10-18T05:58:37.565Z",
+        "lastAttemptAt": "2026-10-18T05:58:37.565Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-10-09T18:51:11.503Z",
-        "contentHash": "sha256:e1bd52be4261a19d94b70c6a2ebff3bf8daeea845d34adf33e2d6c7ba8a431ac"
+        "retrievedAt": "2026-10-18T05:58:37.565Z",
+        "contentHash": "sha256:658229fd636a3c5a4a4f2ff5de4d4b28894eae55c91daa9e5f9415913cc1562b"
       },
       "models": [
         {
@@ -5710,7 +5710,7 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-09-10",
+              "reference": "2026-10-17",
               "status": "missing"
             },
             {

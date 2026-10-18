@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-09T18:50:45.083Z",
-    "lastAttemptAt": "2026-10-09T18:50:45.083Z",
+    "lastSuccessfulAt": "2026-10-18T05:58:15.155Z",
+    "lastAttemptAt": "2026-10-18T05:58:15.155Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -499,8 +499,8 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-10-04T06:58:54.995Z",
-      "contentHash": "sha256:55ec954a550b4b61d23551bfb17184189b0478e88ddbe12b1bdf3f93e7f505dd"
+      "retrievedAt": "2026-10-18T05:58:15.155Z",
+      "contentHash": "sha256:6eaa1b07dbb8c8ae4869a1812c8d5c5018dfbbff051f3b0e2c5d4b203bd16723"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
