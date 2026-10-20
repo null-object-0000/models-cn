@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:15.131Z",
-        "lastAttemptAt": "2026-10-18T05:58:15.131Z",
+        "lastSuccessfulAt": "2026-10-20T06:04:53.220Z",
+        "lastAttemptAt": "2026-10-20T06:04:53.220Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -784,8 +784,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:15.115Z",
-        "lastAttemptAt": "2026-10-18T05:58:15.115Z",
+        "lastSuccessfulAt": "2026-10-20T06:04:53.240Z",
+        "lastAttemptAt": "2026-10-20T06:04:53.240Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1008,7 +1008,7 @@
           "url": "https://api.longcat.chat/openai/v1/models",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-10-18T05:58:15.115Z",
+          "retrievedAt": "2026-10-20T06:04:53.240Z",
           "contentHash": "sha256:016249534c2d3977799666cc228c57726ab2b7ade959569b89b989c5ba0e5147"
         },
         {
@@ -1024,8 +1024,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:15.132Z",
-        "lastAttemptAt": "2026-10-18T05:58:15.132Z",
+        "lastSuccessfulAt": "2026-10-20T06:04:53.248Z",
+        "lastAttemptAt": "2026-10-20T06:04:53.248Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1288,8 +1288,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:15.135Z",
-        "lastAttemptAt": "2026-10-18T05:58:15.135Z",
+        "lastSuccessfulAt": "2026-10-20T06:04:53.253Z",
+        "lastAttemptAt": "2026-10-20T06:04:53.253Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1552,8 +1552,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:15.137Z",
-        "lastAttemptAt": "2026-10-18T05:58:15.137Z",
+        "lastSuccessfulAt": "2026-10-20T06:04:53.255Z",
+        "lastAttemptAt": "2026-10-20T06:04:53.255Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2225,16 +2225,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-10-18T05:58:15.137Z",
-          "contentHash": "sha256:6e218794fe7d148e299cb23d45e4d4991d7adb7fea97d426989fc4ec168e69a1"
+          "retrievedAt": "2026-10-20T06:04:53.255Z",
+          "contentHash": "sha256:7e5085fb46d98a0a36b0cb1bf03bdfc65c8b4f8263f7589c35e892bbbdb4f79a"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-10-18T05:58:15.137Z",
-          "contentHash": "sha256:0342520ecc223e7d0d51a34adf56ebe5275e4a1d6c2d42413901fc76a32516a3"
+          "retrievedAt": "2026-10-20T06:04:53.255Z",
+          "contentHash": "sha256:fbfcae0523a1d1cff021f2e74a9a9863425a032bc759c52ccb8d63e2cec4c4b9"
         }
       ]
     },
@@ -2242,8 +2242,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:15.146Z",
-        "lastAttemptAt": "2026-10-18T05:58:15.146Z",
+        "lastSuccessfulAt": "2026-10-20T06:04:53.270Z",
+        "lastAttemptAt": "2026-10-20T06:04:53.270Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-cn",
@@ -2413,8 +2413,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:15.155Z",
-        "lastAttemptAt": "2026-10-18T05:58:15.155Z",
+        "lastSuccessfulAt": "2026-10-20T06:04:53.282Z",
+        "lastAttemptAt": "2026-10-20T06:04:53.282Z",
         "consecutiveFailures": 0
       },
       "id": "zhipu-intl",
@@ -2936,8 +2936,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:38.217Z",
-        "lastAttemptAt": "2026-10-18T05:58:38.217Z",
+        "lastSuccessfulAt": "2026-10-20T06:05:16.544Z",
+        "lastAttemptAt": "2026-10-20T06:05:16.544Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -2976,8 +2976,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:38.626Z",
-        "lastAttemptAt": "2026-10-18T05:58:38.626Z",
+        "lastSuccessfulAt": "2026-10-20T06:05:17.015Z",
+        "lastAttemptAt": "2026-10-20T06:05:17.015Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3018,8 +3018,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:38.891Z",
-        "lastAttemptAt": "2026-10-18T05:58:38.891Z",
+        "lastSuccessfulAt": "2026-10-20T06:05:17.299Z",
+        "lastAttemptAt": "2026-10-20T06:05:17.299Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3068,8 +3068,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:40.306Z",
-        "lastAttemptAt": "2026-10-18T05:58:40.306Z",
+        "lastSuccessfulAt": "2026-10-20T06:05:18.752Z",
+        "lastAttemptAt": "2026-10-20T06:05:18.752Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3109,8 +3109,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:40.635Z",
-        "lastAttemptAt": "2026-10-18T05:58:40.635Z",
+        "lastSuccessfulAt": "2026-10-20T06:05:19.123Z",
+        "lastAttemptAt": "2026-10-20T06:05:19.123Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3191,8 +3191,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:41.475Z",
-        "lastAttemptAt": "2026-10-18T05:58:41.475Z",
+        "lastSuccessfulAt": "2026-10-20T06:05:19.491Z",
+        "lastAttemptAt": "2026-10-20T06:05:19.491Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -3279,14 +3279,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-10-18T05:58:37.565Z",
-        "lastAttemptAt": "2026-10-18T05:58:37.565Z",
+        "lastSuccessfulAt": "2026-10-20T06:05:15.808Z",
+        "lastAttemptAt": "2026-10-20T06:05:15.808Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-10-18T05:58:37.565Z",
-        "contentHash": "sha256:658229fd636a3c5a4a4f2ff5de4d4b28894eae55c91daa9e5f9415913cc1562b"
+        "retrievedAt": "2026-10-20T06:05:15.808Z",
+        "contentHash": "sha256:7321aec31c5fc2a79d6ed969303d6fdf3ff3841ebac8d5a544f6694e835545e6"
       },
       "models": [
         {
@@ -3624,7 +3624,7 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-04-21",
+              "reference": "2026-04-20",
               "status": "missing"
             },
             {
@@ -4022,7 +4022,7 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-04-21",
+              "reference": "2026-04-20",
               "status": "missing"
             },
             {
@@ -4922,19 +4922,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 1.4,
+              "reference": 1.19516,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.26,
+              "reference": 0.29879,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 4.4,
+              "reference": 4.18306,
               "status": "missing"
             }
           ]
@@ -5000,19 +5000,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 1.4,
+              "reference": 1.19516,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.26,
+              "reference": 0.29879,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 4.4,
+              "reference": 4.18306,
               "status": "missing"
             }
           ]
@@ -5028,7 +5028,7 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-03-27",
+              "reference": "2026-04-07",
               "status": "missing"
             },
             {
@@ -5074,19 +5074,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 1.4,
+              "reference": 0.89637,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.26,
+              "reference": 0.19421,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 4.4,
+              "reference": 3.58548,
               "status": "missing"
             }
           ]
@@ -5102,7 +5102,7 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-02-11",
+              "reference": "2026-02-12",
               "status": "missing"
             },
             {
@@ -5148,19 +5148,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 1,
+              "reference": 0.59758,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.2,
+              "reference": 0.1494,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 3.2,
+              "reference": 2.68911,
               "status": "missing"
             }
           ]
@@ -5222,19 +5222,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 0.6,
+              "reference": 0.44819,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.11,
+              "reference": 0.08964,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 2.2,
+              "reference": 2.09153,
               "status": "missing"
             }
           ]
@@ -5296,19 +5296,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 0.2,
+              "reference": 0.11952,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.03,
+              "reference": 0.0239,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 1.1,
+              "reference": 0.89637,
               "status": "missing"
             }
           ]
@@ -5370,19 +5370,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 0.07,
+              "reference": 0.0747,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.01,
+              "reference": 0.01494,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 0.4,
+              "reference": 0.44819,
               "status": "missing"
             }
           ]
@@ -5716,7 +5716,7 @@
             {
               "field": "limits.contextTokens",
               "official": 1000000,
-              "reference": 1000000,
+              "reference": 1048576,
               "status": "match"
             },
             {
@@ -5790,13 +5790,13 @@
             {
               "field": "createdAt",
               "official": null,
-              "reference": "2026-08-12",
+              "reference": "2026-08-13",
               "status": "missing"
             },
             {
               "field": "limits.contextTokens",
               "official": 1000000,
-              "reference": 1000000,
+              "reference": 1048576,
               "status": "match"
             },
             {
@@ -6411,19 +6411,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 0.1875,
+              "reference": 0.25,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": null,
+              "reference": 0.025,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 1.125,
+              "reference": 1.5,
               "status": "missing"
             }
           ]
@@ -6572,19 +6572,19 @@
             {
               "field": "prices.USD.input.standard",
               "official": null,
-              "reference": 0.15,
+              "reference": 0.11952,
               "status": "missing"
             },
             {
               "field": "prices.USD.input.cacheHit",
               "official": null,
-              "reference": 0.03,
+              "reference": 0.03436,
               "status": "missing"
             },
             {
               "field": "prices.USD.output",
               "official": null,
-              "reference": 0.5,
+              "reference": 0.41831,
               "status": "missing"
             }
           ]
