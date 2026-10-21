@@ -3,8 +3,8 @@
   "provider": "moonshot-intl",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-21T12:58:24.979Z",
-    "lastAttemptAt": "2026-10-21T12:58:24.979Z",
+    "lastSuccessfulAt": "2026-10-21T18:05:53.483Z",
+    "lastAttemptAt": "2026-10-21T18:05:53.483Z",
     "consecutiveFailures": 0
   },
   "source": {
