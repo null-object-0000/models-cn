@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-20T06:04:53.270Z",
-    "lastAttemptAt": "2026-10-20T06:04:53.270Z",
+    "lastSuccessfulAt": "2026-10-21T06:04:29.453Z",
+    "lastAttemptAt": "2026-10-21T06:04:29.453Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-cn",
@@ -20,7 +20,6 @@
     {
       "id": "glm-5.3",
       "name": "GLM-5.3",
-      "createdAt": "2026-08-19T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -56,7 +55,6 @@
     {
       "id": "glm-5.3-flash",
       "name": "GLM-5.3-Flash",
-      "createdAt": "2026-08-26T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -108,20 +106,13 @@
       ]
     },
     {
-      "id": "glm-5.2",
-      "name": "GLM-5.2",
-      "createdAt": "2026-06-16T00:00:00.000+08:00",
+      "id": "glm-5.3-flashx",
+      "name": "GLM-5.3-FlashX",
       "aliases": [],
       "capabilities": {
         "thinking": true,
         "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
+        "toolCalls": true
       },
       "limits": {
         "contextTokens": 1000000,
@@ -134,12 +125,12 @@
           "unit": "1M_tokens",
           "rateType": "standard",
           "input": {
-            "standard": 8,
-            "cacheHit": 2
+            "standard": 2,
+            "cacheHit": 0.57
           },
-          "output": 28,
+          "output": 7,
           "sourceUrl": "https://bigmodel.cn/pricing",
-          "validFrom": "2026-08-07T05:04:14.214Z"
+          "validFrom": "2026-10-21T06:04:37.288Z"
         }
       ]
     }
@@ -150,22 +141,22 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-09-10T06:04:01.172Z",
-      "contentHash": "sha256:39d257eaf00ddb33da5dd7752d735de7a3fe069d7f58be35bf69c1855509162c"
+      "retrievedAt": "2026-10-21T06:04:29.453Z",
+      "contentHash": "sha256:054d1688ff95abbf24dc9e8f384cda779ac1c83e1e5062e4b48f45617144b78f"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-09-18T05:57:52.805Z",
-      "contentHash": "sha256:d8ff2ef289f9954b79960ff2ff14a36496eecc48d49b6302b611af709d24cfb5"
+      "retrievedAt": "2026-10-21T06:04:29.453Z",
+      "contentHash": "sha256:87b7100363c81ed2f77661252612405c5a7f332e714e040cfd8537b1e685f23e"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-30T17:32:13.630Z",
-      "contentHash": "sha256:0f8d03e40e0658c6bbce474fbfde30a3bac21f8d23fd5457870be8446b402e9a"
+      "retrievedAt": "2026-10-21T06:04:29.453Z",
+      "contentHash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     }
   ]
 }

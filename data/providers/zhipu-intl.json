@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-20T06:04:53.282Z",
-    "lastAttemptAt": "2026-10-20T06:04:53.282Z",
+    "lastSuccessfulAt": "2026-10-21T06:04:29.455Z",
+    "lastAttemptAt": "2026-10-21T06:04:29.455Z",
     "consecutiveFailures": 0
   },
   "id": "zhipu-intl",
@@ -20,7 +20,6 @@
     {
       "id": "glm-5.3",
       "name": "GLM-5.3",
-      "createdAt": "2026-08-19T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -56,7 +55,6 @@
     {
       "id": "glm-5.3-flash",
       "name": "GLM-5.3-Flash",
-      "createdAt": "2026-08-26T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
         "thinking": true,
@@ -139,12 +137,11 @@
     {
       "id": "glm-5.2",
       "name": "GLM-5.2",
-      "createdAt": "2026-06-16T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
         "inputModalities": [
           "text"
         ],
@@ -175,12 +172,11 @@
     {
       "id": "glm-5.1",
       "name": "GLM-5.1",
-      "createdAt": "2026-04-07T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
         "inputModalities": [
           "text"
         ],
@@ -211,12 +207,11 @@
     {
       "id": "glm-5",
       "name": "GLM-5",
-      "createdAt": "2026-02-12T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
         "inputModalities": [
           "text"
         ],
@@ -247,12 +242,11 @@
     {
       "id": "glm-4.7",
       "name": "GLM-4.7",
-      "createdAt": "2025-12-22T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
         "inputModalities": [
           "text"
         ],
@@ -275,41 +269,6 @@
             "cacheHit": 0.11
           },
           "output": 2.2,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-07T05:06:29.857Z"
-        }
-      ]
-    },
-    {
-      "id": "glm-4.7-flashx",
-      "name": "GLM-4.7-FlashX",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 204800,
-        "maxOutputTokens": 131072
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0.07,
-            "cacheHit": 0.01
-          },
-          "output": 0.4,
           "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
           "validFrom": "2026-08-07T05:06:29.857Z"
         }
@@ -318,12 +277,11 @@
     {
       "id": "glm-4.6",
       "name": "GLM-4.6",
-      "createdAt": "2025-09-30T00:00:00.000+08:00",
       "aliases": [],
       "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
         "inputModalities": [
           "text"
         ],
@@ -346,147 +304,6 @@
             "cacheHit": 0.11
           },
           "output": 2.2,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-27T04:09:55.724Z"
-        }
-      ]
-    },
-    {
-      "id": "glm-4.5-air",
-      "name": "GLM-4.5-Air",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 131072,
-        "maxOutputTokens": 98304
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0.2,
-            "cacheHit": 0.03
-          },
-          "output": 1.1,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-07T05:06:29.857Z"
-        }
-      ]
-    },
-    {
-      "id": "glm-4.5-airx",
-      "name": "GLM-4.5-AirX",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 131072,
-        "maxOutputTokens": 98304
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 1.1,
-            "cacheHit": 0.22
-          },
-          "output": 4.5,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-27T04:09:55.724Z"
-        }
-      ]
-    },
-    {
-      "id": "glm-4.7-flash",
-      "name": "GLM-4.7-Flash",
-      "createdAt": "2026-01-19T00:00:00.000+08:00",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 204800,
-        "maxOutputTokens": 131072
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0,
-            "cacheHit": 0
-          },
-          "output": 0,
-          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
-          "validFrom": "2026-08-07T05:06:29.857Z"
-        }
-      ]
-    },
-    {
-      "id": "glm-4.5-flash",
-      "name": "GLM-4.5-Flash",
-      "aliases": [],
-      "capabilities": {
-        "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 131072,
-        "maxOutputTokens": 98304
-      },
-      "prices": [
-        {
-          "market": "international",
-          "currency": "USD",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0,
-            "cacheHit": 0
-          },
-          "output": 0,
           "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
           "validFrom": "2026-08-27T04:09:55.724Z"
         }
@@ -499,22 +316,22 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-10-18T05:58:15.155Z",
-      "contentHash": "sha256:6eaa1b07dbb8c8ae4869a1812c8d5c5018dfbbff051f3b0e2c5d4b203bd16723"
+      "retrievedAt": "2026-10-21T06:04:29.455Z",
+      "contentHash": "sha256:cd98a717165c38dbee6821ee54156bfbfa75433ff90f8e09288a1d2423729f8b"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-09-18T05:57:52.809Z",
-      "contentHash": "sha256:d8ff2ef289f9954b79960ff2ff14a36496eecc48d49b6302b611af709d24cfb5"
+      "retrievedAt": "2026-10-21T06:04:29.455Z",
+      "contentHash": "sha256:87b7100363c81ed2f77661252612405c5a7f332e714e040cfd8537b1e685f23e"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-30T17:32:13.635Z",
-      "contentHash": "sha256:0f8d03e40e0658c6bbce474fbfde30a3bac21f8d23fd5457870be8446b402e9a"
+      "retrievedAt": "2026-10-21T06:04:29.455Z",
+      "contentHash": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
     }
   ]
 }

@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-20T06:04:53.255Z",
-    "lastAttemptAt": "2026-10-20T06:04:53.255Z",
+    "lastSuccessfulAt": "2026-10-21T06:04:29.446Z",
+    "lastAttemptAt": "2026-10-21T06:04:29.446Z",
     "consecutiveFailures": 0
   },
   "id": "qwen-cn",
@@ -777,16 +777,16 @@
       "url": "https://www.qianwenai.com/models",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-10-20T06:04:53.255Z",
-      "contentHash": "sha256:7e5085fb46d98a0a36b0cb1bf03bdfc65c8b4f8263f7589c35e892bbbdb4f79a"
+      "retrievedAt": "2026-10-21T06:04:29.446Z",
+      "contentHash": "sha256:2474baed18151249546919fe0b6b00f0c6b27870bfdb42724f9870a3267b8055"
     },
     {
       "url": "https://www.qianwenai.com/models",
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-10-20T06:04:53.255Z",
-      "contentHash": "sha256:fbfcae0523a1d1cff021f2e74a9a9863425a032bc759c52ccb8d63e2cec4c4b9"
+      "retrievedAt": "2026-10-21T06:04:29.446Z",
+      "contentHash": "sha256:7d7e9c735008e490d345b43164ebf598d41534e72f110f5b5647763733f9d5f0"
     }
   ]
 }
