@@ -582,7 +582,24 @@ export interface ZhipuCapabilities {
  * 官方页面存在两种模板：旧模板用 `<Card title="...">` 卡片，新模板（如 GLM-5.3）
  * 用 `* [能力名](链接)` 列表，两种都解析。
  */
-export function parseZhipuCapabilities(markdown: string): ZhipuCapabilities {
+export interface ZhipuCapabilityParse {
+  capabilities: ZhipuCapabilities;
+  /** 页面能力区明确列出的字段。 */
+  parsedFields: string[];
+  /** 能力区存在但没列出、按白名单判为不支持的字段。 */
+  defaultedFields: string[];
+}
+
+/**
+ * 官方能力区是「该模型支持什么」的白名单：列了 = 支持，没列 = 不支持。
+ *
+ * 只有「能力区存在却一项都识别不出」才算模板漂移/解析失败 —— 那种情况必须报错，
+ * 否则老的 GLM-4 系列（页面只有 流式输出/Function Calling/上下文缓存/结构化输出/MCP，
+ * 根本没有「思考」）会被误判成解析失败。
+ */
+export function parseZhipuCapabilitiesWithEvidence(
+  markdown: string,
+): ZhipuCapabilityParse {
   const section =
     unquoteMarkdown(markdown)
       .split("## 能力支持")[1]
@@ -601,23 +618,47 @@ export function parseZhipuCapabilities(markdown: string): ZhipuCapabilities {
     throw new Error(
       "Zhipu capability section has no recognized capability titles",
     );
-  const supported = (pattern: RegExp, field: string): boolean => {
+  const read = (pattern: RegExp): boolean | undefined => {
     const title = titles.find((title) => pattern.test(title));
-    if (!title) throw new Error(`Zhipu missing capability ${field}`);
-    return !/不支持|unsupported/i.test(title);
+    return title === undefined ? undefined : !/不支持|unsupported/i.test(title);
   };
+  const thinking = read(/思考/);
+  const toolCalls = read(/Function Calling/i);
+  const jsonOutput = read(/结构化输出/);
+  const parsedFields = [
+    thinking !== undefined ? "thinking" : null,
+    toolCalls !== undefined ? "toolCalls" : null,
+    jsonOutput !== undefined ? "jsonOutput" : null,
+  ].filter((field): field is string => field !== null);
+  const defaultedFields = [
+    thinking === undefined ? "thinking" : null,
+    toolCalls === undefined ? "toolCalls" : null,
+    jsonOutput === undefined ? "jsonOutput" : null,
+  ].filter((field): field is string => field !== null);
   return {
-    thinking: supported(/思考/, "thinking"),
-    toolCalls: supported(/Function Calling/, "toolCalls"),
-    jsonOutput: supported(/结构化输出/, "jsonOutput"),
+    capabilities: {
+      thinking: thinking ?? false,
+      toolCalls: toolCalls ?? false,
+      jsonOutput: jsonOutput ?? false,
+    },
+    parsedFields,
+    defaultedFields,
   };
+}
+
+export function parseZhipuCapabilities(markdown: string): ZhipuCapabilities {
+  return parseZhipuCapabilitiesWithEvidence(markdown).capabilities;
 }
 
 /** 全文检测区块标题及已知能力模板；模板漂移仍交给严格解析器报错。 */
 export function resolveZhipuCapabilities(markdown: string): {
   capabilities: ZhipuCapabilities | null;
   capabilitiesSource: "docs" | "not-documented";
-  capabilitiesEvidence: { sectionPresent: boolean };
+  capabilitiesEvidence: {
+    sectionPresent: boolean;
+    parsedFields?: string[];
+    defaultedFields?: string[];
+  };
 } {
   const text = unquoteMarkdown(markdown);
   const sectionPresent =
@@ -629,10 +670,21 @@ export function resolveZhipuCapabilities(markdown: string): {
       text,
     ) ||
     /\]\([^)]*\/capabilities\//i.test(text);
+  if (!sectionPresent)
+    return {
+      capabilities: null,
+      capabilitiesSource: "not-documented",
+      capabilitiesEvidence: { sectionPresent: false },
+    };
+  const parsed = parseZhipuCapabilitiesWithEvidence(markdown);
   return {
-    capabilities: sectionPresent ? parseZhipuCapabilities(markdown) : null,
-    capabilitiesSource: sectionPresent ? "docs" : "not-documented",
-    capabilitiesEvidence: { sectionPresent },
+    capabilities: parsed.capabilities,
+    capabilitiesSource: "docs",
+    capabilitiesEvidence: {
+      sectionPresent: true,
+      parsedFields: parsed.parsedFields,
+      defaultedFields: parsed.defaultedFields,
+    },
   };
 }
 

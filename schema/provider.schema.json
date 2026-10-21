@@ -272,7 +272,17 @@
           "type": "object",
           "additionalProperties": false,
           "required": ["sectionPresent"],
-          "properties": { "sectionPresent": { "type": "boolean" } }
+          "properties": {
+            "sectionPresent": { "type": "boolean" },
+            "parsedFields": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "defaultedFields": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
         },
         "capabilities": {
           "type": ["object", "null"],
