@@ -124,3 +124,13 @@ site 的能力类型同步可空，标签与展开详情显示“未公布”，
 因此，“main 唯一阻塞是 GLM-4-Long”这一背景假设在完整实采后不成立。按本任务“有能力区但字段缺失必须报错”的红线，CN 仍必须 error；不能把这两个模型归入未公布整区、补 false、删模型或跳过 provider。CLI 如实保留之前成功快照，所以 CN 的失败快照摘要也不能冒充包含 GLM-4-Long 的成功采集结果。本地一次 models.dev 校准另有网络错误，独立于此能力判据。
 
 本地验证：15 个测试文件、169 项测试通过；validate、build 通过；另检查 typecheck、site build 和格式。提交前按要求还原 data 和两个生成 API 文件；施工前已有 data 改动已备份在 `/tmp/models-cn-capability-backup/preexisting-data.patch`，未混入代码提交。两个 schema 是新增 null 和证据字段能够发布的必要同步，随代码提交。
+
+### 能力二分修复的远端实际结果
+
+[PR #65](https://github.com/null-object-0000/models-cn/pull/65) 的 GitGuardian、CodeQL 两项分析及汇总检查全部通过，于北京时间 2026-10-21 15:32:41 合并到 main，提交 `ce87b828639c8216a77bdcae831fa20d39a4c801`。本地额外用 Chromium 注入 null 能力测试数据，确认列表显示“未公布”、未知筛选保留该模型、文本筛选排除该模型、展开详情无页面异常。
+
+合并后实际执行 `gh workflow run update-prices.yml --ref main`，得到[运行 39562741325](https://github.com/null-object-0000/models-cn/actions/runs/39562741325)，最终 **`conclusion=failure`**。collect、discover、build、check（15 文件、169 测试）、format:check、报告生成、自动 PR 更新全部成功；唯一失败步骤是 Assert collection health。collect 日志确认为 `zhipu-cn collection failed: Zhipu glm-4-flashx-250414: Zhipu missing capability thinking`，INTL 成功采集 13 模型。最终 health 摘要列出 INTL 五个日期 warning，只有 CN 价格源 error；其它价格源、Models API 和 models.dev 均 healthy，远端没有本地那次校准网络错误。
+
+运行更新了[自动 PR #61](https://github.com/null-object-0000/models-cn/pull/61)，bot 提交 `ae0869ffa9740554b166966f9de5d59d5aeadda2`。已 fetch 此提交，以 `ce87b82` 为基准逐字段检查全部 7 个 provider 的模型，另检查 `api.json` 与 `v1/api.json`：模型下线 0、已有非空日期清空 0、能力 true 变 false 0、能力对象变 null 0、官方价格变化 0。CN 整个 models 数组与 main 相同（3 模型，失败后保留旧快照，不能声称完整候选采集成功）。INTL 13 模型能力及模态值均与 main 相同，实质模型字段变化只有新增 `capabilitiesSource: "docs"`、`capabilitiesEvidence.sectionPresent: true`、日期来源与出现证据，以及五个原先缺省日期显式 null。自动报告列出的 13 项 capabilities 变化是对象键顺序从 thinking/jsonOutput/toolCalls 到 thinking/toolCalls/jsonOutput 造成的展示差异，逐字段值没有变化。其余 5 个 provider 的 models 数组不变；另有来源 URL/哈希/时间戳、health、inventory 时间戳和 14 项 models.dev 校准变化，没有将参考价格覆盖官方价格。自动 PR 保持未合并。
+
+**尚未完成“两渠道 healthy + main success”验收**：GLM-4-Long 的无能力区路径及点名 warning 已经由真实 fixture 证明，但 CN 在另两个模型共用的 GLM-4 页面触发了本任务明确要求保留的缺字段错误，整次采集回退，不能将 fixture 的 warning 冒充 main 的成功结果。继续转绿需要明确这两个模型缺少思考字段应采用的官方依据及处理规则；在没有进一步依据或规则调整前，不得将有能力区的页面打成 not-documented，也不得补 false 或跳过模型来制造 success。
