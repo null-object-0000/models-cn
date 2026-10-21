@@ -1,31 +1,34 @@
-import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   collectMoonshotInternational,
   parseMoonshotOutputLimits,
   parseMoonshotPricingPage,
 } from "../src/collectors/moonshot.js";
 
+const cnRsc = readFileSync(
+  new URL("./fixtures/kimi-cn-rsc.txt", import.meta.url),
+  "utf8",
+);
+const intlRsc = readFileSync(
+  new URL("./fixtures/kimi-intl-rsc.txt", import.meta.url),
+  "utf8",
+);
+const modelIds = [
+  "kimi-k3",
+  "kimi-k2.7-code",
+  "kimi-k2.7-code-highspeed",
+  "kimi-k2.6",
+];
+const emptyTable = "<table><thead><tr /></thead><tbody /></table>";
+afterEach(() => vi.unstubAllGlobals());
+
 describe("Kimi collector parser", () => {
   it("reads the K3 table by column title, including both cache-write TTL tiers", () => {
     // The merged pricing page carries one table per family and they do not share a column
     // layout: K3 bills cache writes per TTL tier. Positional parsing broke the collector when
     // this table grew from 6 to 8 columns.
-    const markdown = `
-<DocTable
-  columns={[
-{ title: "模型", width: "12%" },
-{ title: "计费单位", width: "10%" },
-{ title: "缓存写入（TTL 5min）", width: "13%" },
-{ title: "缓存写入（TTL 1h）", width: "13%" },
-{ title: "输入价格（缓存命中）", width: "13%" },
-{ title: "输入价格（缓存未命中）", width: "13%" },
-{ title: "输出价格", width: "10%" },
-{ title: "上下文窗口", width: "16%" },
-]}
-  rows={[
-["kimi-k3", "1M tokens", "¥20.00", "¥40.00", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
-]}
-/>`;
+    const markdown = cnRsc;
     const parsed = parseMoonshotPricingPage(
       markdown,
       "https://platform.kimi.com/docs/pricing/chat",
@@ -52,36 +55,7 @@ describe("Kimi collector parser", () => {
   });
 
   it("parses both tables of the merged page, whose column layouts differ", () => {
-    const markdown = `
-<DocTable
-  columns={[
-{ title: "模型", width: "12%" },
-{ title: "计费单位", width: "10%" },
-{ title: "缓存写入（TTL 5min）", width: "13%" },
-{ title: "缓存写入（TTL 1h）", width: "13%" },
-{ title: "输入价格（缓存命中）", width: "13%" },
-{ title: "输入价格（缓存未命中）", width: "13%" },
-{ title: "输出价格", width: "10%" },
-{ title: "上下文窗口", width: "16%" },
-]}
-  rows={[
-["kimi-k3", "1M tokens", "¥20.00", "¥40.00", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
-]}
-/>
-<DocTable
-  columns={[
-{ title: "模型", width: "24%" },
-{ title: "计费单位", width: "12%" },
-{ title: "输入价格（缓存命中）", width: "16%" },
-{ title: "输入价格（缓存未命中）", width: "16%" },
-{ title: "输出价格", width: "14%" },
-{ title: "上下文窗口", width: "18%" },
-]}
-  rows={[
-["kimi-k2.7-code", "1M tokens", "¥1.30", "¥6.50", "¥27.00", "262,144 tokens"],
-["kimi-k2.6", "1M tokens", "¥1.10", "¥6.50", "¥27.00", "262,144 tokens"],
-]}
-/>`;
+    const markdown = cnRsc;
     const parsed = parseMoonshotPricingPage(
       markdown,
       "https://platform.kimi.com/docs/pricing/chat",
@@ -89,6 +63,7 @@ describe("Kimi collector parser", () => {
     expect(parsed.models.map((model) => model.id)).toEqual([
       "kimi-k3",
       "kimi-k2.7-code",
+      "kimi-k2.7-code-highspeed",
       "kimi-k2.6",
     ]);
     // The K2 family has no cache-write columns, so those fields stay absent rather than zero.
@@ -100,35 +75,7 @@ describe("Kimi collector parser", () => {
   });
 
   it("parses international MDX currency cells across both tables", () => {
-    const markdown = `
-<DocTable
-  columns={[
-{ title: "Model", width: "12%" },
-{ title: "Unit", width: "10%" },
-{ title: "Cache Write Price (TTL 5min)", width: "13%" },
-{ title: "Cache Write Price (TTL 1h)", width: "13%" },
-{ title: "Cached Input Price", width: "13%" },
-{ title: "Input Price", width: "13%" },
-{ title: "Output Price", width: "10%" },
-{ title: "Context Window", width: "16%" },
-]}
-  rows={[
-["kimi-k3", "1M tokens", <>{"$"}3.00</>, <>{"$"}6.00</>, <>{"$"}0.30</>, <>{"$"}3.00</>, <>{"$"}15.00</>, "1,048,576 tokens"],
-]}
-/>
-<DocTable
-  columns={[
-{ title: "Model", width: "24%" },
-{ title: "Unit", width: "12%" },
-{ title: "Input Price (Cache Hit)", width: "16%" },
-{ title: "Input Price (Cache Miss)", width: "16%" },
-{ title: "Output Price", width: "14%" },
-{ title: "Context Window", width: "18%" },
-]}
-  rows={[
-["kimi-k2.6", "1M tokens", <>{"$"}0.16</>, <>{"$"}0.95</>, <>{"$"}4.00</>, "262,144 tokens"],
-]}
-/>`;
+    const markdown = intlRsc;
     const parsed = parseMoonshotPricingPage(
       markdown,
       "https://platform.kimi.ai/docs/pricing/chat",
@@ -147,10 +94,171 @@ describe("Kimi collector parser", () => {
       output: 15,
     });
     // The K2 table names its input columns differently; both must resolve.
-    expect(parsed.models[1]?.prices[0]).toMatchObject({
+    expect(parsed.models[3]?.prices[0]).toMatchObject({
       input: { cacheHit: 0.16, standard: 0.95 },
       output: 4,
     });
+  });
+
+  it.each([
+    [
+      "CN",
+      cnRsc,
+      [
+        [2, 20, 100],
+        [1.3, 6.5, 27],
+        [2.6, 13, 54],
+        [1.1, 6.5, 27],
+      ],
+    ],
+    [
+      "国际站",
+      intlRsc,
+      [
+        [0.3, 3, 15],
+        [0.19, 0.95, 4],
+        [0.38, 1.9, 8],
+        [0.16, 0.95, 4],
+      ],
+    ],
+  ] as const)(
+    "核对%s全部模型的命中、未命中和输出价格",
+    (_, flight, expected) => {
+      const models = parseMoonshotPricingPage(flight, "url").models;
+      expect(models.map((model) => model.id)).toEqual(modelIds);
+      expect(
+        models.map((model) => {
+          const price = model.prices[0]!;
+          return [price.input.cacheHit, price.input.standard, price.output];
+        }),
+      ).toEqual(expected);
+    },
+  );
+
+  it("rejects empty markdown shells and empty or damaged RSC tables", () => {
+    for (const text of [
+      emptyTable,
+      cnRsc.replace("rows:[[`kimi-k3`", "rows:[[]/*`kimi-k3`"),
+      cnRsc.replace(/rows:\[\[`kimi-k3`[^\n]*?\]\]/, "rows:[]"),
+      cnRsc.replace("rows:", "missingRows:"),
+      cnRsc.replace("`¥100.00`", "`unavailable`"),
+      cnRsc.replace("`¥100.00`,", ""),
+      cnRsc.slice(0, 500),
+    ]) {
+      expect(() =>
+        parseMoonshotPricingPage(
+          text,
+          "https://platform.kimi.com/docs/pricing/chat",
+        ),
+      ).toThrow();
+    }
+  });
+
+  it("merges standalone currency cells and rejects a dangling symbol", () => {
+    const split = cnRsc.replace("`¥100.00`", "`¥`,`100.00`");
+    expect(
+      parseMoonshotPricingPage(split, "url").models[0]?.prices[0]?.output,
+    ).toBe(100);
+    expect(() =>
+      parseMoonshotPricingPage(cnRsc.replace("`¥100.00`", "`¥`"), "url"),
+    ).toThrow("currency symbol");
+  });
+
+  it("reads the complete original Flight streams without counting no-JS tables twice", () => {
+    for (const channel of ["cn", "intl"]) {
+      const full = readFileSync(
+        new URL(`../docs/kimi-rsc-samples/${channel}-rsc.txt`, import.meta.url),
+        "utf8",
+      );
+      expect(
+        parseMoonshotPricingPage(
+          full,
+          "https://platform.kimi.com/docs/pricing/chat",
+        ).models.map((model) => model.id),
+      ).toEqual(modelIds);
+    }
+  });
+
+  it("uses column titles even when their order changes", () => {
+    const reordered = cnRsc
+      .replace("title:`模型`", "title:`计费单位`")
+      .replace("title:`计费单位`,width:`10%`", "title:`模型`,width:`10%`")
+      .replace("[`kimi-k3`,`1M tokens`", "[`1M tokens`,`kimi-k3`");
+    expect(parseMoonshotPricingPage(reordered, "url").models[0]?.id).toBe(
+      "kimi-k3",
+    );
+  });
+
+  it("requests RSC first and keeps metadata requests in markdown", async () => {
+    const requests: { url: string; headers: Record<string, string> }[] = [];
+    vi.stubGlobal("fetch", async (url: string, init: RequestInit) => {
+      const headers = init.headers as Record<string, string>;
+      requests.push({ url, headers });
+      if (url.includes("/pricing/")) return new Response(intlRsc);
+      if (url.includes("models-overview"))
+        return new Response(modelIds.join(" "));
+      return new Response(
+        "What is the output length of the Kimi model?\nkimi-k3 1024*1024 - prompt_tokens\nkimi-k2.6 256*1024 - prompt_tokens",
+      );
+    });
+    const provider = await collectMoonshotInternational();
+    expect(provider.health.status).toBe("healthy");
+    expect(provider.models.map((model) => model.id)).toEqual(modelIds);
+    expect(requests).toHaveLength(3);
+    expect(requests[0]?.headers).toMatchObject({ RSC: "1", accept: "*/*" });
+    expect(
+      requests
+        .slice(1)
+        .every(
+          ({ headers }) =>
+            headers.accept === "text/markdown" && !("RSC" in headers),
+        ),
+    ).toBe(true);
+  });
+
+  it("falls back to markdown after an unusable RSC response", async () => {
+    const markdown = readFileSync(
+      new URL("./fixtures/kimi-intl-markdown.mdx", import.meta.url),
+      "utf8",
+    );
+    const pricingHeaders: string[] = [];
+    vi.stubGlobal("fetch", async (url: string, init: RequestInit) => {
+      if (url.includes("/pricing/")) {
+        const accept = (init.headers as Record<string, string>).accept!;
+        pricingHeaders.push(accept);
+        return new Response(accept === "*/*" ? emptyTable : markdown);
+      }
+      if (url.includes("models-overview"))
+        return new Response(modelIds.join(" "));
+      return new Response(
+        "What is the output length of the Kimi model?\nkimi-k3 1024*1024 - prompt_tokens\nkimi-k2.6 256*1024 - prompt_tokens",
+      );
+    });
+    const provider = await collectMoonshotInternational();
+    expect(provider.health.status).toBe("healthy");
+    expect(provider.models.map((model) => model.id)).toEqual([
+      "kimi-k3",
+      "kimi-k2.6",
+    ]);
+    expect(provider.models[0]?.prices[0]?.output).toBe(15);
+    expect(provider.models[1]?.prices[0]?.input).toEqual({
+      cacheHit: 0.16,
+      standard: 0.95,
+    });
+    expect(pricingHeaders).toEqual(["*/*", "text/markdown"]);
+  });
+
+  it("fails collection when RSC and markdown both contain empty shells", async () => {
+    const pricingHeaders: string[] = [];
+    vi.stubGlobal("fetch", async (url: string, init: RequestInit) => {
+      if (url.includes("/pricing/"))
+        pricingHeaders.push((init.headers as Record<string, string>).accept!);
+      return new Response(emptyTable);
+    });
+    await expect(collectMoonshotInternational()).rejects.toThrow(
+      /RSC:.*markdown:/,
+    );
+    expect(pricingHeaders).toEqual(["*/*", "text/markdown"]);
   });
 
   it("parses official context-minus-prompt output limits", () => {
@@ -186,37 +294,7 @@ describe("Kimi collector parser", () => {
 
   it("collects the international channel with USD metadata", async () => {
     // The merged page carries two tables with different layouts, exactly like production.
-    const pricing = `
-<DocTable
-  columns={[
-{ title: "Model", width: "12%" },
-{ title: "Unit", width: "10%" },
-{ title: "Cache Write Price (TTL 5min)", width: "13%" },
-{ title: "Cache Write Price (TTL 1h)", width: "13%" },
-{ title: "Cached Input Price", width: "13%" },
-{ title: "Input Price", width: "13%" },
-{ title: "Output Price", width: "10%" },
-{ title: "Context Window", width: "16%" },
-]}
-  rows={[
-["kimi-k3", "1M tokens", <>{"$"}3.00</>, <>{"$"}6.00</>, <>{"$"}0.30</>, <>{"$"}3.00</>, <>{"$"}15.00</>, "1,048,576 tokens"],
-]}
-/>
-<DocTable
-  columns={[
-{ title: "Model", width: "24%" },
-{ title: "Unit", width: "12%" },
-{ title: "Input Price (Cache Hit)", width: "16%" },
-{ title: "Input Price (Cache Miss)", width: "16%" },
-{ title: "Output Price", width: "14%" },
-{ title: "Context Window", width: "18%" },
-]}
-  rows={[
-["kimi-k2.7-code", "1M tokens", <>{"$"}0.19</>, <>{"$"}0.95</>, <>{"$"}4.00</>, "262,144 tokens"],
-["kimi-k2.7-code-highspeed", "1M tokens", <>{"$"}0.38</>, <>{"$"}1.90</>, <>{"$"}8.00</>, "262,144 tokens"],
-["kimi-k2.6", "1M tokens", <>{"$"}0.16</>, <>{"$"}0.95</>, <>{"$"}4.00</>, "262,144 tokens"],
-]}
-/>`;
+    const pricing = intlRsc;
     const overview = "kimi-k3 kimi-k2.7-code kimi-k2.6";
     const troubleshooting = `
 ## What is the output length of the Kimi model?

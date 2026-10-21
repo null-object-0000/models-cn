@@ -6,23 +6,14 @@
  * 只在 fetch 这一层注入「先抖两次再成功」，断言最终拿到了 healthy 数据。
  * 若哪天有人把某个 collector 的 `fetchTextWithRetry` 换回裸 `fetch`，这条会红。
  */
+import { readFileSync } from "node:fs";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { collectMoonshotChina } from "../src/collectors/moonshot.js";
 
-const PRICING_PAGE = `
-<DocTable
-  columns={[
-{ title: "模型", width: "12%" },
-{ title: "计费单位", width: "10%" },
-{ title: "输入价格（缓存命中）", width: "13%" },
-{ title: "输入价格（缓存未命中）", width: "13%" },
-{ title: "输出价格", width: "10%" },
-{ title: "上下文窗口", width: "16%" },
-]}
-  rows={[
-["kimi-k3", "1M tokens", "¥2.00", "¥20.00", "¥100.00", "1,048,576 tokens"],
-]}
-/>`;
+const PRICING_PAGE = readFileSync(
+  new URL("./fixtures/kimi-cn-rsc.txt", import.meta.url),
+  "utf8",
+);
 
 /** 三个模型名都得在总览页出现，否则 collector 会按「页面改版」报错。 */
 const OVERVIEW_PAGE = "kimi-k3 kimi-k2.7-code kimi-k2.6";
@@ -91,7 +82,7 @@ describe("collector 的网络层重试", () => {
     await expect(
       collectMoonshotChina(new Date("2026-07-23T00:00:00Z")),
     ).rejects.toThrow();
-    // 三个来源各请求一次，且都不重试
-    expect(fetchCalls).toBe(3);
+    // RSC 定价、markdown 兜底、两个元数据来源各请求一次，解析不重试。
+    expect(fetchCalls).toBe(4);
   });
 });

@@ -51,7 +51,7 @@ export const MOONSHOT_CHANNELS = {
   },
 } as const satisfies Record<string, MoonshotChannel>;
 
-/** Kimi 现在把全部在售模型的定价放在同一张表里（旧的 chat-k3/k27-code/k26 路由 307 到 chat.md）。 */
+/** Kimi 现在把全部在售模型的定价放在同一页的多张表里（旧的 chat-k3/k27-code/k26 路由 307 到 chat.md）。 */
 const pricingPaths = ["/docs/pricing/chat"] as const;
 
 function pricingSources(channel: MoonshotChannel): string[] {
@@ -80,9 +80,9 @@ interface ParsedMoonshotPage {
 }
 
 function parseMoney(value: string): number {
-  const match = value.match(/[\d.]+/);
+  const match = value.match(/^[$¥￥]?(\d+(?:\.\d+)?)$/);
   if (!match) throw new Error(`Cannot parse Kimi price: ${value}`);
-  return Number(match[0]);
+  return Number(match[1]);
 }
 
 function parseTokenCount(value: string): number {
@@ -98,7 +98,7 @@ interface KimiTable {
   rows: string[][];
 }
 
-function parseTables(markdown: string): KimiTable[] {
+function parseMarkdownTables(markdown: string): KimiTable[] {
   const tables: KimiTable[] = [];
   // The block terminator is a `/>` at the start of a line. A bare `/>` search would stop early on
   // the MDX currency cells (`<>{"$"}3.00</>` contains `/>`), which only the international page
@@ -106,12 +106,14 @@ function parseTables(markdown: string): KimiTable[] {
   for (const match of markdown.matchAll(/<DocTable\b([\s\S]*?)\n\/>/g)) {
     const block = match[1]!;
     const columnsBlock = block.match(/columns=\{\[([\s\S]*?)\]\}/)?.[1];
-    if (!columnsBlock) continue;
+    if (!columnsBlock)
+      throw new Error("Kimi markdown table is missing columns");
     const columns = [...columnsBlock.matchAll(/title:\s*"([^"]+)"/g)].map(
       (entry) => entry[1]!,
     );
     const rowsBlock = block.match(/rows=\{\[([\s\S]*?)\]\}/)?.[1];
-    if (!columns.length || !rowsBlock) continue;
+    if (!columns.length || !rowsBlock)
+      throw new Error("Kimi markdown table is missing rows or columns");
     const rows = rowsBlock
       .split(/\r?\n/)
       .map((line) => line.trim().replace(/,$/, ""))
@@ -125,11 +127,107 @@ function parseTables(markdown: string): KimiTable[] {
             ),
           ) as string[],
       );
-    if (rows.length) tables.push({ columns, rows });
+    if (!rows.length) throw new Error("Kimi pricing table is empty");
+    tables.push({ columns, rows });
   }
-  if (!tables.length)
+  if (
+    !tables.length ||
+    tables.length !== [...markdown.matchAll(/<DocTable\b/g)].length
+  )
     throw new Error("Kimi pricing page is missing its rows table");
   return tables;
+}
+
+/** 只读取引用的正常 MDX，不能混入 mdxSourceWithNoJs 中重复或没有行的表格。 */
+function parseRscTables(flight: string): KimiTable[] {
+  const id = flight.match(
+    /"mdxSource":\{"compiledSource":"\$([0-9a-f]+)"/,
+  )?.[1];
+  if (!id) throw new Error("Kimi RSC is missing its compiled MDX reference");
+  const record = new RegExp(`(?:^|\\n)${id}:T([0-9a-f]+),`).exec(flight);
+  if (!record) throw new Error("Kimi RSC is missing its compiled MDX record");
+  // Flight 的 T 记录长度按 UTF-8 字节计算，不能按 JS 字符数截取中文正文。
+  const bytes = Buffer.from(flight.slice(record.index + record[0].length));
+  const length = Number.parseInt(record[1]!, 16);
+  if (bytes.length < length)
+    throw new Error("Kimi RSC text record is truncated");
+  const source = bytes.subarray(0, length).toString("utf8");
+  const tables: KimiTable[] = [];
+  for (const match of source.matchAll(/_jsx\(DocTable,\{columns:/g)) {
+    const start = match.index + match[0].length;
+    const columnsBlock = readArray(source, start);
+    const columns = [...columnsBlock.matchAll(/title:`([^`]+)`/g)].map(
+      (entry) => entry[1]!,
+    );
+    const rowsStart = start + columnsBlock.length;
+    if (!source.startsWith(",rows:", rowsStart)) {
+      throw new Error("Kimi RSC pricing table is missing rows");
+    }
+    const rowsBlock = readArray(source, rowsStart + ",rows:".length);
+    // 国际站的一个金额是 Fragment，children 内的货币符号和数字必须先合成一个值。
+    const normalized = rowsBlock
+      .replace(
+        /_jsxs\(_Fragment,\{children:\[`([$¥￥])`,`(\d+(?:\.\d+)?)`\]\}\)/g,
+        (_, symbol: string, amount: string) => JSON.stringify(symbol + amount),
+      )
+      .replace(/`([^`\\]*)`/g, (_, value: string) => {
+        if (value.includes("${"))
+          throw new Error("Unsupported Kimi template expression");
+        return JSON.stringify(value);
+      });
+    // 不执行上游 JavaScript；遇到不认识的表达式或截断直接报错。
+    const rows: unknown = JSON.parse(normalized);
+    if (!columns.length || !Array.isArray(rows) || !rows.length) {
+      throw new Error("Kimi RSC pricing table is empty");
+    }
+    if (
+      !rows.every(
+        (row) =>
+          Array.isArray(row) && row.every((cell) => typeof cell === "string"),
+      )
+    ) {
+      throw new Error("Unexpected Kimi RSC pricing cells");
+    }
+    tables.push({ columns, rows: rows as string[][] });
+  }
+  if (
+    !tables.length ||
+    tables.length !== [...source.matchAll(/_jsx\(DocTable,/g)].length
+  )
+    throw new Error("Kimi RSC is missing its rows table");
+  return tables;
+}
+
+/** 提取完整数组；忽略字符串里的括号，支持 Fragment 中嵌套的 children 数组。 */
+function readArray(source: string, start: number): string {
+  if (source[start] !== "[") throw new Error("Expected Kimi pricing array");
+  let depth = 0;
+  let quote = "";
+  for (let at = start; at < source.length; at += 1) {
+    const char = source[at]!;
+    if (quote) {
+      if (char === "\\") at += 1;
+      else if (char === quote) quote = "";
+    } else if ("\"'`".includes(char)) quote = char;
+    else if (char === "[") depth += 1;
+    else if (char === "]" && --depth === 0) return source.slice(start, at + 1);
+  }
+  throw new Error("Kimi pricing array is truncated");
+}
+
+function mergeCurrencyCells(row: string[]): string[] {
+  const cells: string[] = [];
+  for (let at = 0; at < row.length; at += 1) {
+    const value = row[at]!;
+    if (/^[$¥￥]$/.test(value)) {
+      const amount = row[++at];
+      if (!amount || !/^\d+(?:\.\d+)?$/.test(amount)) {
+        throw new Error("Kimi currency symbol is missing its amount");
+      }
+      cells.push(value + amount);
+    } else cells.push(value);
+  }
+  return cells;
 }
 
 /**
@@ -150,8 +248,11 @@ function columnIndex(columns: string[], ...patterns: RegExp[]): number {
 const COLUMN_PATTERNS = {
   model: [/模型/, /^Model$/i],
   unit: [/计费单位/, /^Unit$/i],
-  cacheWriteShort: [/缓存写入（TTL 5min）/, /Cache Write Price \(TTL 5min\)/i],
-  cacheWriteLong: [/缓存写入（TTL 1h）/, /Cache Write Price \(TTL 1h\)/i],
+  cacheWriteShort: [
+    /缓存写入[（(]TTL 5min[）)]/,
+    /Cache Write Price \(TTL 5min\)/i,
+  ],
+  cacheWriteLong: [/缓存写入[（(]TTL 1h[）)]/, /Cache Write Price \(TTL 1h\)/i],
   // The two English tables name the same columns differently: K3 uses "Cached Input Price" /
   // "Input Price", the K2 family uses "Input Price (Cache Hit)" / "Input Price (Cache Miss)".
   // Order matters — "Cache Miss" must be tried before the bare "Input Price".
@@ -170,6 +271,7 @@ function tableToModels(
   const { columns } = table;
   const index = {
     model: columnIndex(columns, ...COLUMN_PATTERNS.model),
+    unit: columnIndex(columns, ...COLUMN_PATTERNS.unit),
     cacheWriteShort: columnIndex(columns, ...COLUMN_PATTERNS.cacheWriteShort),
     cacheWriteLong: columnIndex(columns, ...COLUMN_PATTERNS.cacheWriteLong),
     cacheHit: columnIndex(columns, ...COLUMN_PATTERNS.cacheHit),
@@ -177,12 +279,33 @@ function tableToModels(
     output: columnIndex(columns, ...COLUMN_PATTERNS.output),
     context: columnIndex(columns, ...COLUMN_PATTERNS.context),
   };
-  if (index.model < 0 || index.inputStandard < 0 || index.output < 0) {
+  if (
+    [
+      index.model,
+      index.unit,
+      index.cacheHit,
+      index.inputStandard,
+      index.output,
+      index.context,
+    ].some((at) => at < 0)
+  ) {
     throw new Error(
       `Unexpected Kimi pricing table columns: ${JSON.stringify(columns)}`,
     );
   }
-  return table.rows.map((row) => {
+  return table.rows.map((rawRow) => {
+    const row = mergeCurrencyCells(rawRow);
+    if (row.some((value) => !value.trim())) {
+      throw new Error("Kimi pricing row contains empty cells");
+    }
+    if (row.length !== columns.length) {
+      throw new Error(
+        `Unexpected Kimi pricing row width: ${row.length}, expected ${columns.length}`,
+      );
+    }
+    if (row[index.unit] !== "1M tokens") {
+      throw new Error(`Unexpected Kimi pricing unit: ${row[index.unit]}`);
+    }
     const id = row[index.model]!;
     if (!id) throw new Error("Kimi pricing row is missing a model ID");
     const cell = (at: number): string | undefined =>
@@ -275,7 +398,9 @@ export function parseMoonshotPricingPage(
   market: Market = "china",
   currency: Currency = "CNY",
 ): ParsedMoonshotPage {
-  const tables = parseTables(markdown);
+  const tables = markdown.includes('"mdxSource":')
+    ? parseRscTables(markdown)
+    : parseMarkdownTables(markdown);
   const models = tables.flatMap((table) =>
     tableToModels(table, sourceUrl, market, currency),
   );
@@ -298,10 +423,40 @@ async function fetchMarkdown(url: string): Promise<string> {
   });
 }
 
+async function fetchPricing(
+  url: string,
+  channel: MoonshotChannel,
+): Promise<ParsedMoonshotPage> {
+  try {
+    const flight = await fetchTextWithRetry(url, {
+      headers: { RSC: "1", accept: "*/*", "user-agent": MODELS_CN_USER_AGENT },
+    });
+    return parseMoonshotPricingPage(
+      flight,
+      url,
+      channel.market,
+      channel.currency,
+    );
+  } catch (rscError) {
+    try {
+      return parseMoonshotPricingPage(
+        await fetchMarkdown(url),
+        url,
+        channel.market,
+        channel.currency,
+      );
+    } catch (markdownError) {
+      throw new Error(
+        `Kimi pricing failed for ${url}; RSC: ${String(rscError)}; markdown: ${String(markdownError)}`,
+      );
+    }
+  }
+}
+
 async function collectMoonshotChannel(
   channel: MoonshotChannel,
   now = new Date(),
-  fetcher: (url: string) => Promise<string> = fetchMarkdown,
+  fetcher?: (url: string) => Promise<string>,
 ): Promise<ProviderData> {
   const pricingUrls = pricingSources(channel);
   const overviewUrl = modelsOverviewUrl(channel);
@@ -310,16 +465,18 @@ async function collectMoonshotChannel(
     Promise.all(
       pricingUrls.map(async (url) => ({
         url,
-        parsed: parseMoonshotPricingPage(
-          await fetcher(url),
-          url,
-          channel.market,
-          channel.currency,
-        ),
+        parsed: fetcher
+          ? parseMoonshotPricingPage(
+              await fetcher(url),
+              url,
+              channel.market,
+              channel.currency,
+            )
+          : await fetchPricing(url, channel),
       })),
     ),
-    fetcher(overviewUrl),
-    fetcher(limitsUrl),
+    (fetcher ?? fetchMarkdown)(overviewUrl),
+    (fetcher ?? fetchMarkdown)(limitsUrl),
   ]);
   for (const id of ["kimi-k3", "kimi-k2.7-code", "kimi-k2.6"]) {
     if (!overview.includes(id)) {
@@ -377,14 +534,14 @@ async function collectMoonshotChannel(
 
 export function collectMoonshotChina(
   now = new Date(),
-  fetcher: (url: string) => Promise<string> = fetchMarkdown,
+  fetcher?: (url: string) => Promise<string>,
 ): Promise<ProviderData> {
   return collectMoonshotChannel(MOONSHOT_CHANNELS.china, now, fetcher);
 }
 
 export function collectMoonshotInternational(
   now = new Date(),
-  fetcher: (url: string) => Promise<string> = fetchMarkdown,
+  fetcher?: (url: string) => Promise<string>,
 ): Promise<ProviderData> {
   return collectMoonshotChannel(MOONSHOT_CHANNELS.international, now, fetcher);
 }
