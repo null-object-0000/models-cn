@@ -1,0 +1,12 @@
+{
+  "code": 200,
+  "msg": "操作成功",
+  "data": [
+    {
+      "id": 45,
+      "operationId": "1164",
+      "content": "{\"title\":\"Other Models & Services\",\"tabs\":[{\"sort\":1,\"title\":\"Models\",\"cards\":[{\"sort\":1,\"title\":\"GLM-5.2\",\"desc\":\"Reasoning Model\",\"fieldList\":[{\"sort\":1,\"label\":\"Input\",\"values\":[\"$1.4 / M\"]},{\"sort\":2,\"label\":\"Output\",\"values\":[\"$4.4 / M\"]},{\"sort\":3,\"label\":\"Cached Input\",\"values\":[\"$0.26 / M\"]},{\"sort\":4,\"label\":\"Cache Store\",\"values\":[\"Limited-time Free\"]}]},{\"sort\":2,\"title\":\"GLM-4.6V\",\"desc\":\"Vison Model\",\"fieldList\":[{\"sort\":1,\"label\":\"Input\",\"values\":[\"$0.3 / M\"]},{\"sort\":2,\"label\":\"Output\",\"values\":[\"$0.9 / M\"]},{\"sort\":3,\"label\":\"Cached Input\",\"values\":[\"$0.05 / M\"]},{\"sort\":4,\"label\":\"Cache Store\",\"values\":[\"Limited-time Free\"]}]},{\"sort\":3,\"title\":\"GLM-OCR\",\"desc\":\"Vison Model\",\"fieldList\":[{\"sort\":1,\"label\":\"Input\",\"values\":[\"$0.03 / M\"]},{\"sort\":2,\"label\":\"Output\",\"values\":[\"$0.03 / M\"]},{\"sort\":3,\"label\":\"Cached Input\",\"values\":[\"-\"]},{\"sort\":4,\"label\":\"Cache Store\",\"values\":[\"-\"]}]}]},{\"sort\":2,\"title\":\"Agents\",\"cards\":[{\"sort\":1,\"title\":\"GLM Slide/Poster Agent (beta)\",\"desc\":\"A Slide & Poster Agent \",\"fieldList\":[{\"sort\":1,\"label\":\"Price\",\"values\":[\"$0.7 / MTok\"]}]},{\"sort\":2,\"title\":\"General-Purpose Translation\",\"desc\":\"Multilingual AI-powered transl\",\"fieldList\":[{\"sort\":1,\"label\":\"Price\",\"values\":[\"$3 / MTok\"]}]},{\"sort\":3,\"title\":\"Popular Special Effects Video \",\"desc\":\"Three popular special effects \",\"fieldList\":[{\"sort\":1,\"label\":\"Price\",\"values\":[\"$0.2 / Video\"]}]}]}],\"list\":[]}"
+    }
+  ],
+  "success": true
+}
