@@ -60,7 +60,10 @@ export function assertCreatedAtProvenance(
   }
 }
 
-/** 只有完全没有能力区才允许 null；存在区块时三个字段都必须解析成功。 */
+/**
+ * 只有完全没有能力区才允许 null；存在区块时，三个字段必须都是布尔值
+ * （列了的来自真实解析，没列的按白名单判 false，见 capabilitiesEvidence）。
+ */
 export function assertCapabilitiesProvenance(
   model: Pick<
     ModelData,

@@ -100,7 +100,13 @@ export interface ModelData {
   tokenizer?: string;
   aliases: ModelAlias[];
   capabilitiesSource?: "docs" | "not-documented";
-  capabilitiesEvidence?: { sectionPresent: boolean };
+  capabilitiesEvidence?: {
+    sectionPresent: boolean;
+    /** 能力区明确列出的字段（真实证据）。 */
+    parsedFields?: string[];
+    /** 能力区没列出、按白名单判为不支持的字段。 */
+    defaultedFields?: string[];
+  };
   capabilities: {
     thinking?: boolean;
     thinkingModes?: string[];

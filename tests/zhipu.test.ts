@@ -6,6 +6,7 @@ import {
   collectZhipuChina,
   collectZhipuInternational,
   parseZhipuCapabilities,
+  parseZhipuCapabilitiesWithEvidence,
   parseZhipuChinaPricingMarkdown,
   parseZhipuInternationalPricing,
   parseZhipuOverview,
@@ -657,10 +658,17 @@ describe("Zhipu capability parser", () => {
     expect(() => parseZhipuCapabilities(markdown)).toThrow(/capability/);
   });
 
-  it("rejects a partially unreadable capability list", () => {
-    expect(() =>
-      parseZhipuCapabilities("## 能力支持\n* [思考模式](/thinking)"),
-    ).toThrow("missing capability toolCalls");
+  it("能力区存在但没列某项 → 判为不支持（白名单），并记录 parsed/defaulted", () => {
+    const parsed = parseZhipuCapabilitiesWithEvidence(
+      "## 能力支持\n* [思考模式](/thinking)",
+    );
+    expect(parsed.capabilities).toEqual({
+      thinking: true,
+      toolCalls: false,
+      jsonOutput: false,
+    });
+    expect(parsed.parsedFields).toEqual(["thinking"]);
+    expect(parsed.defaultedFields).toEqual(["toolCalls", "jsonOutput"]);
   });
 
   it("only writes false when the source explicitly says unsupported", () => {
@@ -1134,14 +1142,24 @@ describe("能力二分（真实官方 fixture）", () => {
     await validateProvider(provider);
   });
 
-  it("有能力区但字段缺失或模板未知 → 必须抛错", () => {
-    expect(() => resolveZhipuCapabilities(readFixture("glm-4.md"))).toThrow(
-      "missing capability thinking",
-    );
-    const missing = present.replace(/^.*Function Calling.*$/m, "");
+  it("GLM-4 页面没有「思考」→ thinking=false，evidence 标明 defaulted", () => {
+    const resolved = resolveZhipuCapabilities(readFixture("glm-4.md"));
+    expect(resolved.capabilitiesSource).toBe("docs");
+    expect(resolved.capabilities).toEqual({
+      thinking: false,
+      toolCalls: true,
+      jsonOutput: true,
+    });
+    expect(resolved.capabilitiesEvidence).toMatchObject({
+      sectionPresent: true,
+      defaultedFields: ["thinking"],
+    });
+    expect(validateProvider.length).toBeGreaterThan(0);
+  });
+
+  it("有能力区但 0 项可识别 → 必须抛错（模板漂移不算不支持）", () => {
     const unknown = present.replace(/^- .*$/gm, "未知模板");
     for (const text of [
-      missing,
       unknown,
       present.replace("## 能力支持", "## 模型能力"),
       present.replace("## 能力支持", "## 能力"),
