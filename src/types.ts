@@ -9,6 +9,7 @@ export interface ProviderHealth {
   lastAttemptAt: string;
   consecutiveFailures: number;
   message?: string;
+  warnings?: { code: "createdAt-not-documented"; modelIds: string[] }[];
 }
 
 export interface Source {
@@ -90,7 +91,9 @@ export interface PriceSnapshot extends ModelPrice {
 export interface ModelData {
   id: string;
   name: string;
-  createdAt?: string;
+  createdAt?: string | null;
+  createdAtSource?: "release-notes" | "not-documented";
+  createdAtEvidence?: { releaseNotesMentioned: boolean };
   tokenizer?: string;
   aliases: ModelAlias[];
   capabilities: {

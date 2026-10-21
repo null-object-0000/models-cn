@@ -74,3 +74,25 @@ INTL: Zhipu release notes missing createdAt: glm-5.3-flashx, glm-4.7-flashx, glm
 运行生成[自动 PR #61](https://github.com/null-object-0000/models-cn/pull/61)：新增模型 0、下线模型 0、价格变化 0、模型信息变化 0、数据源异常 2。除阅读 PR 报告外，还 fetch 了 bot 分支并将两个智谱 provider 的整个 `models` 数组与 main 逐字段比较，二者均完全一致（CN 3 个、INTL 13 个，均为上次成功快照）；智谱 provider 的实质变化仅为 health 报错。因此这次没有再产出“日期被清空／能力变 false／六模型假下线”的智谱数据变更，但这是**失败后保留成功快照**的结果，不能算 14/13 个候选已完整采集成功。#61 未合并。
 
 未通过的验收项：补齐有官方依据的独立日期与缺失能力来源，使两个价格源恢复 healthy；恢复浏览器连接并完成国际五模型的渲染文本核对；之后重新运行 main 工作流并确认全绿。当前证据不支持将这六个模型标作真实下架。
+
+## 发布日期健康二分（2026-10-21）
+
+本节更新此前“每个已选模型必须有日期”的规则，不覆盖上文历史运行结果。日期不再用一个缺值表示所有情况，而是分别断言：
+
+- 在任一官方发布记录的完整文本（正文、标题或链接）出现过该完整模型名，但没有解析出日期：必须抛错，沿用失败后保留成功快照的处理。基座与变体按完整模型名区分，不能用基座日期填补变体。
+- 两个官方发布记录都没有出现该模型名，且模型存在已解析的官方定价：必须显式输出 `createdAt: null`、`createdAtSource: "not-documented"`、`createdAtEvidence.releaseNotesMentioned: false`。有日期则必须输出 `createdAtSource: "release-notes"` 和出现证据。
+
+这是加严而非放宽：原来只有“日期有无”断言，现在还要求来源、发布记录出现证据、官方定价和 warning 名单自洽。解析失败不因其他模型有日期而通过，也不能靠标注 `not-documented` 绕过；缺定价、证据缺失或矛盾同样拒绝。保留上下文、最大输出、三个能力布尔值的全部原断言，不缩减采集范围。旧成功快照没有新字段仍能读取，新采集的每个已选模型均经过严格断言。
+
+两个真实发布记录 fixture、真实概览及完整国际价表用于回归：有日期正例；仅有价格正例；将真实发布链接改为普通正文导致日期漏读的反例；给出现过却漏读日期的模型伪标来源的反例（采集断言和 provider 校验都拒绝）；另覆盖无价格不可标记。另覆盖采集失败保留快照时保留 warnings。总计 15 个测试文件、161 个测试通过。同步修改主 schema 和 v1 schema 以及站点日期类型，允许明确的 null 与新增证据；未提交生成数据。
+
+本地通过 Node 的环境代理实采，INTL 为 healthy（13 个模型），摘要如下，CI health 日志和自动 PR 数据源状态表均显示名单：
+
+```text
+Collection warnings: 5 model(s)
+zhipu-intl: createdAt-not-documented (5): glm-5.3-flashx, glm-4.7-flashx, glm-4.5-air, glm-4.5-airx, glm-4.5-flash
+```
+
+注意：任务背景称 CN 只有 3 个且齐全，但当前 main 采集器已从完整国内价表选择 14 个模型。实采在原能力断言处失败：`Zhipu glm-4-long: Zhipu capability section has no recognized capability titles`。其详情页没有“能力支持”区块，不能凭文本中泛称的“推理能力”推断 thinking/toolCalls/jsonOutput，也不能造出 false。因此本次日期二分已使 INTL 恢复，CN 的另一项能力证据缺失仍如实为 error，尚不能声称两渠道 healthy。
+
+本地验证链已执行：`npx vitest run` → `npm run validate` → `npm run build` → `npx prettier --check .`，另运行 `npm run typecheck`。实采后的逐模型比较确认 CN/INTL 没有误下线、原有日期清空或能力 true 变 false（CN 为失败保留快照）。提交前恢复 `data/`、`api.json` 和 `v1/api.json`。远端 PR 与 main 运行结果将在实际完成后补记。

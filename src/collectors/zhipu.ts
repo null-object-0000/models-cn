@@ -8,7 +8,7 @@ import type {
   Source,
 } from "../types.js";
 import { SCHEMA_VERSION } from "../types.js";
-import { healthyHealth } from "../health.js";
+import { zhipuHealth } from "../health.js";
 import {
   fetchJsonWithRetry,
   fetchTextWithRetry,
@@ -43,6 +43,8 @@ export const ZHIPU_OVERVIEW_URL =
   "https://docs.bigmodel.cn/cn/guide/start/model-overview.md" as const;
 export const ZHIPU_RELEASES_URL =
   "https://docs.bigmodel.cn/cn/update/new-releases.md" as const;
+export const ZHIPU_INTL_RELEASES_URL =
+  "https://docs.z.ai/release-notes/new-released.md" as const;
 export const ZHIPU_DOCS_BASE = "https://docs.bigmodel.cn" as const;
 
 interface ZhipuChannel {
@@ -611,14 +613,32 @@ export function parseZhipuCapabilities(markdown: string): ZhipuCapabilities {
   };
 }
 
-interface ZhipuMetadata extends ZhipuOverviewModel {
+interface ZhipuMetadata
+  extends
+    ZhipuOverviewModel,
+    Pick<ModelData, "createdAt" | "createdAtSource" | "createdAtEvidence"> {
   capabilities: ZhipuCapabilities;
-  createdAt?: string;
 }
 
 function assertMetadata(meta: ZhipuMetadata): void {
-  if (!meta.createdAt || !Number.isFinite(Date.parse(meta.createdAt)))
-    throw new Error(`Zhipu ${meta.id}: missing createdAt`);
+  if (meta.createdAtSource === "not-documented") {
+    if (
+      meta.createdAt !== null ||
+      meta.createdAtEvidence?.releaseNotesMentioned !== false
+    )
+      throw new Error(
+        `Zhipu ${meta.id}: invalid not-documented createdAt evidence`,
+      );
+  } else if (
+    meta.createdAtSource !== "release-notes" ||
+    meta.createdAtEvidence?.releaseNotesMentioned !== true ||
+    !meta.createdAt ||
+    !Number.isFinite(Date.parse(meta.createdAt))
+  ) {
+    throw new Error(
+      `Zhipu ${meta.id}: missing createdAt / release-notes evidence`,
+    );
+  }
   if (!(meta.contextTokens > 0) || !(meta.maxOutputTokens > 0))
     throw new Error(`Zhipu ${meta.id}: missing token limits`);
   for (const key of ["thinking", "toolCalls", "jsonOutput"] as const) {
@@ -627,25 +647,64 @@ function assertMetadata(meta: ZhipuMetadata): void {
   }
 }
 
+/** 在全部官方发布文本里匹配完整模型名；链接、标题及正文中的出现都算证据。 */
+export function resolveZhipuCreatedAt(
+  id: string,
+  releaseTexts: string[],
+  dates: Map<string, string>,
+  hasOfficialPricing: boolean,
+): Pick<ModelData, "createdAt" | "createdAtSource" | "createdAtEvidence"> {
+  const mentioned = releaseTexts.some((text) =>
+    [...text.toLowerCase().matchAll(/glm[-a-z0-9.]+/g)].some(
+      (match) => match[0].replace(/\.+$/, "") === id,
+    ),
+  );
+  const createdAt = dates.get(id);
+  if (mentioned && !createdAt)
+    throw new Error(
+      `Zhipu ${id}: release notes missing createdAt (parsing failure)`,
+    );
+  const result = {
+    createdAt: createdAt ?? null,
+    createdAtSource: createdAt
+      ? ("release-notes" as const)
+      : ("not-documented" as const),
+    createdAtEvidence: { releaseNotesMentioned: mentioned },
+  };
+  if (!createdAt && !hasOfficialPricing)
+    throw new Error(
+      `Zhipu ${id}: invalid not-documented without official pricing`,
+    );
+  if (createdAt && (!mentioned || !Number.isFinite(Date.parse(createdAt))))
+    throw new Error(`Zhipu ${id}: invalid release-notes evidence`);
+  return result;
+}
+
 /** 抓取国内站元数据（上下文 / 最大输出 + 能力 + 发布页发布时间），按模型 id 返回。 */
 async function loadZhipuMetadata(
   pricedIds: Set<string>,
 ): Promise<Map<string, ZhipuMetadata>> {
-  const [overviewMarkdown, releasesMarkdown] = await Promise.all([
-    fetchMarkdown(ZHIPU_OVERVIEW_URL),
-    fetchMarkdown(ZHIPU_RELEASES_URL),
-  ]);
+  const [overviewMarkdown, releasesMarkdown, intlReleasesMarkdown] =
+    await Promise.all([
+      fetchMarkdown(ZHIPU_OVERVIEW_URL),
+      fetchMarkdown(ZHIPU_RELEASES_URL),
+      fetchMarkdown(ZHIPU_INTL_RELEASES_URL),
+    ]);
   const overview = parseZhipuOverview(overviewMarkdown).filter((model) =>
     pricedIds.has(model.id),
   );
   const releaseDates = parseZhipuReleaseNotes(releasesMarkdown);
-  const missingDates = overview
-    .filter((model) => !releaseDates.has(model.id))
-    .map((model) => model.id);
-  if (missingDates.length)
-    throw new Error(
-      `Zhipu release notes missing createdAt: ${missingDates.join(", ")}`,
-    );
+  const provenance = new Map(
+    overview.map((model) => [
+      model.id,
+      resolveZhipuCreatedAt(
+        model.id,
+        [releasesMarkdown, intlReleasesMarkdown],
+        releaseDates,
+        pricedIds.has(model.id),
+      ),
+    ]),
+  );
   // 去重详情页 URL（glm-4.7-flashx / glm-4.5-air 与同系列共享详情页）。
   const uniqueUrls = [...new Set(overview.map((model) => model.url))];
   const capabilityMarkdown = new Map<string, string>();
@@ -660,13 +719,16 @@ async function loadZhipuMetadata(
     const markdown = capabilityMarkdown.get(model.url);
     if (!markdown)
       throw new Error(`Zhipu ${model.id}: missing detail markdown`);
-    const createdAt = releaseDates.get(model.id);
-    if (!createdAt)
-      throw new Error(`Zhipu ${model.id}: release notes missing createdAt`);
+    let capabilities: ZhipuCapabilities;
+    try {
+      capabilities = parseZhipuCapabilities(markdown);
+    } catch (error) {
+      throw new Error(`Zhipu ${model.id}: ${(error as Error).message}`);
+    }
     metadata.set(model.id, {
       ...model,
-      capabilities: parseZhipuCapabilities(markdown),
-      ...(createdAt ? { createdAt } : {}),
+      capabilities,
+      ...provenance.get(model.id),
     });
   }
   return metadata;
@@ -693,9 +755,12 @@ function releasesSource(
   metadata: Map<string, ZhipuMetadata>,
 ): Source {
   const dates = [...metadata]
-    .map(([, m]) => m.createdAt)
-    .filter((date): date is string => Boolean(date))
-    .sort();
+    .map(([id, m]) => ({
+      id,
+      createdAt: m.createdAt,
+      evidence: m.createdAtEvidence,
+    }))
+    .sort((a, b) => a.id.localeCompare(b.id));
   return {
     url: ZHIPU_RELEASES_URL,
     kind: "model-metadata",
@@ -730,7 +795,13 @@ export async function collectZhipuChina(
     models.push({
       id: meta.id,
       name: meta.name,
-      ...(meta.createdAt ? { createdAt: meta.createdAt } : {}),
+      ...(meta.createdAt !== undefined ? { createdAt: meta.createdAt } : {}),
+      ...(meta.createdAtSource
+        ? { createdAtSource: meta.createdAtSource }
+        : {}),
+      ...(meta.createdAtEvidence
+        ? { createdAtEvidence: meta.createdAtEvidence }
+        : {}),
       aliases: [],
       capabilities: {
         thinking: meta.capabilities.thinking,
@@ -794,10 +865,15 @@ export async function collectZhipuChina(
     },
     metadataSource(now, metadata),
     releasesSource(now, metadata),
+    {
+      ...releasesSource(now, metadata),
+      url: ZHIPU_INTL_RELEASES_URL,
+      locale: "en",
+    },
   ];
   return {
     schemaVersion: SCHEMA_VERSION,
-    health: healthyHealth(now),
+    health: zhipuHealth(models, now),
     id: ZHIPU_CHANNELS.china.id,
     name: ZHIPU_CHANNELS.china.name,
     displayNames: ZHIPU_CHANNELS.china.displayNames,
@@ -934,7 +1010,13 @@ export async function collectZhipuInternational(
     models.push({
       id: meta.id,
       name: meta.name,
-      ...(meta.createdAt ? { createdAt: meta.createdAt } : {}),
+      ...(meta.createdAt !== undefined ? { createdAt: meta.createdAt } : {}),
+      ...(meta.createdAtSource
+        ? { createdAtSource: meta.createdAtSource }
+        : {}),
+      ...(meta.createdAtEvidence
+        ? { createdAtEvidence: meta.createdAtEvidence }
+        : {}),
       aliases: [],
       capabilities: {
         thinking: meta.capabilities.thinking,
@@ -973,10 +1055,15 @@ export async function collectZhipuInternational(
     },
     metadataSource(now, metadata),
     releasesSource(now, metadata),
+    {
+      ...releasesSource(now, metadata),
+      url: ZHIPU_INTL_RELEASES_URL,
+      locale: "en",
+    },
   ];
   return {
     schemaVersion: SCHEMA_VERSION,
-    health: healthyHealth(now),
+    health: zhipuHealth(models, now),
     id: ZHIPU_CHANNELS.international.id,
     name: ZHIPU_CHANNELS.international.name,
     displayNames: ZHIPU_CHANNELS.international.displayNames,

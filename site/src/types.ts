@@ -49,7 +49,7 @@ export interface Price {
 export interface Model {
   id: string;
   name: string;
-  createdAt?: string;
+  createdAt?: string | null;
   aliases: Array<{ id: string; deprecatedAt?: string }>;
   capabilities: Record<string, unknown>;
   limits: {
