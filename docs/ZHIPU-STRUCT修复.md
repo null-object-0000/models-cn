@@ -96,3 +96,13 @@ zhipu-intl: createdAt-not-documented (5): glm-5.3-flashx, glm-4.7-flashx, glm-4.
 注意：任务背景称 CN 只有 3 个且齐全，但当前 main 采集器已从完整国内价表选择 14 个模型。实采在原能力断言处失败：`Zhipu glm-4-long: Zhipu capability section has no recognized capability titles`。其详情页没有“能力支持”区块，不能凭文本中泛称的“推理能力”推断 thinking/toolCalls/jsonOutput，也不能造出 false。因此本次日期二分已使 INTL 恢复，CN 的另一项能力证据缺失仍如实为 error，尚不能声称两渠道 healthy。
 
 本地验证链已执行：`npx vitest run` → `npm run validate` → `npm run build` → `npx prettier --check .`，另运行 `npm run typecheck`。实采后的逐模型比较确认 CN/INTL 没有误下线、原有日期清空或能力 true 变 false（CN 为失败保留快照）。提交前恢复 `data/`、`api.json` 和 `v1/api.json`。远端 PR 与 main 运行结果将在实际完成后补记。
+
+### 日期二分修复的远端最终验收
+
+[PR #63](https://github.com/null-object-0000/models-cn/pull/63) 的 GitGuardian、两项 CodeQL 分析及汇总检查全部通过并已合并，main 提交为 `e135ff2`。随后实际执行 `gh workflow run update-prices.yml --ref main`，得到[运行 39560675057](https://github.com/null-object-0000/models-cn/actions/runs/39560675057)，最终 `conclusion=failure`，**未达到任务要求的 success**。
+
+该运行的 collect、discover、build、check（含 161 个测试）、format:check、报告与自动 PR 更新全部成功；唯一失败步骤为 Assert collection health。日志逐字列出上面的 5 个 INTL warnings，唯一 error 为 `official pricing: zhipu-cn (error)`，collect 日志明确归因为 `glm-4-long` 缺能力支持区块。INTL 采集 healthy、13 个模型；CN 采集失败后保留此前 3 个模型快照，不能误称它们就是本次采集范围。
+
+运行更新了现有[自动 PR #61](https://github.com/null-object-0000/models-cn/pull/61)，bot 提交为 `f5c92b9`。已 fetch 此提交并与 `e135ff2` 逐字段核对所有 7 个 provider：下线模型 0、原有非空日期清空 0、能力 true 变 false 0；价格变化 0。两个智谱的整个 models 数组在排除新日期来源/证据字段、将显式 null 归一到原先缺省后完全一致。五项 createdAt 变化均为原先字段缺省 → 明确 null，**不是将已有日期清空**。其余智谱差异为新增来源、来源哈希、抓取时间、INTL 的 5 项 warning，以及 CN 如实记录的失败状态。其余自动数据差异包括时间戳和 models.dev 的 14 项校准变化（LongCat 参考价格/模型变化）；没有将参考价格覆盖到官方价表。#61 保持未合并。
+
+最终未完成项：两个渠道同时 healthy、main workflow `conclusion=success`。要继续必须补上 GLM-4-Long 三个能力字段的官方依据或已有独立修复；不能删除该模型、改采集范围、继承其他模型能力、将未知能力填成 false，或跳过 health 门禁来制造成功。
