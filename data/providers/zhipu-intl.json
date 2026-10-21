@@ -2,14 +2,15 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-21T12:57:55.151Z",
-    "lastAttemptAt": "2026-10-21T12:57:55.151Z",
+    "lastSuccessfulAt": "2026-10-21T18:05:26.457Z",
+    "lastAttemptAt": "2026-10-21T18:05:26.457Z",
     "consecutiveFailures": 0,
     "warnings": [
       {
         "code": "createdAt-not-documented",
         "modelIds": [
           "glm-5.3-flashx",
+          "glm-5.3-flashx-legal",
           "glm-4.7-flashx",
           "glm-4.5-air",
           "glm-4.5-airx",
@@ -188,6 +189,50 @@
           "output": 1.25,
           "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
           "validFrom": "2026-09-18T05:57:56.674Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-5.3-flashx-legal",
+      "name": "GLM-5.3-FlashX-Legal",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "international",
+          "currency": "USD",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.37,
+            "cacheHit": 0.075
+          },
+          "output": 1.25,
+          "sourceUrl": "https://docs.z.ai/guides/overview/pricing",
+          "validFrom": "2026-10-21T18:05:32.095Z"
         }
       ]
     },
@@ -698,29 +743,29 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-10-21T07:50:08.336Z",
-      "contentHash": "sha256:cd98a717165c38dbee6821ee54156bfbfa75433ff90f8e09288a1d2423729f8b"
+      "retrievedAt": "2026-10-21T18:05:26.457Z",
+      "contentHash": "sha256:43b70d72eebd26c18d2f996b944a94c1fce01fe0c46f76bdde539cd378da84ae"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-10-21T07:50:08.336Z",
-      "contentHash": "sha256:8f5ff7b65794ac6e5207e32e6e4ccfe4a2a60019e3ac4f0f8d64e791872ef27c"
+      "retrievedAt": "2026-10-21T18:05:26.457Z",
+      "contentHash": "sha256:588400d202fbb5e5371a3d4c85ef1b29a5e31ca94fa3df7183025531931de04c"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-10-21T07:50:08.336Z",
-      "contentHash": "sha256:c6f97a259696d4d8d412c3e33720eb2440c502a57818afd85e634d5d964dc984"
+      "retrievedAt": "2026-10-21T18:05:26.457Z",
+      "contentHash": "sha256:a70510c418282c05eb9c6c08b13923b2400fc99355bfeba2f0578eb5ddde5d51"
     },
     {
       "url": "https://docs.z.ai/release-notes/new-released.md",
       "kind": "model-metadata",
       "locale": "en",
-      "retrievedAt": "2026-10-21T07:50:08.336Z",
-      "contentHash": "sha256:c6f97a259696d4d8d412c3e33720eb2440c502a57818afd85e634d5d964dc984"
+      "retrievedAt": "2026-10-21T18:05:26.457Z",
+      "contentHash": "sha256:a70510c418282c05eb9c6c08b13923b2400fc99355bfeba2f0578eb5ddde5d51"
     }
   ]
 }
