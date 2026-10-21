@@ -1,0 +1,12 @@
+{
+  "code": 200,
+  "msg": "操作成功",
+  "data": [
+    {
+      "id": 44,
+      "operationId": "1163",
+      "content": "{\"title\":\"Flagship Models\",\"subtitle\":\"Our latest text and multimodal models, built for stronger reasoning, richer creation, and deeper comprehension.\",\"list\":[{\"sort\":1,\"imageUrl\":\"https://cdn.bigmodel.cn/activitytemp/22f68d57-cce2-4eaa-8157-7eb9807abd79.png\",\"title\":\"GLM-5.3\",\"tag\":\"New\",\"desc\":\"Z.ai’s latest flagship model delivers significantly stronger coding, agentic task handling, and cybersecurity capabilities, achieving a 50% performance gain on Z.ai Code Bench.\",\"note\":\"\",\"table\":{\"fieldList\":[{\"code\":\"c9676\",\"label\":\"\",\"sublabel\":\"\",\"tip\":\"\"},{\"code\":\"c3342\",\"label\":\"\",\"sublabel\":\"\",\"tip\":\"\"}],\"modelList\":[{\"sort\":1,\"c9676\":{\"value\":\"Context\"},\"c3342\":{\"value\":\"1M\"}},{\"sort\":2,\"c9676\":{\"value\":\"Input\"},\"c3342\":{\"value\":\"$1.4 / M\"}},{\"sort\":3,\"c9676\":{\"value\":\"Output\"},\"c3342\":{\"value\":\"$4.4 / M\"}},{\"sort\":4,\"c9676\":{\"value\":\"Cached Input\"},\"c3342\":{\"value\":\"$0.26 / M\"}},{\"sort\":5,\"c9676\":{\"value\":\"Cache Store\"},\"c3342\":{\"value\":\"Limited-time Free\"}},{\"sort\":6,\"c9676\":{\"value\":\"Input Modality\"},\"c3342\":{\"value\":\"Text\"}}]}},{\"sort\":2,\"imageUrl\":\"https://cdn.bigmodel.cn/activitytemp/35e3eeff-5f10-4e89-af75-2db4f5e002f4.png\",\"title\":\"GLM-5.3-Flash\",\"tag\":\"\",\"desc\":\"It is the first native multimodal model in the GLM-5 series, delivering stronger intelligence than GLM-5.2 while maintaining an exceptionally cost-efficient architecture.\",\"note\":\"\",\"table\":{\"fieldList\":[{\"code\":\"c4066\",\"label\":\"\",\"sublabel\":\"\",\"tip\":\"\"},{\"code\":\"c8872\",\"label\":\"\",\"sublabel\":\"\",\"tip\":\"\"}],\"modelList\":[{\"sort\":1,\"c4066\":{\"value\":\"Context\"},\"c8872\":{\"value\":\"1M\"}},{\"sort\":2,\"c4066\":{\"value\":\"Input\"},\"c8872\":{\"value\":\"$0.15 / M\"}},{\"sort\":3,\"c4066\":{\"value\":\"Output\"},\"c8872\":{\"value\":\"$0.5 / M\"}},{\"sort\":4,\"c4066\":{\"value\":\"Cached Input\"},\"c8872\":{\"value\":\"$0.03 / M\"}},{\"sort\":5,\"c4066\":{\"value\":\"Cache Store\"},\"c8872\":{\"value\":\"Limited-time Free\"}},{\"sort\":6,\"c4066\":{\"value\":\"Input Modality\"},\"c8872\":{\"value\":\"Image | Video | File | Text \"}}]}}]}"
+    }
+  ],
+  "success": true
+}

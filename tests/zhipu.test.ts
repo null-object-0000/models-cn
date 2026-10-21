@@ -1,8 +1,10 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   collectZhipuChina,
   collectZhipuInternational,
   parseZhipuCapabilities,
+  parseZhipuChinaPricingMarkdown,
   parseZhipuInternationalPricing,
   parseZhipuOverview,
   parseZhipuPricingConfig,
@@ -10,6 +12,12 @@ import {
   parseZhipuReleaseNotes,
   type ZhipuDomCell,
 } from "../src/collectors/zhipu.js";
+
+const readFixture = (name: string) =>
+  readFileSync(
+    new URL(`../docs/zhipu-fixtures/${name}`, import.meta.url),
+    "utf8",
+  );
 
 const cell = (col: number, text: string): ZhipuDomCell => ({ col, text });
 
@@ -244,76 +252,89 @@ describe("Zhipu pricing DOM parser", () => {
 });
 
 describe("Zhipu pricing config parser", () => {
-  it("converts flagship and other-model cards into normalized rows", () => {
-    const payload = {
-      data: [
-        {
-          content: JSON.stringify({
-            list: [
-              {
-                title: "GLM-5.3",
-                table: {
-                  fieldList: [{ code: "label" }, { code: "value" }],
-                  modelList: [
-                    { label: { value: "上下文" }, value: { value: "1M" } },
-                    {
-                      label: { value: "输入单价" },
-                      value: { value: "8元 / M" },
-                    },
-                    {
-                      label: { value: "输出单价" },
-                      value: { value: "28元 / M" },
-                    },
-                    {
-                      label: { value: "缓存命中" },
-                      value: { value: "2元 / M" },
-                    },
-                  ],
-                },
-              },
-            ],
-          }),
-        },
-        {
-          content: JSON.stringify({
-            tabs: [
-              {
-                cards: [
-                  {
-                    title: "GLM-5.2",
-                    fieldList: [
-                      { label: "上下文", values: ["1M"] },
-                      { label: "输入单价", values: ["8元"] },
-                      { label: "输出单价", values: ["28元"] },
-                      { label: "缓存命中", values: ["2元"] },
-                    ],
-                  },
-                  {
-                    title: "GLM-OCR",
-                    fieldList: [
-                      { label: "输入价格", values: ["0.2元/百万Tokens"] },
-                      { label: "输出价格", values: ["0.2元/百万Tokens"] },
-                    ],
-                  },
-                ],
-              },
-            ],
-          }),
-        },
-      ],
-    };
+  const fixture = (operation: number) =>
+    JSON.parse(
+      readFileSync(
+        new URL(`../docs/zhipu-fixtures/op-${operation}.json`, import.meta.url),
+        "utf8",
+      ),
+    );
 
-    expect(parseZhipuPricingDom(parseZhipuPricingConfig(payload))).toEqual([
-      {
-        id: "glm-5.3",
-        prices: [{ input: 8, cacheHit: 2, output: 28 }],
-      },
-      {
-        id: "glm-5.2",
-        prices: [{ input: 8, cacheHit: 2, output: 28 }],
-      },
-    ]);
+  it.each([1160, 1163])(
+    "reads real flagship tables with dynamic codes: %s",
+    (operation) => {
+      const models = parseZhipuPricingDom(
+        parseZhipuPricingConfig(fixture(operation)),
+      );
+      expect(models.map((model) => model.id)).toEqual([
+        "glm-5.3",
+        "glm-5.3-flash",
+      ]);
+      expect(models[0]!.prices).toEqual([
+        operation === 1160
+          ? { input: 8, cacheHit: 2, output: 28 }
+          : { input: 1.4, cacheHit: 0.26, output: 4.4 },
+      ]);
+      expect(models[1]!.prices[0]!.input).toBe(operation === 1160 ? 0.8 : 0.15);
+    },
+  );
+
+  it.each([1161, 1164])(
+    "reads real legacy cards, including the empty auxiliary list: %s",
+    (operation) => {
+      const models = parseZhipuPricingDom(
+        parseZhipuPricingConfig(fixture(operation)),
+      );
+      expect(models.map((model) => model.id)).toEqual(
+        operation === 1161
+          ? ["glm-5.3-flashx"]
+          : ["glm-5.2", "glm-4.6v", "glm-ocr"],
+      );
+      expect(models[0]!.prices[0]).toEqual(
+        operation === 1161
+          ? { input: 2, cacheHit: 0.57, output: 7 }
+          : { input: 1.4, cacheHit: 0.26, output: 4.4 },
+      );
+    },
+  );
+
+  it("uses declared codes after codes and row order change", () => {
+    const data = fixture(1160);
+    const content = JSON.parse(data.data[0].content);
+    const table = content.list[0].table;
+    const oldCodes = table.fieldList.map((field: any) => field.code);
+    table.fieldList.forEach((field: any, i: number) => {
+      field.code = `new-${i}`;
+    });
+    table.modelList.reverse().forEach((row: any) =>
+      oldCodes.forEach((code: string, i: number) => {
+        row[`new-${i}`] = row[code];
+        delete row[code];
+      }),
+    );
+    data.data[0].content = JSON.stringify(content);
+    expect(
+      parseZhipuPricingDom(parseZhipuPricingConfig(data))[0]!.prices[0],
+    ).toEqual({ input: 8, cacheHit: 2, output: 28 });
   });
+
+  it.each(["codes", "labels", "empty", "missing-cell"])(
+    "rejects malformed flagship data even alongside valid legacy cards: %s",
+    (kind) => {
+      const data = fixture(1160);
+      const content = JSON.parse(data.data[0].content);
+      const table = content.list[0].table;
+      if (kind === "codes") table.fieldList[0].code = "not-present";
+      if (kind === "labels")
+        table.modelList[1][table.fieldList[0].code].value = "Unknown input";
+      if (kind === "empty") content.list = [];
+      if (kind === "missing-cell")
+        delete table.modelList[1][table.fieldList[1].code];
+      data.data[0].content = JSON.stringify(content);
+      data.data.push(...fixture(1161).data);
+      expect(() => parseZhipuPricingConfig(data)).toThrow(/Zhipu/);
+    },
+  );
 
   it("rejects a config with no supported token pricing", () => {
     expect(() => parseZhipuPricingConfig({ data: [] })).toThrow(
@@ -624,13 +645,38 @@ describe("Zhipu capability parser", () => {
     });
   });
 
-  it("keeps unsupported capabilities false", () => {
-    expect(parseZhipuCapabilities("## 能力支持\n\n<empty>\n")).toEqual({
-      thinking: false,
-      toolCalls: false,
-      jsonOutput: false,
-    });
+  it.each([
+    "## 能力支持\n\n<empty>\n",
+    "# 无能力区块",
+    "## 能力支持\n* [未知能力](/unknown)",
+  ])("rejects unreadable capability fields: %s", (markdown) => {
+    expect(() => parseZhipuCapabilities(markdown)).toThrow(/capability/);
   });
+
+  it("rejects a partially unreadable capability list", () => {
+    expect(() =>
+      parseZhipuCapabilities("## 能力支持\n* [思考模式](/thinking)"),
+    ).toThrow("missing capability toolCalls");
+  });
+
+  it("only writes false when the source explicitly says unsupported", () => {
+    expect(
+      parseZhipuCapabilities(
+        '## 能力支持\n<Card title="不支持思考模式">否</Card>\n<Card title="Function Calling">是</Card>\n<Card title="结构化输出">是</Card>',
+      ),
+    ).toEqual({ thinking: false, toolCalls: true, jsonOutput: true });
+  });
+
+  it.each(["capabilities-list.md", "capabilities-quote.md"])(
+    "reads real capability markdown: %s",
+    (name) => {
+      expect(parseZhipuCapabilities(readFixture(name))).toEqual({
+        thinking: true,
+        toolCalls: true,
+        jsonOutput: true,
+      });
+    },
+  );
 
   it("parses the bullet-list template used by GLM-5.3", () => {
     const markdown = `## 能力支持
@@ -698,8 +744,27 @@ describe("Zhipu release notes parser", () => {
     expect(dates.get("glm-image")).toBe("2026-01-14T00:00:00.000+08:00");
   });
 
-  it("returns an empty map for markdown without updates", () => {
-    expect(parseZhipuReleaseNotes("# no updates").size).toBe(0);
+  it.each([
+    "# no updates",
+    "[**GLM-5.3**](/cn/guide/models/text/glm-5.3)",
+    "**2026-02-30**\n[**GLM-5.3**](/model)",
+  ])("rejects missing or invalid dates: %s", (markdown) => {
+    expect(() => parseZhipuReleaseNotes(markdown)).toThrow(/date/);
+  });
+
+  it("reads the real markdown release notes, including non-padded dates", () => {
+    const dates = parseZhipuReleaseNotes(readFixture("new-releases.md"));
+    expect(dates.get("glm-5.3-flash")).toBe("2026-08-26T00:00:00.000+08:00");
+    expect(dates.get("glm-5.3")).toBe("2026-08-19T00:00:00.000+08:00");
+    expect(dates.get("glm-5.2")).toBe("2026-06-16T00:00:00.000+08:00");
+  });
+
+  it("keeps the earliest date across both formats", () => {
+    expect(
+      parseZhipuReleaseNotes(
+        `**2026-8-20**\n[**GLM-5.3**](/model)\n${RELEASES}`,
+      ).get("glm-5.3"),
+    ).toBe("2026-08-19T00:00:00.000+08:00");
   });
 });
 
@@ -722,6 +787,7 @@ describe("Zhipu collectors derive the model set from official sources", () => {
       "glm-5.3-flash",
       {
         id: "glm-5.3-flash",
+        createdAt: "2026-08-26T00:00:00.000+08:00",
         name: "GLM-5.3-Flash",
         url: "/cn/guide/models/vlm/glm-5.3-flash",
         contextTokens: 1_000_000,
@@ -733,6 +799,7 @@ describe("Zhipu collectors derive the model set from official sources", () => {
       "glm-4.6",
       {
         id: "glm-4.6",
+        createdAt: "2025-09-30T00:00:00.000+08:00",
         name: "GLM-4.6",
         url: "/cn/guide/models/text/glm-4.6",
         contextTokens: 204_800,
@@ -741,6 +808,22 @@ describe("Zhipu collectors derive the model set from official sources", () => {
       },
     ],
   ]);
+
+  it.each(["createdAt", "capabilities"])(
+    "rejects missing selected-model metadata: %s",
+    async (field) => {
+      const broken = structuredClone(metadata);
+      delete broken.get("glm-5.3")[field];
+      await expect(
+        collectZhipuInternational(
+          now,
+          async () =>
+            "### Text Models\n| GLM-5.3 | $1.4 | $0.26 | Free | $4.4 |",
+          async () => broken,
+        ),
+      ).rejects.toThrow(/missing/);
+    },
+  );
 
   it("includes new models present in both metadata and CN pricing", async () => {
     const rows: ZhipuDomCell[][] = [
@@ -807,5 +890,50 @@ describe("Zhipu collectors derive the model set from official sources", () => {
       input: { standard: 0.075, cacheHit: 0.015 },
       output: 0.25,
     });
+  });
+});
+
+describe("真实完整定价文档回归", () => {
+  it("恢复国内 GLM-5.2 以及输入/输出分档", () => {
+    const models = parseZhipuPricingDom(
+      parseZhipuChinaPricingMarkdown(readFixture("cn-pricing.md")),
+    );
+    expect(models.find((model) => model.id === "glm-5.2")!.prices).toEqual([
+      { input: 8, cacheHit: 2, output: 28 },
+    ]);
+    expect(models.find((model) => model.id === "glm-5.1")!.prices).toEqual([
+      {
+        input: 6,
+        cacheHit: 1.3,
+        output: 24,
+        inputTokenRange: { label: "输入长度 [0, 32)", maxInclusive: 32000 },
+      },
+      {
+        input: 8,
+        cacheHit: 2,
+        output: 28,
+        inputTokenRange: { label: "输入长度 [32+)", minExclusive: 32000 },
+      },
+    ]);
+    expect(
+      models.find((model) => model.id === "glm-4.7")!.prices[1]!
+        .outputTokenRange,
+    ).toEqual({ label: "输出长度 [0.2+)", minExclusive: 200 });
+  });
+
+  it("恢复引用块中的全部五个国际站模型", () => {
+    const prices = parseZhipuInternationalPricing(
+      readFixture("intl-pricing.md"),
+    );
+    for (const id of [
+      "glm-4.7-flashx",
+      "glm-4.5-air",
+      "glm-4.5-airx",
+      "glm-4.7-flash",
+      "glm-4.5-flash",
+    ])
+      expect(prices.has(id)).toBe(true);
+    expect(prices.get("glm-4.5-air")!.input.standard).toBe(0.2);
+    expect(prices.get("glm-4.5-flash")!.output).toBe(0);
   });
 });

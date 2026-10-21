@@ -37,6 +37,8 @@ export const ZHIPU_PRICING_CONFIG_URL =
   "https://bigmodel.cn/api/biz/operation/query?ids=1160,1161" as const;
 export const ZHIPU_INTL_PRICING_URL =
   "https://docs.z.ai/guides/overview/pricing" as const;
+export const ZHIPU_CN_DETAIL_PRICING_URL =
+  "https://docs.bigmodel.cn/cn/guide/start/pricing.md" as const;
 export const ZHIPU_OVERVIEW_URL =
   "https://docs.bigmodel.cn/cn/guide/start/model-overview.md" as const;
 export const ZHIPU_RELEASES_URL =
@@ -91,7 +93,7 @@ export interface ZhipuParsedPrice {
   inputTokenRange?: ModelPrice["inputTokenRange"];
   outputTokenRange?: ModelPrice["outputTokenRange"];
   input: number;
-  cacheHit: number;
+  cacheHit?: number;
   output: number;
 }
 
@@ -131,7 +133,8 @@ function parseUsdEffectiveOrDash(value: string): number | undefined {
 
 function parseUsdOrDash(value: string): number | undefined {
   const trimmed = value.trim();
-  if (trimmed === "-" || trimmed === "\\" || trimmed === "") return undefined;
+  if (trimmed === "-" || trimmed === "\\") return undefined;
+  if (!trimmed) throw new Error("Zhipu missing cached-input price");
   return parseUsd(trimmed);
 }
 
@@ -189,8 +192,13 @@ export function parseZhipuPricingDom(
         models.push(current);
       }
     }
-    if (!current || inputText === undefined || outputText === undefined) {
-      continue;
+    if (
+      !current ||
+      inputText === undefined ||
+      outputText === undefined ||
+      cacheText === undefined
+    ) {
+      throw new Error("Zhipu pricing row missing model/input/output/cache hit");
     }
     const labelText = `${c1 ?? ""}${c2 ?? ""}`;
     current.prices.push({
@@ -201,7 +209,9 @@ export function parseZhipuPricingDom(
         ? { outputTokenRange: tokenRange(labelText, "输出长度", 1_000) }
         : {}),
       input: parseMoney(inputText),
-      cacheHit: parseMoney(cacheText ?? ""),
+      ...(cacheText === "不支持" || cacheText === "-"
+        ? {}
+        : { cacheHit: parseMoney(cacheText ?? "") }),
       output: parseMoney(outputText),
     });
   }
@@ -230,9 +240,15 @@ function pricingCardFields(card: ZhipuPricingCard): Map<string, string> {
   if (Array.isArray(card.fieldList)) {
     for (const field of card.fieldList as ZhipuPricingField[]) {
       const value = Array.isArray(field.values) ? field.values[0] : undefined;
-      if (typeof field.label === "string" && typeof value === "string") {
-        fields.set(field.label, value);
-      }
+      if (
+        typeof field.label !== "string" ||
+        typeof value !== "string" ||
+        !field.label.trim() ||
+        !value.trim() ||
+        fields.has(field.label)
+      )
+        throw new Error(`Zhipu ${card.title}: invalid legacy pricing field`);
+      fields.set(field.label, value);
     }
   }
   const columnCodes = Array.isArray(card.table?.fieldList)
@@ -240,7 +256,16 @@ function pricingCardFields(card: ZhipuPricingCard): Map<string, string> {
         typeof field.code === "string" ? [field.code] : [],
       )
     : [];
-  if (columnCodes.length >= 2 && Array.isArray(card.table?.modelList)) {
+  if (
+    card.table &&
+    (columnCodes.length !== 2 ||
+      new Set(columnCodes).size !== 2 ||
+      !Array.isArray(card.table.modelList) ||
+      !card.table.modelList.length)
+  ) {
+    throw new Error(`Zhipu ${card.title}: invalid table field codes/modelList`);
+  }
+  if (columnCodes.length === 2 && Array.isArray(card.table?.modelList)) {
     for (const row of card.table.modelList as Array<Record<string, unknown>>) {
       const labelCell = row[columnCodes[0]!];
       const valueCell = row[columnCodes[1]!];
@@ -252,9 +277,33 @@ function pricingCardFields(card: ZhipuPricingCard): Map<string, string> {
         valueCell && typeof valueCell === "object"
           ? (valueCell as { value?: unknown }).value
           : undefined;
-      if (typeof label === "string" && typeof value === "string") {
-        fields.set(label, value);
+      if (
+        typeof label !== "string" ||
+        typeof value !== "string" ||
+        !label.trim() ||
+        !value.trim() ||
+        fields.has(label)
+      ) {
+        throw new Error(
+          `Zhipu ${card.title}: table field codes do not match row cells`,
+        );
       }
+      fields.set(label, value);
+    }
+  }
+  if (card.table) {
+    for (const labels of [
+      ["上下文", "Context"],
+      ["输入单价", "Input"],
+      ["输出单价", "Output"],
+      ["缓存命中", "Cached Input"],
+      ["缓存存储", "Cache Store"],
+      ["输入模态", "Input Modality"],
+    ]) {
+      if (!labels.some((label) => fields.has(label)))
+        throw new Error(
+          `Zhipu ${card.title}: missing pricing label ${labels.join("/")}`,
+        );
     }
   }
   return fields;
@@ -271,33 +320,63 @@ export function parseZhipuPricingConfig(payload: unknown): ZhipuDomCell[][] {
   }
   const cards: ZhipuPricingCard[] = [];
   for (const item of data as Array<{ content?: unknown }>) {
-    if (typeof item.content !== "string") continue;
+    if (typeof item.content !== "string")
+      throw new Error("Zhipu pricing config missing content");
     const content = JSON.parse(item.content) as {
       list?: unknown;
       tabs?: unknown;
     };
+    if (
+      Array.isArray(content.list) &&
+      !content.list.length &&
+      !Array.isArray(content.tabs)
+    ) {
+      throw new Error("Zhipu pricing list is empty");
+    }
+    if (content.list !== undefined && !Array.isArray(content.list))
+      throw new Error("Zhipu pricing list is not an array");
     if (Array.isArray(content.list)) {
-      cards.push(...(content.list as ZhipuPricingCard[]));
+      for (const card of content.list as ZhipuPricingCard[]) {
+        if (
+          !card ||
+          typeof card.title !== "string" ||
+          !/^glm-/i.test(card.title) ||
+          !card.table
+        )
+          throw new Error("Zhipu flagship card missing title/table");
+        cards.push(card);
+      }
     }
     if (Array.isArray(content.tabs)) {
       for (const tab of content.tabs as Array<{ cards?: unknown }>) {
-        if (Array.isArray(tab.cards)) {
-          cards.push(...(tab.cards as ZhipuPricingCard[]));
-        }
+        if (!Array.isArray(tab.cards) || !tab.cards.length)
+          throw new Error("Zhipu pricing tab missing cards");
+        cards.push(...(tab.cards as ZhipuPricingCard[]));
       }
     }
   }
   const rows = cards.flatMap((card): ZhipuDomCell[][] => {
     if (typeof card.title !== "string" || !/^glm-/i.test(card.title)) return [];
     const fields = pricingCardFields(card);
-    const input = fields.get("输入单价") ?? fields.get("输入价格");
-    const output = fields.get("输出单价") ?? fields.get("输出价格");
-    const cacheHit = fields.get("缓存命中");
-    if (!input || !output || !cacheHit) return [];
+    const input =
+      fields.get("输入单价") ?? fields.get("输入价格") ?? fields.get("Input");
+    const output =
+      fields.get("输出单价") ?? fields.get("输出价格") ?? fields.get("Output");
+    const cacheHit = fields.get("缓存命中") ?? fields.get("Cached Input");
+    // 明确标注单价的非 token 服务不属于采集范围；其他 GLM 卡片缺字段必须失败。
+    if (!card.table && (fields.has("单价") || fields.has("Price"))) return [];
+    // 老 CN 卡片中的 OCR 是纯文档/图片模型，不在文本与旗舰多模态范围。
+    const modality = fields.get("输入模态");
+    if (modality && !modality.includes("文本")) return [];
+    if (!input || !output || !cacheHit) {
+      throw new Error(
+        `Zhipu ${card.title}: pricing labels missing (input/output/cache hit)`,
+      );
+    }
     return [
       [
         { col: 1, text: card.title },
-        { col: 2, text: fields.get("上下文") ?? "" },
+        { col: 2, text: fields.get("上下文") ?? fields.get("Context") ?? "" },
         { col: 3, text: input },
         { col: 4, text: output },
         { col: 6, text: cacheHit },
@@ -317,7 +396,22 @@ async function loadZhipuPricingRows(): Promise<ZhipuDomCell[][]> {
       "user-agent": MODELS_CN_USER_AGENT,
     },
   });
-  return parseZhipuPricingConfig(payload);
+  const summary = parseZhipuPricingConfig(payload);
+  const detailed = parseZhipuChinaPricingMarkdown(
+    await fetchMarkdown(ZHIPU_CN_DETAIL_PRICING_URL),
+  );
+  const summaryIds = new Set(
+    parseZhipuPricingDom(summary).map((model) => model.id),
+  );
+  let include = false;
+  return [
+    ...summary,
+    ...detailed.filter((row) => {
+      const title = row.find((cell) => cell.col === 1)?.text;
+      if (title) include = !summaryIds.has(title.toLowerCase());
+      return include;
+    }),
+  ];
 }
 
 async function fetchMarkdown(url: string): Promise<string> {
@@ -356,6 +450,11 @@ function splitTableRow(line: string): string[] {
     .filter((_, index, array) => index > 0 && index < array.length - 1);
 }
 
+/** 官方将折叠组件转成引用块后，保留内容，移除行首引用标记。 */
+function unquoteMarkdown(markdown: string): string {
+  return markdown.replace(/^[ \t]*(?:>[ \t]*)+/gm, "");
+}
+
 /** 取出两个标记之间的内容；缺少标记时返回空串。 */
 function markdownBetween(markdown: string, start: string, end: string): string {
   const from = markdown.indexOf(start);
@@ -382,6 +481,7 @@ function markdownSectionTilHeading(markdown: string, start: string): string {
  * `| [模型](链接) | 特点 | 上下文 | 最大输出 |` 行。
  */
 export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
+  markdown = unquoteMarkdown(markdown);
   const recommended = markdownBetween(markdown, "## 推荐模型", "<Accordion");
   const text = markdownSectionTilHeading(markdown, "### 文本模型");
   const models: ZhipuOverviewModel[] = [];
@@ -397,7 +497,12 @@ export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
     if (!idMatch || seen.has(idMatch[1]!)) continue;
     const contextTokens = parseTokenCount(cells[2]!);
     const maxOutputTokens = parseTokenCount(cells[3]!);
-    if (contextTokens === undefined || maxOutputTokens === undefined) continue;
+    if (contextTokens === undefined || maxOutputTokens === undefined) {
+      // 推荐表还含图像/语音等非 token 生成模型，只有文本及旗舰多模态属于范围。
+      if (/\/(text|free)\//.test(nameMatch[2]!) || /glm-5\./.test(idMatch[1]!))
+        throw new Error(`Zhipu ${idMatch[1]}: missing token limits`);
+      continue;
+    }
     seen.add(idMatch[1]!);
     models.push({
       id: idMatch[1]!,
@@ -417,30 +522,48 @@ export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
  * 解析智谱「新品发布」页，返回每个模型首次发布的 ISO 日期。
  * 公告块形如 `<Update label="2026-06-16" description="GLM-5.2 新一代旗舰模型上线">`，
  * 正文里用 `[**GLM-5.2**](/cn/guide/models/text/glm-5.2)` 指向模型。
- * 取每个模型**最早**出现的公告日期作为发布时间；未出现在公告中的模型不设日期。
+ * 新模板使用独立的粗体日期行。取模型链接最早出现的公告日期；无日期时明确失败。
  * 解析所有 GLM 开头的模型名，不再依赖硬编码清单，新模型自动获得发布日期。
  */
 export function parseZhipuReleaseNotes(markdown: string): Map<string, string> {
   const result = new Map<string, string>();
-  const blocks = markdown.matchAll(
-    /<Update label="([^"]+)"[^>]*>([\s\S]*?)<\/Update>/g,
-  );
-  for (const [, label, body] of blocks) {
-    // 官方公告日期可能不带前导零（如 `2026-8-19`），允许 1-2 位月/日。
-    const dateMatch = label?.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-    if (!label || !body || !dateMatch) continue;
-    // 统一补齐为 `YYYY-MM-DD`，保证 ISO 字符串可比较。
+  const record = (label: string, body: string) => {
+    const dateMatch = label.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (!dateMatch) throw new Error(`Zhipu invalid release date: ${label}`);
     const isoDate = `${dateMatch[1]}-${dateMatch[2]!.padStart(2, "0")}-${dateMatch[3]!.padStart(2, "0")}`;
-    const names = body.matchAll(/\*\*([^*\]]+)\*\*/g);
-    for (const match of names) {
+    const date = new Date(`${isoDate}T00:00:00Z`);
+    if (
+      !Number.isFinite(date.getTime()) ||
+      date.toISOString().slice(0, 10) !== isoDate
+    )
+      throw new Error(`Zhipu invalid release date: ${label}`);
+    for (const match of body.matchAll(/\[\*\*([^*\]]+)\*\*\]\([^)]+\)/g)) {
       const id = match[1]?.toLowerCase().match(/(glm[-a-z0-9.]+)/)?.[1];
       if (!id) continue;
       const iso = `${isoDate}T00:00:00.000+08:00`;
-      const existing = result.get(id);
-      // 取最早日期（首次发布）；ISO 字符串可直接按字典序比较。
-      if (!existing || iso < existing) result.set(id, iso);
+      if (!result.has(id) || iso < result.get(id)!) result.set(id, iso);
     }
+  };
+  for (const [, label, body] of markdown.matchAll(
+    /<Update label="([^"]+)"[^>]*>([\s\S]*?)<\/Update>/g,
+  )) {
+    record(label!, body!);
   }
+  const plain = unquoteMarkdown(
+    markdown.replace(/<Update\b[\s\S]*?<\/Update>/g, ""),
+  );
+  const dates = [
+    ...plain.matchAll(/^\s*\*\*(\d{4}-\d{1,2}-\d{1,2})\*\*\s*$/gm),
+  ];
+  for (let i = 0; i < dates.length; i++) {
+    const match = dates[i]!;
+    record(
+      match[1]!,
+      plain.slice(match.index! + match[0].length, dates[i + 1]?.index),
+    );
+  }
+  if (!result.size)
+    throw new Error("Zhipu release notes contain no dated models");
   return result;
 }
 
@@ -458,20 +581,33 @@ export interface ZhipuCapabilities {
  * 用 `* [能力名](链接)` 列表，两种都解析。
  */
 export function parseZhipuCapabilities(markdown: string): ZhipuCapabilities {
-  const section = markdown.split("## 能力支持")[1]?.split("##")[0] ?? "";
+  const section =
+    unquoteMarkdown(markdown)
+      .split("## 能力支持")[1]
+      ?.split(/\n#{2,}\s/)[0] ?? "";
   const titles = Array.from(section.matchAll(/<Card title="([^"]+)"/g))
     .map((match) => match[1])
     .filter((title): title is string => title !== undefined);
   // 新版文档模板：`* [思考模式](/cn/guide/capabilities/thinking-mode)：…`
-  for (const match of section.matchAll(/^\s*\*\s+\[([^\]]+)\]\(/gm)) {
+  for (const match of section.matchAll(
+    /(?:^\s*[-*]\s+|^\s*\*\*)\[([^\]]+)\]\(/gm,
+  )) {
     const title = match[1]?.trim();
     if (title) titles.push(title);
   }
+  if (!titles.some((title) => /思考|Function Calling|结构化输出/.test(title)))
+    throw new Error(
+      "Zhipu capability section has no recognized capability titles",
+    );
+  const supported = (pattern: RegExp, field: string): boolean => {
+    const title = titles.find((title) => pattern.test(title));
+    if (!title) throw new Error(`Zhipu missing capability ${field}`);
+    return !/不支持|unsupported/i.test(title);
+  };
   return {
-    // 官方能力卡标题有「思考模式」与「深度思考」两种写法。
-    thinking: titles.some((title) => /思考/.test(title)),
-    toolCalls: titles.includes("Function Calling"),
-    jsonOutput: titles.includes("结构化输出"),
+    thinking: supported(/思考/, "thinking"),
+    toolCalls: supported(/Function Calling/, "toolCalls"),
+    jsonOutput: supported(/结构化输出/, "jsonOutput"),
   };
 }
 
@@ -480,14 +616,36 @@ interface ZhipuMetadata extends ZhipuOverviewModel {
   createdAt?: string;
 }
 
+function assertMetadata(meta: ZhipuMetadata): void {
+  if (!meta.createdAt || !Number.isFinite(Date.parse(meta.createdAt)))
+    throw new Error(`Zhipu ${meta.id}: missing createdAt`);
+  if (!(meta.contextTokens > 0) || !(meta.maxOutputTokens > 0))
+    throw new Error(`Zhipu ${meta.id}: missing token limits`);
+  for (const key of ["thinking", "toolCalls", "jsonOutput"] as const) {
+    if (typeof meta.capabilities?.[key] !== "boolean")
+      throw new Error(`Zhipu ${meta.id}: missing capability ${key}`);
+  }
+}
+
 /** 抓取国内站元数据（上下文 / 最大输出 + 能力 + 发布页发布时间），按模型 id 返回。 */
-async function loadZhipuMetadata(): Promise<Map<string, ZhipuMetadata>> {
+async function loadZhipuMetadata(
+  pricedIds: Set<string>,
+): Promise<Map<string, ZhipuMetadata>> {
   const [overviewMarkdown, releasesMarkdown] = await Promise.all([
     fetchMarkdown(ZHIPU_OVERVIEW_URL),
     fetchMarkdown(ZHIPU_RELEASES_URL),
   ]);
-  const overview = parseZhipuOverview(overviewMarkdown);
+  const overview = parseZhipuOverview(overviewMarkdown).filter((model) =>
+    pricedIds.has(model.id),
+  );
   const releaseDates = parseZhipuReleaseNotes(releasesMarkdown);
+  const missingDates = overview
+    .filter((model) => !releaseDates.has(model.id))
+    .map((model) => model.id);
+  if (missingDates.length)
+    throw new Error(
+      `Zhipu release notes missing createdAt: ${missingDates.join(", ")}`,
+    );
   // 去重详情页 URL（glm-4.7-flashx / glm-4.5-air 与同系列共享详情页）。
   const uniqueUrls = [...new Set(overview.map((model) => model.url))];
   const capabilityMarkdown = new Map<string, string>();
@@ -500,8 +658,11 @@ async function loadZhipuMetadata(): Promise<Map<string, ZhipuMetadata>> {
   const metadata = new Map<string, ZhipuMetadata>();
   for (const model of overview) {
     const markdown = capabilityMarkdown.get(model.url);
-    if (!markdown) continue;
+    if (!markdown)
+      throw new Error(`Zhipu ${model.id}: missing detail markdown`);
     const createdAt = releaseDates.get(model.id);
+    if (!createdAt)
+      throw new Error(`Zhipu ${model.id}: release notes missing createdAt`);
     metadata.set(model.id, {
       ...model,
       capabilities: parseZhipuCapabilities(markdown),
@@ -549,13 +710,13 @@ function releasesSource(
 export async function collectZhipuChina(
   now = new Date(),
   pricingLoader: () => Promise<ZhipuDomCell[][]> = loadZhipuPricingRows,
-  metadataLoader: () => Promise<Map<string, ZhipuMetadata>> = loadZhipuMetadata,
+  metadataLoader?: () => Promise<Map<string, ZhipuMetadata>>,
 ): Promise<ProviderData> {
-  const [rows, metadata] = await Promise.all([
-    pricingLoader(),
-    metadataLoader(),
-  ]);
+  const rows = await pricingLoader();
   const parsed = parseZhipuPricingDom(rows);
+  const metadata = await (metadataLoader
+    ? metadataLoader()
+    : loadZhipuMetadata(new Set(parsed.map((model) => model.id))));
   const byId = new Map(parsed.map((model) => [model.id, model]));
   const models: ModelData[] = [];
   const skipped: string[] = [];
@@ -565,6 +726,7 @@ export async function collectZhipuChina(
       skipped.push(meta.id);
       continue;
     }
+    assertMetadata(meta);
     models.push({
       id: meta.id,
       name: meta.name,
@@ -590,9 +752,12 @@ export async function collectZhipuChina(
         ...(price.outputTokenRange
           ? { outputTokenRange: price.outputTokenRange }
           : {}),
-        input: { standard: price.input, cacheHit: price.cacheHit },
+        input: {
+          standard: price.input,
+          ...(price.cacheHit === undefined ? {} : { cacheHit: price.cacheHit }),
+        },
         output: price.output,
-        sourceUrl: ZHIPU_PRICING_URL,
+        sourceUrl: ZHIPU_CN_DETAIL_PRICING_URL,
       })),
     });
   }
@@ -619,6 +784,14 @@ export async function collectZhipuChina(
       retrievedAt,
       contentHash: `sha256:${pricingHash}`,
     },
+    {
+      url: ZHIPU_CN_DETAIL_PRICING_URL,
+      kind: "pricing",
+      locale: "zh-CN",
+      currency: "CNY",
+      retrievedAt,
+      contentHash: `sha256:${pricingHash}`,
+    },
     metadataSource(now, metadata),
     releasesSource(now, metadata),
   ];
@@ -633,6 +806,42 @@ export async function collectZhipuChina(
     models,
     sources,
   };
+}
+
+/** 价格首页仅展示部分模型，完整文本模型价格来自其「详细价格」官方文档。 */
+export function parseZhipuChinaPricingMarkdown(
+  markdown: string,
+): ZhipuDomCell[][] {
+  markdown = unquoteMarkdown(markdown);
+  const sections = [
+    ...pricingSections(markdown, "最新模型"),
+    ...pricingSections(markdown, "文本模型"),
+  ];
+  const rows: ZhipuDomCell[][] = [];
+  let lastId: string | undefined;
+  for (const line of sections.join("\n").split("\n")) {
+    const cells = splitTableRow(line);
+    if (!/^glm-/i.test(cells[0] ?? "")) continue;
+    if (cells.length < 6)
+      throw new Error(`Zhipu incomplete CN pricing row: ${line}`);
+    const id = cells[0]!.toLowerCase();
+    const label = cells[1]!
+      .replace(/\\\[/g, "[")
+      .replace(/(输入|输出)(?!长度)/g, "$1长度")
+      .replace(/≥([\d.]+)K/g, "[$1+)")
+      .replace(/([\d.]+)K/g, "$1");
+    rows.push([
+      { col: 1, text: id === lastId ? "" : cells[0]! },
+      { col: 2, text: label },
+      { col: 3, text: cells[2]! },
+      { col: 4, text: cells[3]! },
+      { col: 6, text: cells[5]! },
+    ]);
+    lastId = id;
+  }
+  if (!rows.length)
+    throw new Error("Zhipu CN pricing markdown contains no models");
+  return rows;
 }
 
 /**
@@ -664,6 +873,7 @@ function pricingSections(markdown: string, title: string): string[] {
 export function parseZhipuInternationalPricing(
   markdown: string,
 ): Map<string, ModelPrice> {
+  markdown = unquoteMarkdown(markdown);
   const section = [
     ...pricingSections(markdown, "Latest Models"),
     ...pricingSections(markdown, "Text Models"),
@@ -677,7 +887,8 @@ export function parseZhipuInternationalPricing(
       .map((cell) => cell.trim())
       .filter((cell, index, array) => index > 0 && index < array.length - 1);
     // cells: [Model, Input, Cached Input, Cached Input Storage, Output]
-    if (cells.length < 5) continue;
+    if (cells.length < 5)
+      throw new Error(`Z.AI ${idMatch[1]}: incomplete pricing row`);
     const input = parseUsdEffective(cells[1]!);
     const cacheHit = parseUsdEffectiveOrDash(cells[2]!);
     const output = parseUsdEffective(cells[4]!);
@@ -704,13 +915,13 @@ export async function collectZhipuInternational(
   now = new Date(),
   pricingFetcher: () => Promise<string> = () =>
     fetchMarkdown(ZHIPU_INTL_PRICING_URL),
-  metadataLoader: () => Promise<Map<string, ZhipuMetadata>> = loadZhipuMetadata,
+  metadataLoader?: () => Promise<Map<string, ZhipuMetadata>>,
 ): Promise<ProviderData> {
-  const [markdown, metadata] = await Promise.all([
-    pricingFetcher(),
-    metadataLoader(),
-  ]);
+  const markdown = await pricingFetcher();
   const prices = parseZhipuInternationalPricing(markdown);
+  const metadata = await (metadataLoader
+    ? metadataLoader()
+    : loadZhipuMetadata(new Set(prices.keys())));
   const models: ModelData[] = [];
   const skipped: string[] = [];
   for (const meta of metadata.values()) {
@@ -719,6 +930,7 @@ export async function collectZhipuInternational(
       skipped.push(meta.id);
       continue;
     }
+    assertMetadata(meta);
     models.push({
       id: meta.id,
       name: meta.name,
