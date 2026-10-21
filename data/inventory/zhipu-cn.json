@@ -3,8 +3,8 @@
   "provider": "zhipu-cn",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-20T06:05:19.123Z",
-    "lastAttemptAt": "2026-10-20T06:05:19.123Z",
+    "lastSuccessfulAt": "2026-10-21T07:50:34.314Z",
+    "lastAttemptAt": "2026-10-21T07:50:34.314Z",
     "consecutiveFailures": 0
   },
   "source": {
@@ -61,22 +61,28 @@
   "comparison": {
     "status": "mismatch",
     "pricedAndListed": [
-      "glm-5.2",
-      "glm-5.3",
-      "glm-5.3-flash"
-    ],
-    "aliasesAndListed": [],
-    "listedWithoutPricing": [
-      "glm-4.5",
       "glm-4.5-air",
-      "glm-4.6",
       "glm-4.7",
       "glm-5",
       "glm-5-turbo",
       "glm-5.1",
+      "glm-5.2",
+      "glm-5.3",
+      "glm-5.3-flash",
       "glm-5.3-flashx"
     ],
-    "pricedButNotListed": [],
+    "aliasesAndListed": [],
+    "listedWithoutPricing": [
+      "glm-4.5",
+      "glm-4.6"
+    ],
+    "pricedButNotListed": [
+      "glm-4-flash-250414",
+      "glm-4-flashx-250414",
+      "glm-4-long",
+      "glm-4.7-flash",
+      "glm-4.7-flashx"
+    ],
     "activeAliasesNotListed": []
   }
 }
