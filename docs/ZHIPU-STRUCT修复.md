@@ -64,3 +64,13 @@ INTL: Zhipu release notes missing createdAt: glm-5.3-flashx, glm-4.7-flashx, glm
 本地最终验证链全部通过：`npx vitest run`（15 个文件、155 个测试）→ `npm run validate`（7 个 provider、6 个 inventory、manual 与 calibration）→ `npm run build` → `npx prettier --check .`；另 `npm run typecheck` 通过。Schema validate 允许数据源携带 error 状态，所以 validate/build 成功不代表 health 成功。
 
 按任务执行 `git checkout -- data/`，同时恢复本次 build 生成的 `api.json`、`v1/api.json`，仅提交 src、tests 与 docs。远端验收待执行后补记。
+
+### main 远端实际结果
+
+[修复 PR #60](https://github.com/null-object-0000/models-cn/pull/60) 的 GitGuardian、CodeQL 两语言分析及汇总检查全部通过，已于北京时间 2026-10-21 14:49:37 合并，main 提交为 `5660b6c7bdbc75b5593bbb24890bf65f5b3c264d`。
+
+随后实际执行 `gh workflow run update-prices.yml --ref main`，得到[运行 39557859020](https://github.com/null-object-0000/models-cn/actions/runs/39557859020)。该运行完成了全量 collect、discover、build、check（含类型检查、155 个测试、validate）、format:check、报告生成和自动 PR 创建；最终在 **Assert collection health** 失败。只有 `zhipu-cn`、`zhipu-intl` 两个价格源为 error，日志逐个列出了上面的缺失发布日期名单。没有放宽该断言，也没有跳过 provider；这次远端运行不是全绿。
+
+运行生成[自动 PR #61](https://github.com/null-object-0000/models-cn/pull/61)：新增模型 0、下线模型 0、价格变化 0、模型信息变化 0、数据源异常 2。除阅读 PR 报告外，还 fetch 了 bot 分支并将两个智谱 provider 的整个 `models` 数组与 main 逐字段比较，二者均完全一致（CN 3 个、INTL 13 个，均为上次成功快照）；智谱 provider 的实质变化仅为 health 报错。因此这次没有再产出“日期被清空／能力变 false／六模型假下线”的智谱数据变更，但这是**失败后保留成功快照**的结果，不能算 14/13 个候选已完整采集成功。#61 未合并。
+
+未通过的验收项：补齐有官方依据的独立日期与缺失能力来源，使两个价格源恢复 healthy；恢复浏览器连接并完成国际五模型的渲染文本核对；之后重新运行 main 工作流并确认全绿。当前证据不支持将这六个模型标作真实下架。
