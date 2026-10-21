@@ -4,6 +4,7 @@ import type {
   ModelPrice,
   ProviderHealth,
 } from "./types.js";
+import { formatHealthWarnings } from "./health.js";
 import { priceKey } from "./history.js";
 
 export type Change = {
@@ -405,7 +406,15 @@ function sourceHealthTable(catalog: Catalog): string {
       const message = source.health?.message
         ? ` — ${source.health.message}`
         : "";
-      return `| ${cell(source.name)} | ${cell(`${status}${message}`)} | ${source.health?.lastSuccessfulAt ?? "—"} |`;
+      return `| ${cell(source.name)} | ${cell(
+        `${status}${message}${
+          source.health
+            ? formatHealthWarnings(source.name, source.health)
+                .map((warning) => ` — warning: ${warning}`)
+                .join("")
+            : ""
+        }`,
+      )} | ${source.health?.lastSuccessfulAt ?? "—"} |`;
     }),
   ].join("\n");
 }

@@ -9,7 +9,11 @@ import {
 } from "../io.js";
 import type { ModelsDevCalibration, ProviderInventory } from "../types.js";
 
+import { formatHealthWarnings } from "../health.js";
+
 const failures: string[] = [];
+const warnings: string[] = [];
+let warningModels = 0;
 const staleAfterMs = 36 * 60 * 60 * 1000;
 const unhealthy = (
   status: string | undefined,
@@ -21,6 +25,13 @@ const unhealthy = (
 for (const file of await readdir(providersDir)) {
   if (!file.endsWith(".json")) continue;
   const provider = await readProvider(path.join(providersDir, file));
+  if (provider) {
+    warnings.push(...formatHealthWarnings(provider.id, provider.health));
+    warningModels += (provider.health.warnings ?? []).reduce(
+      (sum, warning) => sum + warning.modelIds.length,
+      0,
+    );
+  }
   if (unhealthy(provider?.health.status, provider?.health.lastAttemptAt)) {
     failures.push(
       `official pricing: ${provider?.id ?? file} (${provider?.health.status ?? "missing"})`,
@@ -44,6 +55,10 @@ const calibration = await readJson<ModelsDevCalibration>(
 if (unhealthy(calibration?.health.status, calibration?.health.lastAttemptAt)) {
   failures.push(`models.dev: ${calibration?.health.status ?? "missing"}`);
 }
+
+console.log(
+  `Collection warnings: ${warningModels} model(s)\n${warnings.join("\n")}`,
+);
 
 if (failures.length) {
   throw new Error(`Unhealthy collection sources:\n- ${failures.join("\n- ")}`);

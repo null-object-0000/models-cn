@@ -1,3 +1,5 @@
+import { validateProvider } from "../src/validation.js";
+import { failedHealth, formatHealthWarnings } from "../src/health.js";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
@@ -10,6 +12,7 @@ import {
   parseZhipuPricingConfig,
   parseZhipuPricingDom,
   parseZhipuReleaseNotes,
+  resolveZhipuCreatedAt,
   type ZhipuDomCell,
 } from "../src/collectors/zhipu.js";
 
@@ -780,6 +783,8 @@ describe("Zhipu collectors derive the model set from official sources", () => {
         contextTokens: 1_000_000,
         maxOutputTokens: 131_072,
         capabilities: { thinking: true, toolCalls: true, jsonOutput: true },
+        createdAtSource: "release-notes",
+        createdAtEvidence: { releaseNotesMentioned: true },
         createdAt: "2026-08-19T00:00:00.000+08:00",
       },
     ],
@@ -787,6 +792,8 @@ describe("Zhipu collectors derive the model set from official sources", () => {
       "glm-5.3-flash",
       {
         id: "glm-5.3-flash",
+        createdAtSource: "release-notes",
+        createdAtEvidence: { releaseNotesMentioned: true },
         createdAt: "2026-08-26T00:00:00.000+08:00",
         name: "GLM-5.3-Flash",
         url: "/cn/guide/models/vlm/glm-5.3-flash",
@@ -799,6 +806,8 @@ describe("Zhipu collectors derive the model set from official sources", () => {
       "glm-4.6",
       {
         id: "glm-4.6",
+        createdAtSource: "release-notes",
+        createdAtEvidence: { releaseNotesMentioned: true },
         createdAt: "2025-09-30T00:00:00.000+08:00",
         name: "GLM-4.6",
         url: "/cn/guide/models/text/glm-4.6",
@@ -935,5 +944,131 @@ describe("真实完整定价文档回归", () => {
       expect(prices.has(id)).toBe(true);
     expect(prices.get("glm-4.5-air")!.input.standard).toBe(0.2);
     expect(prices.get("glm-4.5-flash")!.output).toBe(0);
+  });
+});
+
+describe("发布日期二分（真实官方 fixture）", () => {
+  const notes = [
+    readFixture("new-releases.md"),
+    readFixture("intl-new-released.md"),
+  ];
+  const dates = parseZhipuReleaseNotes(notes[0]!);
+  const pricing = readFixture("intl-pricing.md");
+  const unknownIds = [
+    "glm-5.3-flashx",
+    "glm-4.7-flashx",
+    "glm-4.5-air",
+    "glm-4.5-airx",
+    "glm-4.5-flash",
+  ];
+  const collect = async (texts = notes, overrides = {}) => {
+    const prices = parseZhipuInternationalPricing(pricing);
+    const metadata = new Map(
+      parseZhipuOverview(readFixture("model-overview.md"))
+        .filter((model) => prices.has(model.id))
+        .map((model) => [
+          model.id,
+          {
+            ...model,
+            ...resolveZhipuCreatedAt(
+              model.id,
+              texts,
+              dates,
+              prices.has(model.id),
+            ),
+            capabilities: parseZhipuCapabilities(
+              readFixture("capabilities-quote.md"),
+            ),
+            ...(model.id === "glm-5.3" ? overrides : {}),
+          },
+        ]),
+    );
+    return collectZhipuInternational(
+      new Date("2026-10-21T00:00:00Z"),
+      async () => pricing,
+      async () => metadata,
+    );
+  };
+
+  it("发布页有日期 → release-notes，且通过 provider 校验", async () => {
+    const provider = await collect();
+    expect(
+      provider.models.find((model) => model.id === "glm-5.3"),
+    ).toMatchObject({
+      createdAt: "2026-08-19T00:00:00.000+08:00",
+      createdAtSource: "release-notes",
+      createdAtEvidence: { releaseNotesMentioned: true },
+    });
+    await validateProvider(provider);
+  });
+
+  it("仅有定价引用块 → null + not-documented，health 显式列出五个 warning 模型", async () => {
+    const provider = await collect();
+    expect(provider.health.status).toBe("healthy");
+    expect(provider.health.warnings).toEqual([
+      { code: "createdAt-not-documented", modelIds: unknownIds },
+    ]);
+    for (const id of unknownIds) {
+      expect(provider.models.find((model) => model.id === id)).toMatchObject({
+        createdAt: null,
+        createdAtSource: "not-documented",
+        createdAtEvidence: { releaseNotesMentioned: false },
+      });
+      expect(
+        formatHealthWarnings(provider.id, provider.health).join("\n"),
+      ).toContain(id);
+    }
+  });
+
+  it("发布页出现过完整模型名但日期无法解析 → 必须抛错", async () => {
+    // 真实文档的一个模型链接改为普通正文，日期仍存在、其它模型仍能解析。
+    const broken = notes[0]!.replaceAll("[**GLM-5.3**]", "GLM-5.3");
+    const brokenDates = parseZhipuReleaseNotes(broken);
+    expect(brokenDates.has("glm-5.3")).toBe(false);
+    expect(() =>
+      resolveZhipuCreatedAt("glm-5.3", [broken, notes[1]!], brokenDates, true),
+    ).toThrow(/parsing failure/);
+    // 只在另一渠道正文出现也不能放行，不能把变体和基座做子串匹配。
+    expect(() =>
+      resolveZhipuCreatedAt(
+        "glm-5.3-flashx",
+        [notes[0]!, `${notes[1]}\nGLM-5.3-FlashX`],
+        dates,
+        true,
+      ),
+    ).toThrow(/parsing failure/);
+  });
+
+  it("给解析失败模型强打 not-documented → 采集断言与 provider 校验均拒绝", async () => {
+    const forged = {
+      createdAt: null,
+      createdAtSource: "not-documented",
+      createdAtEvidence: { releaseNotesMentioned: true },
+    };
+    await expect(collect(notes, forged)).rejects.toThrow(
+      /invalid not-documented/,
+    );
+    const provider = await collect();
+    Object.assign(
+      provider.models.find((model) => model.id === "glm-5.3")!,
+      forged,
+    );
+    await expect(validateProvider(provider)).rejects.toThrow(
+      /invalid not-documented/,
+    );
+  });
+
+  it("失败保留成功快照时仍保留 warning 名单并通过校验", async () => {
+    const provider = await collect();
+    provider.health = failedHealth(provider.health, new Error("fetch failed"));
+    expect(provider.health.status).toBe("error");
+    expect(provider.health.warnings?.[0]?.modelIds).toEqual(unknownIds);
+    await validateProvider(provider);
+  });
+
+  it("没有官方定价证据时也不能标记 not-documented", () => {
+    expect(() =>
+      resolveZhipuCreatedAt("glm-4.5-air", notes, dates, false),
+    ).toThrow(/invalid not-documented/);
   });
 });
