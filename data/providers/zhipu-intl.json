@@ -2,9 +2,21 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-20T06:04:53.282Z",
-    "lastAttemptAt": "2026-10-20T06:04:53.282Z",
-    "consecutiveFailures": 0
+    "lastSuccessfulAt": "2026-10-21T07:50:08.336Z",
+    "lastAttemptAt": "2026-10-21T07:50:08.336Z",
+    "consecutiveFailures": 0,
+    "warnings": [
+      {
+        "code": "createdAt-not-documented",
+        "modelIds": [
+          "glm-5.3-flashx",
+          "glm-4.7-flashx",
+          "glm-4.5-air",
+          "glm-4.5-airx",
+          "glm-4.5-flash"
+        ]
+      }
+    ]
   },
   "id": "zhipu-intl",
   "name": "Zhipu International",
@@ -21,17 +33,31 @@
       "id": "glm-5.3",
       "name": "GLM-5.3",
       "createdAt": "2026-08-19T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 1000000,
@@ -57,11 +83,15 @@
       "id": "glm-5.3-flash",
       "name": "GLM-5.3-Flash",
       "createdAt": "2026-08-26T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text",
           "image",
@@ -70,6 +100,16 @@
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 1000000,
@@ -110,11 +150,26 @@
     {
       "id": "glm-5.3-flashx",
       "name": "GLM-5.3-FlashX",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
-        "toolCalls": true
+        "toolCalls": true,
+        "jsonOutput": true
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 1000000,
@@ -140,17 +195,31 @@
       "id": "glm-5.2",
       "name": "GLM-5.2",
       "createdAt": "2026-06-16T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 1000000,
@@ -176,17 +245,31 @@
       "id": "glm-5.1",
       "name": "GLM-5.1",
       "createdAt": "2026-04-07T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 204800,
@@ -212,17 +295,31 @@
       "id": "glm-5",
       "name": "GLM-5",
       "createdAt": "2026-02-12T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 204800,
@@ -248,17 +345,31 @@
       "id": "glm-4.7",
       "name": "GLM-4.7",
       "createdAt": "2025-12-22T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 204800,
@@ -283,17 +394,32 @@
     {
       "id": "glm-4.7-flashx",
       "name": "GLM-4.7-FlashX",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 204800,
@@ -319,17 +445,31 @@
       "id": "glm-4.6",
       "name": "GLM-4.6",
       "createdAt": "2025-09-30T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 204800,
@@ -354,17 +494,32 @@
     {
       "id": "glm-4.5-air",
       "name": "GLM-4.5-Air",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 131072,
@@ -389,17 +544,32 @@
     {
       "id": "glm-4.5-airx",
       "name": "GLM-4.5-AirX",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 131072,
@@ -425,17 +595,31 @@
       "id": "glm-4.7-flash",
       "name": "GLM-4.7-Flash",
       "createdAt": "2026-01-19T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 204800,
@@ -460,17 +644,32 @@
     {
       "id": "glm-4.5-flash",
       "name": "GLM-4.5-Flash",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 131072,
@@ -499,22 +698,29 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-10-18T05:58:15.155Z",
-      "contentHash": "sha256:6eaa1b07dbb8c8ae4869a1812c8d5c5018dfbbff051f3b0e2c5d4b203bd16723"
+      "retrievedAt": "2026-10-21T07:50:08.336Z",
+      "contentHash": "sha256:cd98a717165c38dbee6821ee54156bfbfa75433ff90f8e09288a1d2423729f8b"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-09-18T05:57:52.809Z",
-      "contentHash": "sha256:d8ff2ef289f9954b79960ff2ff14a36496eecc48d49b6302b611af709d24cfb5"
+      "retrievedAt": "2026-10-21T07:50:08.336Z",
+      "contentHash": "sha256:8f5ff7b65794ac6e5207e32e6e4ccfe4a2a60019e3ac4f0f8d64e791872ef27c"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-30T17:32:13.635Z",
-      "contentHash": "sha256:0f8d03e40e0658c6bbce474fbfde30a3bac21f8d23fd5457870be8446b402e9a"
+      "retrievedAt": "2026-10-21T07:50:08.336Z",
+      "contentHash": "sha256:c6f97a259696d4d8d412c3e33720eb2440c502a57818afd85e634d5d964dc984"
+    },
+    {
+      "url": "https://docs.z.ai/release-notes/new-released.md",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-10-21T07:50:08.336Z",
+      "contentHash": "sha256:c6f97a259696d4d8d412c3e33720eb2440c502a57818afd85e634d5d964dc984"
     }
   ]
 }

@@ -2,9 +2,27 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-20T06:04:53.270Z",
-    "lastAttemptAt": "2026-10-20T06:04:53.270Z",
-    "consecutiveFailures": 0
+    "lastSuccessfulAt": "2026-10-21T07:50:08.332Z",
+    "lastAttemptAt": "2026-10-21T07:50:08.332Z",
+    "consecutiveFailures": 0,
+    "warnings": [
+      {
+        "code": "createdAt-not-documented",
+        "modelIds": [
+          "glm-5.3-flashx",
+          "glm-4.7-flashx",
+          "glm-4.5-air",
+          "glm-4-long",
+          "glm-4-flashx-250414"
+        ]
+      },
+      {
+        "code": "capabilities-not-documented",
+        "modelIds": [
+          "glm-4-long"
+        ]
+      }
+    ]
   },
   "id": "zhipu-cn",
   "name": "Zhipu China",
@@ -21,17 +39,31 @@
       "id": "glm-5.3",
       "name": "GLM-5.3",
       "createdAt": "2026-08-19T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 1000000,
@@ -48,7 +80,7 @@
             "cacheHit": 2
           },
           "output": 28,
-          "sourceUrl": "https://bigmodel.cn/pricing",
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
           "validFrom": "2026-08-19T05:53:26.770Z"
         }
       ]
@@ -57,11 +89,15 @@
       "id": "glm-5.3-flash",
       "name": "GLM-5.3-Flash",
       "createdAt": "2026-08-26T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text",
           "image",
@@ -70,6 +106,16 @@
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 1000000,
@@ -86,7 +132,7 @@
             "cacheHit": 0.23
           },
           "output": 2.8,
-          "sourceUrl": "https://bigmodel.cn/pricing",
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
           "validFrom": "2026-09-10T06:04:03.370Z"
         }
       ],
@@ -108,20 +154,78 @@
       ]
     },
     {
-      "id": "glm-5.2",
-      "name": "GLM-5.2",
-      "createdAt": "2026-06-16T00:00:00.000+08:00",
+      "id": "glm-5.3-flashx",
+      "name": "GLM-5.3-FlashX",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
       "aliases": [],
       "capabilities": {
         "thinking": true,
-        "jsonOutput": true,
         "toolCalls": true,
+        "jsonOutput": true
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 2,
+            "cacheHit": 0.57
+          },
+          "output": 7,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "createdAt": "2026-06-16T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true,
         "inputModalities": [
           "text"
         ],
         "outputModalities": [
           "text"
         ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
       },
       "limits": {
         "contextTokens": 1000000,
@@ -138,8 +242,638 @@
             "cacheHit": 2
           },
           "output": 28,
-          "sourceUrl": "https://bigmodel.cn/pricing",
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
           "validFrom": "2026-08-07T05:04:14.214Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-5.1",
+      "name": "GLM-5.1",
+      "createdAt": "2026-04-07T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [0, 32)",
+            "maxInclusive": 32000
+          },
+          "input": {
+            "standard": 6,
+            "cacheHit": 1.3
+          },
+          "output": 24,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [32+)",
+            "minExclusive": 32000
+          },
+          "input": {
+            "standard": 8,
+            "cacheHit": 2
+          },
+          "output": 28,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-5",
+      "name": "GLM-5",
+      "createdAt": "2026-02-12T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [0, 32)",
+            "maxInclusive": 32000
+          },
+          "input": {
+            "standard": 4,
+            "cacheHit": 1
+          },
+          "output": 18,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [32+)",
+            "minExclusive": 32000
+          },
+          "input": {
+            "standard": 6,
+            "cacheHit": 1.5
+          },
+          "output": 22,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-5-turbo",
+      "name": "GLM-5-Turbo",
+      "createdAt": "2026-03-15T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [0, 32)",
+            "maxInclusive": 32000
+          },
+          "input": {
+            "standard": 5,
+            "cacheHit": 1.2
+          },
+          "output": 22,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [32+)",
+            "minExclusive": 32000
+          },
+          "input": {
+            "standard": 7,
+            "cacheHit": 1.8
+          },
+          "output": 26,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-4.7",
+      "name": "GLM-4.7",
+      "createdAt": "2025-12-22T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [0, 32)",
+            "maxInclusive": 32000
+          },
+          "outputTokenRange": {
+            "label": "输出长度 [0, 0.2)",
+            "maxInclusive": 200
+          },
+          "input": {
+            "standard": 2,
+            "cacheHit": 0.4
+          },
+          "output": 8,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [0, 32)",
+            "maxInclusive": 32000
+          },
+          "outputTokenRange": {
+            "label": "输出长度 [0.2+)",
+            "minExclusive": 200
+          },
+          "input": {
+            "standard": 3,
+            "cacheHit": 0.6
+          },
+          "output": 14,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [32, 200)",
+            "minExclusive": 32000,
+            "maxInclusive": 200000
+          },
+          "input": {
+            "standard": 4,
+            "cacheHit": 0.8
+          },
+          "output": 16,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-4.7-flashx",
+      "name": "GLM-4.7-FlashX",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.5,
+            "cacheHit": 0.1
+          },
+          "output": 3,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-4.5-air",
+      "name": "GLM-4.5-Air",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 131072,
+        "maxOutputTokens": 98304
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [0, 32)",
+            "maxInclusive": 32000
+          },
+          "outputTokenRange": {
+            "label": "输出长度 [0, 0.2)",
+            "maxInclusive": 200
+          },
+          "input": {
+            "standard": 0.8,
+            "cacheHit": 0.16
+          },
+          "output": 2,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [0, 32)",
+            "maxInclusive": 32000
+          },
+          "outputTokenRange": {
+            "label": "输出长度 [0.2+)",
+            "minExclusive": 200
+          },
+          "input": {
+            "standard": 0.8,
+            "cacheHit": 0.16
+          },
+          "output": 6,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        },
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "inputTokenRange": {
+            "label": "输入长度 [32, 128)",
+            "minExclusive": 32000,
+            "maxInclusive": 128000
+          },
+          "input": {
+            "standard": 1.2,
+            "cacheHit": 0.24
+          },
+          "output": 8,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-4-long",
+      "name": "GLM-4-Long",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
+      "aliases": [],
+      "capabilities": null,
+      "capabilitiesSource": "not-documented",
+      "capabilitiesEvidence": {
+        "sectionPresent": false
+      },
+      "limits": {
+        "contextTokens": 1000000,
+        "maxOutputTokens": 4096
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 1,
+            "cacheHit": 0.5
+          },
+          "output": 1,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-4-flashx-250414",
+      "name": "GLM-4-FlashX-250414",
+      "createdAt": null,
+      "createdAtSource": "not-documented",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": false
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": false,
+        "toolCalls": true,
+        "jsonOutput": true
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": [
+          "thinking"
+        ]
+      },
+      "limits": {
+        "contextTokens": 131072,
+        "maxOutputTokens": 16384
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.1,
+            "cacheHit": 0.05
+          },
+          "output": 0.1,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-4.7-flash",
+      "name": "GLM-4.7-Flash",
+      "createdAt": "2026-01-19T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "toolCalls": true,
+        "jsonOutput": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "thinking",
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": []
+      },
+      "limits": {
+        "contextTokens": 204800,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0,
+            "cacheHit": 0
+          },
+          "output": 0,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
+        }
+      ]
+    },
+    {
+      "id": "glm-4-flash-250414",
+      "name": "GLM-4-Flash-250414",
+      "createdAt": "2025-04-14T00:00:00.000+08:00",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
+      "aliases": [],
+      "capabilities": {
+        "thinking": false,
+        "toolCalls": true,
+        "jsonOutput": true
+      },
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "toolCalls",
+          "jsonOutput"
+        ],
+        "defaultedFields": [
+          "thinking"
+        ]
+      },
+      "limits": {
+        "contextTokens": 131072,
+        "maxOutputTokens": 16384
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0
+          },
+          "output": 0,
+          "sourceUrl": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+          "validFrom": "2026-10-21T07:50:14.083Z"
         }
       ]
     }
@@ -150,22 +884,37 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-09-10T06:04:01.172Z",
-      "contentHash": "sha256:39d257eaf00ddb33da5dd7752d735de7a3fe069d7f58be35bf69c1855509162c"
+      "retrievedAt": "2026-10-21T07:50:08.332Z",
+      "contentHash": "sha256:3c2f03265042568bf6500a997f1eea7d71d2442b4d8ebcd3baf0bb53fea86f35"
+    },
+    {
+      "url": "https://docs.bigmodel.cn/cn/guide/start/pricing.md",
+      "kind": "pricing",
+      "locale": "zh-CN",
+      "currency": "CNY",
+      "retrievedAt": "2026-10-21T07:50:08.332Z",
+      "contentHash": "sha256:3c2f03265042568bf6500a997f1eea7d71d2442b4d8ebcd3baf0bb53fea86f35"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-09-18T05:57:52.805Z",
-      "contentHash": "sha256:d8ff2ef289f9954b79960ff2ff14a36496eecc48d49b6302b611af709d24cfb5"
+      "retrievedAt": "2026-10-21T07:50:08.332Z",
+      "contentHash": "sha256:2f3e8749e469dd2fe890e68d357424a9bb1e8f4a694b0444b56549c2710bd7dc"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-08-30T17:32:13.630Z",
-      "contentHash": "sha256:0f8d03e40e0658c6bbce474fbfde30a3bac21f8d23fd5457870be8446b402e9a"
+      "retrievedAt": "2026-10-21T07:50:08.332Z",
+      "contentHash": "sha256:ad5620496eb3cad7c2817964f2452befba7ef7733a62393447fb518c6861ee8f"
+    },
+    {
+      "url": "https://docs.z.ai/release-notes/new-released.md",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-10-21T07:50:08.332Z",
+      "contentHash": "sha256:ad5620496eb3cad7c2817964f2452befba7ef7733a62393447fb518c6861ee8f"
     }
   ]
 }
