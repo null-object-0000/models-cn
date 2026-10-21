@@ -114,9 +114,9 @@ function ModelRows({
   const referencePrices = hasPromotional ? standardPrices : [];
   const capabilities = capabilityLabels(model.capabilities);
   const inputModalities =
-    (model.capabilities.inputModalities as string[] | undefined) ?? [];
+    (model.capabilities?.inputModalities as string[] | undefined) ?? [];
   const outputModalities =
-    (model.capabilities.outputModalities as string[] | undefined) ?? [];
+    (model.capabilities?.outputModalities as string[] | undefined) ?? [];
   const source =
     summaryPrices[0]?.sourceUrl ??
     selected[0]?.sourceUrl ??

@@ -13,6 +13,7 @@ import {
   parseZhipuPricingDom,
   parseZhipuReleaseNotes,
   resolveZhipuCreatedAt,
+  resolveZhipuCapabilities,
   type ZhipuDomCell,
 } from "../src/collectors/zhipu.js";
 
@@ -782,7 +783,7 @@ describe("Zhipu collectors derive the model set from official sources", () => {
         url: "/cn/guide/models/text/glm-5.3",
         contextTokens: 1_000_000,
         maxOutputTokens: 131_072,
-        capabilities: { thinking: true, toolCalls: true, jsonOutput: true },
+        ...resolveZhipuCapabilities(readFixture("capabilities-list.md")),
         createdAtSource: "release-notes",
         createdAtEvidence: { releaseNotesMentioned: true },
         createdAt: "2026-08-19T00:00:00.000+08:00",
@@ -799,7 +800,7 @@ describe("Zhipu collectors derive the model set from official sources", () => {
         url: "/cn/guide/models/vlm/glm-5.3-flash",
         contextTokens: 1_000_000,
         maxOutputTokens: 131_072,
-        capabilities: { thinking: true, toolCalls: true, jsonOutput: true },
+        ...resolveZhipuCapabilities(readFixture("capabilities-list.md")),
       },
     ],
     [
@@ -813,7 +814,7 @@ describe("Zhipu collectors derive the model set from official sources", () => {
         url: "/cn/guide/models/text/glm-4.6",
         contextTokens: 204_800,
         maxOutputTokens: 131_072,
-        capabilities: { thinking: true, toolCalls: true, jsonOutput: true },
+        ...resolveZhipuCapabilities(readFixture("capabilities-list.md")),
       },
     ],
   ]);
@@ -976,9 +977,7 @@ describe("发布日期二分（真实官方 fixture）", () => {
               dates,
               prices.has(model.id),
             ),
-            capabilities: parseZhipuCapabilities(
-              readFixture("capabilities-quote.md"),
-            ),
+            ...resolveZhipuCapabilities(readFixture("capabilities-quote.md")),
             ...(model.id === "glm-5.3" ? overrides : {}),
           },
         ]),
@@ -1070,5 +1069,123 @@ describe("发布日期二分（真实官方 fixture）", () => {
     expect(() =>
       resolveZhipuCreatedAt("glm-4.5-air", notes, dates, false),
     ).toThrow(/invalid not-documented/);
+  });
+});
+
+describe("能力二分（真实官方 fixture）", () => {
+  const present = readFixture("capabilities-list.md");
+  const absent = readFixture("glm-4-long.md");
+  const collect = async (
+    capabilityMetadata = resolveZhipuCapabilities(absent),
+  ) =>
+    collectZhipuChina(
+      new Date("2026-10-21T00:00:00Z"),
+      async () => parseZhipuChinaPricingMarkdown(readFixture("cn-pricing.md")),
+      async () =>
+        new Map([
+          [
+            "glm-4-long",
+            {
+              id: "glm-4-long",
+              name: "GLM-4-Long",
+              url: "/cn/guide/models/text/glm-4-long",
+              contextTokens: 1_000_000,
+              maxOutputTokens: 4096,
+              ...resolveZhipuCreatedAt(
+                "glm-4-long",
+                [
+                  readFixture("new-releases.md"),
+                  readFixture("intl-new-released.md"),
+                ],
+                parseZhipuReleaseNotes(readFixture("new-releases.md")),
+                true,
+              ),
+              ...capabilityMetadata,
+            },
+          ],
+        ]),
+    );
+
+  it("有能力区且解析成功 → docs，通过采集及 provider 校验", async () => {
+    const provider = await collect(resolveZhipuCapabilities(present));
+    expect(provider.models[0]).toMatchObject({
+      capabilitiesSource: "docs",
+      capabilitiesEvidence: { sectionPresent: true },
+      capabilities: { thinking: true, toolCalls: true, jsonOutput: true },
+    });
+    await validateProvider(provider);
+  });
+
+  it("完全没有能力区 → null，warning 点名 glm-4-long", async () => {
+    const provider = await collect();
+    expect(provider.models[0]).toMatchObject({
+      capabilities: null,
+      capabilitiesSource: "not-documented",
+      capabilitiesEvidence: { sectionPresent: false },
+    });
+    expect(provider.health.status).toBe("healthy");
+    expect(provider.health.warnings).toContainEqual({
+      code: "capabilities-not-documented",
+      modelIds: ["glm-4-long"],
+    });
+    expect(
+      formatHealthWarnings(provider.id, provider.health).join("\n"),
+    ).toContain("capabilities-not-documented (1): glm-4-long");
+    await validateProvider(provider);
+  });
+
+  it("有能力区但字段缺失或模板未知 → 必须抛错", () => {
+    expect(() => resolveZhipuCapabilities(readFixture("glm-4.md"))).toThrow(
+      "missing capability thinking",
+    );
+    const missing = present.replace(/^.*Function Calling.*$/m, "");
+    const unknown = present.replace(/^- .*$/gm, "未知模板");
+    for (const text of [
+      missing,
+      unknown,
+      present.replace("## 能力支持", "## 模型能力"),
+      present.replace("## 能力支持", "## 能力"),
+      present.replace("## 能力支持", ""),
+    ])
+      expect(() => resolveZhipuCapabilities(text)).toThrow(/capability/);
+  });
+
+  it("给解析失败强打 not-documented → 采集断言与 provider 校验均拒绝", async () => {
+    const forged = {
+      capabilities: null,
+      capabilitiesSource: "not-documented" as const,
+      capabilitiesEvidence: { sectionPresent: true },
+    };
+    await expect(collect(forged)).rejects.toThrow(
+      /invalid not-documented capabilities/,
+    );
+    const provider = await collect();
+    Object.assign(provider.models[0]!, forged);
+    await expect(validateProvider(provider)).rejects.toThrow(
+      /invalid not-documented capabilities/,
+    );
+  });
+
+  it("来源/字段/证据矛盾、漏 warning 和伪造空能力均拒绝", async () => {
+    for (const overrides of [
+      { capabilitiesEvidence: undefined },
+      {
+        capabilities: { thinking: false, toolCalls: false, jsonOutput: false },
+      },
+      { capabilitiesSource: "docs" },
+    ]) {
+      const provider = await collect();
+      Object.assign(provider.models[0]!, overrides);
+      await expect(validateProvider(provider)).rejects.toThrow(
+        /capability|capabilities/,
+      );
+    }
+    const provider = await collect();
+    provider.health.warnings = provider.health.warnings!.filter(
+      (warning) => warning.code !== "capabilities-not-documented",
+    );
+    await expect(validateProvider(provider)).rejects.toThrow(
+      /capabilities warnings/,
+    );
   });
 });

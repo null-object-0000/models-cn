@@ -4,12 +4,21 @@ import path from "node:path";
 import { Ajv2020 } from "ajv/dist/2020.js";
 import type { ProviderData } from "./types.js";
 import type { ModelsDevCalibration, ProviderInventory } from "./types.js";
-import { assertCreatedAtProvenance } from "./health.js";
+import {
+  assertCapabilitiesProvenance,
+  assertCreatedAtProvenance,
+} from "./health.js";
 import { rootDir } from "./io.js";
 
 export async function validateProvider(data: ProviderData): Promise<void> {
   // 旧成功快照没有来源字段；新采集写出的证据必须严格自洽。
   for (const model of data.models) {
+    if (
+      model.capabilitiesSource !== undefined ||
+      model.capabilitiesEvidence !== undefined ||
+      model.capabilities === null
+    )
+      assertCapabilitiesProvenance(model);
     if (
       model.createdAtSource !== undefined ||
       model.createdAtEvidence !== undefined ||
@@ -18,17 +27,20 @@ export async function validateProvider(data: ProviderData): Promise<void> {
       assertCreatedAtProvenance(model);
   }
 
-  if (data.models.some((model) => model.createdAtSource !== undefined)) {
+  for (const field of ["createdAt", "capabilities"] as const) {
+    if (!data.models.some((model) => model[`${field}Source`] !== undefined))
+      continue;
     const expected = data.models
-      .filter((model) => model.createdAtSource === "not-documented")
+      .filter((model) => model[`${field}Source`] === "not-documented")
       .map((model) => model.id)
       .sort();
     const actual = (data.health.warnings ?? [])
+      .filter((warning) => warning.code === `${field}-not-documented`)
       .flatMap((warning) => warning.modelIds)
       .sort();
     if (JSON.stringify(expected) !== JSON.stringify(actual))
       throw new Error(
-        `Provider ${data.id}: createdAt warnings do not match undocumented models`,
+        `Provider ${data.id}: ${field} warnings do not match undocumented models`,
       );
   }
   const schema = JSON.parse(

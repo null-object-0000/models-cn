@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   activePricesAt,
+  buildMergedGroups,
   capabilityLabels,
   compareModelsByReleaseDate,
   formatPriceRange,
@@ -13,7 +14,7 @@ import {
   modelReleaseDate,
   nextPricesAt,
 } from "../site/src/lib/catalog.js";
-import type { CalibrationModel, Model } from "../site/src/types.js";
+import type { CalibrationModel, Model, Provider } from "../site/src/types.js";
 
 function model(id: string, createdAt?: string): Model {
   return {
@@ -170,5 +171,50 @@ describe("site input modality filter", () => {
     expect(modelHasInputModality(textImage, "image")).toBe(true);
     expect(modelHasInputModality(textOnly, "image")).toBe(false);
     expect(modelHasInputModality(model("none"), "image")).toBe(false);
+  });
+});
+
+describe("未公布能力", () => {
+  it("显示未公布，模态筛选归入未知", () => {
+    const unknown = { ...model("glm-4-long"), capabilities: null };
+    expect(capabilityLabels(unknown.capabilities)).toEqual(["未公布"]);
+    expect(inputModalityOptions([unknown])).toEqual(["unknown"]);
+    expect(modelHasInputModality(unknown, "unknown")).toBe(true);
+    expect(modelHasInputModality(unknown, "text")).toBe(false);
+    expect(modelHasInputModality(model("known"), "unknown")).toBe(false);
+    expect(capabilityLabels({ thinking: false })).toEqual([]);
+  });
+  it("跨渠道比较不会把 null 合并为明确不支持", () => {
+    const provider = (
+      id: string,
+      capabilities: Model["capabilities"],
+    ): Provider => ({
+      id,
+      name: id,
+      models: [{ ...model("glm-4-long"), capabilities }],
+      sources: [],
+      health: {
+        status: "healthy",
+        lastSuccessfulAt: "2026-10-21T00:00:00Z",
+        lastAttemptAt: "2026-10-21T00:00:00Z",
+        consecutiveFailures: 0,
+      },
+    });
+    const groups = buildMergedGroups(
+      [
+        provider("zhipu-cn", null),
+        provider("zhipu-intl", {
+          thinking: false,
+          toolCalls: false,
+          jsonOutput: false,
+        }),
+      ],
+      new Map(),
+      () => true,
+    );
+    expect(groups[0]!.models[0]).toMatchObject({
+      mergeable: false,
+      differences: ["能力"],
+    });
   });
 });

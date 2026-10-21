@@ -73,7 +73,10 @@
             "required": ["code", "modelIds"],
             "properties": {
               "code": {
-                "const": "createdAt-not-documented"
+                "enum": [
+                  "createdAt-not-documented",
+                  "capabilities-not-documented"
+                ]
               },
               "modelIds": {
                 "type": "array",
@@ -264,8 +267,15 @@
         },
         "tokenizer": { "type": "string", "minLength": 1 },
         "aliases": { "type": "array", "items": { "$ref": "#/$defs/alias" } },
-        "capabilities": {
+        "capabilitiesSource": { "enum": ["docs", "not-documented"] },
+        "capabilitiesEvidence": {
           "type": "object",
+          "additionalProperties": false,
+          "required": ["sectionPresent"],
+          "properties": { "sectionPresent": { "type": "boolean" } }
+        },
+        "capabilities": {
+          "type": ["object", "null"],
           "additionalProperties": false,
           "properties": {
             "thinking": { "type": "boolean" },

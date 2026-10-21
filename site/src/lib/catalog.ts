@@ -140,6 +140,7 @@ export function compactTokens(value?: number): string {
 }
 
 const MODALITY_LABELS: Record<string, string> = {
+  unknown: "未知（未公布）",
   text: "文本",
   image: "图片",
   video: "视频",
@@ -169,7 +170,8 @@ export function inputModalityOptions(
 ): string[] {
   const values = new Set<string>();
   for (const model of models) {
-    const inputs = model.capabilities.inputModalities as string[] | undefined;
+    if (model.capabilities === null) values.add("unknown");
+    const inputs = model.capabilities?.inputModalities as string[] | undefined;
     for (const value of inputs ?? []) values.add(value);
   }
   return [...values].sort((left, right) => {
@@ -184,13 +186,15 @@ export function inputModalityOptions(
 }
 
 export function modelHasInputModality(model: Model, modality: string): boolean {
-  const inputs = model.capabilities.inputModalities as string[] | undefined;
+  if (modality === "unknown") return model.capabilities === null;
+  const inputs = model.capabilities?.inputModalities as string[] | undefined;
   return (inputs ?? []).includes(modality);
 }
 
 export function capabilityLabels(
-  capabilities: Record<string, unknown>,
+  capabilities: Record<string, unknown> | null,
 ): string[] {
+  if (capabilities === null) return ["未公布"];
   const labels: string[] = [];
   if (capabilities.thinking) labels.push("思考");
   if (capabilities.dynamicTools) labels.push("动态工具");
@@ -304,21 +308,21 @@ function stripRegionSuffix(name: string): string {
 
 function modelSignature(model: Model): string {
   const caps = model.capabilities;
-  const inputModalities = (caps.inputModalities as string[] | undefined)
+  const inputModalities = (caps?.inputModalities as string[] | undefined)
     ?.slice()
     .sort()
     .join(",");
-  const outputModalities = (caps.outputModalities as string[] | undefined)
+  const outputModalities = (caps?.outputModalities as string[] | undefined)
     ?.slice()
     .sort()
     .join(",");
   return JSON.stringify({
     context: model.limits.contextTokens,
     maxOutput: model.limits.maxOutputTokens,
-    thinking: !!caps.thinking,
-    toolCalls: !!caps.toolCalls,
-    jsonOutput: !!caps.jsonOutput,
-    dynamicTools: !!caps.dynamicTools,
+    thinking: caps?.thinking ?? null,
+    toolCalls: caps?.toolCalls ?? null,
+    jsonOutput: caps?.jsonOutput ?? null,
+    dynamicTools: caps?.dynamicTools ?? null,
     inputModalities,
     outputModalities,
   });

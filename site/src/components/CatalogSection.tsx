@@ -54,7 +54,10 @@ export function CatalogSection({ catalog }: { catalog: Catalog }) {
       provider: (typeof models)[0]["provider"],
       model: (typeof models)[0]["model"],
     ) => {
-      const capabilities = Object.values(model.capabilities).flat().join(" ");
+      const capabilities =
+        model.capabilities === null
+          ? "未知 未公布"
+          : Object.values(model.capabilities).flat().join(" ");
       const aliases = model.aliases.map((alias) => alias.id).join(" ");
       return `${providerName(provider)} ${provider.name} ${provider.displayNames?.en ?? ""} ${provider.id} ${model.name} ${model.id} ${aliases} ${capabilities}`
         .toLowerCase()

@@ -259,22 +259,22 @@ function compareModel(
     ),
     check(
       "capabilities.thinking",
-      model?.capabilities.thinking,
+      model?.capabilities?.thinking,
       reference?.reasoning,
     ),
     check(
       "capabilities.toolCalls",
-      model?.capabilities.toolCalls,
+      model?.capabilities?.toolCalls,
       reference?.tool_call,
     ),
     check(
       "capabilities.inputModalities",
-      model?.capabilities.inputModalities,
+      model?.capabilities?.inputModalities,
       reference?.modalities?.input,
     ),
     check(
       "capabilities.outputModalities",
-      model?.capabilities.outputModalities,
+      model?.capabilities?.outputModalities,
       reference?.modalities?.output,
     ),
     check(

@@ -106,3 +106,21 @@ zhipu-intl: createdAt-not-documented (5): glm-5.3-flashx, glm-4.7-flashx, glm-4.
 运行更新了现有[自动 PR #61](https://github.com/null-object-0000/models-cn/pull/61)，bot 提交为 `f5c92b9`。已 fetch 此提交并与 `e135ff2` 逐字段核对所有 7 个 provider：下线模型 0、原有非空日期清空 0、能力 true 变 false 0；价格变化 0。两个智谱的整个 models 数组在排除新日期来源/证据字段、将显式 null 归一到原先缺省后完全一致。五项 createdAt 变化均为原先字段缺省 → 明确 null，**不是将已有日期清空**。其余智谱差异为新增来源、来源哈希、抓取时间、INTL 的 5 项 warning，以及 CN 如实记录的失败状态。其余自动数据差异包括时间戳和 models.dev 的 14 项校准变化（LongCat 参考价格/模型变化）；没有将参考价格覆盖到官方价表。#61 保持未合并。
 
 最终未完成项：两个渠道同时 healthy、main workflow `conclusion=success`。要继续必须补上 GLM-4-Long 三个能力字段的官方依据或已有独立修复；不能删除该模型、改采集范围、继承其他模型能力、将未知能力填成 false，或跳过 health 门禁来制造成功。
+
+## 能力健康二分（2026-10-21）
+
+能力缺值现在按官方详情全文的证据分流：命中“能力支持／模型能力／能力介绍／功能支持”等区块标题、独立“能力／功能”标题、能力 Card/Accordion 模板或能力文档链接时，必须严格解析思考、工具调用、结构化输出三个字段。标题存在但模板不认识、某个字段缺失，均抛错；不会捕获解析错误后降级。只有这些区块及模板完全不存在，才输出 `capabilities: null`、`capabilitiesSource: "not-documented"`、`capabilitiesEvidence.sectionPresent: false`。介绍正文或“推理能力”等叙述性小标题不作为能力支持区。有区块且全部解析成功则写 `docs` 和 `sectionPresent: true`。
+
+这是加严：原来的能力字段类型断言保留在有能力区的分支，新增来源、区块存在证据和 warning 名单的交叉校验；采集元数据断言与 provider 校验都会拒绝有区块却强打 `not-documented`、缺证据、null/来源矛盾和 warning 缺漏。`capabilities-not-documented` 与日期 warning 分开计数、逐一列名；失败保留快照机制不变。手工能力补充保留明确的 null，不将其转换成对象。没有新增默认 false，也没有继承同系列模型能力。
+
+site 的能力类型同步可空，标签与展开详情显示“未公布”，搜索可匹配“未知／未公布”；模态筛选提供“未知（未公布）”，null 不命中已知模态。跨渠道合并比较保留 null 与明确 false 的区别，不再用布尔强制转换把未知等同于不支持。同步两个 provider schema，以及 CLI、手工补充、校准的 null 处理。
+
+真实 fixture：已有能力列表和引用块正例；新增 [GLM-4-Long 官方全文](https://docs.bigmodel.cn/cn/guide/models/text/glm-4-long.md) 无能力区正例 `docs/zhipu-fixtures/glm-4-long.md`；新增 [GLM-4 官方全文](https://docs.bigmodel.cn/cn/guide/models/text/glm-4.md) 反例 `docs/zhipu-fixtures/glm-4.md`。后者有能力区但没有思考模式，必须抛 `missing capability thinking`；另将真实列表删字段、替换模板，以及对有区块模型伪造 `not-documented`，分别验证解析器、采集断言和 provider 校验不能放行。无区块正例的 health 输出明确包含 `capabilities-not-documented (1): glm-4-long`。
+
+### 实采暴露的新阻塞
+
+本地实际执行两个渠道采集，INTL 成功采到 13 个模型，health 为 healthy，仍显式列出此前的 5 个日期 warning：`glm-5.3-flashx`、`glm-4.7-flashx`、`glm-4.5-air`、`glm-4.5-airx`、`glm-4.5-flash`。CN 越过 GLM-4-Long 后，失败于 `Zhipu glm-4-flashx-250414: Zhipu missing capability thinking`。概览中它与 `glm-4-flash-250414` 都链接到 GLM-4 详情；该真实页面“能力支持”列出了流式输出、Function Calling、上下文缓存、结构化输出、MCP，缺少思考模式字段。
+
+因此，“main 唯一阻塞是 GLM-4-Long”这一背景假设在完整实采后不成立。按本任务“有能力区但字段缺失必须报错”的红线，CN 仍必须 error；不能把这两个模型归入未公布整区、补 false、删模型或跳过 provider。CLI 如实保留之前成功快照，所以 CN 的失败快照摘要也不能冒充包含 GLM-4-Long 的成功采集结果。本地一次 models.dev 校准另有网络错误，独立于此能力判据。
+
+本地验证：15 个测试文件、169 项测试通过；validate、build 通过；另检查 typecheck、site build 和格式。提交前按要求还原 data 和两个生成 API 文件；施工前已有 data 改动已备份在 `/tmp/models-cn-capability-backup/preexisting-data.patch`，未混入代码提交。两个 schema 是新增 null 和证据字段能够发布的必要同步，随代码提交。

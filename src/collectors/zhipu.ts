@@ -8,7 +8,7 @@ import type {
   Source,
 } from "../types.js";
 import { SCHEMA_VERSION } from "../types.js";
-import { zhipuHealth } from "../health.js";
+import { assertCapabilitiesProvenance, zhipuHealth } from "../health.js";
 import {
   fetchJsonWithRetry,
   fetchTextWithRetry,
@@ -613,11 +613,36 @@ export function parseZhipuCapabilities(markdown: string): ZhipuCapabilities {
   };
 }
 
+/** 全文检测区块标题及已知能力模板；模板漂移仍交给严格解析器报错。 */
+export function resolveZhipuCapabilities(markdown: string): {
+  capabilities: ZhipuCapabilities | null;
+  capabilitiesSource: "docs" | "not-documented";
+  capabilitiesEvidence: { sectionPresent: boolean };
+} {
+  const text = unquoteMarkdown(markdown);
+  const sectionPresent =
+    /^\s*#{1,6}\s*[^\n]*(?:能力支持|模型能力|能力介绍|功能支持|capabilities|supported features)/im.test(
+      text,
+    ) ||
+    /^\s*#{1,6}\s*(?:能力|功能|features)\s*$/im.test(text) ||
+    /<(?:Card|Accordion)\b[^>]*title=["'][^"']*(?:能力|思考|Function Calling|结构化输出)/i.test(
+      text,
+    ) ||
+    /\]\([^)]*\/capabilities\//i.test(text);
+  return {
+    capabilities: sectionPresent ? parseZhipuCapabilities(markdown) : null,
+    capabilitiesSource: sectionPresent ? "docs" : "not-documented",
+    capabilitiesEvidence: { sectionPresent },
+  };
+}
+
 interface ZhipuMetadata
   extends
     ZhipuOverviewModel,
     Pick<ModelData, "createdAt" | "createdAtSource" | "createdAtEvidence"> {
-  capabilities: ZhipuCapabilities;
+  capabilities: ZhipuCapabilities | null;
+  capabilitiesSource: NonNullable<ModelData["capabilitiesSource"]>;
+  capabilitiesEvidence: NonNullable<ModelData["capabilitiesEvidence"]>;
 }
 
 function assertMetadata(meta: ZhipuMetadata): void {
@@ -641,10 +666,7 @@ function assertMetadata(meta: ZhipuMetadata): void {
   }
   if (!(meta.contextTokens > 0) || !(meta.maxOutputTokens > 0))
     throw new Error(`Zhipu ${meta.id}: missing token limits`);
-  for (const key of ["thinking", "toolCalls", "jsonOutput"] as const) {
-    if (typeof meta.capabilities?.[key] !== "boolean")
-      throw new Error(`Zhipu ${meta.id}: missing capability ${key}`);
-  }
+  assertCapabilitiesProvenance(meta);
 }
 
 /** 在全部官方发布文本里匹配完整模型名；链接、标题及正文中的出现都算证据。 */
@@ -719,15 +741,15 @@ async function loadZhipuMetadata(
     const markdown = capabilityMarkdown.get(model.url);
     if (!markdown)
       throw new Error(`Zhipu ${model.id}: missing detail markdown`);
-    let capabilities: ZhipuCapabilities;
+    let capabilityMetadata: ReturnType<typeof resolveZhipuCapabilities>;
     try {
-      capabilities = parseZhipuCapabilities(markdown);
+      capabilityMetadata = resolveZhipuCapabilities(markdown);
     } catch (error) {
       throw new Error(`Zhipu ${model.id}: ${(error as Error).message}`);
     }
     metadata.set(model.id, {
       ...model,
-      capabilities,
+      ...capabilityMetadata,
       ...provenance.get(model.id),
     });
   }
@@ -803,11 +825,9 @@ export async function collectZhipuChina(
         ? { createdAtEvidence: meta.createdAtEvidence }
         : {}),
       aliases: [],
-      capabilities: {
-        thinking: meta.capabilities.thinking,
-        jsonOutput: meta.capabilities.jsonOutput,
-        toolCalls: meta.capabilities.toolCalls,
-      },
+      capabilities: meta.capabilities,
+      capabilitiesSource: meta.capabilitiesSource,
+      capabilitiesEvidence: meta.capabilitiesEvidence,
       limits: {
         contextTokens: meta.contextTokens,
         maxOutputTokens: meta.maxOutputTokens,
@@ -1018,11 +1038,9 @@ export async function collectZhipuInternational(
         ? { createdAtEvidence: meta.createdAtEvidence }
         : {}),
       aliases: [],
-      capabilities: {
-        thinking: meta.capabilities.thinking,
-        jsonOutput: meta.capabilities.jsonOutput,
-        toolCalls: meta.capabilities.toolCalls,
-      },
+      capabilities: meta.capabilities,
+      capabilitiesSource: meta.capabilitiesSource,
+      capabilitiesEvidence: meta.capabilitiesEvidence,
       limits: {
         contextTokens: meta.contextTokens,
         maxOutputTokens: meta.maxOutputTokens,

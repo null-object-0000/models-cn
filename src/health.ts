@@ -60,17 +60,43 @@ export function assertCreatedAtProvenance(
   }
 }
 
+/** 只有完全没有能力区才允许 null；存在区块时三个字段都必须解析成功。 */
+export function assertCapabilitiesProvenance(
+  model: Pick<
+    ModelData,
+    "id" | "capabilities" | "capabilitiesSource" | "capabilitiesEvidence"
+  >,
+): void {
+  const present = model.capabilitiesEvidence?.sectionPresent;
+  if (model.capabilitiesSource === "not-documented") {
+    if (model.capabilities !== null || present !== false)
+      throw new Error(
+        `Zhipu ${model.id}: invalid not-documented capabilities evidence`,
+      );
+    return;
+  }
+  if (model.capabilitiesSource !== "docs" || present !== true)
+    throw new Error(`Zhipu ${model.id}: missing capability docs evidence`);
+  for (const key of ["thinking", "toolCalls", "jsonOutput"] as const) {
+    if (typeof model.capabilities?.[key] !== "boolean")
+      throw new Error(`Zhipu ${model.id}: missing capability ${key}`);
+  }
+}
+
 export function zhipuHealth(models: ModelData[], now: Date): ProviderHealth {
-  for (const model of models) assertCreatedAtProvenance(model);
-  const modelIds = models
-    .filter((model) => model.createdAtSource === "not-documented")
-    .map((model) => model.id);
-  return {
-    ...healthyHealth(now),
-    ...(modelIds.length
-      ? { warnings: [{ code: "createdAt-not-documented" as const, modelIds }] }
-      : {}),
-  };
+  for (const model of models) {
+    assertCreatedAtProvenance(model);
+    assertCapabilitiesProvenance(model);
+  }
+  const warnings: NonNullable<ProviderHealth["warnings"]> = [];
+  for (const field of ["createdAt", "capabilities"] as const) {
+    const modelIds = models
+      .filter((model) => model[`${field}Source`] === "not-documented")
+      .map((model) => model.id);
+    if (modelIds.length)
+      warnings.push({ code: `${field}-not-documented`, modelIds });
+  }
+  return { ...healthyHealth(now), ...(warnings.length ? { warnings } : {}) };
 }
 
 export function formatHealthWarnings(

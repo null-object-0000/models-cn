@@ -51,7 +51,8 @@ export interface Model {
   name: string;
   createdAt?: string | null;
   aliases: Array<{ id: string; deprecatedAt?: string }>;
-  capabilities: Record<string, unknown>;
+  capabilities: Record<string, unknown> | null;
+  capabilitiesSource?: "docs" | "not-documented";
   limits: {
     contextTokens: number;
     maxOutputTokens?: number;

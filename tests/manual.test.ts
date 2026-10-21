@@ -124,6 +124,24 @@ describe("manual capabilities validation", () => {
 });
 
 describe("manual capabilities merge", () => {
+  it("保留明确未公布的 null，不能被手工条目转成对象", () => {
+    const unknown: ModelData = {
+      ...model("glm-4-long", {}),
+      capabilities: null,
+      capabilitiesSource: "not-documented",
+      capabilitiesEvidence: { sectionPresent: false },
+    };
+    const result = applyManualCapabilities(
+      provider([unknown]),
+      manual([
+        entry("test", "glm-4-long", {
+          thinking: false,
+          inputModalities: ["text"],
+        }),
+      ]),
+    );
+    expect(result.models[0]).toEqual(unknown);
+  });
   it("fills fields the collector did not provide and keeps official values", () => {
     const data = provider([
       model("m1", { thinking: true }),
@@ -147,7 +165,7 @@ describe("manual capabilities merge", () => {
       outputModalities: ["text"],
     });
     // 官方已有 inputModalities，手工值不覆盖
-    expect(merged.models[1]?.capabilities.inputModalities).toEqual([
+    expect(merged.models[1]?.capabilities?.inputModalities).toEqual([
       "image",
       "text",
     ]);
