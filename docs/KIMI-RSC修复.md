@@ -58,6 +58,14 @@ K3 的 5min / 1h 缓存写入价格为 CN 20 / 40、国际站 3 / 6。国际站�
 
 远端验收在代码 PR 检查通过并合并后，执行 `gh workflow run update-prices.yml --ref main`；检查该次运行的每一步和自动 PR 中的模型清单。运行链接与最终结果记录在交付说明中，不将本地验证等同于远端全绿。
 
+## 合并后的远端验收
+
+代码 [PR #57](https://github.com/null-object-0000/models-cn/pull/57) 的全部检查通过，已于 2026-10-21T06:18:20Z 合并，main 提交为 `1c61cffeb7c532228d5cb598da9fa58b26da0e44`。
+
+随后执行 `gh workflow run update-prices.yml --ref main`，[运行 39554600855](https://github.com/null-object-0000/models-cn/actions/runs/39554600855) 成功。完整采集、发现、类型检查、133 项测试、数据校验、格式检查以及 `Assert collection health` 均通过；通知任务按手动触发条件正常跳过。日志确认 CN／国际站各采到 4 个 Kimi 模型，所有配置的数据源 healthy。
+
+但“没有新的假 PR”尚未通过验收：该次运行创建了 [数据 PR #58](https://github.com/null-object-0000/models-cn/pull/58)，再次列出与 #56 相同的 6 个智谱模型减少，Kimi 无模型或价格移除。已核查官方国际站 markdown，5 个被移除模型仍在 `Other Pricing` 的文本模型表中，只是该折叠块被转换成了 `>` 引用块，现有智谱标题匹配未识别。国内 `glm-5.2` 则已不在当前查询的定价配置中，需独立核实有效价格来源。该数据 PR 未合并，不能因运行全绿就认定其模型下线结论正确。
+
 ## 不确定项与边界
 
 1. Flight / MDX 编译格式不是稳定公开的数据协议；未来记录引用、字符串转义、Fragment 形式或组件名称变化可能需要适配。当前遇到不支持的表达式明确报错，保留 markdown 兜底。
