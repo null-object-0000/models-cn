@@ -9,7 +9,10 @@ export interface ProviderHealth {
   lastAttemptAt: string;
   consecutiveFailures: number;
   message?: string;
-  warnings?: { code: "createdAt-not-documented"; modelIds: string[] }[];
+  warnings?: {
+    code: "createdAt-not-documented" | "capabilities-not-documented";
+    modelIds: string[];
+  }[];
 }
 
 export interface Source {
@@ -96,6 +99,8 @@ export interface ModelData {
   createdAtEvidence?: { releaseNotesMentioned: boolean };
   tokenizer?: string;
   aliases: ModelAlias[];
+  capabilitiesSource?: "docs" | "not-documented";
+  capabilitiesEvidence?: { sectionPresent: boolean };
   capabilities: {
     thinking?: boolean;
     thinkingModes?: string[];
@@ -108,7 +113,7 @@ export interface ModelData {
     inputModalities?: string[];
     outputModalities?: string[];
     supportedParameters?: string[];
-  };
+  } | null;
   limits: {
     contextTokens: number;
     maxOutputTokens?: number;

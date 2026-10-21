@@ -170,7 +170,7 @@ export function applyManualCapabilities(
   if (!byModel.size) return provider;
   const models = provider.models.map((model) => {
     const entry = byModel.get(model.id);
-    if (!entry) return model;
+    if (!entry || model.capabilities === null) return model;
     const capabilities = { ...model.capabilities };
     const target = capabilities as Record<string, unknown>;
     for (const [key, value] of Object.entries(entry.capabilities)) {
