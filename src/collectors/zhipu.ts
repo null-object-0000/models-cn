@@ -509,7 +509,9 @@ export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
     models.push({
       id: idMatch[1]!,
       name: nameMatch[1]!,
-      url: nameMatch[2]!,
+      // 上游 model-overview 的详情链接有时已经带 .md 后缀（如 glm-5.3.md），
+      // 下游统一再拼一次 .md；这里先去掉，避免请求变成 .md.md 而 404。
+      url: nameMatch[2]!.replace(/\.md$/, ""),
       contextTokens,
       maxOutputTokens,
     });
