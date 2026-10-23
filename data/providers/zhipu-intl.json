@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-10-21T18:05:26.457Z",
-    "lastAttemptAt": "2026-10-21T18:05:26.457Z",
-    "consecutiveFailures": 0,
+    "lastAttemptAt": "2026-10-23T06:04:10.502Z",
+    "consecutiveFailures": 1,
     "warnings": [
       {
         "code": "createdAt-not-documented",
@@ -17,7 +17,8 @@
           "glm-4.5-flash"
         ]
       }
-    ]
+    ],
+    "message": "Failed to fetch https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3.md.md: HTTP 404"
   },
   "id": "zhipu-intl",
   "name": "Zhipu International",

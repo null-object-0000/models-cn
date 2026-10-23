@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-21T18:05:50.392Z",
-    "lastAttemptAt": "2026-10-21T18:05:50.392Z",
+    "lastSuccessfulAt": "2026-10-23T06:04:31.109Z",
+    "lastAttemptAt": "2026-10-23T06:04:31.109Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-10-21T07:50:31.215Z",
-    "contentHash": "sha256:71ce0cfe6995a3df6ab25147b3a1ee38bef2262f51a98d8fed25d7c4729eca3e"
+    "retrievedAt": "2026-10-23T06:04:31.109Z",
+    "contentHash": "sha256:9a9b0d14a11351b7c3426d83696802fe4cd3349168da3bff110fd7b01be99601"
   },
   "models": [
     {
@@ -2357,7 +2357,7 @@
         {
           "field": "prices.USD.input.cacheHit",
           "official": null,
-          "reference": 0.002962,
+          "reference": 0.005924,
           "status": "missing"
         },
         {
@@ -2924,7 +2924,7 @@
         {
           "field": "prices.USD.input.cacheHit",
           "official": null,
-          "reference": 0.04,
+          "reference": 0.08,
           "status": "missing"
         },
         {
@@ -3326,7 +3326,7 @@
         {
           "field": "prices.USD.input.cacheHit",
           "official": null,
-          "reference": null,
+          "reference": 0.06,
           "status": "missing"
         },
         {
