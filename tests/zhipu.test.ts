@@ -1207,3 +1207,24 @@ describe("能力二分（真实官方 fixture）", () => {
     );
   });
 });
+
+describe("Zhipu model overview detail URL normalization", () => {
+  it("strips an existing .md suffix so the collector does not request .md.md", () => {
+    // 上游 model-overview 自 2026-10 起把部分详情链接写成 glm-5.3.md，
+    // collector 会再拼一次 .md；这里钉住归一化行为。
+    const overview = `# 模型概览
+
+## 推荐模型
+
+| 模型 | 特点 | 上下文 | 最大输出 |
+| :-- | :-- | :-- | :-- |
+| [GLM-5.3](/cn/guide/models/text/glm-5.3.md) | 最新旗舰 | 1M | 128K |
+| [GLM-5.2](/cn/guide/models/text/glm-5.2) | 1M 上下文 | 1M | 128K |
+`;
+    const models = parseZhipuOverview(overview);
+    expect(models.map((model) => model.url)).toEqual([
+      "/cn/guide/models/text/glm-5.3",
+      "/cn/guide/models/text/glm-5.2",
+    ]);
+  });
+});
