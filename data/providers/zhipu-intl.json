@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-10-23T06:31:53.154Z",
-    "lastAttemptAt": "2026-10-23T06:31:53.154Z",
-    "consecutiveFailures": 0,
+    "lastAttemptAt": "2026-10-27T13:15:51.968Z",
+    "consecutiveFailures": 1,
     "warnings": [
       {
         "code": "createdAt-not-documented",
@@ -17,7 +17,8 @@
           "glm-4.5-flash"
         ]
       }
-    ]
+    ],
+    "message": "Zhipu model overview contains no text models"
   },
   "id": "zhipu-intl",
   "name": "Zhipu International",
