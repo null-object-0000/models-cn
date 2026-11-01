@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-10-23T06:31:53.132Z",
-    "lastAttemptAt": "2026-10-23T06:31:53.132Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-11-01T07:36:16.513Z",
+    "consecutiveFailures": 1,
+    "message": "LongCat quick start is missing the maximum output length for LongCat-2.0"
   },
   "id": "longcat",
   "name": "LongCat",
