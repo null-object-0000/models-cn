@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-23T06:31:53.154Z",
-    "lastAttemptAt": "2026-10-23T06:31:53.154Z",
+    "lastSuccessfulAt": "2026-11-02T01:06:33.552Z",
+    "lastAttemptAt": "2026-11-02T01:06:33.552Z",
     "consecutiveFailures": 0,
     "warnings": [
       {
@@ -743,15 +743,15 @@
       "kind": "pricing",
       "locale": "en",
       "currency": "USD",
-      "retrievedAt": "2026-10-21T18:05:26.457Z",
-      "contentHash": "sha256:43b70d72eebd26c18d2f996b944a94c1fce01fe0c46f76bdde539cd378da84ae"
+      "retrievedAt": "2026-11-02T01:06:33.552Z",
+      "contentHash": "sha256:dc399b139b8e0a2e1abd84f37197b809e94f3efce9b3dd457fadf8ac112cd773"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-10-23T06:31:53.154Z",
-      "contentHash": "sha256:28382cc16df5cb049c31cdae70ede0aa9b7be643bddac6dbb23bf6b016a3ef56"
+      "retrievedAt": "2026-11-02T01:06:33.552Z",
+      "contentHash": "sha256:810cec9696d8f0daa4e047cb88c5366be020241ff9df581b01efc35d98718a32"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",
