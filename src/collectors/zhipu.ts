@@ -614,9 +614,17 @@ export function parseZhipuCapabilitiesWithEvidence(
     .map((match) => match[1])
     .filter((title): title is string => title !== undefined);
   // 新版文档模板：`* [思考模式](/cn/guide/capabilities/thinking-mode)：…`
+  // 以及 2026-11 起的 card 模板：`[card] [思考模式](https://docs.bigmodel.cn/...)`
+  // （原 blockquote 前缀已被 unquoteMarkdown 去掉）。
   for (const match of section.matchAll(
-    /(?:^\s*[-*]\s+|^\s*\*\*)\[([^\]]+)\]\(/gm,
+    /(?:^|[\s\[*｜|])(?:[-*]\s+)?\[([^\]\n]{2,40})\]\(/gm,
   )) {
+    const title = match[1]?.trim();
+    if (title && title !== "card") titles.push(title);
+  }
+  // 旧版引用块模板：`> **思考模式**(/cn/guide/capabilities/thinking-mode)`
+  // （`>` 已被 unquoteMarkdown 去掉，标题是加粗文本而不是 markdown 链接）
+  for (const match of section.matchAll(/\*\*([^*\n]{2,40})\*\*\s*\(/g)) {
     const title = match[1]?.trim();
     if (title) titles.push(title);
   }
