@@ -96,6 +96,7 @@ function parseTokenCount(value: string): number {
 interface KimiTable {
   columns: string[];
   rows: string[][];
+  contextTokens?: number;
 }
 
 function parseMarkdownTables(markdown: string): KimiTable[] {
@@ -134,7 +135,11 @@ function parseMarkdownTables(markdown: string): KimiTable[] {
     !tables.length ||
     tables.length !== [...markdown.matchAll(/<DocTable\b/g)].length
   )
-    throw new Error("Kimi pricing page is missing its rows table");
+    throw new Error(
+      /<table[\s>]/.test(markdown)
+        ? "Kimi markdown contains an empty pricing shell; RSC data is required"
+        : "Kimi pricing page is missing its rows table",
+    );
   return tables;
 }
 
@@ -153,42 +158,45 @@ function parseRscTables(flight: string): KimiTable[] {
     throw new Error("Kimi RSC text record is truncated");
   const source = bytes.subarray(0, length).toString("utf8");
   const tables: KimiTable[] = [];
-  for (const match of source.matchAll(/_jsx\(DocTable,\{columns:/g)) {
-    const start = match.index + match[0].length;
-    const columnsBlock = readArray(source, start);
-    const columns = [...columnsBlock.matchAll(/title:`([^`]+)`/g)].map(
-      (entry) => entry[1]!,
+  let previousTableEnd = 0;
+  for (const match of source.matchAll(/_jsx\(DocTable,\{/g)) {
+    const start = match.index + match[0].length - 1;
+    const propsBlock = readBalanced(source, start);
+    const props = readProps(propsBlock);
+    const columnsBlock = props.get("columns");
+    const rowsBlock = props.get("rows");
+    if (!columnsBlock || !rowsBlock)
+      throw new Error("Kimi RSC pricing table is missing rows or columns");
+    const columns = splitExpressions(columnsBlock.slice(1, -1)).map(
+      (column) => {
+        const title = readProps(column).get("title");
+        if (!title) throw new Error("Kimi RSC pricing column is missing title");
+        return normalizeRscString(title);
+      },
     );
-    const rowsStart = start + columnsBlock.length;
-    if (!source.startsWith(",rows:", rowsStart)) {
-      throw new Error("Kimi RSC pricing table is missing rows");
-    }
-    const rowsBlock = readArray(source, rowsStart + ",rows:".length);
-    // 国际站的一个金额是 Fragment，children 内的货币符号和数字必须先合成一个值。
-    const normalized = rowsBlock
-      .replace(
-        /_jsxs\(_Fragment,\{children:\[`([$¥￥])`,`(\d+(?:\.\d+)?)`\]\}\)/g,
-        (_, symbol: string, amount: string) => JSON.stringify(symbol + amount),
-      )
-      .replace(/`([^`\\]*)`/g, (_, value: string) => {
-        if (value.includes("${"))
-          throw new Error("Unsupported Kimi template expression");
-        return JSON.stringify(value);
-      });
-    // 不执行上游 JavaScript；遇到不认识的表达式或截断直接报错。
-    const rows: unknown = JSON.parse(normalized);
-    if (!columns.length || !Array.isArray(rows) || !rows.length) {
+    const normalized = rowsBlock.replace(
+      /_jsxs\(_Fragment,\{children:\[`([$¥￥])`,`(\d+(?:\.\d+)?)`\]\}\)/g,
+      (_, symbol: string, amount: string) => JSON.stringify(symbol + amount),
+    );
+    const rows: unknown = JSON.parse(normalizeRscCells(normalized));
+    if (!columns.length || !Array.isArray(rows) || !rows.length)
       throw new Error("Kimi RSC pricing table is empty");
-    }
     if (
       !rows.every(
         (row) =>
           Array.isArray(row) && row.every((cell) => typeof cell === "string"),
       )
-    ) {
+    )
       throw new Error("Unexpected Kimi RSC pricing cells");
-    }
-    tables.push({ columns, rows: rows as string[][] });
+    const contextTokens = nearestContext(
+      source.slice(previousTableEnd, match.index),
+    );
+    tables.push({
+      columns,
+      rows: rows as string[][],
+      ...(contextTokens !== undefined ? { contextTokens } : {}),
+    });
+    previousTableEnd = start + propsBlock.length;
   }
   if (
     !tables.length ||
@@ -198,10 +206,10 @@ function parseRscTables(flight: string): KimiTable[] {
   return tables;
 }
 
-/** 提取完整数组；忽略字符串里的括号，支持 Fragment 中嵌套的 children 数组。 */
-function readArray(source: string, start: number): string {
-  if (source[start] !== "[") throw new Error("Expected Kimi pricing array");
-  let depth = 0;
+/** Read balanced expressions without interpreting upstream JavaScript. */
+function readBalanced(source: string, start: number): string {
+  const pairs: Record<string, string> = { "[": "]", "{": "}", "(": ")" };
+  const stack: string[] = [];
   let quote = "";
   for (let at = start; at < source.length; at += 1) {
     const char = source[at]!;
@@ -209,10 +217,85 @@ function readArray(source: string, start: number): string {
       if (char === "\\") at += 1;
       else if (char === quote) quote = "";
     } else if ("\"'`".includes(char)) quote = char;
-    else if (char === "[") depth += 1;
-    else if (char === "]" && --depth === 0) return source.slice(start, at + 1);
+    else if (pairs[char]) stack.push(pairs[char]!);
+    else if (["]", "}", ")"].includes(char)) {
+      if (stack.pop() !== char)
+        throw new Error("Unbalanced Kimi pricing expression");
+      if (!stack.length) return source.slice(start, at + 1);
+    }
   }
-  throw new Error("Kimi pricing array is truncated");
+  throw new Error("Kimi pricing expression is truncated");
+}
+
+function splitExpressions(source: string): string[] {
+  const parts: string[] = [];
+  let start = 0;
+  for (let at = 0; at < source.length; at += 1) {
+    const char = source[at]!;
+    if ("[{(".includes(char)) at += readBalanced(source, at).length - 1;
+    else if ("\"'`".includes(char)) {
+      const quote = char;
+      while (++at < source.length) {
+        if (source[at] === "\\") at += 1;
+        else if (source[at] === quote) break;
+      }
+      if (at >= source.length) throw new Error("Truncated Kimi string");
+    } else if (char === ",") {
+      parts.push(source.slice(start, at).trim());
+      start = at + 1;
+    }
+  }
+  if (source.slice(start).trim()) parts.push(source.slice(start).trim());
+  return parts;
+}
+
+function readProps(block: string): Map<string, string> {
+  return new Map(
+    splitExpressions(block.slice(1, -1)).map((prop) => {
+      const colon = prop.indexOf(":");
+      if (colon < 0) throw new Error("Unsupported Kimi property");
+      return [prop.slice(0, colon).trim(), prop.slice(colon + 1).trim()];
+    }),
+  );
+}
+
+function normalizeRscString(expression: string): string {
+  if (/^_jsx\((?:_components\.a|Tooltip),\{/.test(expression)) {
+    const start = expression.indexOf("{");
+    const block = readBalanced(expression, start);
+    if (expression.slice(start + block.length) !== ")")
+      throw new Error("Unsupported Kimi JSX expression");
+    const children = readProps(block).get("children");
+    if (!children) throw new Error("Kimi JSX cell is missing string children");
+    return normalizeRscString(children);
+  }
+  if (/^`[^`\\]*`$/.test(expression) && !expression.includes("${"))
+    return expression.slice(1, -1);
+  if (/^"/.test(expression)) {
+    const value: unknown = JSON.parse(expression);
+    if (typeof value === "string") return value;
+  }
+  throw new Error("Unsupported Kimi string expression");
+}
+
+function normalizeRscCells(source: string): string {
+  return JSON.stringify(
+    splitExpressions(source.slice(1, -1)).map((row) => {
+      if (!row.startsWith("[") || !row.endsWith("]"))
+        throw new Error("Unexpected Kimi RSC pricing row");
+      return splitExpressions(row.slice(1, -1)).map(normalizeRscString);
+    }),
+  );
+}
+
+function nearestContext(text: string): number | undefined {
+  const matches = [
+    ...text.matchAll(
+      /([\d,]+)(?:\s+tokens?|[-–]tokens?)\s+(?:上下文窗口|context window)/gi,
+    ),
+  ];
+  const value = matches.at(-1)?.[1];
+  return value ? parseTokenCount(value) : undefined;
 }
 
 function mergeCurrencyCells(row: string[]): string[] {
@@ -249,16 +332,21 @@ const COLUMN_PATTERNS = {
   model: [/模型/, /^Model$/i],
   unit: [/计费单位/, /^Unit$/i],
   cacheWriteShort: [
-    /缓存写入[（(]TTL 5min[）)]/,
-    /Cache Write Price \(TTL 5min\)/i,
+    /缓存写入[（(](?:TTL\s*)?5min[）)]/,
+    /Cache Write(?: Price)? \((?:TTL\s*)?5min\)/i,
+    /^5m writes$/i,
   ],
-  cacheWriteLong: [/缓存写入[（(]TTL 1h[）)]/, /Cache Write Price \(TTL 1h\)/i],
+  cacheWriteLong: [
+    /缓存写入[（(](?:TTL\s*)?1h[）)]/,
+    /Cache Write(?: Price)? \((?:TTL\s*)?1h\)/i,
+    /^1h writes$/i,
+  ],
   // The two English tables name the same columns differently: K3 uses "Cached Input Price" /
   // "Input Price", the K2 family uses "Input Price (Cache Hit)" / "Input Price (Cache Miss)".
   // Order matters — "Cache Miss" must be tried before the bare "Input Price".
-  cacheHit: [/缓存命中/, /Cache Hit/i, /Cached Input Price/i],
-  inputStandard: [/缓存未命中/, /Cache Miss/i, /^Input Price$/i],
-  output: [/^输出价格$/, /^Output Price$/i],
+  cacheHit: [/缓存命中/, /Cache Hit/i, /Cached Input Price/i, /Cached Input/i],
+  inputStandard: [/缓存未命中/, /Cache Miss/i, /^Input(?: Price)?$/i, /^输入$/],
+  output: [/^输出(?:价格)?$/, /^Output(?: Price)?$/i],
   context: [/上下文窗口/, /Context Window/i],
 } as const;
 
@@ -280,14 +368,9 @@ function tableToModels(
     context: columnIndex(columns, ...COLUMN_PATTERNS.context),
   };
   if (
-    [
-      index.model,
-      index.unit,
-      index.cacheHit,
-      index.inputStandard,
-      index.output,
-      index.context,
-    ].some((at) => at < 0)
+    [index.model, index.cacheHit, index.inputStandard, index.output].some(
+      (at) => at < 0,
+    )
   ) {
     throw new Error(
       `Unexpected Kimi pricing table columns: ${JSON.stringify(columns)}`,
@@ -303,7 +386,7 @@ function tableToModels(
         `Unexpected Kimi pricing row width: ${row.length}, expected ${columns.length}`,
       );
     }
-    if (row[index.unit] !== "1M tokens") {
+    if (index.unit >= 0 && row[index.unit] !== "1M tokens") {
       throw new Error(`Unexpected Kimi pricing unit: ${row[index.unit]}`);
     }
     const id = row[index.model]!;
@@ -314,22 +397,33 @@ function tableToModels(
     const cacheWriteShort = cell(index.cacheWriteShort);
     const cacheWriteLong = cell(index.cacheWriteLong);
     const contextValue = cell(index.context);
+    const contextTokens = contextValue
+      ? parseTokenCount(contextValue)
+      : table.contextTokens;
+    if (!contextTokens)
+      throw new Error(`Kimi pricing table is missing context window for ${id}`);
+    const money = (value: string): number => {
+      const inline = value.match(/^([$¥￥]?\d+(?:\.\d+)?)\s*\/\s*MTok$/i);
+      if (inline) return parseMoney(inline[1]!);
+      if (index.unit >= 0) return parseMoney(value);
+      throw new Error(`Cannot parse Kimi price and unit: ${value}`);
+    };
     const price: ModelPrice = {
       market,
       currency,
       unit: "1M_tokens",
       rateType: "standard",
       input: {
-        ...(cacheHitValue ? { cacheHit: parseMoney(cacheHitValue) } : {}),
+        ...(cacheHitValue ? { cacheHit: money(cacheHitValue) } : {}),
         ...(cacheWriteShort
-          ? { explicitCacheCreation: parseMoney(cacheWriteShort) }
+          ? { explicitCacheCreation: money(cacheWriteShort) }
           : {}),
         ...(cacheWriteLong
-          ? { explicitCacheCreation1h: parseMoney(cacheWriteLong) }
+          ? { explicitCacheCreation1h: money(cacheWriteLong) }
           : {}),
-        standard: parseMoney(row[index.inputStandard]!),
+        standard: money(row[index.inputStandard]!),
       },
-      output: parseMoney(row[index.output]!),
+      output: money(row[index.output]!),
       sourceUrl,
     };
     return {
@@ -338,7 +432,7 @@ function tableToModels(
       aliases: [],
       capabilities: {},
       limits: {
-        contextTokens: contextValue ? parseTokenCount(contextValue) : 0,
+        contextTokens,
       },
       prices: [price],
     } satisfies ModelData;
@@ -410,7 +504,7 @@ export function parseMoonshotPricingPage(
   }
   return {
     models,
-    normalizedTable: JSON.stringify(tables.map((table) => table.rows)),
+    normalizedTable: JSON.stringify(tables),
   };
 }
 

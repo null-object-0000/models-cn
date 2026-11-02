@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it, vi, afterEach } from "vitest";
 import {
   collectLongCat,
@@ -32,6 +33,26 @@ const modelDocsHtml = `
 }</pre>`;
 
 describe("LongCat collector parsers", () => {
+  it("reads the current bilingual QuickStart without borrowing limits from another model", () => {
+    for (const file of ["longcat-docs.md", "zh_.md"]) {
+      const html = readFileSync(
+        new URL(`../docs/upstream-samples-20261102/${file}`, import.meta.url),
+        "utf8",
+      );
+      expect(parseLongCatMaxOutput(html, "LongCat-2.0")).toBeUndefined();
+      expect(
+        parseLongCatMaxOutput(html, "LongCat-2.5-Preview"),
+      ).toBeUndefined();
+      expect(parseLongCatMaxOutput(html, "LongCat-2.5")).toBe(131_072);
+    }
+    expect(
+      parseLongCatMaxOutput(
+        "LongCat-2.5-Preview: maximum output length of 128K tokens",
+        "LongCat-2.5",
+      ),
+    ).toBeUndefined();
+  });
+
   it("keeps standard and limited-time CNY prices separate", () => {
     const parsed = parseLongCatPricingPage(
       pricingHtml,
@@ -121,12 +142,10 @@ describe("LongCat collector parsers", () => {
     expect(parseLongCatMaxOutput(html, "LongCat-2.5-Preview")).toBe(262_144);
   });
 
-  it("fails loudly when the requested model is absent", () => {
+  it("returns undefined when the requested model is absent", () => {
     const html =
       "LongCat-2.0: 1M token context window with a maximum output length of 128K tokens";
-    expect(() => parseLongCatMaxOutput(html, "LongCat-9.9")).toThrow(
-      /maximum output length/,
-    );
+    expect(parseLongCatMaxOutput(html, "LongCat-9.9")).toBeUndefined();
   });
 });
 
@@ -158,7 +177,7 @@ describe("collectLongCat", () => {
   <tr><td>Output</td><td>$1.20</td></tr>
 </table>`,
     "https://longcat.chat/platform/docs/": `
-      LongCat-2.5-Preview: 1M token context window with a maximum output length of 128K tokens
+      LongCat-2.5: 1M token context window with a maximum output length of 128K tokens
       LongCat-2.0: 1M token context window with a maximum output length of 128K tokens`,
     "https://longcat.chat/platform/docs/zh/api/model": modelDocsHtml,
   };
@@ -171,88 +190,136 @@ describe("collectLongCat", () => {
 
   afterEach(() => vi.unstubAllGlobals());
 
-  it("emits both models with per-model pricing, tolerating a missing created", async () => {
-    vi.stubGlobal("fetch", async (input: string | URL) => {
-      const url = String(input);
-      if (url.includes("api.longcat.chat")) {
-        if (url.endsWith("/models"))
+  it.each([
+    "api",
+    "quickstart",
+    "missing-model",
+    "all-max-missing",
+    "all-missing",
+  ])(
+    "emits priced models with %s output metadata, tolerating a missing created",
+    async (scenario) => {
+      vi.stubGlobal("fetch", async (input: string | URL) => {
+        const url = String(input);
+        if (url.includes("api.longcat.chat")) {
+          if (url.endsWith("/models"))
+            return json({
+              object: "list",
+              data: [
+                {
+                  id: "LongCat-2.5",
+                  object: "model",
+                  owned_by: "LongCat",
+                  ...(scenario === "all-missing"
+                    ? {}
+                    : { context_window: 1_048_576 }),
+                  ...(scenario === "api" ? { max_output_tokens: 131_072 } : {}),
+                },
+                {
+                  id: "LongCat-2.0",
+                  object: "model",
+                  owned_by: "LongCat",
+                  ...(scenario === "all-missing"
+                    ? {}
+                    : { context_window: 1_048_576 }),
+                  ...(scenario === "api" ? { max_output_tokens: 131_072 } : {}),
+                },
+              ],
+            });
+          const id = url.split("/").at(-1)!;
           return json({
-            object: "list",
-            data: [
-              {
-                id: "LongCat-2.5-Preview",
-                object: "model",
-                owned_by: "LongCat",
-                context_window: 1_048_576,
-                max_output_tokens: 131_072,
-              },
-              {
-                id: "LongCat-2.0",
-                object: "model",
-                owned_by: "LongCat",
-                context_window: 1_048_576,
-                max_output_tokens: 131_072,
-              },
-            ],
+            id,
+            name: id,
+            // 2.5-Preview 的真实详情**没有** created —— 这正是崩溃触发点
+            ...(id === "LongCat-2.0" ? { created: 1_773_331_200 } : {}),
+            ...(scenario === "all-missing"
+              ? {}
+              : { context_length: 1_048_576 }),
+            architecture: {
+              input_modalities: ["text"],
+              output_modalities: ["text"],
+              tokenizer: "Other",
+            },
+            supported_parameters: ["max_tokens", "stream", "tools", "thinking"],
+            pricing: { prompt: "2", completion: "8", cached_tokens: "0.04" },
           });
-        const id = url.split("/").at(-1)!;
-        return json({
-          id,
-          name: id,
-          // 2.5-Preview 的真实详情**没有** created —— 这正是崩溃触发点
-          ...(id === "LongCat-2.0" ? { created: 1_773_331_200 } : {}),
-          context_length: 1_048_576,
-          architecture: {
-            input_modalities: ["text"],
-            output_modalities: ["text"],
-            tokenizer: "Other",
-          },
-          supported_parameters: ["max_tokens", "stream", "tools", "thinking"],
-          pricing: { prompt: "2", completion: "8", cached_tokens: "0.04" },
-        });
+        }
+        const page =
+          url === "https://longcat.chat/platform/docs/" &&
+          scenario !== "api" &&
+          scenario !== "quickstart"
+            ? scenario === "all-missing" || scenario === "all-max-missing"
+              ? "<p>No output limits documented</p>"
+              : readFileSync(
+                  new URL(
+                    "../docs/upstream-samples-20261102/longcat-docs.md",
+                    import.meta.url,
+                  ),
+                  "utf8",
+                )
+            : url === "https://longcat.chat/platform/docs/" &&
+                scenario === "api"
+              ? "LongCat-2.5: maximum output length of 256K tokens"
+              : pages[url];
+        if (!page) throw new Error(`unexpected fetch: ${url}`);
+        return new Response(page, { status: 200 });
+      });
+
+      if (scenario === "all-missing") {
+        await expect(
+          collectLongCat(new Date("2026-11-02T00:00:00Z"), "test-key"),
+        ).rejects.toThrow(/all missing limit information/);
+        return;
       }
-      const page = pages[url];
-      if (!page) throw new Error(`unexpected fetch: ${url}`);
-      return new Response(page, { status: 200 });
-    });
+      const data = await collectLongCat(
+        new Date("2026-09-26T00:00:00Z"),
+        "test-key",
+      );
 
-    const data = await collectLongCat(
-      new Date("2026-09-26T00:00:00Z"),
-      "test-key",
-    );
+      expect(data.health.status).toBe("healthy");
+      expect(data.models.map((m) => m.id)).toEqual([
+        "LongCat-2.0",
+        "LongCat-2.5",
+      ]);
 
-    expect(data.health.status).toBe("healthy");
-    expect(data.models.map((m) => m.id)).toEqual([
-      "LongCat-2.0",
-      "LongCat-2.5-Preview",
-    ]);
+      const [older, newer] = data.models;
+      expect(older!.limits.maxOutputTokens).toBe(
+        scenario === "missing-model" || scenario === "all-max-missing"
+          ? undefined
+          : 131_072,
+      );
+      expect(newer!.limits.maxOutputTokens).toBe(
+        scenario === "all-max-missing" ? undefined : 131_072,
+      );
+      expect(older!.limits.contextTokens).toBe(1_048_576);
+      // 价格必须各归各的：2.0 有原价+折扣价，2.5 目前只有折扣价
+      expect(
+        older!.prices.map((p) => `${p.market}/${p.rateType}`).sort(),
+      ).toEqual([
+        "china/promotional",
+        "china/standard",
+        "international/promotional",
+        "international/standard",
+      ]);
+      expect(
+        newer!.prices.map((p) => `${p.market}/${p.rateType}`).sort(),
+      ).toEqual(["china/promotional", "international/promotional"]);
+      // 2.0 原价：CNY 5 / USD 0.75；2.5 折扣价：CNY 2 / USD 0.30
+      expect(
+        older!.prices
+          .filter((p) => p.rateType === "standard")
+          .map((p) => p.input.standard)
+          .sort(),
+      ).toEqual([0.75, 5]);
+      expect(newer!.prices.map((p) => p.input.standard).sort()).toEqual([
+        0.3, 2,
+      ]);
+      // 2.5 绝不能出现 2.0 的原价
+      expect(newer!.prices.some((p) => p.rateType === "standard")).toBe(false);
 
-    const [older, newer] = data.models;
-    // 价格必须各归各的：2.0 有原价+折扣价，2.5 目前只有折扣价
-    expect(
-      older!.prices.map((p) => `${p.market}/${p.rateType}`).sort(),
-    ).toEqual([
-      "china/promotional",
-      "china/standard",
-      "international/promotional",
-      "international/standard",
-    ]);
-    expect(
-      newer!.prices.map((p) => `${p.market}/${p.rateType}`).sort(),
-    ).toEqual(["china/promotional", "international/promotional"]);
-    // 2.0 原价：CNY 5 / USD 0.75；2.5 折扣价：CNY 2 / USD 0.30
-    expect(
-      older!.prices
-        .filter((p) => p.rateType === "standard")
-        .map((p) => p.input.standard)
-        .sort(),
-    ).toEqual([0.75, 5]);
-    expect(newer!.prices.map((p) => p.input.standard).sort()).toEqual([0.3, 2]);
-    // 2.5 绝不能出现 2.0 的原价
-    expect(newer!.prices.some((p) => p.rateType === "standard")).toBe(false);
-
-    // created 缺失 → 省略 createdAt，而不是抛 "Invalid time value"
-    expect(older!.createdAt).toBe("2026-03-12T16:00:00.000Z");
-    expect(newer!.createdAt).toBeUndefined();
-  });
+      // created 缺失 → 省略 createdAt，而不是抛 "Invalid time value"
+      expect(older!.createdAt).toBe("2026-03-12T16:00:00.000Z");
+      expect(newer!.createdAt).toBeUndefined();
+    },
+  );
 });
