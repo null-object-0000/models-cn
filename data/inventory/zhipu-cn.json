@@ -3,14 +3,14 @@
   "provider": "zhipu-cn",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-02T01:07:00.615Z",
-    "lastAttemptAt": "2026-11-02T01:07:00.615Z",
+    "lastSuccessfulAt": "2026-11-02T22:20:47.361Z",
+    "lastAttemptAt": "2026-11-02T22:20:47.361Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://open.bigmodel.cn/api/paas/v4/models",
-    "retrievedAt": "2026-09-18T05:58:41.162Z",
-    "contentHash": "sha256:67a7862f6b9d98e0ac8970d24d53248267ebffc9817f9bc153e1f4037ba19b23"
+    "retrievedAt": "2026-11-02T22:20:47.361Z",
+    "contentHash": "sha256:b67b92c38ed8cf1b061338b8bf41ec1821ced4b5bfd14b0119e713df4740d158"
   },
   "models": [
     {
@@ -56,6 +56,10 @@
     {
       "id": "glm-5.3-flashx",
       "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-5.3-flashx-legal",
+      "ownedBy": "z-ai"
     }
   ],
   "comparison": {
@@ -69,7 +73,8 @@
       "glm-5.2",
       "glm-5.3",
       "glm-5.3-flash",
-      "glm-5.3-flashx"
+      "glm-5.3-flashx",
+      "glm-5.3-flashx-legal"
     ],
     "aliasesAndListed": [],
     "listedWithoutPricing": [
@@ -81,8 +86,7 @@
       "glm-4-flashx-250414",
       "glm-4-long",
       "glm-4.7-flash",
-      "glm-4.7-flashx",
-      "glm-5.3-flashx-legal"
+      "glm-4.7-flashx"
     ],
     "activeAliasesNotListed": []
   }
