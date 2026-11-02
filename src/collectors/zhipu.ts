@@ -491,17 +491,21 @@ export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
   for (const line of `${recommended}\n${text}`.split("\n")) {
     const cells = splitTableRow(line);
     if (cells.length < 4) continue;
-    const nameMatch = cells[0]!.match(
-      /\[([^\]]+)\]\((\/cn\/guide\/models\/[^)]+)\)/,
-    );
+    // 上游 2026-11 起把表格里的模型链接从相对路径改成了绝对 URL
+    // （`/cn/guide/models/...` → `https://docs.bigmodel.cn/cn/guide/models/...`），
+    // 且部分链接带 `.md` 后缀或 `#anchor`。这里只取路径部分，下游统一再拼域名。
+    const nameMatch = cells[0]!.match(/\[([^\]]+)\]\(([^)]+)\)/);
     if (!nameMatch) continue;
+    const pathMatch = nameMatch[2]!.match(/(\/cn\/guide\/models\/[^)#]+)/);
+    if (!pathMatch) continue;
+    const modelPath = pathMatch[1]!;
     const idMatch = nameMatch[1]!.toLowerCase().match(/(glm[-a-z0-9.]+)/);
     if (!idMatch || seen.has(idMatch[1]!)) continue;
     const contextTokens = parseTokenCount(cells[2]!);
     const maxOutputTokens = parseTokenCount(cells[3]!);
     if (contextTokens === undefined || maxOutputTokens === undefined) {
       // 推荐表还含图像/语音等非 token 生成模型，只有文本及旗舰多模态属于范围。
-      if (/\/(text|free)\//.test(nameMatch[2]!) || /glm-5\./.test(idMatch[1]!))
+      if (/\/(text|free)\//.test(modelPath) || /glm-5\./.test(idMatch[1]!))
         throw new Error(`Zhipu ${idMatch[1]}: missing token limits`);
       continue;
     }
@@ -511,7 +515,7 @@ export function parseZhipuOverview(markdown: string): ZhipuOverviewModel[] {
       name: nameMatch[1]!,
       // 上游 model-overview 的详情链接有时已经带 .md 后缀（如 glm-5.3.md），
       // 下游统一再拼一次 .md；这里先去掉，避免请求变成 .md.md 而 404。
-      url: nameMatch[2]!.replace(/\.md$/, ""),
+      url: modelPath.replace(/\.md$/, ""),
       contextTokens,
       maxOutputTokens,
     });
