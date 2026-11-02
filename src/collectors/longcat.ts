@@ -334,6 +334,10 @@ export async function collectLongCat(
   }
 
   const detailByModel = new Map<string, LongCatModelDetail>();
+  // 定价页比 API 慢一拍：上游下架模型后旧定价页仍会 200 一段时间。
+  // 有 API key 时以 `/v1/models` 为准——列表里没有的建模直接判为已下架并跳过，
+  // 不再让整个 provider 因为一个过期定价页变红。
+  const retiredByApi = new Set<string>();
   if (apiKey) {
     const list = await fetchAuthenticatedJson<LongCatModelList>(
       LONGCAT_MODELS_API_URL,
@@ -341,8 +345,10 @@ export async function collectLongCat(
     );
     for (const modelId of LONGCAT_PRICED_MODEL_IDS) {
       const listed = list.data.find((model) => model.id === modelId);
-      if (!listed)
-        throw new Error(`LongCat API model list does not include ${modelId}`);
+      if (!listed) {
+        retiredByApi.add(modelId);
+        continue;
+      }
       const detail = await fetchAuthenticatedJson<LongCatModelDetail>(
         longCatModelApiUrl(modelId),
         apiKey,
@@ -410,7 +416,13 @@ export async function collectLongCat(
     contentHash: hash(JSON.stringify([...maxOutputByModel.entries()])),
   });
 
-  const models = LONGCAT_PRICED_MODEL_IDS.map((modelId) => {
+  const activeIds = LONGCAT_PRICED_MODEL_IDS.filter(
+    (modelId) => !retiredByApi.has(modelId),
+  );
+  if (!activeIds.length)
+    throw new Error("LongCat API model list does not include any priced model");
+
+  const models = activeIds.map((modelId) => {
     const detail = detailByModel.get(modelId)!;
     const maxOutputTokens = maxOutputByModel.get(modelId);
     // created 是可选字段：上游 2.5-Preview 的详情接口不给它。此时**省略**
