@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  collectMoonshotChina,
   collectMoonshotInternational,
   parseMoonshotOutputLimits,
   parseMoonshotPricingPage,
@@ -23,7 +24,138 @@ const modelIds = [
 const emptyTable = "<table><thead><tr /></thead><tbody /></table>";
 afterEach(() => vi.unstubAllGlobals());
 
+const currentRsc = readFileSync(
+  new URL("./fixtures/kimi-cn-rsc-20261102.txt", import.meta.url),
+  "utf8",
+);
+
+// Preserve UTF-8 Flight lengths when mutating a real compiled record for failure tests.
+function updateCurrentRsc(transform: (source: string) => string): string {
+  return currentRsc.replace(
+    /([0-9a-f]+:T)[0-9a-f]+,([\s\S]*)/,
+    (_, prefix: string, source: string) => {
+      const changed = transform(source);
+      return `${prefix}${Buffer.byteLength(changed).toString(16)},${changed}`;
+    },
+  );
+}
+
 describe("Kimi collector parser", () => {
+  it("parses the 2026-11-02 original grouped tables, links, Tooltip titles and inline MTok units", () => {
+    const models = parseMoonshotPricingPage(currentRsc, "url").models;
+    expect(models.map((model) => model.id)).toEqual([
+      "kimi-k3.1-pro",
+      "kimi-k3.1-pro-highspeed",
+      "kimi-k3",
+      "kimi-k2.7-code",
+      "kimi-k2.7-code-highspeed",
+      "kimi-k2.6",
+    ]);
+    expect(models.map((model) => model.limits.contextTokens)).toEqual([
+      1_048_576, 1_048_576, 1_048_576, 262_144, 262_144, 262_144,
+    ]);
+    expect(
+      models.map((model) => {
+        const price = model.prices[0]!;
+        expect(price.unit).toBe("1M_tokens");
+        return [
+          price.input.standard,
+          price.output,
+          price.input.cacheHit,
+          price.input.explicitCacheCreation,
+          price.input.explicitCacheCreation1h,
+        ];
+      }),
+    ).toEqual([
+      [13, 68, 1.3, 13, 26],
+      [26, 136, 1.3, 26, 52],
+      [20, 100, 2, 20, 40],
+      [6.5, 27, 1.3, undefined, undefined],
+      [13, 54, 2.6, undefined, undefined],
+      [6.5, 27, 1.1, undefined, undefined],
+    ]);
+    const full = readFileSync(
+      new URL(
+        "../docs/upstream-samples-20261102/kimi-cn-rsc.txt",
+        import.meta.url,
+      ),
+      "utf8",
+    );
+    expect(parseMoonshotPricingPage(full, "url").models).toEqual(models);
+  });
+
+  it("accepts reordered props and columns in the current grouped table", () => {
+    const reordered = updateCurrentRsc((source) =>
+      source
+        .replace("className:`doc-table-bordered`,", "")
+        .replace("rows:", "className:`doc-table-bordered`,rows:")
+        .replace("title:`输入`", "title:`SWAP`")
+        .replace("title:`输出`,width:`13%`", "title:`输入`,width:`13%`")
+        .replace("title:`SWAP`", "title:`输出`")
+        .replace(
+          "`¥13.00 / MTok`,`¥68.00 / MTok`",
+          "`¥68.00 / MTok`,`¥13.00 / MTok`",
+        ),
+    );
+    expect(
+      parseMoonshotPricingPage(reordered, "url").models[0]?.prices[0],
+    ).toMatchObject({ input: { standard: 13 }, output: 68 });
+  });
+
+  it("reads English context prose and rejects missing context separately for each family", () => {
+    const english = updateCurrentRsc((source) =>
+      source
+        .replace(
+          "1,048,576 tokens 上下文窗口",
+          "1,048,576-token context window",
+        )
+        .replace("262,144 tokens 上下文窗口", "262,144 tokens context window"),
+    );
+    expect(
+      parseMoonshotPricingPage(english, "url").models.map(
+        (model) => model.limits.contextTokens,
+      ),
+    ).toEqual([1_048_576, 1_048_576, 1_048_576, 262_144, 262_144, 262_144]);
+    for (const context of [
+      "1,048,576 tokens 上下文窗口",
+      "262,144 tokens 上下文窗口",
+    ]) {
+      expect(() =>
+        parseMoonshotPricingPage(
+          updateCurrentRsc((source) => source.replace(context, "未公开上下文")),
+          "url",
+        ),
+      ).toThrow(/missing context window/);
+    }
+  });
+
+  it.each(["¥13.00", "¥13.00 / KTok", "unavailable / MTok"])(
+    "rejects absent or unknown inline units and invalid prices: %s",
+    (value) => {
+      expect(() =>
+        parseMoonshotPricingPage(
+          updateCurrentRsc((source) => source.replace("¥13.00 / MTok", value)),
+          "url",
+        ),
+      ).toThrow(/price and unit/);
+    },
+  );
+
+  it("identifies current markdown shells as missing RSC data rather than model removal", () => {
+    for (const locale of ["cn", "intl"]) {
+      const shell = readFileSync(
+        new URL(
+          `../docs/upstream-samples-20261102/kimi-pricing-${locale}.md`,
+          import.meta.url,
+        ),
+        "utf8",
+      );
+      expect(() => parseMoonshotPricingPage(shell, "url")).toThrow(
+        /empty pricing shell; RSC data is required/,
+      );
+    }
+  });
+
   it("reads the K3 table by column title, including both cache-write TTL tiers", () => {
     // The merged pricing page carries one table per family and they do not share a column
     // layout: K3 bills cache writes per TTL tier. Positional parsing broke the collector when
@@ -187,6 +319,29 @@ describe("Kimi collector parser", () => {
     expect(parseMoonshotPricingPage(reordered, "url").models[0]?.id).toBe(
       "kimi-k3",
     );
+  });
+
+  it("collects the current CN RSC models without relying on the empty markdown shell", async () => {
+    vi.stubGlobal("fetch", async (url: string, init: RequestInit) => {
+      if (url.includes("/pricing/")) {
+        expect((init.headers as Record<string, string>).RSC).toBe("1");
+        return new Response(currentRsc);
+      }
+      if (url.includes("models-overview"))
+        return new Response(modelIds.join(" "));
+      return new Response(
+        "Kimi 大模型的输出长度是多少\nkimi-k3 1024*1024 - prompt_tokens\nkimi-k2.6 256*1024 - prompt_tokens",
+      );
+    });
+    const provider = await collectMoonshotChina();
+    expect(provider.health.status).toBe("healthy");
+    expect(provider.models).toHaveLength(6);
+    expect(provider.models[0]).toMatchObject({
+      id: "kimi-k3.1-pro",
+      limits: { contextTokens: 1_048_576 },
+    });
+    expect(provider.models[0]?.limits.maxOutputTokens).toBeUndefined();
+    expect(provider.models[2]?.limits.maxOutputTokens).toBe(1_048_576);
   });
 
   it("requests RSC first and keeps metadata requests in markdown", async () => {

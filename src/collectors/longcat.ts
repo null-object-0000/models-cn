@@ -35,14 +35,14 @@ export const LONGCAT_PRICING_SOURCES = [
     locale: "zh-CN",
     currency: "CNY",
     market: "china",
-    modelId: "LongCat-2.5-Preview",
+    modelId: "LongCat-2.5",
   },
   {
     url: "https://longcat.chat/platform/docs/pricing/longcat-2.5",
     locale: "en",
     currency: "USD",
     market: "international",
-    modelId: "LongCat-2.5-Preview",
+    modelId: "LongCat-2.5",
   },
 ] as const;
 
@@ -54,7 +54,7 @@ export const LONGCAT_MODELS_API_URL =
 
 /**
  * 定价页覆盖的模型清单（去重，顺序稳定）。上游 2026-09 新增了
- * LongCat-2.5-Preview 并给它单独开了定价页，因此**模型数量不是常量**：
+ * LongCat-2.5（原 Preview）并给它单独开了定价页，因此**模型数量不是常量**：
  * 采集时以「有定价页的模型」为产出集合，避免把 2.0 的价格挂到 2.5 名下，
  * 也避免无定价的模型被静默丢掉。
  */
@@ -214,7 +214,7 @@ export function parseLongCatModelDocs(html: string): LongCatModelDetail {
 export function parseLongCatMaxOutput(
   html: string,
   modelId = "LongCat-2.0",
-): number {
+): number | undefined {
   const text = cleanText(cheerio.load(html).root().text());
   // 按**模型名**取该模型那一行。上游 quickstart 现在同时列出多个模型
   // （LongCat-2.5-Preview 与 LongCat-2.0 各一行），不带模型名取第一个匹配
@@ -227,14 +227,11 @@ export function parseLongCatMaxOutput(
   const escaped = modelId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const match = text.match(
     new RegExp(
-      `${escaped}(?:(?!LongCat-)[\\s\\S]){0,200}?maximum output length of\\s*([\\d.]+\\s*[KM])`,
+      `${escaped}(?![\\w.-])(?:(?!LongCat-)[\\s\\S]){0,200}?(?:maximum output length of|最大输出长度)\\s*([\\d.]+\\s*[KM])`,
       "i",
     ),
   );
-  if (!match?.[1])
-    throw new Error(
-      `LongCat quick start is missing the maximum output length for ${modelId}`,
-    );
+  if (!match?.[1]) return undefined;
   return parseBinaryTokenCount(match[1]);
 }
 
@@ -331,13 +328,16 @@ export async function collectLongCat(
 
   const maxOutputByModel = new Map<string, number>();
   for (const modelId of LONGCAT_PRICED_MODEL_IDS) {
-    maxOutputByModel.set(
-      modelId,
-      parseLongCatMaxOutput(quickstartHtml, modelId),
-    );
+    const documentedOutput = parseLongCatMaxOutput(quickstartHtml, modelId);
+    if (documentedOutput !== undefined)
+      maxOutputByModel.set(modelId, documentedOutput);
   }
 
   const detailByModel = new Map<string, LongCatModelDetail>();
+  // 定价页比 API 慢一拍：上游下架模型后旧定价页仍会 200 一段时间。
+  // 有 API key 时以 `/v1/models` 为准——列表里没有的建模直接判为已下架并跳过，
+  // 不再让整个 provider 因为一个过期定价页变红。
+  const retiredByApi = new Set<string>();
   if (apiKey) {
     const list = await fetchAuthenticatedJson<LongCatModelList>(
       LONGCAT_MODELS_API_URL,
@@ -345,8 +345,10 @@ export async function collectLongCat(
     );
     for (const modelId of LONGCAT_PRICED_MODEL_IDS) {
       const listed = list.data.find((model) => model.id === modelId);
-      if (!listed)
-        throw new Error(`LongCat API model list does not include ${modelId}`);
+      if (!listed) {
+        retiredByApi.add(modelId);
+        continue;
+      }
       const detail = await fetchAuthenticatedJson<LongCatModelDetail>(
         longCatModelApiUrl(modelId),
         apiKey,
@@ -398,6 +400,14 @@ export async function collectLongCat(
       );
   }
 
+  // A missing output cap alone is not loss of all limit information: API context
+  // windows still count. Fail only when no priced model has either limit.
+  if (
+    !maxOutputByModel.size &&
+    ![...detailByModel.values()].some((detail) => detail.context_length > 0)
+  )
+    throw new Error("LongCat priced models are all missing limit information");
+
   sources.push({
     url: LONGCAT_QUICKSTART_URL,
     kind: "model-metadata",
@@ -406,13 +416,15 @@ export async function collectLongCat(
     contentHash: hash(JSON.stringify([...maxOutputByModel.entries()])),
   });
 
-  const models = LONGCAT_PRICED_MODEL_IDS.map((modelId) => {
+  const activeIds = LONGCAT_PRICED_MODEL_IDS.filter(
+    (modelId) => !retiredByApi.has(modelId),
+  );
+  if (!activeIds.length)
+    throw new Error("LongCat API model list does not include any priced model");
+
+  const models = activeIds.map((modelId) => {
     const detail = detailByModel.get(modelId)!;
     const maxOutputTokens = maxOutputByModel.get(modelId);
-    if (!maxOutputTokens)
-      throw new Error(
-        `LongCat quick start is missing the maximum output length for ${modelId}`,
-      );
     // created 是可选字段：上游 2.5-Preview 的详情接口不给它。此时**省略**
     // createdAt，而不是 `new Date(undefined*1000)` → "Invalid time value"
     // 崩掉整个采集（实测 CI 失败）。
@@ -436,7 +448,7 @@ export async function collectLongCat(
       },
       limits: {
         contextTokens: detail.context_length,
-        maxOutputTokens,
+        ...(maxOutputTokens !== undefined ? { maxOutputTokens } : {}),
       },
       prices: pricesByModel.get(modelId) ?? [],
     };

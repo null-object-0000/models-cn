@@ -5,8 +5,12 @@
       "provider": "zhipu-cn",
       "model": "glm-5.3",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，官方定价页无结构化模态字段"
     },
@@ -14,8 +18,14 @@
       "provider": "zhipu-cn",
       "model": "glm-5.3-flash",
       "capabilities": {
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "原生多模态模型，官方定价页标注图片、视频、文件、文本输入"
     },
@@ -23,8 +33,12 @@
       "provider": "zhipu-cn",
       "model": "glm-5.2",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，官方定价页无结构化模态字段"
     },
@@ -32,8 +46,12 @@
       "provider": "zhipu-cn",
       "model": "glm-5.1",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，官方定价页无结构化模态字段"
     },
@@ -41,8 +59,12 @@
       "provider": "zhipu-cn",
       "model": "glm-5-turbo",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，官方定价页无结构化模态字段"
     },
@@ -50,8 +72,12 @@
       "provider": "zhipu-cn",
       "model": "glm-5",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，官方定价页无结构化模态字段"
     },
@@ -59,8 +85,12 @@
       "provider": "zhipu-cn",
       "model": "glm-4.7",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，官方定价页无结构化模态字段"
     },
@@ -68,8 +98,12 @@
       "provider": "zhipu-cn",
       "model": "glm-4.5-air",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，官方定价页无结构化模态字段"
     },
@@ -77,8 +111,12 @@
       "provider": "zhipu-cn",
       "model": "glm-4.7-flashx",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，官方定价页无结构化模态字段"
     },
@@ -86,8 +124,12 @@
       "provider": "zhipu-cn",
       "model": "glm-4.7-flash",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型（免费），官方定价页无结构化模态字段"
     },
@@ -95,8 +137,12 @@
       "provider": "zhipu-intl",
       "model": "glm-5.3",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
     },
@@ -104,8 +150,14 @@
       "provider": "zhipu-intl",
       "model": "glm-5.3-flash",
       "capabilities": {
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "原生多模态模型，国际站定价页为 Latest Models"
     },
@@ -113,8 +165,12 @@
       "provider": "zhipu-intl",
       "model": "glm-4.6",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "国际站有标准按量价的文本模型，国内站仅有 Batch/私有化计价"
     },
@@ -122,8 +178,12 @@
       "provider": "zhipu-intl",
       "model": "glm-4.5-airx",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "国际站有标准按量价的文本模型，国内站仅有 Batch/私有化计价"
     },
@@ -131,8 +191,12 @@
       "provider": "zhipu-intl",
       "model": "glm-4.5-flash",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "国际站免费文本模型，国内站仅有 Batch/私有化计价"
     },
@@ -140,8 +204,12 @@
       "provider": "zhipu-intl",
       "model": "glm-5.2",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
     },
@@ -149,8 +217,12 @@
       "provider": "zhipu-intl",
       "model": "glm-5.1",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
     },
@@ -158,8 +230,12 @@
       "provider": "zhipu-intl",
       "model": "glm-5-turbo",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
     },
@@ -167,8 +243,12 @@
       "provider": "zhipu-intl",
       "model": "glm-5",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
     },
@@ -176,8 +256,12 @@
       "provider": "zhipu-intl",
       "model": "glm-4.7",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
     },
@@ -185,8 +269,12 @@
       "provider": "zhipu-intl",
       "model": "glm-4.5-air",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
     },
@@ -194,8 +282,12 @@
       "provider": "zhipu-intl",
       "model": "glm-4.7-flashx",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型，国际站定价页为 Text Models"
     },
@@ -203,8 +295,12 @@
       "provider": "zhipu-intl",
       "model": "glm-4.7-flash",
       "capabilities": {
-        "inputModalities": ["text"],
-        "outputModalities": ["text"]
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
       },
       "note": "旗舰文本模型（免费），国际站定价页为 Text Models"
     },
@@ -213,13 +309,25 @@
       "model": "kimi-k3",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking"],
-        "reasoningEfforts": ["low", "high", "max"],
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
         "dynamicTools": true,
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
         "supportedParameters": [
           "reasoning_effort",
           "tool_choice",
@@ -237,11 +345,19 @@
       "model": "kimi-k2.7-code",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking"],
+        "thinkingModes": [
+          "thinking"
+        ],
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
         "supportedParameters": [
           "thinking",
           "tool_choice",
@@ -259,11 +375,19 @@
       "model": "kimi-k2.7-code-highspeed",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking"],
+        "thinkingModes": [
+          "thinking"
+        ],
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
         "supportedParameters": [
           "thinking",
           "tool_choice",
@@ -281,11 +405,20 @@
       "model": "kimi-k2.6",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking", "non-thinking"],
+        "thinkingModes": [
+          "thinking",
+          "non-thinking"
+        ],
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
         "supportedParameters": [
           "thinking",
           "tool_choice",
@@ -303,12 +436,24 @@
       "model": "kimi-k2.5",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking", "non-thinking"],
+        "thinkingModes": [
+          "thinking",
+          "non-thinking"
+        ],
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
-        "supportedParameters": ["thinking", "temperature"]
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "thinking",
+          "temperature"
+        ]
       },
       "note": "能力来自官方模型概览文档；定价页无结构化能力字段"
     },
@@ -317,13 +462,25 @@
       "model": "kimi-k3",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking"],
-        "reasoningEfforts": ["low", "high", "max"],
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
         "dynamicTools": true,
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
         "supportedParameters": [
           "reasoning_effort",
           "tool_choice",
@@ -341,11 +498,19 @@
       "model": "kimi-k2.7-code",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking"],
+        "thinkingModes": [
+          "thinking"
+        ],
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
         "supportedParameters": [
           "thinking",
           "tool_choice",
@@ -363,11 +528,19 @@
       "model": "kimi-k2.7-code-highspeed",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking"],
+        "thinkingModes": [
+          "thinking"
+        ],
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
         "supportedParameters": [
           "thinking",
           "tool_choice",
@@ -385,11 +558,20 @@
       "model": "kimi-k2.6",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking", "non-thinking"],
+        "thinkingModes": [
+          "thinking",
+          "non-thinking"
+        ],
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
         "supportedParameters": [
           "thinking",
           "tool_choice",
@@ -407,14 +589,162 @@
       "model": "kimi-k2.5",
       "capabilities": {
         "thinking": true,
-        "thinkingModes": ["thinking", "non-thinking"],
+        "thinkingModes": [
+          "thinking",
+          "non-thinking"
+        ],
         "jsonOutput": true,
         "toolCalls": true,
-        "inputModalities": ["text", "image", "video"],
-        "outputModalities": ["text"],
-        "supportedParameters": ["thinking", "temperature"]
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "thinking",
+          "temperature"
+        ]
       },
       "note": "能力来自官方模型概览文档；定价页无结构化能力字段"
+    },
+    {
+      "provider": "moonshot-cn",
+      "model": "kimi-k3.1-pro",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "reasoning_effort",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "note": "能力来自官方 quickstart（推理强度 low/high/max、始终思考、视觉输入、工具调用、结构化输出）；定价页无结构化能力字段"
+    },
+    {
+      "provider": "moonshot-cn",
+      "model": "kimi-k3.1-pro-highspeed",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "reasoning_effort",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "note": "能力来自官方 quickstart（推理强度 low/high/max、始终思考、视觉输入、工具调用、结构化输出）；定价页无结构化能力字段"
+    },
+    {
+      "provider": "moonshot-intl",
+      "model": "kimi-k3.1-pro",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "reasoning_effort",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "note": "能力来自官方 quickstart（推理强度 low/high/max、始终思考、视觉输入、工具调用、结构化输出）；定价页无结构化能力字段"
+    },
+    {
+      "provider": "moonshot-intl",
+      "model": "kimi-k3.1-pro-highspeed",
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "reasoning_effort",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "note": "能力来自官方 quickstart（推理强度 low/high/max、始终思考、视觉输入、工具调用、结构化输出）；定价页无结构化能力字段"
     }
   ]
 }
