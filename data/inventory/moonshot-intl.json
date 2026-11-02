@@ -3,14 +3,14 @@
   "provider": "moonshot-intl",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-02T01:07:00.226Z",
-    "lastAttemptAt": "2026-11-02T01:07:00.226Z",
+    "lastSuccessfulAt": "2026-11-02T22:20:47.002Z",
+    "lastAttemptAt": "2026-11-02T22:20:47.002Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://api.moonshot.ai/v1/models",
-    "retrievedAt": "2026-07-23T09:12:44.157Z",
-    "contentHash": "sha256:3b62322cca3b0a7d1ea876508bf70eaa0ec578109fdb5e3f11c9e79c031e4faf"
+    "retrievedAt": "2026-11-02T22:20:47.002Z",
+    "contentHash": "sha256:a435b0290026b6095abce398eb5d7f9d45f323ac1b719fe270112b2495a645b0"
   },
   "models": [
     {
@@ -22,18 +22,23 @@
       "id": "kimi-k2.7-code",
       "ownedBy": "moonshot",
       "contextTokens": 262144
+    },
+    {
+      "id": "kimi-k2.7-code-highspeed",
+      "ownedBy": "moonshot",
+      "contextTokens": 262144
     }
   ],
   "comparison": {
     "status": "mismatch",
     "pricedAndListed": [
       "kimi-k2.6",
-      "kimi-k2.7-code"
+      "kimi-k2.7-code",
+      "kimi-k2.7-code-highspeed"
     ],
     "aliasesAndListed": [],
     "listedWithoutPricing": [],
     "pricedButNotListed": [
-      "kimi-k2.7-code-highspeed",
       "kimi-k3",
       "kimi-k3.1-pro",
       "kimi-k3.1-pro-highspeed"
