@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-23T06:31:53.152Z",
-    "lastAttemptAt": "2026-10-23T06:31:53.152Z",
+    "lastSuccessfulAt": "2026-11-02T01:06:33.551Z",
+    "lastAttemptAt": "2026-11-02T01:06:33.551Z",
     "consecutiveFailures": 0,
     "warnings": [
       {
@@ -944,8 +944,8 @@
       "url": "https://docs.bigmodel.cn/cn/guide/start/model-overview.md",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-10-23T06:31:53.152Z",
-      "contentHash": "sha256:b01680bf2cdf6507d1060e597aaf3cc07eb578bb7c80c70198cfe6967c97a7ad"
+      "retrievedAt": "2026-11-02T01:06:33.551Z",
+      "contentHash": "sha256:2f908786dae21b6d3219e03f20840f7df141c9dae2bfd0b61e14acb9e7830c3a"
     },
     {
       "url": "https://docs.bigmodel.cn/cn/update/new-releases.md",

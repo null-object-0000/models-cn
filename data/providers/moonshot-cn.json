@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-10-23T06:31:53.128Z",
-    "lastAttemptAt": "2026-10-23T06:31:53.128Z",
+    "lastSuccessfulAt": "2026-11-02T01:06:33.553Z",
+    "lastAttemptAt": "2026-11-02T01:06:33.553Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-cn",
@@ -17,6 +17,114 @@
     "openai": "https://api.moonshot.cn/v1"
   },
   "models": [
+    {
+      "id": "kimi-k3.1-pro",
+      "name": "kimi-k3.1-pro",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "reasoning_effort",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1048576
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 1.3,
+            "explicitCacheCreation": 13,
+            "explicitCacheCreation1h": 26,
+            "standard": 13
+          },
+          "output": 68,
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
+          "validFrom": "2026-11-02T01:06:35.841Z"
+        }
+      ]
+    },
+    {
+      "id": "kimi-k3.1-pro-highspeed",
+      "name": "kimi-k3.1-pro-highspeed",
+      "aliases": [],
+      "capabilities": {
+        "thinking": true,
+        "thinkingModes": [
+          "thinking"
+        ],
+        "reasoningEfforts": [
+          "low",
+          "high",
+          "max"
+        ],
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ],
+        "supportedParameters": [
+          "reasoning_effort",
+          "tool_choice",
+          "temperature",
+          "top_p",
+          "n",
+          "presence_penalty",
+          "frequency_penalty"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1048576
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "cacheHit": 1.3,
+            "explicitCacheCreation": 26,
+            "explicitCacheCreation1h": 52,
+            "standard": 26
+          },
+          "output": 136,
+          "sourceUrl": "https://platform.kimi.com/docs/pricing/chat",
+          "validFrom": "2026-11-02T01:06:35.841Z"
+        }
+      ]
+    },
     {
       "id": "kimi-k3",
       "name": "Kimi K3",
@@ -243,22 +351,22 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-09-20T01:50:43.642Z",
-      "contentHash": "sha256:333d08d430437054b588001e572ce3eee545d5cec5c3b08db0047df0f51375a3"
+      "retrievedAt": "2026-11-02T01:06:33.553Z",
+      "contentHash": "sha256:444123239918c848239a12a60d36f280932be4fb9f5c533a8ddd30f2cb50aae6"
     },
     {
       "url": "https://platform.kimi.com/docs/api/models-overview",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-10-23T06:31:53.128Z",
-      "contentHash": "sha256:b2b4a931a9e5de3bb90bfeb2b70831be769a6d47975e6e2ca5e628726e0d28e0"
+      "retrievedAt": "2026-11-02T01:06:33.553Z",
+      "contentHash": "sha256:fabd98dceddf1862b8fab5113f93d258119c5b8063db08118f58651953dceba3"
     },
     {
       "url": "https://platform.kimi.com/docs/guide/troubleshooting#kimi",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-10-23T06:31:53.128Z",
-      "contentHash": "sha256:708503c3e27479183272f7d8bcdd6d5c6e0b4d22875bc3ddfedbbbe0b7d92bbf"
+      "retrievedAt": "2026-11-02T01:06:33.553Z",
+      "contentHash": "sha256:17bb2c5daf7988dd29eb9f94e0310f4526ffcfcc13e054839aff328bd0f54cf8"
     }
   ]
 }
