@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-11-02T22:20:20.129Z",
-    "lastAttemptAt": "2026-11-02T22:20:20.129Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-11-06T19:58:02.533Z",
+    "consecutiveFailures": 1,
+    "message": "Kimi pricing failed for https://platform.kimi.ai/docs/pricing/chat; RSC: Error: Kimi RSC is missing its compiled MDX reference; markdown: Error: Kimi markdown contains an empty pricing shell; RSC data is required"
   },
   "id": "moonshot-intl",
   "name": "Kimi International",

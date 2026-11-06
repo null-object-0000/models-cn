@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-02T22:20:20.103Z",
-    "lastAttemptAt": "2026-11-02T22:20:20.103Z",
+    "lastSuccessfulAt": "2026-11-06T19:58:00.615Z",
+    "lastAttemptAt": "2026-11-06T19:58:00.615Z",
     "consecutiveFailures": 0
   },
   "id": "longcat",
@@ -213,8 +213,8 @@
       "url": "https://api.longcat.chat/openai/v1/models",
       "kind": "model-metadata",
       "locale": "en",
-      "retrievedAt": "2026-07-22T03:54:28.935Z",
-      "contentHash": "sha256:7a6f62083d26fb847782a0074648e388a16f6afef83ac0007d75c19b9a9568cc"
+      "retrievedAt": "2026-11-06T19:58:00.615Z",
+      "contentHash": "sha256:17aae6c6eb0e573dd4c12b1a229061f7df9f817a390324bbd2e958496cc525a5"
     },
     {
       "url": "https://api.longcat.chat/openai/v1/models/LongCat-2.5",
@@ -227,8 +227,8 @@
       "url": "https://api.longcat.chat/openai/v1/models",
       "kind": "model-metadata",
       "locale": "en",
-      "retrievedAt": "2026-11-02T22:20:20.103Z",
-      "contentHash": "sha256:8da119184928c712dda0410550398f8ca2911612676f61f5a7f65c00fc76688b"
+      "retrievedAt": "2026-11-06T19:58:00.615Z",
+      "contentHash": "sha256:96dbf4ff734727757ed7cdce2e8c06120acf1e687093374cd1f1510e4dd9cea4"
     },
     {
       "url": "https://longcat.chat/platform/docs/",
