@@ -84,6 +84,66 @@ describe("Kimi collector parser", () => {
     expect(parseMoonshotPricingPage(full, "url").models).toEqual(models);
   });
 
+  it("parses the 2026-11-07 inline compiled MDX source (no $id reference)", () => {
+    const inline = readFileSync(
+      new URL("./fixtures/kimi-cn-rsc-20261107.txt", import.meta.url),
+      "utf8",
+    );
+    expect(inline).toContain('"mdxSource":{"compiledSource":"\\"use strict\\"');
+    const models = parseMoonshotPricingPage(inline, "url").models;
+    expect(models.map((model) => model.id)).toEqual([
+      "kimi-k3.1-pro",
+      "kimi-k3.1-pro-highspeed",
+      "kimi-k3",
+      "kimi-k2.7-code",
+      "kimi-k2.7-code-highspeed",
+      "kimi-k2.6",
+    ]);
+    expect(models.map((model) => model.limits.contextTokens)).toEqual([
+      1_048_576, 1_048_576, 1_048_576, 262_144, 262_144, 262_144,
+    ]);
+    // 与 2026-11-02 的引用式 Flight 解析结果逐项一致：上游只改了包装方式，价格没变。
+    expect(
+      models.map((model) => {
+        const price = model.prices[0]!;
+        return [
+          price.input.standard,
+          price.output,
+          price.input.cacheHit,
+          price.input.explicitCacheCreation,
+          price.input.explicitCacheCreation1h,
+        ];
+      }),
+    ).toEqual([
+      [13, 68, 1.3, 13, 26],
+      [26, 136, 1.3, 26, 52],
+      [20, 100, 2, 20, 40],
+      [6.5, 27, 1.3, undefined, undefined],
+      [13, 54, 2.6, undefined, undefined],
+      [6.5, 27, 1.1, undefined, undefined],
+    ]);
+    const intl = readFileSync(
+      new URL("./fixtures/kimi-intl-rsc-20261107.txt", import.meta.url),
+      "utf8",
+    );
+    const intlModels = parseMoonshotPricingPage(
+      intl,
+      "url",
+      "international",
+      "USD",
+    ).models;
+    expect(intlModels.map((model) => model.id)).toEqual(
+      models.map((model) => model.id),
+    );
+    const intlPrice = intlModels[0]!.prices[0]!;
+    expect(intlPrice.currency).toBe("USD");
+    expect([
+      intlPrice.input.standard,
+      intlPrice.output,
+      intlPrice.input.cacheHit,
+    ]).toEqual([2, 10, 0.2]);
+  });
+
   it("accepts reordered props and columns in the current grouped table", () => {
     const reordered = updateCurrentRsc((source) =>
       source
