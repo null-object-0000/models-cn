@@ -143,20 +143,42 @@ function parseMarkdownTables(markdown: string): KimiTable[] {
   return tables;
 }
 
-/** 只读取引用的正常 MDX，不能混入 mdxSourceWithNoJs 中重复或没有行的表格。 */
-function parseRscTables(flight: string): KimiTable[] {
+/**
+ * 取页面的 compiled MDX 源码。上游有两种形态，都要认：
+ * - 旧：`"mdxSource":{"compiledSource":"$<id>"` + 独立的 `<id>:T<len>,` 记录
+ * - 新（2026-11 起）：`"mdxSource":{"compiledSource":"<内联的编译后源码>"`（JSON 字符串）
+ * 只读 `mdxSource`，不要落到 `mdxSourceWithNoJs` —— 那份是重复且可能没有行的副本。
+ */
+function readCompiledMdx(flight: string): string {
   const id = flight.match(
     /"mdxSource":\{"compiledSource":"\$([0-9a-f]+)"/,
   )?.[1];
-  if (!id) throw new Error("Kimi RSC is missing its compiled MDX reference");
-  const record = new RegExp(`(?:^|\\n)${id}:T([0-9a-f]+),`).exec(flight);
-  if (!record) throw new Error("Kimi RSC is missing its compiled MDX record");
-  // Flight 的 T 记录长度按 UTF-8 字节计算，不能按 JS 字符数截取中文正文。
-  const bytes = Buffer.from(flight.slice(record.index + record[0].length));
-  const length = Number.parseInt(record[1]!, 16);
-  if (bytes.length < length)
-    throw new Error("Kimi RSC text record is truncated");
-  const source = bytes.subarray(0, length).toString("utf8");
+  if (id) {
+    const record = new RegExp(`(?:^|\\n)${id}:T([0-9a-f]+),`).exec(flight);
+    if (!record) throw new Error("Kimi RSC is missing its compiled MDX record");
+    // Flight 的 T 记录长度按 UTF-8 字节计算，不能按 JS 字符数截取中文正文。
+    const bytes = Buffer.from(flight.slice(record.index + record[0].length));
+    const length = Number.parseInt(record[1]!, 16);
+    if (bytes.length < length)
+      throw new Error("Kimi RSC text record is truncated");
+    return bytes.subarray(0, length).toString("utf8");
+  }
+  const inline =
+    flight.match(/"mdxSource":\{"compiledSource":"((?:[^"\\]|\\.)*)"/)?.[1] ??
+    flight.match(
+      /"mdxSourceWithNoJs":\{"compiledSource":"((?:[^"\\]|\\.)*)"/,
+    )?.[1];
+  if (!inline) throw new Error("Kimi RSC is missing its compiled MDX source");
+  try {
+    return JSON.parse(`"${inline}"`) as string;
+  } catch {
+    throw new Error("Kimi RSC inline MDX source is malformed");
+  }
+}
+
+/** 只读取引用的正常 MDX，不能混入 mdxSourceWithNoJs 中重复或没有行的表格。 */
+function parseRscTables(flight: string): KimiTable[] {
+  const source = readCompiledMdx(flight);
   const tables: KimiTable[] = [];
   let previousTableEnd = 0;
   for (const match of source.matchAll(/_jsx\(DocTable,\{/g)) {
