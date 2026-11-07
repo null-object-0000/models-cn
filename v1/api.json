@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:20.131Z",
-        "lastAttemptAt": "2026-11-02T22:20:20.131Z",
+        "lastSuccessfulAt": "2026-11-07T07:13:47.580Z",
+        "lastAttemptAt": "2026-11-07T07:13:47.580Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -784,8 +784,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:20.103Z",
-        "lastAttemptAt": "2026-11-02T22:20:20.103Z",
+        "lastSuccessfulAt": "2026-11-07T07:13:47.595Z",
+        "lastAttemptAt": "2026-11-07T07:13:47.595Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -995,8 +995,8 @@
           "url": "https://api.longcat.chat/openai/v1/models",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-07-22T03:54:28.935Z",
-          "contentHash": "sha256:7a6f62083d26fb847782a0074648e388a16f6afef83ac0007d75c19b9a9568cc"
+          "retrievedAt": "2026-11-07T07:13:47.595Z",
+          "contentHash": "sha256:17aae6c6eb0e573dd4c12b1a229061f7df9f817a390324bbd2e958496cc525a5"
         },
         {
           "url": "https://api.longcat.chat/openai/v1/models/LongCat-2.5",
@@ -1009,8 +1009,8 @@
           "url": "https://api.longcat.chat/openai/v1/models",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-11-02T22:20:20.103Z",
-          "contentHash": "sha256:8da119184928c712dda0410550398f8ca2911612676f61f5a7f65c00fc76688b"
+          "retrievedAt": "2026-11-07T07:13:47.595Z",
+          "contentHash": "sha256:96dbf4ff734727757ed7cdce2e8c06120acf1e687093374cd1f1510e4dd9cea4"
         },
         {
           "url": "https://longcat.chat/platform/docs/",
@@ -1024,10 +1024,11 @@
     {
       "schemaVersion": "1.0",
       "health": {
-        "status": "healthy",
+        "status": "error",
         "lastSuccessfulAt": "2026-11-02T22:20:20.125Z",
-        "lastAttemptAt": "2026-11-02T22:20:20.125Z",
-        "consecutiveFailures": 0
+        "lastAttemptAt": "2026-11-07T07:13:51.954Z",
+        "consecutiveFailures": 1,
+        "message": "Kimi pricing failed for https://platform.kimi.com/docs/pricing/chat; RSC: Error: Kimi RSC is missing its compiled MDX reference; markdown: Error: Kimi markdown contains an empty pricing shell; RSC data is required"
       },
       "id": "moonshot-cn",
       "name": "Kimi China",
@@ -1396,10 +1397,11 @@
     {
       "schemaVersion": "1.0",
       "health": {
-        "status": "healthy",
+        "status": "error",
         "lastSuccessfulAt": "2026-11-02T22:20:20.129Z",
-        "lastAttemptAt": "2026-11-02T22:20:20.129Z",
-        "consecutiveFailures": 0
+        "lastAttemptAt": "2026-11-07T07:13:49.976Z",
+        "consecutiveFailures": 1,
+        "message": "Kimi pricing failed for https://platform.kimi.ai/docs/pricing/chat; RSC: Error: Kimi RSC is missing its compiled MDX reference; markdown: Error: Kimi markdown contains an empty pricing shell; RSC data is required"
       },
       "id": "moonshot-intl",
       "name": "Kimi International",
@@ -1769,8 +1771,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:20.133Z",
-        "lastAttemptAt": "2026-11-02T22:20:20.133Z",
+        "lastSuccessfulAt": "2026-11-07T07:13:47.609Z",
+        "lastAttemptAt": "2026-11-07T07:13:47.609Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2442,16 +2444,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-11-02T01:06:33.534Z",
-          "contentHash": "sha256:283fa2a306da1cf1b4180257616234eeb1273f65e033777e7ad4b5ecf55361d8"
+          "retrievedAt": "2026-11-07T07:13:47.609Z",
+          "contentHash": "sha256:482aa7e0c6ade072af11c9c484492f89c453cbd67c67567253d35207109860aa"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-11-02T22:20:20.133Z",
-          "contentHash": "sha256:c166ac53395a3d9a700f701ccb2248d5f1f0dd5663715d97711c1f65105a8dc7"
+          "retrievedAt": "2026-11-07T07:13:47.609Z",
+          "contentHash": "sha256:07525481bd7d3f216e1e118d2c073f80c8ec5d7b024fc8199e708236eda5f102"
         }
       ]
     },
@@ -2459,8 +2461,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:20.143Z",
-        "lastAttemptAt": "2026-11-02T22:20:20.143Z",
+        "lastSuccessfulAt": "2026-11-07T07:13:47.620Z",
+        "lastAttemptAt": "2026-11-07T07:13:47.620Z",
         "consecutiveFailures": 0,
         "warnings": [
           {
@@ -3424,8 +3426,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:20.144Z",
-        "lastAttemptAt": "2026-11-02T22:20:20.144Z",
+        "lastSuccessfulAt": "2026-11-07T07:13:47.621Z",
+        "lastAttemptAt": "2026-11-07T07:13:47.621Z",
         "consecutiveFailures": 0,
         "warnings": [
           {
@@ -4198,8 +4200,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:44.145Z",
-        "lastAttemptAt": "2026-11-02T22:20:44.145Z",
+        "lastSuccessfulAt": "2026-11-07T07:14:14.171Z",
+        "lastAttemptAt": "2026-11-07T07:14:14.171Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4238,8 +4240,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:44.685Z",
-        "lastAttemptAt": "2026-11-02T22:20:44.685Z",
+        "lastSuccessfulAt": "2026-11-07T07:14:14.698Z",
+        "lastAttemptAt": "2026-11-07T07:14:14.698Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4289,8 +4291,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:45.162Z",
-        "lastAttemptAt": "2026-11-02T22:20:45.162Z",
+        "lastSuccessfulAt": "2026-11-07T07:14:15.053Z",
+        "lastAttemptAt": "2026-11-07T07:14:15.053Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4347,14 +4349,14 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:47.002Z",
-        "lastAttemptAt": "2026-11-02T22:20:47.002Z",
+        "lastSuccessfulAt": "2026-11-07T07:14:16.856Z",
+        "lastAttemptAt": "2026-11-07T07:14:16.856Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://api.moonshot.ai/v1/models",
-        "retrievedAt": "2026-11-02T22:20:47.002Z",
-        "contentHash": "sha256:a435b0290026b6095abce398eb5d7f9d45f323ac1b719fe270112b2495a645b0"
+        "retrievedAt": "2026-11-07T07:14:16.856Z",
+        "contentHash": "sha256:6c46a07d9fde9ae5e5a2aee3acd5af8a955cdf5ccfb3627e09b4757dff82a690"
       },
       "models": [
         {
@@ -4371,6 +4373,16 @@
           "id": "kimi-k2.7-code-highspeed",
           "ownedBy": "moonshot",
           "contextTokens": 262144
+        },
+        {
+          "id": "kimi-k3",
+          "ownedBy": "moonshot",
+          "contextTokens": 1048576
+        },
+        {
+          "id": "kimi-k3.1-pro",
+          "ownedBy": "moonshot",
+          "contextTokens": 1048576
         }
       ],
       "comparison": {
@@ -4378,13 +4390,13 @@
         "pricedAndListed": [
           "kimi-k2.6",
           "kimi-k2.7-code",
-          "kimi-k2.7-code-highspeed"
+          "kimi-k2.7-code-highspeed",
+          "kimi-k3",
+          "kimi-k3.1-pro"
         ],
         "aliasesAndListed": [],
         "listedWithoutPricing": [],
         "pricedButNotListed": [
-          "kimi-k3",
-          "kimi-k3.1-pro",
           "kimi-k3.1-pro-highspeed"
         ],
         "activeAliasesNotListed": []
@@ -4395,8 +4407,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:47.361Z",
-        "lastAttemptAt": "2026-11-02T22:20:47.361Z",
+        "lastSuccessfulAt": "2026-11-07T07:14:17.222Z",
+        "lastAttemptAt": "2026-11-07T07:14:17.222Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4488,8 +4500,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:48.396Z",
-        "lastAttemptAt": "2026-11-02T22:20:48.396Z",
+        "lastSuccessfulAt": "2026-11-07T07:14:17.833Z",
+        "lastAttemptAt": "2026-11-07T07:14:17.833Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4581,8 +4593,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-02T22:20:43.433Z",
-        "lastAttemptAt": "2026-11-02T22:20:43.433Z",
+        "lastSuccessfulAt": "2026-11-07T07:14:13.309Z",
+        "lastAttemptAt": "2026-11-07T07:14:13.309Z",
         "consecutiveFailures": 0
       },
       "source": {
