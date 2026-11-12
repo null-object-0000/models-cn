@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-11-07T15:43:26.694Z",
-    "lastAttemptAt": "2026-11-07T15:43:26.694Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-11-12T08:22:52.559Z",
+    "consecutiveFailures": 1,
+    "message": "Kimi output limits are missing kimi-k3"
   },
   "id": "moonshot-cn",
   "name": "Kimi China",
