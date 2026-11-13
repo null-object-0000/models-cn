@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-11-07T15:43:26.694Z",
-    "lastAttemptAt": "2026-11-07T15:43:26.694Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-11-13T08:03:52.095Z",
+    "consecutiveFailures": 1,
+    "message": "Kimi pricing failed for https://platform.kimi.com/docs/pricing/chat; RSC: TimeoutError: The operation was aborted due to timeout; markdown: Error: Kimi markdown contains an empty pricing shell; RSC data is required"
   },
   "id": "moonshot-cn",
   "name": "Kimi China",
