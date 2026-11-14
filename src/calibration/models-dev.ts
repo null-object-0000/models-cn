@@ -58,6 +58,9 @@ const DEFAULT_REFERENCE_PROVIDER: Record<string, string> = {
   "moonshot-cn": "moonshotai",
   "moonshot-intl": "moonshotai",
   "qwen-cn": "alibaba",
+  // 混元在 models.dev 的命名空间是 tencent-tokenhub（另有 tencent-token-plan /
+  // tencent-coding-plan，模型集合不同；TokenHub 与我们的数据源一致）。
+  "tencent-hunyuan": "tencent-tokenhub",
   "zhipu-cn": "zhipuai",
   "zhipu-intl": "zai",
 };

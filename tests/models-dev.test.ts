@@ -495,3 +495,79 @@ describe("models.dev calibration auto-fallback", () => {
     );
   });
 });
+
+describe("tencent-hunyuan 校准命名空间", () => {
+  it("把混元模型对齐到 models.dev 的 tencent-tokenhub", async () => {
+    const hunyuan: ProviderData = {
+      schemaVersion: "1.0",
+      health: healthyHealth(new Date("2026-11-14T00:00:00Z")),
+      id: "tencent-hunyuan",
+      name: "Tencent Hunyuan",
+      ownedBy: "tencent",
+      baseUrls: { openai: "https://api.hunyuan.cloud.tencent.com/v1" },
+      models: [
+        {
+          id: "hy4",
+          name: "Hy4",
+          createdAt: "2026-11-04T05:42:10.000Z",
+          createdAtSource: "release-notes",
+          createdAtEvidence: { releaseNotesMentioned: true },
+          aliases: [],
+          capabilities: {
+            thinking: true,
+            toolCalls: true,
+            inputModalities: ["text", "image"],
+            outputModalities: ["text"],
+          },
+          limits: { contextTokens: 1_048_576, maxOutputTokens: 65_536 },
+          prices: [
+            {
+              market: "china",
+              currency: "CNY",
+              unit: "1M_tokens",
+              rateType: "standard",
+              input: { standard: 6, cacheHit: 0.3 },
+              output: 18,
+              sourceUrl:
+                "https://cloud.tencent.com/document/product/1823/130055",
+            },
+          ],
+        },
+      ],
+      sources: [],
+    };
+
+    const api: ModelsDevApi = {
+      "tencent-tokenhub": {
+        models: {
+          hy4: {
+            id: "hy4",
+            release_date: "2026-11-04",
+            reasoning: true,
+            tool_call: true,
+            modalities: { input: ["text", "image"], output: ["text"] },
+            limit: { context: 1_048_576, output: 65_536 },
+            cost: { input: 6, cache_read: 0.3, output: 18 },
+          },
+        },
+      },
+    };
+
+    const report = await collectModelsDevCalibration(
+      [hunyuan],
+      undefined,
+      new Date("2026-11-14T00:00:00Z"),
+      async () => api,
+    );
+    const result = report.models.find(
+      (model) => model.provider === "tencent-hunyuan" && model.model === "hy4",
+    );
+    expect(result).toMatchObject({
+      referenceProvider: "tencent-tokenhub",
+      referenceModel: "hy4",
+      referenceUrl: "https://models.dev/models/tencent-tokenhub/hy4/",
+      // 价格项按 USD 比对，混元只发布人民币价，因此整体是 partial 而不是 match
+      status: "partial",
+    });
+  });
+});
