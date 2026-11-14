@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-07T15:43:50.579Z",
-    "lastAttemptAt": "2026-11-07T15:43:50.579Z",
+    "lastSuccessfulAt": "2026-11-14T09:07:30.113Z",
+    "lastAttemptAt": "2026-11-14T09:07:30.113Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-11-02T01:06:57.242Z",
-    "contentHash": "sha256:d44770b3006297a8b6065a6a657374fe3b3ee1be95a426339c750a4c8407eb4e"
+    "retrievedAt": "2026-11-14T09:07:30.113Z",
+    "contentHash": "sha256:9bd35079ccd05722aeb94ee82daa528137a5eea102b3a1a6c66b23899fe1a1e6"
   },
   "models": [
     {
@@ -96,7 +96,7 @@
       "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k3",
       "referenceUrl": "https://models.dev/models/moonshotai/kimi-k3/",
-      "status": "partial",
+      "status": "mismatch",
       "checks": [
         {
           "field": "createdAt",
@@ -112,9 +112,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 1048576,
+          "official": 131072,
           "reference": 1048576,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",
@@ -358,9 +358,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 262144,
+          "official": null,
           "reference": 262144,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
@@ -494,7 +494,7 @@
       "referenceProvider": "moonshotai",
       "referenceModel": "kimi-k3",
       "referenceUrl": "https://models.dev/models/moonshotai/kimi-k3/",
-      "status": "partial",
+      "status": "mismatch",
       "checks": [
         {
           "field": "createdAt",
@@ -510,9 +510,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 1048576,
+          "official": 131072,
           "reference": 1048576,
-          "status": "match"
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",
@@ -756,9 +756,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": 262144,
+          "official": null,
           "reference": 262144,
-          "status": "match"
+          "status": "missing"
         },
         {
           "field": "capabilities.thinking",
@@ -2630,9 +2630,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": null,
+          "official": 131072,
           "reference": 1048576,
-          "status": "missing"
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",
@@ -2792,9 +2792,9 @@
         },
         {
           "field": "limits.maxOutputTokens",
-          "official": null,
+          "official": 131072,
           "reference": 1048576,
-          "status": "missing"
+          "status": "mismatch"
         },
         {
           "field": "capabilities.thinking",
