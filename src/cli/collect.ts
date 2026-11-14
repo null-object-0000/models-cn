@@ -13,6 +13,7 @@ import {
   collectZhipuChina,
   collectZhipuInternational,
 } from "../collectors/zhipu.js";
+import { collectTencentHunyuan } from "../collectors/tencent-hunyuan.js";
 import {
   calibrationDir,
   preserveUnchangedSourceTimestamps,
@@ -37,6 +38,7 @@ const collectors = [
   { id: "qwen-cn", collect: collectQwen },
   { id: "zhipu-cn", collect: collectZhipuChina },
   { id: "zhipu-intl", collect: collectZhipuInternational },
+  { id: "tencent-hunyuan", collect: collectTencentHunyuan },
 ];
 
 const providerOption = process.argv.indexOf("--provider");

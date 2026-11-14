@@ -1,0 +1,406 @@
+{
+  "schemaVersion": "1.0",
+  "id": "tencent-hunyuan",
+  "name": "Tencent Hunyuan",
+  "displayNames": {
+    "zh-CN": "腾讯混元",
+    "en": "Tencent Hunyuan"
+  },
+  "ownedBy": "tencent",
+  "baseUrls": {
+    "openai": "https://api.hunyuan.cloud.tencent.com/v1"
+  },
+  "health": {
+    "status": "healthy",
+    "lastSuccessfulAt": "2026-11-14T12:52:51.553Z",
+    "lastAttemptAt": "2026-11-14T12:52:51.553Z",
+    "consecutiveFailures": 0
+  },
+  "models": [
+    {
+      "id": "hy4",
+      "name": "Hy4",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": []
+      },
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 6,
+            "cacheHit": 0.3
+          },
+          "output": 18,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-14T12:52:52.730Z"
+        }
+      ]
+    },
+    {
+      "id": "hy4-preview",
+      "name": "Hy4 preview",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": []
+      },
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 6,
+            "cacheHit": 0.3
+          },
+          "output": 18,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-14T12:52:52.730Z"
+        }
+      ]
+    },
+    {
+      "id": "hy3",
+      "name": "Hy3",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": []
+      },
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 262144,
+        "maxOutputTokens": 131072
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 1,
+            "cacheHit": 0.25
+          },
+          "output": 4,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-14T12:52:52.730Z"
+        }
+      ]
+    },
+    {
+      "id": "hy-mt2-pro",
+      "name": "Hy-MT2-Pro",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": [
+          "thinking",
+          "jsonOutput",
+          "toolCalls"
+        ]
+      },
+      "capabilities": {
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 8192,
+        "maxOutputTokens": 4096
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.5
+          },
+          "output": 2,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-14T12:52:52.730Z"
+        }
+      ]
+    },
+    {
+      "id": "hy-mt2-plus",
+      "name": "Hy-MT2-Plus",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": [
+          "thinking",
+          "jsonOutput",
+          "toolCalls"
+        ]
+      },
+      "capabilities": {
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 8192,
+        "maxOutputTokens": 4096
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.5
+          },
+          "output": 2,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-14T12:52:52.730Z"
+        }
+      ]
+    },
+    {
+      "id": "hy-mt2-lite",
+      "name": "Hy-MT2-Lite",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": [
+          "thinking",
+          "jsonOutput",
+          "toolCalls"
+        ]
+      },
+      "capabilities": {
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 8192,
+        "maxOutputTokens": 4096
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.3
+          },
+          "output": 1.2,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-14T12:52:52.730Z"
+        }
+      ]
+    },
+    {
+      "id": "hunyuan-role-latest",
+      "name": "Hy-Role-Latest",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": [
+          "thinking",
+          "jsonOutput",
+          "toolCalls"
+        ]
+      },
+      "capabilities": {
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 32768,
+        "maxOutputTokens": 4096
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 2.4
+          },
+          "output": 9.6,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-14T12:52:52.730Z"
+        }
+      ]
+    },
+    {
+      "id": "hy-role",
+      "name": "Hy-Role",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": [
+          "thinking",
+          "jsonOutput",
+          "toolCalls"
+        ]
+      },
+      "capabilities": {
+        "thinking": false,
+        "jsonOutput": false,
+        "toolCalls": false,
+        "inputModalities": [
+          "text"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 32768,
+        "maxOutputTokens": 4096
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 2.4
+          },
+          "output": 9.6,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-14T12:52:52.730Z"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://cloud.tencent.com/document/product/1823/130055",
+      "kind": "pricing",
+      "locale": "zh-CN",
+      "currency": "CNY",
+      "retrievedAt": "2026-11-14T12:52:51.553Z",
+      "contentHash": "sha256:b9a41694664287fb8e330af28d43e9493ba9d410020501cb65ec8a1330cc167c"
+    },
+    {
+      "url": "https://cloud.tencent.com/document/product/1823/130051",
+      "kind": "model-metadata",
+      "locale": "zh-CN",
+      "retrievedAt": "2026-11-14T12:52:51.553Z",
+      "contentHash": "sha256:cf6557e2dc6707b0bf5896cb44054aec9c316da65c724f03112405b455f4a3c3"
+    }
+  ]
+}
