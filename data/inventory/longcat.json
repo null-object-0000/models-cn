@@ -3,8 +3,8 @@
   "provider": "longcat",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-14T12:57:38.281Z",
-    "lastAttemptAt": "2026-11-14T12:57:38.281Z",
+    "lastSuccessfulAt": "2026-11-14T13:17:03.604Z",
+    "lastAttemptAt": "2026-11-14T13:17:03.604Z",
     "consecutiveFailures": 0
   },
   "source": {
