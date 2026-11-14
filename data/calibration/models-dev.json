@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-14T13:17:01.857Z",
-    "lastAttemptAt": "2026-11-14T13:17:01.857Z",
+    "lastSuccessfulAt": "2026-11-14T13:31:04.442Z",
+    "lastAttemptAt": "2026-11-14T13:31:04.442Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-11-14T09:07:30.113Z",
-    "contentHash": "sha256:9bd35079ccd05722aeb94ee82daa528137a5eea102b3a1a6c66b23899fe1a1e6"
+    "retrievedAt": "2026-11-14T13:31:04.442Z",
+    "contentHash": "sha256:8e83182b6d9a6052a8d950d0f780bf87dbed51cf5e540f3dd4df2c9a0c305ff8"
   },
   "models": [
     {
@@ -3577,6 +3577,242 @@
           "field": "prices.USD.output",
           "official": null,
           "reference": 1.5,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "tencent-hunyuan",
+      "model": "hy4",
+      "referenceProvider": "tencent-tokenhub",
+      "referenceModel": "hy4",
+      "referenceUrl": "https://models.dev/models/tencent-tokenhub/hy4/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": "2026-11-04",
+          "reference": "2026-11-04",
+          "status": "match"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1048576,
+          "reference": 1048576,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 65536,
+          "reference": 65536,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image"
+          ],
+          "reference": [
+            "text",
+            "image"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.834,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.042,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 2.501,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "tencent-hunyuan",
+      "model": "hy4-preview",
+      "referenceProvider": "tencent-tokenhub",
+      "referenceModel": "hy4-preview",
+      "referenceUrl": "https://models.dev/models/tencent-tokenhub/hy4-preview/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": "2026-08-28",
+          "reference": "2026-08-28",
+          "status": "match"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1048576,
+          "reference": 1024000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 65536,
+          "reference": 64000,
+          "status": "mismatch"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.834,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.042,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 2.501,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "tencent-hunyuan",
+      "model": "hy3",
+      "referenceProvider": "tencent-tokenhub",
+      "referenceModel": "hy3",
+      "referenceUrl": "https://models.dev/models/tencent-tokenhub/hy3/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": "2026-07-06",
+          "reference": "2026-07-06",
+          "status": "match"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 262144,
+          "reference": 256000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 128000,
+          "status": "mismatch"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 0,
           "status": "missing"
         }
       ]
