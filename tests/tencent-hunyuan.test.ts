@@ -5,12 +5,14 @@ import {
   collectTencentHunyuan,
   isTencentHunyuanModel,
   parseHunyuanCapabilities,
+  parseHunyuanReleaseDates,
   parsePriceCell,
   parseTencentHunyuanModels,
   parseTencentHunyuanPricing,
   parseTokenCount,
   TENCENT_HUNYUAN_MODELS_URL,
   TENCENT_HUNYUAN_PRICING_URL,
+  TENCENT_HUNYUAN_RELEASE_NOTES_URL,
 } from "../src/collectors/tencent-hunyuan.js";
 
 const fixtures = path.join(import.meta.dirname, "fixtures");
@@ -58,13 +60,19 @@ describe("Tencent Hunyuan collector", () => {
   });
 
   it("collects only Tencent self-hosted models", async () => {
-    const [pricing, models] = await Promise.all([
+    const [pricing, models, releaseNotes] = await Promise.all([
       fixture("tencent-hunyuan-pricing.html"),
       fixture("tencent-hunyuan-models.html"),
+      fixture("tencent-hunyuan-release-notes.json"),
     ]);
     const provider = await collectTencentHunyuan(
       new Date("2026-11-14T00:00:00Z"),
-      async (url) => (url === TENCENT_HUNYUAN_PRICING_URL ? pricing : models),
+      async (url) => {
+        if (url === TENCENT_HUNYUAN_PRICING_URL) return pricing;
+        if (url === TENCENT_HUNYUAN_MODELS_URL) return models;
+        if (url === TENCENT_HUNYUAN_RELEASE_NOTES_URL) return releaseNotes;
+        throw new Error(`unexpected url ${url}`);
+      },
     );
 
     expect(provider.id).toBe("tencent-hunyuan");
@@ -73,11 +81,6 @@ describe("Tencent Hunyuan collector", () => {
       "hy4",
       "hy4-preview",
       "hy3",
-      "hy-mt2-pro",
-      "hy-mt2-plus",
-      "hy-mt2-lite",
-      "hunyuan-role-latest",
-      "hy-role",
     ]);
     expect(
       provider.models.some((model) =>
@@ -109,15 +112,33 @@ describe("Tencent Hunyuan collector", () => {
     expect(provider.sources.map((source) => source.url)).toEqual([
       TENCENT_HUNYUAN_PRICING_URL,
       TENCENT_HUNYUAN_MODELS_URL,
+      TENCENT_HUNYUAN_RELEASE_NOTES_URL,
     ]);
+    expect(hy4?.createdAt).toMatch(/^2026-11-04T/);
+    expect(provider.models.every((model) => model.createdAt)).toBe(true);
+  });
+
+  it("reads release dates from the official research feed", async () => {
+    const dates = parseHunyuanReleaseDates(
+      await fixture("tencent-hunyuan-release-notes.json"),
+    );
+    expect(dates.get("hy4")).toMatch(/^2026-11-04T/);
+    expect(dates.get("hy4-preview")).toMatch(/^2026-08-28T/);
+    expect(dates.get("hy3")).toMatch(/^2026-07-06T/);
+    // 接口里没有的模型不猜日期
+    expect(dates.get("hy-mt2-pro")).toBeUndefined();
+    expect(dates.get("hunyuan-role-latest")).toBeUndefined();
   });
 
   it("throws when the price table is gone", async () => {
     const models = await fixture("tencent-hunyuan-models.html");
+    const releaseNotes = await fixture("tencent-hunyuan-release-notes.json");
     await expect(
-      collectTencentHunyuan(new Date(), async (url) =>
-        url === TENCENT_HUNYUAN_PRICING_URL ? "<html>改版了</html>" : models,
-      ),
+      collectTencentHunyuan(new Date(), async (url) => {
+        if (url === TENCENT_HUNYUAN_PRICING_URL) return "<html>改版了</html>";
+        if (url === TENCENT_HUNYUAN_RELEASE_NOTES_URL) return releaseNotes;
+        return models;
+      }),
     ).rejects.toThrow(/missing the inference price table/);
   });
 
@@ -140,11 +161,15 @@ describe("Tencent Hunyuan collector", () => {
     expect(parsePriceCell("-")).toBeUndefined();
   });
 
-  it("only treats hy/hunyuan ids as self-hosted", () => {
-    for (const id of ["hy4", "hy3", "hy-mt2-pro", "hunyuan-role-latest"]) {
+  it("only treats flagship hy ids as self-hosted", () => {
+    for (const id of ["hy4", "hy3", "hy4-flash"]) {
       expect(isTencentHunyuanModel(id)).toBe(true);
     }
     for (const id of [
+      "hy-mt2-pro",
+      "hy-mt2-lite",
+      "hy-role",
+      "hunyuan-role-latest",
       "deepseek/deepseek-flash",
       "glm-5.3",
       "kimi-k3",

@@ -12,8 +12,8 @@
   },
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-14T12:57:11.465Z",
-    "lastAttemptAt": "2026-11-14T12:57:11.465Z",
+    "lastSuccessfulAt": "2026-11-14T13:13:19.887Z",
+    "lastAttemptAt": "2026-11-14T13:13:19.887Z",
     "consecutiveFailures": 0
   },
   "models": [
@@ -21,6 +21,11 @@
       "id": "hy4",
       "name": "Hy4",
       "aliases": [],
+      "createdAt": "2026-11-04T05:42:10.000Z",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "capabilitiesSource": "docs",
       "capabilitiesEvidence": {
         "sectionPresent": true,
@@ -66,6 +71,11 @@
       "id": "hy4-preview",
       "name": "Hy4 preview",
       "aliases": [],
+      "createdAt": "2026-08-28T05:57:52.000Z",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "capabilitiesSource": "docs",
       "capabilitiesEvidence": {
         "sectionPresent": true,
@@ -110,6 +120,11 @@
       "id": "hy3",
       "name": "Hy3",
       "aliases": [],
+      "createdAt": "2026-07-06T06:36:51.000Z",
+      "createdAtSource": "release-notes",
+      "createdAtEvidence": {
+        "releaseNotesMentioned": true
+      },
       "capabilitiesSource": "docs",
       "capabilitiesEvidence": {
         "sectionPresent": true,
@@ -149,241 +164,6 @@
           "validFrom": "2026-11-14T12:52:52.730Z"
         }
       ]
-    },
-    {
-      "id": "hy-mt2-pro",
-      "name": "Hy-MT2-Pro",
-      "aliases": [],
-      "capabilitiesSource": "docs",
-      "capabilitiesEvidence": {
-        "sectionPresent": true,
-        "parsedFields": [
-          "inputModalities",
-          "outputModalities"
-        ],
-        "defaultedFields": [
-          "thinking",
-          "jsonOutput",
-          "toolCalls"
-        ]
-      },
-      "capabilities": {
-        "thinking": false,
-        "jsonOutput": false,
-        "toolCalls": false,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 8192,
-        "maxOutputTokens": 4096
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0.5
-          },
-          "output": 2,
-          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
-          "validFrom": "2026-11-14T12:52:52.730Z"
-        }
-      ]
-    },
-    {
-      "id": "hy-mt2-plus",
-      "name": "Hy-MT2-Plus",
-      "aliases": [],
-      "capabilitiesSource": "docs",
-      "capabilitiesEvidence": {
-        "sectionPresent": true,
-        "parsedFields": [
-          "inputModalities",
-          "outputModalities"
-        ],
-        "defaultedFields": [
-          "thinking",
-          "jsonOutput",
-          "toolCalls"
-        ]
-      },
-      "capabilities": {
-        "thinking": false,
-        "jsonOutput": false,
-        "toolCalls": false,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 8192,
-        "maxOutputTokens": 4096
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0.5
-          },
-          "output": 2,
-          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
-          "validFrom": "2026-11-14T12:52:52.730Z"
-        }
-      ]
-    },
-    {
-      "id": "hy-mt2-lite",
-      "name": "Hy-MT2-Lite",
-      "aliases": [],
-      "capabilitiesSource": "docs",
-      "capabilitiesEvidence": {
-        "sectionPresent": true,
-        "parsedFields": [
-          "inputModalities",
-          "outputModalities"
-        ],
-        "defaultedFields": [
-          "thinking",
-          "jsonOutput",
-          "toolCalls"
-        ]
-      },
-      "capabilities": {
-        "thinking": false,
-        "jsonOutput": false,
-        "toolCalls": false,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 8192,
-        "maxOutputTokens": 4096
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 0.3
-          },
-          "output": 1.2,
-          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
-          "validFrom": "2026-11-14T12:52:52.730Z"
-        }
-      ]
-    },
-    {
-      "id": "hunyuan-role-latest",
-      "name": "Hy-Role-Latest",
-      "aliases": [],
-      "capabilitiesSource": "docs",
-      "capabilitiesEvidence": {
-        "sectionPresent": true,
-        "parsedFields": [
-          "inputModalities",
-          "outputModalities"
-        ],
-        "defaultedFields": [
-          "thinking",
-          "jsonOutput",
-          "toolCalls"
-        ]
-      },
-      "capabilities": {
-        "thinking": false,
-        "jsonOutput": false,
-        "toolCalls": false,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 32768,
-        "maxOutputTokens": 4096
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 2.4
-          },
-          "output": 9.6,
-          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
-          "validFrom": "2026-11-14T12:52:52.730Z"
-        }
-      ]
-    },
-    {
-      "id": "hy-role",
-      "name": "Hy-Role",
-      "aliases": [],
-      "capabilitiesSource": "docs",
-      "capabilitiesEvidence": {
-        "sectionPresent": true,
-        "parsedFields": [
-          "inputModalities",
-          "outputModalities"
-        ],
-        "defaultedFields": [
-          "thinking",
-          "jsonOutput",
-          "toolCalls"
-        ]
-      },
-      "capabilities": {
-        "thinking": false,
-        "jsonOutput": false,
-        "toolCalls": false,
-        "inputModalities": [
-          "text"
-        ],
-        "outputModalities": [
-          "text"
-        ]
-      },
-      "limits": {
-        "contextTokens": 32768,
-        "maxOutputTokens": 4096
-      },
-      "prices": [
-        {
-          "market": "china",
-          "currency": "CNY",
-          "unit": "1M_tokens",
-          "rateType": "standard",
-          "input": {
-            "standard": 2.4
-          },
-          "output": 9.6,
-          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
-          "validFrom": "2026-11-14T12:52:52.730Z"
-        }
-      ]
     }
   ],
   "sources": [
@@ -392,15 +172,22 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-11-14T12:52:51.553Z",
-      "contentHash": "sha256:b9a41694664287fb8e330af28d43e9493ba9d410020501cb65ec8a1330cc167c"
+      "retrievedAt": "2026-11-14T13:13:19.887Z",
+      "contentHash": "sha256:67d21cddd0d777164a5b172861bd6c97cf84c0b7e35e6d8d8225e7386a05c2a5"
     },
     {
       "url": "https://cloud.tencent.com/document/product/1823/130051",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-11-14T12:52:51.553Z",
-      "contentHash": "sha256:cf6557e2dc6707b0bf5896cb44054aec9c316da65c724f03112405b455f4a3c3"
+      "retrievedAt": "2026-11-14T13:13:19.887Z",
+      "contentHash": "sha256:2dc3bbe9791cc53d96cfcb9c9a943ff86d48655e88bab9f0509764e2c72bfe27"
+    },
+    {
+      "url": "https://api.hunyuan.tencent.com/api/blog/publicList",
+      "kind": "model-metadata",
+      "locale": "en",
+      "retrievedAt": "2026-11-14T13:09:50.349Z",
+      "contentHash": "sha256:62073ac58c2fb2fbfae255a8c115b7067c0778145124fc8f70f3b6a0f623474e"
     }
   ]
 }

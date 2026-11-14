@@ -1,0 +1,89 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "totalNum": 11,
+    "list": [
+      {
+        "id": 100129,
+        "lang": "en",
+        "title": "Introducing Hy4",
+        "customUrl": "hy4",
+        "publishedAt": 1793770930,
+        "displayPublishTime": 1793721600
+      },
+      {
+        "id": 100127,
+        "lang": "en",
+        "title": "Hyra 2.0: The Next Step for Auto Research",
+        "customUrl": "hyra2",
+        "publishedAt": 1792920366,
+        "displayPublishTime": 1793548800
+      },
+      {
+        "id": 100116,
+        "lang": "en",
+        "title": "When Do Larger Batches Help Scale LLM Reinforcement Learning?",
+        "customUrl": "",
+        "publishedAt": 1789707529,
+        "displayPublishTime": 1790006400
+      },
+      {
+        "id": 100100,
+        "lang": "en",
+        "title": "Introducing Hy4 preview",
+        "customUrl": "hy4-preview",
+        "publishedAt": 1787896672,
+        "displayPublishTime": 1787846400
+      },
+      {
+        "id": 100091,
+        "lang": "en",
+        "title": "From LR to ELR: A Better Heuristic for Pretraining Dynamics",
+        "customUrl": "elr",
+        "publishedAt": 1785989409,
+        "displayPublishTime": 1785945600
+      },
+      {
+        "id": 100087,
+        "lang": "en",
+        "title": "Hyra: A simple yet effective scaffold for general discovery",
+        "customUrl": "hyra",
+        "publishedAt": 1784111171,
+        "displayPublishTime": 1784599200
+      },
+      {
+        "id": 100064,
+        "lang": "en",
+        "title": "Introducing Hy3",
+        "customUrl": "hy3",
+        "publishedAt": 1783319811,
+        "displayPublishTime": 1783440000
+      },
+      {
+        "id": 100039,
+        "lang": "en",
+        "title": "Real life is where context gets hard",
+        "customUrl": "",
+        "publishedAt": 1777227059,
+        "displayPublishTime": 1777532400
+      },
+      {
+        "id": 100061,
+        "lang": "en",
+        "title": "Hy3 preview: The First Step in Rebuilding the Hy model",
+        "customUrl": "hy3-preview",
+        "publishedAt": 1782369407,
+        "displayPublishTime": 1776873600
+      },
+      {
+        "id": 100015,
+        "lang": "en",
+        "title": "Stabilizing RLVR via Token-level Gradient Diagnosis and Layerwise Clipping",
+        "customUrl": "",
+        "publishedAt": 1770971763,
+        "displayPublishTime": 1770971763
+      }
+    ]
+  }
+}
