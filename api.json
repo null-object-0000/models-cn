@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:16:36.312Z",
-        "lastAttemptAt": "2026-11-14T13:16:36.312Z",
+        "lastSuccessfulAt": "2026-11-14T13:30:38.759Z",
+        "lastAttemptAt": "2026-11-14T13:30:38.759Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -784,8 +784,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:16:36.360Z",
-        "lastAttemptAt": "2026-11-14T13:16:36.360Z",
+        "lastSuccessfulAt": "2026-11-14T13:30:38.754Z",
+        "lastAttemptAt": "2026-11-14T13:30:38.754Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1009,7 +1009,7 @@
           "url": "https://api.longcat.chat/openai/v1/models",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-11-14T13:16:36.360Z",
+          "retrievedAt": "2026-11-14T13:30:38.754Z",
           "contentHash": "sha256:96dbf4ff734727757ed7cdce2e8c06120acf1e687093374cd1f1510e4dd9cea4"
         },
         {
@@ -1025,8 +1025,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:16:36.326Z",
-        "lastAttemptAt": "2026-11-14T13:16:36.326Z",
+        "lastSuccessfulAt": "2026-11-14T13:30:38.761Z",
+        "lastAttemptAt": "2026-11-14T13:30:38.761Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1397,8 +1397,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:16:36.330Z",
-        "lastAttemptAt": "2026-11-14T13:16:36.330Z",
+        "lastSuccessfulAt": "2026-11-14T13:30:38.713Z",
+        "lastAttemptAt": "2026-11-14T13:30:38.713Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1769,8 +1769,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:16:36.337Z",
-        "lastAttemptAt": "2026-11-14T13:16:36.337Z",
+        "lastSuccessfulAt": "2026-11-14T13:30:38.734Z",
+        "lastAttemptAt": "2026-11-14T13:30:38.734Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -2450,7 +2450,7 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-11-14T13:16:36.337Z",
+          "retrievedAt": "2026-11-14T13:30:38.734Z",
           "contentHash": "sha256:058e401333910beb1633c59f9a250648e9afe3fbf732de4ab03ee03ef4aeeaf9"
         }
       ]
@@ -2469,8 +2469,8 @@
       },
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:16:36.354Z",
-        "lastAttemptAt": "2026-11-14T13:16:36.354Z",
+        "lastSuccessfulAt": "2026-11-14T13:30:38.749Z",
+        "lastAttemptAt": "2026-11-14T13:30:38.749Z",
         "consecutiveFailures": 0
       },
       "models": [
@@ -2652,8 +2652,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:16:36.350Z",
-        "lastAttemptAt": "2026-11-14T13:16:36.350Z",
+        "lastSuccessfulAt": "2026-11-14T13:30:38.745Z",
+        "lastAttemptAt": "2026-11-14T13:30:38.745Z",
         "consecutiveFailures": 0,
         "warnings": [
           {
@@ -3617,8 +3617,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:16:36.352Z",
-        "lastAttemptAt": "2026-11-14T13:16:36.352Z",
+        "lastSuccessfulAt": "2026-11-14T13:30:38.747Z",
+        "lastAttemptAt": "2026-11-14T13:30:38.747Z",
         "consecutiveFailures": 0,
         "warnings": [
           {
@@ -4391,8 +4391,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:17:02.945Z",
-        "lastAttemptAt": "2026-11-14T13:17:02.945Z",
+        "lastSuccessfulAt": "2026-11-14T13:31:05.306Z",
+        "lastAttemptAt": "2026-11-14T13:31:05.306Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4431,8 +4431,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:17:03.604Z",
-        "lastAttemptAt": "2026-11-14T13:17:03.604Z",
+        "lastSuccessfulAt": "2026-11-14T13:31:05.908Z",
+        "lastAttemptAt": "2026-11-14T13:31:05.908Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4482,8 +4482,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:17:04.276Z",
-        "lastAttemptAt": "2026-11-14T13:17:04.276Z",
+        "lastSuccessfulAt": "2026-11-14T13:31:06.458Z",
+        "lastAttemptAt": "2026-11-14T13:31:06.458Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4540,8 +4540,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:17:06.029Z",
-        "lastAttemptAt": "2026-11-14T13:17:06.029Z",
+        "lastSuccessfulAt": "2026-11-14T13:31:08.217Z",
+        "lastAttemptAt": "2026-11-14T13:31:08.217Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4598,8 +4598,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:17:06.445Z",
-        "lastAttemptAt": "2026-11-14T13:17:06.445Z",
+        "lastSuccessfulAt": "2026-11-14T13:31:08.594Z",
+        "lastAttemptAt": "2026-11-14T13:31:08.594Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4691,8 +4691,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:17:06.895Z",
-        "lastAttemptAt": "2026-11-14T13:17:06.895Z",
+        "lastSuccessfulAt": "2026-11-14T13:31:09.358Z",
+        "lastAttemptAt": "2026-11-14T13:31:09.358Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4784,14 +4784,14 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:17:01.857Z",
-        "lastAttemptAt": "2026-11-14T13:17:01.857Z",
+        "lastSuccessfulAt": "2026-11-14T13:31:04.442Z",
+        "lastAttemptAt": "2026-11-14T13:31:04.442Z",
         "consecutiveFailures": 0
       },
       "source": {
         "url": "https://models.dev/api.json",
-        "retrievedAt": "2026-11-14T09:07:30.113Z",
-        "contentHash": "sha256:9bd35079ccd05722aeb94ee82daa528137a5eea102b3a1a6c66b23899fe1a1e6"
+        "retrievedAt": "2026-11-14T13:31:04.442Z",
+        "contentHash": "sha256:8e83182b6d9a6052a8d950d0f780bf87dbed51cf5e540f3dd4df2c9a0c305ff8"
       },
       "models": [
         {
@@ -8359,6 +8359,242 @@
               "field": "prices.USD.output",
               "official": null,
               "reference": 1.5,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "tencent-hunyuan",
+          "model": "hy4",
+          "referenceProvider": "tencent-tokenhub",
+          "referenceModel": "hy4",
+          "referenceUrl": "https://models.dev/models/tencent-tokenhub/hy4/",
+          "status": "partial",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-11-04",
+              "reference": "2026-11-04",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1048576,
+              "reference": 1048576,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 65536,
+              "reference": 65536,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text",
+                "image"
+              ],
+              "reference": [
+                "text",
+                "image"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.834,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.042,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 2.501,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "tencent-hunyuan",
+          "model": "hy4-preview",
+          "referenceProvider": "tencent-tokenhub",
+          "referenceModel": "hy4-preview",
+          "referenceUrl": "https://models.dev/models/tencent-tokenhub/hy4-preview/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-08-28",
+              "reference": "2026-08-28",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 1048576,
+              "reference": 1024000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 65536,
+              "reference": 64000,
+              "status": "mismatch"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0.834,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0.042,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 2.501,
+              "status": "missing"
+            }
+          ]
+        },
+        {
+          "provider": "tencent-hunyuan",
+          "model": "hy3",
+          "referenceProvider": "tencent-tokenhub",
+          "referenceModel": "hy3",
+          "referenceUrl": "https://models.dev/models/tencent-tokenhub/hy3/",
+          "status": "mismatch",
+          "checks": [
+            {
+              "field": "createdAt",
+              "official": "2026-07-06",
+              "reference": "2026-07-06",
+              "status": "match"
+            },
+            {
+              "field": "limits.contextTokens",
+              "official": 262144,
+              "reference": 256000,
+              "status": "match"
+            },
+            {
+              "field": "limits.maxOutputTokens",
+              "official": 131072,
+              "reference": 128000,
+              "status": "mismatch"
+            },
+            {
+              "field": "capabilities.thinking",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.toolCalls",
+              "official": true,
+              "reference": true,
+              "status": "match"
+            },
+            {
+              "field": "capabilities.inputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "capabilities.outputModalities",
+              "official": [
+                "text"
+              ],
+              "reference": [
+                "text"
+              ],
+              "status": "match"
+            },
+            {
+              "field": "prices.USD.input.standard",
+              "official": null,
+              "reference": 0,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.input.cacheHit",
+              "official": null,
+              "reference": 0,
+              "status": "missing"
+            },
+            {
+              "field": "prices.USD.output",
+              "official": null,
+              "reference": 0,
               "status": "missing"
             }
           ]
