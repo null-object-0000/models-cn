@@ -390,7 +390,7 @@ describe("Kimi collector parser", () => {
       if (url.includes("models-overview"))
         return new Response(modelIds.join(" "));
       return new Response(
-        "Kimi 大模型的输出长度是多少\nkimi-k3 1024*1024 - prompt_tokens\nkimi-k2.6 256*1024 - prompt_tokens",
+        "Kimi 大模型的输出长度是多少\n`kimi-k3.1-pro` 和 `kimi-k3` 的上下文窗口为 1M tokens，`max_completion_tokens` 默认为 131072；实际可用输出还受本次请求输入 Tokens 限制。",
       );
     });
     const provider = await collectMoonshotChina();
@@ -400,8 +400,8 @@ describe("Kimi collector parser", () => {
       id: "kimi-k3.1-pro",
       limits: { contextTokens: 1_048_576 },
     });
-    expect(provider.models[0]?.limits.maxOutputTokens).toBeUndefined();
-    expect(provider.models[2]?.limits.maxOutputTokens).toBe(1_048_576);
+    expect(provider.models[0]?.limits.maxOutputTokens).toBe(131_072);
+    expect(provider.models[2]?.limits.maxOutputTokens).toBe(131_072);
   });
 
   it("requests RSC first and keeps metadata requests in markdown", async () => {
@@ -488,7 +488,8 @@ describe("Kimi collector parser", () => {
     const limits = parseMoonshotOutputLimits(markdown);
     expect(limits.get("kimi-k3")).toBe(1_048_576);
     expect(limits.get("kimi-k2.6")).toBe(262_144);
-    expect(limits.get("kimi-k2.5")).toBeUndefined();
+    // 同一行点名的模型都取同一个上限（上游原文同时列了 k2.5）
+    expect(limits.get("kimi-k2.5")).toBe(262_144);
     expect(limits.get("kimi-k2.7-code")).toBeUndefined();
   });
 
@@ -504,7 +505,45 @@ describe("Kimi collector parser", () => {
     const limits = parseMoonshotOutputLimits(markdown);
     expect(limits.get("kimi-k3")).toBe(1_048_576);
     expect(limits.get("kimi-k2.6")).toBe(262_144);
-    expect(limits.get("kimi-k2.5")).toBeUndefined();
+    expect(limits.get("kimi-k2.5")).toBe(262_144);
+  });
+
+  it("parses the consolidated max_completion_tokens wording (2026-11)", () => {
+    const zh = `
+> [accordion] Kimi 大模型的输出长度是多少
+>
+> \`kimi-k3.1-pro\` 和 \`kimi-k3\` 的上下文窗口为 1M tokens，\`max_completion_tokens\` 默认为 131072；实际可用输出还受本次请求输入 Tokens 限制。
+
+> [accordion] Kimi 大模型支持的汉字数量是多少？
+`;
+    const zhLimits = parseMoonshotOutputLimits(zh);
+    expect(zhLimits.get("kimi-k3.1-pro")).toBe(131_072);
+    expect(zhLimits.get("kimi-k3")).toBe(131_072);
+    expect(zhLimits.get("kimi-k2.6")).toBeUndefined();
+
+    const en = `
+> [accordion] What is the output length of the Kimi model?
+>
+> \`kimi-k3.1-pro\` and \`kimi-k3\` support a 1M-token context window, and \`max_completion_tokens\` defaults to 131072. The available output length is also limited by the input tokens in the request.
+
+> [accordion] How many Chinese characters does the Kimi model support?
+`;
+    const enLimits = parseMoonshotOutputLimits(en);
+    expect(enLimits.get("kimi-k3.1-pro")).toBe(131_072);
+    expect(enLimits.get("kimi-k3")).toBe(131_072);
+  });
+
+  it("throws when the output-limit section carries no limits at all", () => {
+    const markdown = `
+## Kimi 大模型的输出长度是多少
+
+输出长度取决于上下文窗口。
+
+## Kimi 大模型支持的汉字数量是多少
+`;
+    expect(() => parseMoonshotOutputLimits(markdown)).toThrow(
+      /missing all model limits/,
+    );
   });
 
   it("collects the international channel with USD metadata", async () => {

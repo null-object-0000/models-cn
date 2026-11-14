@@ -475,19 +475,35 @@ export function parseMoonshotOutputLimits(
     throw new Error("Kimi troubleshooting page is missing output limits");
   }
 
+  // 上游 2026-11 起把「N*M - prompt_tokens」公式换成了纯文案：
+  // `max_completion_tokens` 默认值直接写在正文里。逐行扫描，同一行出现的模型 ID
+  // 共用该行的默认值；旧的公式写法继续兼容（部分渠道/旧版页面还在用）。
   const limits = new Map<string, number>();
-  for (const id of ["kimi-k3", "kimi-k2.6"]) {
-    const escapedId = id.replaceAll(".", "\\.");
-    const expression = section.match(
-      new RegExp(
-        `${escapedId}[^\\n]*?(\\d+)\\s*\\*\\s*(\\d+)\\s*-\\s*prompt_tokens`,
-        "i",
-      ),
+  for (const line of section.split(/\r?\n/)) {
+    const backticked = [...line.matchAll(/`(kimi[a-z0-9.-]*)`/gi)].map(
+      (match) => match[1]!.toLowerCase(),
     );
-    if (!expression) {
-      throw new Error(`Kimi output limits are missing ${id}`);
-    }
-    limits.set(id, Number(expression[1]) * Number(expression[2]));
+    const ids = backticked.length
+      ? backticked
+      : [...line.matchAll(/\b(kimi-[a-z0-9.-]+)/gi)].map((match) =>
+          match[1]!.replace(/[.-]+$/, "").toLowerCase(),
+        );
+    if (ids.length === 0) continue;
+
+    const consolidated = line.match(
+      /max_completion_tokens[^0-9]{0,40}(\d{3,})/i,
+    );
+    const expression = line.match(/(\d+)\s*\*\s*(\d+)\s*-\s*prompt_tokens/i);
+    const maxOutputTokens = consolidated
+      ? Number(consolidated[1])
+      : expression
+        ? Number(expression[1]) * Number(expression[2])
+        : undefined;
+    if (maxOutputTokens === undefined) continue;
+    for (const id of new Set(ids)) limits.set(id, maxOutputTokens);
+  }
+  if (limits.size === 0) {
+    throw new Error("Kimi output limits are missing all model limits");
   }
   return limits;
 }
