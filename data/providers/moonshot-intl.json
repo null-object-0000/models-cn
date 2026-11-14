@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-14T09:07:08.258Z",
-    "lastAttemptAt": "2026-11-14T09:07:08.258Z",
+    "lastSuccessfulAt": "2026-11-14T12:57:11.451Z",
+    "lastAttemptAt": "2026-11-14T12:57:11.451Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-intl",
