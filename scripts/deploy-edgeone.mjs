@@ -4,7 +4,7 @@ for (const key of ["TENCENT_CLOUD_SECRET_ID", "TENCENT_CLOUD_SECRET_KEY"]) {
   if (!process.env[key]) throw new Error(`Missing ${key}`);
 }
 
-const projectId = "makers-qgqj3tultmxa";
+const projectId = "makers-f2mq3hkqxfbj";
 const makers = new Makers({
   credentials: {
     secretId: process.env.TENCENT_CLOUD_SECRET_ID,
@@ -15,8 +15,10 @@ const makers = new Makers({
 });
 
 const project = await makers.projects.get({ projectId });
-if (project.area !== "mainland") {
-  throw new Error("Deployment target must use mainland nodes");
+if (project.area !== "global") {
+  throw new Error(
+    "Deployment target must use global nodes including mainland China",
+  );
 }
 const deployment = await makers.deployments.deploy({
   projectId,
