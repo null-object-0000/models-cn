@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-07T15:43:26.694Z",
-    "lastAttemptAt": "2026-11-07T15:43:26.694Z",
+    "lastSuccessfulAt": "2026-11-14T09:07:08.253Z",
+    "lastAttemptAt": "2026-11-14T09:07:08.253Z",
     "consecutiveFailures": 0
   },
   "id": "moonshot-cn",
@@ -51,7 +51,8 @@
         ]
       },
       "limits": {
-        "contextTokens": 1048576
+        "contextTokens": 1048576,
+        "maxOutputTokens": 131072
       },
       "prices": [
         {
@@ -162,7 +163,7 @@
       },
       "limits": {
         "contextTokens": 1048576,
-        "maxOutputTokens": 1048576
+        "maxOutputTokens": 131072
       },
       "prices": [
         {
@@ -325,8 +326,7 @@
         ]
       },
       "limits": {
-        "contextTokens": 262144,
-        "maxOutputTokens": 262144
+        "contextTokens": 262144
       },
       "prices": [
         {
@@ -358,15 +358,15 @@
       "url": "https://platform.kimi.com/docs/api/models-overview",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-11-02T01:06:33.553Z",
-      "contentHash": "sha256:fabd98dceddf1862b8fab5113f93d258119c5b8063db08118f58651953dceba3"
+      "retrievedAt": "2026-11-14T09:07:08.253Z",
+      "contentHash": "sha256:52774999655c2d542144e65f7583e9e194d3eab11caedffa34be5e9274e4f89f"
     },
     {
       "url": "https://platform.kimi.com/docs/guide/troubleshooting#kimi",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-11-07T15:43:26.694Z",
-      "contentHash": "sha256:e505699c830f8d89e566bf487f48a681c2c5efdf8fe4a730dad25f7f42b035ea"
+      "retrievedAt": "2026-11-14T09:07:08.253Z",
+      "contentHash": "sha256:10ff188f54bd460f6baae287051f8e8d2bb07f49ed787c164c84f87bbaa4c7ad"
     }
   ]
 }
