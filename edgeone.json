@@ -1,0 +1,25 @@
+{
+  "headers": [
+    {
+      "source": "/api.json",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public,max-age=300" }
+      ]
+    },
+    {
+      "source": "/v1/*",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public,max-age=300" }
+      ]
+    },
+    {
+      "source": "/schema/*",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public,max-age=300" }
+      ]
+    }
+  ]
+}

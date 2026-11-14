@@ -4,7 +4,7 @@ export function SiteFooter() {
       <div className="shell footer-inner">
         <div className="brand">
           <span className="brand-mark" />
-          models-cn
+          DevTrends · models-cn
         </div>
         <p>开放数据 · 官方来源 · 可追溯更新</p>
         <a

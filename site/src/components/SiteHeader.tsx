@@ -11,12 +11,13 @@ export function SiteHeader({
   return (
     <header className="site-header">
       <div className="shell header-inner">
-        <a className="brand" href="#top" aria-label="models-cn 首页">
+        <a className="brand" href="#top" aria-label="DevTrends 模型价格首页">
           <span className="brand-mark" />
-          models-cn
+          DevTrends · 模型价格
         </a>
         <div className="header-actions">
           <nav aria-label="主导航">
+            <a href="https://devtrends.site/">返回主站</a>
             <a className="active" href="#models">
               模型
             </a>
