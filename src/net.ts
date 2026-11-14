@@ -122,6 +122,10 @@ export async function retryAsync<T>(
 
 export interface FetchWithRetryInit extends RetryOptions {
   headers?: Record<string, string>;
+  /** 请求方法，默认 GET。有些文档站的文章接口只接受 POST。 */
+  method?: "GET" | "POST";
+  /** 请求体，仅 POST 时使用。 */
+  body?: string;
   /** 单次尝试的超时毫秒，默认 30000 */
   timeoutMs?: number;
   /** HTTP 非 2xx 时错误消息的前缀，默认 `Failed to fetch <url>` */
@@ -152,13 +156,15 @@ export async function requestWithRetry(
   url: string,
   init: FetchWithRetryInit = {},
 ): Promise<Response> {
-  const { headers, timeoutMs = 30_000, errorPrefix } = init;
+  const { headers, timeoutMs = 30_000, errorPrefix, method, body } = init;
   const prefix = errorPrefix ?? `Failed to fetch ${url}`;
   return retryAsync(async () => {
     const requestInit: RequestInit = {
       signal: AbortSignal.timeout(timeoutMs),
     };
     if (headers !== undefined) requestInit.headers = headers;
+    if (method !== undefined) requestInit.method = method;
+    if (body !== undefined) requestInit.body = body;
     const response = await fetch(url, requestInit);
     if (!response.ok) {
       throw new Error(`${prefix}: HTTP ${response.status}`);

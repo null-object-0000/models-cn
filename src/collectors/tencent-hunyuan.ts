@@ -23,10 +23,20 @@ export const TENCENT_HUNYUAN_BASE_URL =
   "https://api.hunyuan.cloud.tencent.com/v1";
 
 /** 腾讯自研混元的调用参数前缀：hy4 / hy3 / hy-mt2-* / hy-role / hunyuan-role-latest。 */
-const SELF_HOSTED_PATTERN = /^(?:hy\d|hy-|hunyuan-)/i;
+const SELF_HOSTED_PATTERN = /^(?:hy\d|hy-)/i;
+
+/**
+ * 不收录的系列：翻译（hy-mt2-*）与角色扮演（hy-role / hunyuan-role-latest）。
+ * 这两个系列不是通用对话模型，官方也没给它们发布日期，收进来只会让目录里多出
+ * 一堆缺字段的条目；保留前缀判断是为了让以后新增的旗舰（如 hy4-flash）自动进来。
+ */
+const EXCLUDED_FAMILIES = [/^hy-mt/i, /^hy-role/i, /^hunyuan-/i];
 
 export function isTencentHunyuanModel(modelId: string): boolean {
-  return SELF_HOSTED_PATTERN.test(modelId);
+  return (
+    SELF_HOSTED_PATTERN.test(modelId) &&
+    !EXCLUDED_FAMILIES.some((pattern) => pattern.test(modelId))
+  );
 }
 
 export interface HunyuanPricingRow {
@@ -223,21 +233,87 @@ const DOCS_HEADERS = {
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
 };
 
+/**
+ * 发布时间只有一个官方来源：混元官网「研究」页背后的文章接口。
+ * 每篇文章带 `customUrl`（hy4 / hy4-preview / hy3 …）与 `publishedAt`，
+ * 正文里也写着发布日期。TokenHub 的文档页本身**不提供**上线时间。
+ *
+ * 只有发布文章明确对应的模型才写 createdAt；Hy-MT2 与两个角色扮演模型
+ * 在该接口里没有条目（中文页有 Hy-MT2 的文章，但接口只回英文列表），
+ * 因此保持缺省，不猜日期。
+ */
+export const TENCENT_HUNYUAN_RELEASE_NOTES_URL =
+  "https://api.hunyuan.tencent.com/api/blog/publicList";
+
+/** 发布文章 customUrl → 它正式发布的模型 id。 */
+const RELEASE_NOTE_MODELS: Record<string, string[]> = {
+  hy4: ["hy4"],
+  "hy4-preview": ["hy4-preview"],
+  hy3: ["hy3"],
+};
+
+interface ReleaseNoteItem {
+  customUrl?: string;
+  publishedAt?: number;
+  displayPublishTime?: number;
+}
+
+export function parseHunyuanReleaseDates(payload: string): Map<string, string> {
+  const parsed = JSON.parse(payload) as {
+    data?: { list?: ReleaseNoteItem[] };
+  };
+  const list = parsed.data?.list ?? [];
+  if (!list.length) {
+    throw new Error("Hunyuan release notes returned an empty article list");
+  }
+  const dates = new Map<string, string>();
+  for (const item of list) {
+    const customUrl = item.customUrl?.trim();
+    if (!customUrl) continue;
+    const modelIds = RELEASE_NOTE_MODELS[customUrl];
+    if (!modelIds) continue;
+    const timestamp = item.publishedAt ?? item.displayPublishTime;
+    if (!timestamp) continue;
+    const iso = new Date(timestamp * 1000).toISOString();
+    for (const modelId of modelIds) dates.set(modelId, iso);
+  }
+  return dates;
+}
+
 function contentHash(value: string): string {
   return `sha256:${createHash("sha256").update(value).digest("hex")}`;
 }
+
+export interface HunyuanFetchInit {
+  headers: Record<string, string>;
+  method?: "GET" | "POST";
+  body?: string;
+}
+
+/**
+ * 默认 fetcher：统一走 src/net.ts 的带重试实现（仓库有 network-guard 用例禁止裸 fetch）。
+ * 发布文章接口只接受 POST（GET 返回 405），所以 init 里带上 method/body。
+ */
+const defaultFetcher = (url: string, init: HunyuanFetchInit): Promise<string> =>
+  fetchTextWithRetry(url, init);
 
 export async function collectTencentHunyuan(
   now = new Date(),
   fetcher: (
     url: string,
-    init: { headers: Record<string, string> },
-  ) => Promise<string> = fetchTextWithRetry,
+    init: HunyuanFetchInit,
+  ) => Promise<string> = defaultFetcher,
 ): Promise<ProviderData> {
-  const [pricingHtml, modelsHtml] = await Promise.all([
+  const [pricingHtml, modelsHtml, releaseNotes] = await Promise.all([
     fetcher(TENCENT_HUNYUAN_PRICING_URL, { headers: DOCS_HEADERS }),
     fetcher(TENCENT_HUNYUAN_MODELS_URL, { headers: DOCS_HEADERS }),
+    fetcher(TENCENT_HUNYUAN_RELEASE_NOTES_URL, {
+      headers: { ...DOCS_HEADERS, "content-type": "application/json" },
+      method: "POST",
+      body: '{"pageNum":1,"pageSize":50}',
+    }),
   ]);
+  const releaseDates = parseHunyuanReleaseDates(releaseNotes);
 
   const pricing = parseTencentHunyuanPricing(pricingHtml).filter((row) =>
     isTencentHunyuanModel(row.id),
@@ -284,11 +360,19 @@ export async function collectTencentHunyuan(
     };
 
     const capabilities = parseHunyuanCapabilities(row.capabilitiesText);
+    const createdAt = releaseDates.get(row.id);
 
     collected.push({
       id: row.id,
       name: row.name || row.id,
       aliases: [],
+      ...(createdAt
+        ? {
+            createdAt,
+            createdAtSource: "release-notes" as const,
+            createdAtEvidence: { releaseNotesMentioned: true },
+          }
+        : {}),
       capabilitiesSource: "docs",
       capabilitiesEvidence: {
         sectionPresent: true,
@@ -340,6 +424,18 @@ export async function collectTencentHunyuan(
             (row) =>
               `${row.id}:${row.contextTokens}:${row.maxOutputTokens ?? ""}:${row.capabilitiesText}`,
           )
+          .join("\n"),
+      ),
+    },
+    {
+      url: TENCENT_HUNYUAN_RELEASE_NOTES_URL,
+      kind: "model-metadata",
+      locale: "en",
+      retrievedAt,
+      contentHash: contentHash(
+        [...releaseDates.entries()]
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([modelId, createdAt]) => `${modelId}:${createdAt}`)
           .join("\n"),
       ),
     },
