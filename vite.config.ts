@@ -27,6 +27,10 @@ function copyCatalog(): Plugin {
         path.resolve("api.json"),
         path.join(outputDirectory, "api.json"),
       );
+      await copyFile(
+        path.resolve("edgeone.json"),
+        path.join(outputDirectory, "edgeone.json"),
+      );
       await cp(path.resolve("v1"), path.join(outputDirectory, "v1"), {
         recursive: true,
       });

@@ -16,7 +16,15 @@ models-cn 只关注**中国大陆模型厂商及其官方渠道**，核心目标
 - **持续更新**：GitHub Actions 定期采集，数据变化通过 Pull Request 审核。
 - **Agent 友好**：提供可直接交给 Codex、Claude Code、Cursor 等工具的接入提示词。
 
-[浏览官网](https://null-object-0000.github.io/models-cn/) · [获取 api.json](https://null-object-0000.github.io/models-cn/api.json) · [v1 稳定接口](https://null-object-0000.github.io/models-cn/v1/api.json) · [查看 JSON Schema](schema/v1/provider.schema.json) · [兼容性承诺](COMPATIBILITY.md) · [复制 Agent 接入提示词](docs/agent-integration-prompt.md)
+[浏览官网](https://models.devtrends.site/) · [GitHub Pages 镜像](https://null-object-0000.github.io/models-cn/) · [获取 api.json](https://null-object-0000.github.io/models-cn/api.json) · [v1 稳定接口](https://null-object-0000.github.io/models-cn/v1/api.json) · [查看 JSON Schema](schema/v1/provider.schema.json) · [兼容性承诺](COMPATIBILITY.md) · [复制 Agent 接入提示词](docs/agent-integration-prompt.md)
+
+## 网站部署
+
+大陆主站为 https://models.devtrends.site/，属于 DevTrends 的模型价格栏目。models-cn 保持独立的数据采集、审核和开放接口，GitHub Pages 与原有 API 地址继续保留。
+
+合并到 `main` 后，GitHub Actions 分别发布 GitHub Pages 和 EdgeOne 大陆站。EdgeOne 工作流依赖仓库 Secrets `TENCENT_CLOUD_SECRET_ID` 与 `TENCENT_CLOUD_SECRET_KEY`；部署目标固定为大陆项目，并保留 JSON 接口的跨域读取。
+
+本地复现：`npm ci && npm run check && npm run build && npm run site:build`，产物目录为 `dist/site`。
 
 ## 30 秒开始使用
 
