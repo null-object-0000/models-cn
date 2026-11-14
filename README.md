@@ -20,9 +20,11 @@ models-cn 只关注**中国大陆模型厂商及其官方渠道**，核心目标
 
 ## 网站部署
 
-大陆主站为 https://models.devtrends.site/，属于 DevTrends 的模型价格栏目。models-cn 保持独立的数据采集、审核和开放接口，GitHub Pages 与原有 API 地址继续保留。
+主站为 https://models.devtrends.site/，使用 EdgeOne 全球节点（包含中国大陆），属于 DevTrends 的模型价格栏目。models-cn 保持独立的数据采集、审核和开放接口，GitHub Pages 与原有 API 地址继续保留。
 
-合并到 `main` 后，GitHub Actions 分别发布 GitHub Pages 和 EdgeOne 大陆站。EdgeOne 工作流依赖仓库 Secrets `TENCENT_CLOUD_SECRET_ID` 与 `TENCENT_CLOUD_SECRET_KEY`；部署目标固定为大陆项目，并保留 JSON 接口的跨域读取。
+提交或合并到 `main` 后，GitHub Actions 分别构建并发布 GitHub Pages 和 EdgeOne 全球站，页面与 JSON 数据同步更新。EdgeOne 工作流依赖仓库 Secrets `TENCENT_CLOUD_SECRET_ID` 与 `TENCENT_CLOUD_SECRET_KEY`；部署目标固定为全球项目（包含中国大陆），并保留 JSON 接口的跨域读取。
+
+仅创建 Tag 或发布 GitHub Release 不单独触发站点部署；定时价格采集生成的 PR 也需要合并到 `main` 才会上线。部署工作流支持手动运行。
 
 本地复现：`npm ci && npm run check && npm run build && npm run site:build`，产物目录为 `dist/site`。
 

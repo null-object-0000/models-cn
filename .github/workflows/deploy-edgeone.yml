@@ -1,4 +1,4 @@
-name: Deploy mainland website to EdgeOne
+name: Deploy global website to EdgeOne
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
       - run: npm run check
       - run: npm run build
       - run: npm run site:build
-      - name: Publish to mainland EdgeOne
+      - name: Publish to global EdgeOne
         run: node scripts/deploy-edgeone.mjs
         env:
           TENCENT_CLOUD_SECRET_ID: ${{ secrets.TENCENT_CLOUD_SECRET_ID }}
