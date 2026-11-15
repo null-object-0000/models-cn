@@ -22,6 +22,7 @@ export function SiteHeader({
               模型
             </a>
             <a href="#method">数据说明</a>
+            <a href="https://umanager.devtrends.site/">UManager</a>
             <a
               href="https://github.com/null-object-0000/models-cn"
               target="_blank"

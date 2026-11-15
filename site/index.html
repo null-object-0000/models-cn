@@ -25,6 +25,65 @@
     />
     <meta property="og:url" content="https://models.devtrends.site/" />
     <link rel="canonical" href="https://models.devtrends.site/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:site_name" content="DevTrends 模型价格" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta
+      property="og:image"
+      content="https://models.devtrends.site/apple-touch-icon.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="DevTrends 模型价格 · 中国大模型官方 API 定价"
+    />
+    <meta
+      name="twitter:description"
+      content="比较中国大模型官方 API 的人民币价格与能力，保留来源和更新信息。"
+    />
+    <meta
+      name="twitter:image"
+      content="https://models.devtrends.site/apple-touch-icon.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://devtrends.site/#organization",
+            "name": "DevTrends",
+            "url": "https://devtrends.site/"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://models.devtrends.site/#website",
+            "name": "DevTrends 模型价格 · models-cn",
+            "url": "https://models.devtrends.site/",
+            "inLanguage": "zh-CN",
+            "publisher": { "@id": "https://devtrends.site/#organization" },
+            "isPartOf": { "@id": "https://devtrends.site/#website" }
+          },
+          {
+            "@type": "Dataset",
+            "@id": "https://models.devtrends.site/#dataset",
+            "name": "中国大模型官方 API 定价与能力数据",
+            "description": "中国大陆大模型厂商官方 API 定价与模型信息，保留人民币价格、官方来源和更新时间。",
+            "url": "https://models.devtrends.site/",
+            "inLanguage": "zh-CN",
+            "isAccessibleForFree": true,
+            "creator": { "@id": "https://devtrends.site/#organization" },
+            "distribution": [
+              {
+                "@type": "DataDownload",
+                "encodingFormat": "application/json",
+                "contentUrl": "https://models.devtrends.site/api.json"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
     <title>DevTrends 模型价格 · 中国大模型官方定价</title>
   </head>
   <body>
@@ -47,11 +106,41 @@
       }
     </script>
     <div id="app">
-      <main class="loading-shell" aria-live="polite">
-        <span class="loading-dot"></span>
-        正在载入模型数据…
+      <main
+        class="loading-shell"
+        aria-live="polite"
+        style="
+          flex-direction: column;
+          align-items: flex-start;
+          max-width: 1100px;
+          margin: auto;
+          padding: 40px 24px;
+        "
+      >
+        <h1>DevTrends 模型价格：比较中国大模型官方 API 定价</h1>
+        <p>
+          汇总中国大陆大模型厂商的官方模型信息、人民币 API
+          价格、能力与上下文信息，保留官方来源与更新时间，帮助开发者比较模型。具体计价条件、缓存与阶梯价格请以厂商官网说明为准。
+        </p>
+        <nav aria-label="DevTrends 产品系列">
+          <a href="https://devtrends.site/">发现开发者趋势</a> ·
+          <a href="https://umanager.devtrends.site/"
+            >UManager · Ubuntu 软件管家</a
+          >
+          · <a href="./api.json">读取 JSON 数据</a>
+        </nav>
+        <p>正在载入可筛选的模型清单…</p>
       </main>
     </div>
+    <noscript
+      ><p>
+        启用 JavaScript 后可以搜索、筛选与比较模型；也可直接读取
+        <a href="./api.json">JSON 数据</a>，或访问
+        <a href="https://github.com/null-object-0000/models-cn"
+          >项目源码与说明</a
+        >。
+      </p></noscript
+    >
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
