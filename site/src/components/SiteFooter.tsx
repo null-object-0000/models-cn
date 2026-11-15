@@ -7,6 +7,13 @@ export function SiteFooter() {
           DevTrends · models-cn
         </div>
         <p>开放数据 · 官方来源 · 可追溯更新</p>
+        <nav aria-label="DevTrends 产品系列">
+          <a href="https://devtrends.site/">发现开发者趋势</a>
+          {" · "}
+          <a href="https://umanager.devtrends.site/">
+            UManager · Ubuntu 软件管家
+          </a>
+        </nav>
         <a
           href="https://beian.miit.gov.cn/"
           target="_blank"
