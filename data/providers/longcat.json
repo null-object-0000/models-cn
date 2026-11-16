@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-16T08:01:45.424Z",
-    "lastAttemptAt": "2026-11-16T08:01:45.424Z",
+    "lastSuccessfulAt": "2026-11-16T22:55:19.396Z",
+    "lastAttemptAt": "2026-11-16T22:55:19.396Z",
     "consecutiveFailures": 0
   },
   "id": "longcat",
@@ -227,7 +227,7 @@
       "url": "https://api.longcat.chat/openai/v1/models",
       "kind": "model-metadata",
       "locale": "en",
-      "retrievedAt": "2026-11-16T08:01:45.424Z",
+      "retrievedAt": "2026-11-16T22:55:19.396Z",
       "contentHash": "sha256:96dbf4ff734727757ed7cdce2e8c06120acf1e687093374cd1f1510e4dd9cea4"
     },
     {
