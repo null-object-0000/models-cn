@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:01:45.406Z",
-        "lastAttemptAt": "2026-11-16T08:01:45.406Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:19.418Z",
+        "lastAttemptAt": "2026-11-16T22:55:19.418Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -784,8 +784,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:01:45.424Z",
-        "lastAttemptAt": "2026-11-16T08:01:45.424Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:19.396Z",
+        "lastAttemptAt": "2026-11-16T22:55:19.396Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1009,7 +1009,7 @@
           "url": "https://api.longcat.chat/openai/v1/models",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-11-16T08:01:45.424Z",
+          "retrievedAt": "2026-11-16T22:55:19.396Z",
           "contentHash": "sha256:96dbf4ff734727757ed7cdce2e8c06120acf1e687093374cd1f1510e4dd9cea4"
         },
         {
@@ -1025,8 +1025,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:01:45.430Z",
-        "lastAttemptAt": "2026-11-16T08:01:45.430Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:19.379Z",
+        "lastAttemptAt": "2026-11-16T22:55:19.379Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1397,8 +1397,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:01:45.434Z",
-        "lastAttemptAt": "2026-11-16T08:01:45.434Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:19.400Z",
+        "lastAttemptAt": "2026-11-16T22:55:19.400Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1769,8 +1769,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:01:45.436Z",
-        "lastAttemptAt": "2026-11-16T08:01:45.436Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:19.403Z",
+        "lastAttemptAt": "2026-11-16T22:55:19.403Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1805,7 +1805,7 @@
           },
           "limits": {
             "contextTokens": 1000000,
-            "maxOutputTokens": 393216,
+            "maxOutputTokens": 131072,
             "tokensPerMinute": 5000000
           },
           "prices": [
@@ -2484,16 +2484,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-11-16T08:01:45.436Z",
-          "contentHash": "sha256:64826baf918e987a3d189101c860f42be41da37b4bb157227794e883bea79c9f"
+          "retrievedAt": "2026-11-16T22:55:19.403Z",
+          "contentHash": "sha256:faa48b7908e2bfcebc3f98acfc8b0b22a6e4c08496cde7bd0abe1aa5da209628"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-11-16T08:01:45.436Z",
-          "contentHash": "sha256:48b96e185472c9872ece76d1cd411a5a63b9748ed8ee5eb68f8462f47e9ca0fd"
+          "retrievedAt": "2026-11-16T22:55:19.403Z",
+          "contentHash": "sha256:5dc69e29bd846119ed1a4373c6a549c286d4a675065ea1162071fb5eb5d5fcd1"
         }
       ]
     },
@@ -2511,8 +2511,8 @@
       },
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:01:45.459Z",
-        "lastAttemptAt": "2026-11-16T08:01:45.459Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:19.413Z",
+        "lastAttemptAt": "2026-11-16T22:55:19.413Z",
         "consecutiveFailures": 0
       },
       "models": [
@@ -2739,8 +2739,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:01:45.447Z",
-        "lastAttemptAt": "2026-11-16T08:01:45.447Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:19.402Z",
+        "lastAttemptAt": "2026-11-16T22:55:19.402Z",
         "consecutiveFailures": 0,
         "warnings": [
           {
@@ -3704,8 +3704,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:01:45.449Z",
-        "lastAttemptAt": "2026-11-16T08:01:45.449Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:19.416Z",
+        "lastAttemptAt": "2026-11-16T22:55:19.416Z",
         "consecutiveFailures": 0,
         "warnings": [
           {
@@ -4478,8 +4478,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:02:06.692Z",
-        "lastAttemptAt": "2026-11-16T08:02:06.692Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:48.356Z",
+        "lastAttemptAt": "2026-11-16T22:55:48.356Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4518,8 +4518,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:02:07.286Z",
-        "lastAttemptAt": "2026-11-16T08:02:07.286Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:48.767Z",
+        "lastAttemptAt": "2026-11-16T22:55:48.767Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4569,8 +4569,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:02:07.604Z",
-        "lastAttemptAt": "2026-11-16T08:02:07.604Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:49.094Z",
+        "lastAttemptAt": "2026-11-16T22:55:49.094Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4627,8 +4627,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:02:08.841Z",
-        "lastAttemptAt": "2026-11-16T08:02:08.841Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:50.410Z",
+        "lastAttemptAt": "2026-11-16T22:55:50.410Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4685,8 +4685,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:02:09.224Z",
-        "lastAttemptAt": "2026-11-16T08:02:09.224Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:51.173Z",
+        "lastAttemptAt": "2026-11-16T22:55:51.173Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4778,8 +4778,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:02:09.864Z",
-        "lastAttemptAt": "2026-11-16T08:02:09.864Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:51.732Z",
+        "lastAttemptAt": "2026-11-16T22:55:51.732Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4871,8 +4871,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-16T08:02:05.844Z",
-        "lastAttemptAt": "2026-11-16T08:02:05.844Z",
+        "lastSuccessfulAt": "2026-11-16T22:55:47.190Z",
+        "lastAttemptAt": "2026-11-16T22:55:47.190Z",
         "consecutiveFailures": 0
       },
       "source": {
