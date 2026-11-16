@@ -12,11 +12,56 @@
   },
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-14T13:30:38.749Z",
-    "lastAttemptAt": "2026-11-14T13:30:38.749Z",
+    "lastSuccessfulAt": "2026-11-16T08:01:45.459Z",
+    "lastAttemptAt": "2026-11-16T08:01:45.459Z",
     "consecutiveFailures": 0
   },
   "models": [
+    {
+      "id": "hy4-flash",
+      "name": "Hy4 flash",
+      "aliases": [],
+      "capabilitiesSource": "docs",
+      "capabilitiesEvidence": {
+        "sectionPresent": true,
+        "parsedFields": [
+          "inputModalities",
+          "outputModalities"
+        ],
+        "defaultedFields": []
+      },
+      "capabilities": {
+        "thinking": true,
+        "jsonOutput": true,
+        "toolCalls": true,
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "outputModalities": [
+          "text"
+        ]
+      },
+      "limits": {
+        "contextTokens": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "prices": [
+        {
+          "market": "china",
+          "currency": "CNY",
+          "unit": "1M_tokens",
+          "rateType": "standard",
+          "input": {
+            "standard": 0.5,
+            "cacheHit": 0.02
+          },
+          "output": 2,
+          "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+          "validFrom": "2026-11-16T08:01:52.154Z"
+        }
+      ]
+    },
     {
       "id": "hy4",
       "name": "Hy4",
@@ -69,7 +114,7 @@
     },
     {
       "id": "hy4-preview",
-      "name": "Hy4 preview",
+      "name": "Hy4 preview（2026-12-07下线）",
       "aliases": [],
       "createdAt": "2026-08-28T05:57:52.000Z",
       "createdAtSource": "release-notes",
@@ -172,15 +217,15 @@
       "kind": "pricing",
       "locale": "zh-CN",
       "currency": "CNY",
-      "retrievedAt": "2026-11-14T13:13:19.887Z",
-      "contentHash": "sha256:67d21cddd0d777164a5b172861bd6c97cf84c0b7e35e6d8d8225e7386a05c2a5"
+      "retrievedAt": "2026-11-16T08:01:45.459Z",
+      "contentHash": "sha256:4eebe417940eaf8e5da83e70ae80c6c449ed4a51d5c8fac12a6081b402b32f7f"
     },
     {
       "url": "https://cloud.tencent.com/document/product/1823/130051",
       "kind": "model-metadata",
       "locale": "zh-CN",
-      "retrievedAt": "2026-11-14T13:13:19.887Z",
-      "contentHash": "sha256:2dc3bbe9791cc53d96cfcb9c9a943ff86d48655e88bab9f0509764e2c72bfe27"
+      "retrievedAt": "2026-11-16T08:01:45.459Z",
+      "contentHash": "sha256:e9b2b11dcfb8f48105919251fec0c433f55143f76e4c9f7d6d452ae8a2ad6694"
     },
     {
       "url": "https://api.hunyuan.tencent.com/api/blog/publicList",

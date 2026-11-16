@@ -5,8 +5,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:30:38.759Z",
-        "lastAttemptAt": "2026-11-14T13:30:38.759Z",
+        "lastSuccessfulAt": "2026-11-16T08:01:45.406Z",
+        "lastAttemptAt": "2026-11-16T08:01:45.406Z",
         "consecutiveFailures": 0
       },
       "id": "deepseek",
@@ -784,8 +784,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:30:38.754Z",
-        "lastAttemptAt": "2026-11-14T13:30:38.754Z",
+        "lastSuccessfulAt": "2026-11-16T08:01:45.424Z",
+        "lastAttemptAt": "2026-11-16T08:01:45.424Z",
         "consecutiveFailures": 0
       },
       "id": "longcat",
@@ -1009,7 +1009,7 @@
           "url": "https://api.longcat.chat/openai/v1/models",
           "kind": "model-metadata",
           "locale": "en",
-          "retrievedAt": "2026-11-14T13:30:38.754Z",
+          "retrievedAt": "2026-11-16T08:01:45.424Z",
           "contentHash": "sha256:96dbf4ff734727757ed7cdce2e8c06120acf1e687093374cd1f1510e4dd9cea4"
         },
         {
@@ -1025,8 +1025,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:30:38.761Z",
-        "lastAttemptAt": "2026-11-14T13:30:38.761Z",
+        "lastSuccessfulAt": "2026-11-16T08:01:45.430Z",
+        "lastAttemptAt": "2026-11-16T08:01:45.430Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-cn",
@@ -1397,8 +1397,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:30:38.713Z",
-        "lastAttemptAt": "2026-11-14T13:30:38.713Z",
+        "lastSuccessfulAt": "2026-11-16T08:01:45.434Z",
+        "lastAttemptAt": "2026-11-16T08:01:45.434Z",
         "consecutiveFailures": 0
       },
       "id": "moonshot-intl",
@@ -1769,8 +1769,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:30:38.734Z",
-        "lastAttemptAt": "2026-11-14T13:30:38.734Z",
+        "lastSuccessfulAt": "2026-11-16T08:01:45.436Z",
+        "lastAttemptAt": "2026-11-16T08:01:45.436Z",
         "consecutiveFailures": 0
       },
       "id": "qwen-cn",
@@ -1784,6 +1784,48 @@
         "openai": "https://dashscope.aliyuncs.com/compatible-mode/v1"
       },
       "models": [
+        {
+          "id": "qwen4-max",
+          "name": "Qwen4-Max",
+          "createdAt": "2026-11-16T02:00:00.000+00:00",
+          "aliases": [],
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "chatPrefixCompletion": true,
+            "inputModalities": [
+              "text",
+              "image",
+              "video"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1000000,
+            "maxOutputTokens": 393216,
+            "tokensPerMinute": 5000000
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 10,
+                "cacheHit": 0.5,
+                "explicitCacheCreation": 12.5,
+                "explicitCacheHit": 0.5
+              },
+              "output": 30,
+              "sourceUrl": "https://www.qianwenai.com/models/qwen4-max",
+              "validFrom": "2026-11-16T08:02:05.803Z"
+            }
+          ]
+        },
         {
           "id": "qwen3.8-max",
           "name": "Qwen3.8-Max",
@@ -2442,16 +2484,16 @@
           "url": "https://www.qianwenai.com/models",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-11-14T09:07:08.266Z",
-          "contentHash": "sha256:d61976f4f632d9881a888e8cf36ecf4844e565ce4ac375d3bc4fa0661f19020a"
+          "retrievedAt": "2026-11-16T08:01:45.436Z",
+          "contentHash": "sha256:64826baf918e987a3d189101c860f42be41da37b4bb157227794e883bea79c9f"
         },
         {
           "url": "https://www.qianwenai.com/models",
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-11-14T13:30:38.734Z",
-          "contentHash": "sha256:058e401333910beb1633c59f9a250648e9afe3fbf732de4ab03ee03ef4aeeaf9"
+          "retrievedAt": "2026-11-16T08:01:45.436Z",
+          "contentHash": "sha256:48b96e185472c9872ece76d1cd411a5a63b9748ed8ee5eb68f8462f47e9ca0fd"
         }
       ]
     },
@@ -2469,11 +2511,56 @@
       },
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:30:38.749Z",
-        "lastAttemptAt": "2026-11-14T13:30:38.749Z",
+        "lastSuccessfulAt": "2026-11-16T08:01:45.459Z",
+        "lastAttemptAt": "2026-11-16T08:01:45.459Z",
         "consecutiveFailures": 0
       },
       "models": [
+        {
+          "id": "hy4-flash",
+          "name": "Hy4 flash",
+          "aliases": [],
+          "capabilitiesSource": "docs",
+          "capabilitiesEvidence": {
+            "sectionPresent": true,
+            "parsedFields": [
+              "inputModalities",
+              "outputModalities"
+            ],
+            "defaultedFields": []
+          },
+          "capabilities": {
+            "thinking": true,
+            "jsonOutput": true,
+            "toolCalls": true,
+            "inputModalities": [
+              "text",
+              "image"
+            ],
+            "outputModalities": [
+              "text"
+            ]
+          },
+          "limits": {
+            "contextTokens": 1048576,
+            "maxOutputTokens": 65536
+          },
+          "prices": [
+            {
+              "market": "china",
+              "currency": "CNY",
+              "unit": "1M_tokens",
+              "rateType": "standard",
+              "input": {
+                "standard": 0.5,
+                "cacheHit": 0.02
+              },
+              "output": 2,
+              "sourceUrl": "https://cloud.tencent.com/document/product/1823/130055",
+              "validFrom": "2026-11-16T08:01:52.154Z"
+            }
+          ]
+        },
         {
           "id": "hy4",
           "name": "Hy4",
@@ -2526,7 +2613,7 @@
         },
         {
           "id": "hy4-preview",
-          "name": "Hy4 preview",
+          "name": "Hy4 preview（2026-12-07下线）",
           "aliases": [],
           "createdAt": "2026-08-28T05:57:52.000Z",
           "createdAtSource": "release-notes",
@@ -2629,15 +2716,15 @@
           "kind": "pricing",
           "locale": "zh-CN",
           "currency": "CNY",
-          "retrievedAt": "2026-11-14T13:13:19.887Z",
-          "contentHash": "sha256:67d21cddd0d777164a5b172861bd6c97cf84c0b7e35e6d8d8225e7386a05c2a5"
+          "retrievedAt": "2026-11-16T08:01:45.459Z",
+          "contentHash": "sha256:4eebe417940eaf8e5da83e70ae80c6c449ed4a51d5c8fac12a6081b402b32f7f"
         },
         {
           "url": "https://cloud.tencent.com/document/product/1823/130051",
           "kind": "model-metadata",
           "locale": "zh-CN",
-          "retrievedAt": "2026-11-14T13:13:19.887Z",
-          "contentHash": "sha256:2dc3bbe9791cc53d96cfcb9c9a943ff86d48655e88bab9f0509764e2c72bfe27"
+          "retrievedAt": "2026-11-16T08:01:45.459Z",
+          "contentHash": "sha256:e9b2b11dcfb8f48105919251fec0c433f55143f76e4c9f7d6d452ae8a2ad6694"
         },
         {
           "url": "https://api.hunyuan.tencent.com/api/blog/publicList",
@@ -2652,8 +2739,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:30:38.745Z",
-        "lastAttemptAt": "2026-11-14T13:30:38.745Z",
+        "lastSuccessfulAt": "2026-11-16T08:01:45.447Z",
+        "lastAttemptAt": "2026-11-16T08:01:45.447Z",
         "consecutiveFailures": 0,
         "warnings": [
           {
@@ -3617,8 +3704,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:30:38.747Z",
-        "lastAttemptAt": "2026-11-14T13:30:38.747Z",
+        "lastSuccessfulAt": "2026-11-16T08:01:45.449Z",
+        "lastAttemptAt": "2026-11-16T08:01:45.449Z",
         "consecutiveFailures": 0,
         "warnings": [
           {
@@ -4391,8 +4478,8 @@
       "provider": "deepseek",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:31:05.306Z",
-        "lastAttemptAt": "2026-11-14T13:31:05.306Z",
+        "lastSuccessfulAt": "2026-11-16T08:02:06.692Z",
+        "lastAttemptAt": "2026-11-16T08:02:06.692Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4431,8 +4518,8 @@
       "provider": "longcat",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:31:05.908Z",
-        "lastAttemptAt": "2026-11-14T13:31:05.908Z",
+        "lastSuccessfulAt": "2026-11-16T08:02:07.286Z",
+        "lastAttemptAt": "2026-11-16T08:02:07.286Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4482,8 +4569,8 @@
       "provider": "moonshot-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:31:06.458Z",
-        "lastAttemptAt": "2026-11-14T13:31:06.458Z",
+        "lastSuccessfulAt": "2026-11-16T08:02:07.604Z",
+        "lastAttemptAt": "2026-11-16T08:02:07.604Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4540,8 +4627,8 @@
       "provider": "moonshot-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:31:08.217Z",
-        "lastAttemptAt": "2026-11-14T13:31:08.217Z",
+        "lastSuccessfulAt": "2026-11-16T08:02:08.841Z",
+        "lastAttemptAt": "2026-11-16T08:02:08.841Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4598,8 +4685,8 @@
       "provider": "zhipu-cn",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:31:08.594Z",
-        "lastAttemptAt": "2026-11-14T13:31:08.594Z",
+        "lastSuccessfulAt": "2026-11-16T08:02:09.224Z",
+        "lastAttemptAt": "2026-11-16T08:02:09.224Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4691,8 +4778,8 @@
       "provider": "zhipu-intl",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:31:09.358Z",
-        "lastAttemptAt": "2026-11-14T13:31:09.358Z",
+        "lastSuccessfulAt": "2026-11-16T08:02:09.864Z",
+        "lastAttemptAt": "2026-11-16T08:02:09.864Z",
         "consecutiveFailures": 0
       },
       "source": {
@@ -4784,8 +4871,8 @@
       "schemaVersion": "1.0",
       "health": {
         "status": "healthy",
-        "lastSuccessfulAt": "2026-11-14T13:31:04.442Z",
-        "lastAttemptAt": "2026-11-14T13:31:04.442Z",
+        "lastSuccessfulAt": "2026-11-16T08:02:05.844Z",
+        "lastAttemptAt": "2026-11-16T08:02:05.844Z",
         "consecutiveFailures": 0
       },
       "source": {
