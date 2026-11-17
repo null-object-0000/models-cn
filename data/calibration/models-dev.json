@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-16T22:55:47.190Z",
-    "lastAttemptAt": "2026-11-16T22:55:47.190Z",
+    "lastSuccessfulAt": "2026-11-17T09:16:04.027Z",
+    "lastAttemptAt": "2026-11-17T09:16:04.027Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-11-14T13:31:04.442Z",
-    "contentHash": "sha256:8e83182b6d9a6052a8d950d0f780bf87dbed51cf5e540f3dd4df2c9a0c305ff8"
+    "retrievedAt": "2026-11-17T09:16:04.027Z",
+    "contentHash": "sha256:64409ca95a896a6a0c738e4243254d50b68143b94eef435bc116cc6afdc986a7"
   },
   "models": [
     {
@@ -4194,6 +4194,80 @@
             "text"
           ],
           "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 0.6,
+          "reference": 0.6,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.11,
+          "reference": 0.11,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 2.2,
+          "reference": 2.2,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-4.5",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-4.5",
+      "referenceUrl": "https://models.dev/models/zai/glm-4.5/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": "2025-07-28",
+          "reference": "2025-07-28",
+          "status": "match"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 98304,
+          "reference": 98304,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
         },
         {
           "field": "prices.USD.input.standard",
