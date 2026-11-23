@@ -3,14 +3,14 @@
   "provider": "zhipu-cn",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-17T09:16:10.079Z",
-    "lastAttemptAt": "2026-11-17T09:16:10.079Z",
+    "lastSuccessfulAt": "2026-11-23T09:10:10.214Z",
+    "lastAttemptAt": "2026-11-23T09:10:10.214Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://open.bigmodel.cn/api/paas/v4/models",
-    "retrievedAt": "2026-11-02T22:20:47.361Z",
-    "contentHash": "sha256:b67b92c38ed8cf1b061338b8bf41ec1821ced4b5bfd14b0119e713df4740d158"
+    "retrievedAt": "2026-11-23T09:10:10.214Z",
+    "contentHash": "sha256:a100c9c2ae38e71f63091a8e9451fb60afedbfa7f6ccebcb673b9a8a557b1166"
   },
   "models": [
     {
@@ -60,6 +60,10 @@
     {
       "id": "glm-5.3-flashx-legal",
       "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-5.4",
+      "ownedBy": "z-ai"
     }
   ],
   "comparison": {
@@ -79,7 +83,8 @@
     "aliasesAndListed": [],
     "listedWithoutPricing": [
       "glm-4.5",
-      "glm-4.6"
+      "glm-4.6",
+      "glm-5.4"
     ],
     "pricedButNotListed": [
       "glm-4-flash-250414",
