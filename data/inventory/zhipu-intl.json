@@ -3,14 +3,14 @@
   "provider": "zhipu-intl",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-17T09:16:10.451Z",
-    "lastAttemptAt": "2026-11-17T09:16:10.451Z",
+    "lastSuccessfulAt": "2026-11-24T10:59:51.903Z",
+    "lastAttemptAt": "2026-11-24T10:59:51.903Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://api.z.ai/api/paas/v4/models",
-    "retrievedAt": "2026-11-02T22:20:48.396Z",
-    "contentHash": "sha256:b67b92c38ed8cf1b061338b8bf41ec1821ced4b5bfd14b0119e713df4740d158"
+    "retrievedAt": "2026-11-24T10:59:51.903Z",
+    "contentHash": "sha256:a100c9c2ae38e71f63091a8e9451fb60afedbfa7f6ccebcb673b9a8a557b1166"
   },
   "models": [
     {
@@ -60,6 +60,10 @@
     {
       "id": "glm-5.3-flashx-legal",
       "ownedBy": "z-ai"
+    },
+    {
+      "id": "glm-5.4",
+      "ownedBy": "z-ai"
     }
   ],
   "comparison": {
@@ -79,7 +83,8 @@
     ],
     "aliasesAndListed": [],
     "listedWithoutPricing": [
-      "glm-5-turbo"
+      "glm-5-turbo",
+      "glm-5.4"
     ],
     "pricedButNotListed": [
       "glm-4.5-airx",

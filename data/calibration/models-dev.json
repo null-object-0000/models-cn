@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-17T09:16:04.027Z",
-    "lastAttemptAt": "2026-11-17T09:16:04.027Z",
+    "lastSuccessfulAt": "2026-11-24T10:59:48.140Z",
+    "lastAttemptAt": "2026-11-24T10:59:48.140Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-11-17T09:16:04.027Z",
-    "contentHash": "sha256:64409ca95a896a6a0c738e4243254d50b68143b94eef435bc116cc6afdc986a7"
+    "retrievedAt": "2026-11-24T10:59:48.140Z",
+    "contentHash": "sha256:0d114300fe4e31c7899fb9c90f92cb7cea479119d17eedb388ce013e20f273c2"
   },
   "models": [
     {
@@ -2605,6 +2605,88 @@
           "official": 1.98,
           "reference": 1.98,
           "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "longcat",
+      "model": "LongCat-2.5",
+      "referenceProvider": "longcat",
+      "referenceModel": "LongCat-2.5",
+      "referenceUrl": "https://models.dev/models/longcat/LongCat-2.5/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-11-02",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1048576,
+          "reference": 1048576,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 262144,
+          "reference": 262144,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.3,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.006,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 1.2,
+          "status": "missing"
         }
       ]
     },
