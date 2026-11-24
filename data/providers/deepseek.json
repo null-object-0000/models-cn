@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0",
   "health": {
-    "status": "healthy",
+    "status": "error",
     "lastSuccessfulAt": "2026-11-17T09:15:40.040Z",
-    "lastAttemptAt": "2026-11-17T09:15:40.040Z",
-    "consecutiveFailures": 0
+    "lastAttemptAt": "2026-11-24T00:56:14.113Z",
+    "consecutiveFailures": 1,
+    "message": "Feature row json_mode is missing"
   },
   "id": "deepseek",
   "name": "DeepSeek",
