@@ -12,8 +12,8 @@
   },
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-17T09:15:40.093Z",
-    "lastAttemptAt": "2026-11-17T09:15:40.093Z",
+    "lastSuccessfulAt": "2026-11-25T09:53:13.174Z",
+    "lastAttemptAt": "2026-11-25T09:53:13.174Z",
     "consecutiveFailures": 0
   },
   "models": [
