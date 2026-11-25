@@ -2,14 +2,14 @@
   "schemaVersion": "1.0",
   "health": {
     "status": "healthy",
-    "lastSuccessfulAt": "2026-11-17T09:16:04.027Z",
-    "lastAttemptAt": "2026-11-17T09:16:04.027Z",
+    "lastSuccessfulAt": "2026-11-25T22:35:36.967Z",
+    "lastAttemptAt": "2026-11-25T22:35:36.967Z",
     "consecutiveFailures": 0
   },
   "source": {
     "url": "https://models.dev/api.json",
-    "retrievedAt": "2026-11-17T09:16:04.027Z",
-    "contentHash": "sha256:64409ca95a896a6a0c738e4243254d50b68143b94eef435bc116cc6afdc986a7"
+    "retrievedAt": "2026-11-25T22:35:36.967Z",
+    "contentHash": "sha256:759e03538c40765d752316cf93bc9d5de80d33f094cb2c4d7705101fa74b9a01"
   },
   "models": [
     {
@@ -2609,6 +2609,88 @@
       ]
     },
     {
+      "provider": "longcat",
+      "model": "LongCat-2.5",
+      "referenceProvider": "longcat",
+      "referenceModel": "LongCat-2.5",
+      "referenceUrl": "https://models.dev/models/longcat/LongCat-2.5/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-11-02",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1048576,
+          "reference": 1048576,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 262144,
+          "reference": 262144,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.3,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.006,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 1.2,
+          "status": "missing"
+        }
+      ]
+    },
+    {
       "provider": "moonshot-cn",
       "model": "kimi-k3.1-pro",
       "referenceProvider": "moonshotai",
@@ -2929,6 +3011,89 @@
           "official": 20,
           "reference": 20,
           "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "qwen-cn",
+      "model": "qwen4-max",
+      "referenceProvider": "alibaba",
+      "referenceModel": "qwen4-max",
+      "referenceUrl": "https://models.dev/models/alibaba/qwen4-max/",
+      "status": "mismatch",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": "2026-11-16",
+          "reference": "2026-11-16",
+          "status": "match"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 262144,
+          "status": "mismatch"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image",
+            "video"
+          ],
+          "reference": [
+            "text",
+            "image",
+            "video",
+            "pdf"
+          ],
+          "status": "mismatch"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 1.5,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.075,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 4.5,
+          "status": "missing"
         }
       ]
     },
@@ -3583,6 +3748,86 @@
     },
     {
       "provider": "tencent-hunyuan",
+      "model": "hy4-flash",
+      "referenceProvider": "tencent-tokenhub",
+      "referenceModel": "hy4-flash",
+      "referenceUrl": "https://models.dev/models/tencent-tokenhub/hy4-flash/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-11-16",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1048576,
+          "reference": 1048576,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 65536,
+          "reference": 65536,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": [
+            "text",
+            "image"
+          ],
+          "reference": [
+            "text",
+            "image"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": [
+            "text"
+          ],
+          "reference": [
+            "text"
+          ],
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.07,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.003,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 0.281,
+          "status": "missing"
+        }
+      ]
+    },
+    {
+      "provider": "tencent-hunyuan",
       "model": "hy4",
       "referenceProvider": "tencent-tokenhub",
       "referenceModel": "hy4",
@@ -3667,7 +3912,7 @@
       "referenceProvider": "tencent-tokenhub",
       "referenceModel": "hy4-preview",
       "referenceUrl": "https://models.dev/models/tencent-tokenhub/hy4-preview/",
-      "status": "mismatch",
+      "status": "partial",
       "checks": [
         {
           "field": "createdAt",
@@ -3678,14 +3923,14 @@
         {
           "field": "limits.contextTokens",
           "official": 1048576,
-          "reference": 1024000,
+          "reference": 1048576,
           "status": "match"
         },
         {
           "field": "limits.maxOutputTokens",
           "official": 65536,
-          "reference": 64000,
-          "status": "mismatch"
+          "reference": 65536,
+          "status": "match"
         },
         {
           "field": "capabilities.thinking",
@@ -3800,19 +4045,19 @@
         {
           "field": "prices.USD.input.standard",
           "official": null,
-          "reference": 0,
+          "reference": 0.132,
           "status": "missing"
         },
         {
           "field": "prices.USD.input.cacheHit",
           "official": null,
-          "reference": 0,
+          "reference": 0.033,
           "status": "missing"
         },
         {
           "field": "prices.USD.output",
           "official": null,
-          "reference": 0,
+          "reference": 0.528,
           "status": "missing"
         }
       ]
@@ -3978,6 +4223,83 @@
       ]
     },
     {
+      "provider": "zhipu-cn",
+      "model": "glm-5.3-flashx-legal",
+      "referenceProvider": "zhipuai",
+      "referenceModel": "glm-5.3-flashx-legal",
+      "referenceUrl": "https://models.dev/models/zhipuai/glm-5.3-flashx-legal/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-11-02",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": null,
+          "reference": [
+            "text",
+            "image",
+            "video",
+            "pdf"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": null,
+          "reference": 0.29943,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": null,
+          "reference": 0.08534,
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": null,
+          "reference": 1.04801,
+          "status": "missing"
+        }
+      ]
+    },
+    {
       "provider": "zhipu-intl",
       "model": "glm-5.3-flash",
       "referenceProvider": "zai",
@@ -4072,6 +4394,83 @@
           "field": "createdAt",
           "official": null,
           "reference": "2026-09-18",
+          "status": "missing"
+        },
+        {
+          "field": "limits.contextTokens",
+          "official": 1000000,
+          "reference": 1000000,
+          "status": "match"
+        },
+        {
+          "field": "limits.maxOutputTokens",
+          "official": 131072,
+          "reference": 131072,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.thinking",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.toolCalls",
+          "official": true,
+          "reference": true,
+          "status": "match"
+        },
+        {
+          "field": "capabilities.inputModalities",
+          "official": null,
+          "reference": [
+            "text",
+            "image",
+            "video",
+            "pdf"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "capabilities.outputModalities",
+          "official": null,
+          "reference": [
+            "text"
+          ],
+          "status": "missing"
+        },
+        {
+          "field": "prices.USD.input.standard",
+          "official": 0.37,
+          "reference": 0.37,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.input.cacheHit",
+          "official": 0.075,
+          "reference": 0.075,
+          "status": "match"
+        },
+        {
+          "field": "prices.USD.output",
+          "official": 1.25,
+          "reference": 1.25,
+          "status": "match"
+        }
+      ]
+    },
+    {
+      "provider": "zhipu-intl",
+      "model": "glm-5.3-flashx-legal",
+      "referenceProvider": "zai",
+      "referenceModel": "glm-5.3-flashx-legal",
+      "referenceUrl": "https://models.dev/models/zai/glm-5.3-flashx-legal/",
+      "status": "partial",
+      "checks": [
+        {
+          "field": "createdAt",
+          "official": null,
+          "reference": "2026-11-02",
           "status": "missing"
         },
         {
